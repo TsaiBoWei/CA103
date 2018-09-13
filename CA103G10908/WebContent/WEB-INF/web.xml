@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>MemSpLikeServlet</servlet-name>
+  	<servlet-class>com.memsplike.controller.MemSpLikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MemSpLikeServlet</servlet-name>
+  	<url-pattern>/memsplike/memsplike.do</url-pattern>
+  </servlet-mapping>
 </web-app>
