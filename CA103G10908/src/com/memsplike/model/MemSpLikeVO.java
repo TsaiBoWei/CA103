@@ -8,6 +8,12 @@ public class MemSpLikeVO {
 	
 	public MemSpLikeVO() {}
 	
+	public MemSpLikeVO( String mem_id, String sptype_id, String like_status ) {
+		this.mem_id = mem_id;
+		this.sptype_id = sptype_id;
+		this.like_status = like_status;
+	}
+	
 	public String getMem_id() {
 		return mem_id;
 	}
