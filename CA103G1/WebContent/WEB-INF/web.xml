@@ -17,4 +17,13 @@
   	<servlet-name>MemSpLikeServlet</servlet-name>
   	<url-pattern>/memsplike/memsplike.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PlanServlet</servlet-name>
+    <servlet-class>com.plan.controller_undone.PlanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlanServlet</servlet-name>
+    <url-pattern>/plan/plan.do</url-pattern>
+  </servlet-mapping>
 </web-app>
