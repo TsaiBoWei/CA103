@@ -207,7 +207,7 @@ body {
 						</div>
 					</form>
 
-					<form>
+					<form method="post" action="plan.do">
 						<label class="btn btn-info"> <input id="upload_img"
 							style="display: none;" type="file"> <i
 							class="fa fa-photo"></i> 上傳圖片
