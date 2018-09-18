@@ -190,75 +190,50 @@ body {
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-6">
-					<h1 class="text-gray-dark">Create A New Plan</h1>
-					<form method="post" action="plan.do">
+					<form method="post"
+						action="<%=request.getContextPath()%>/plan/plan.do"
+						enctype="multipart/form-data">
+						<h1 class="text-gray-dark">Create A New Plan</h1>
 						<div class="form-group">
 							<label><h5>Plan Name ：</h5></label> <input type="TEXT"
 								name="plan_name" size="45"
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>" />
 						</div>
-					</form>
 
-					<form method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>Plan Cover ：</h5></label> <input type="submit"
-								name="plan_name"
-								value="<%=(planVO == null) ? "選擇檔案" : planVO.getPlan_name()%>" />
-						</div>
-					</form>
 
-					<form method="post" action="plan.do">
-						<label class="btn btn-info"> <input id="upload_img"
-							style="display: none;" type="file"> <i
-							class="fa fa-photo"></i> 上傳圖片
+
+
+						<label><h5>Plan Cover ：</h5></label> <label class="btn btn-info">
+							<input id="upload_img" style="display: none;" type="file"
+							name="plan_cover"> <i class="fa fa-photo"></i> 上傳圖片
 						</label>
 
-					</form>
 
-					<jsp:useBean id="PlanSvc" scope="page"
-						class="com.plan.model.PlanService" />
+						<jsp:useBean id="PlanSvc" scope="page"
+							class="com.plan.model.PlanService" />
 
-					<form method="post" action="plan.do">
 						<div class="form-group">
-							<label><h5>plan_creat_date_undone :</h5></label> <input
-								type="text" name="plan_create_time" id="f_date1">
+							<label><h5>plan_start_date_undone :</h5></label> <input
+								type="date" name="plan_start_date" id="f_date1">
 						</div>
-					</form>
 
-					<form method="post" action="plan.do">
 						<div class="form-group">
-							<label><h5>plan_end_time_undone :</h5></label> <input type="text"
-								name="plan_create_time" id="f_date1">
+							<label><h5>plan_end_time_undone :</h5></label> <input type="date"
+								name="plan_end_date" id="f_date1">
 						</div>
-					</form>
 
-
-					<form class="" method="post" action="plan.do">
-						<div class="form-group">
-							<label>Plan SportType</label> <select size="1" name="sptype_id">
-								<c:forEach var="planVO" items="${planSvc.all}">
-									<option value="${planVO.sptype_id}"
-										${(PlanVO.sptype_id==SptypeVO.sptype_id)? 'selected':'' }>${planVO.sptype_id}
-								</c:forEach>
-							</select>
-						</div>
-					</form>
-
-					<form class="" method="post" action="plan.do">
 						<div class="form-group">
 							<label><h5>Privacy Setting :</h5></label> <select size="1"
-								name="privacy">
+								name="plan_privacy">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
 								<option value="PLANPR2">只對朋友公開</option>
 							</select>
 						</div>
-					</form>
 
-					<form class="" method="post" action="plan.do">
 						<div class="form-group">
 							<label><h5>Sport Type :</h5></label> <select size="1"
-								name="privacy">
+								name="sptype_id">
 								<option value="SP000001">田徑</option>
 								<option value="SP000002">單車</option>
 								<option value="SP000003">球類</option>
@@ -269,24 +244,19 @@ body {
 								<option value="SP000008">其他</option>
 							</select>
 						</div>
-					</form>
 
-					<form class="" method="post" action="plan.do">
 						<div class="form-group">
 							<label>Plan Content(plan vo) </label>
-							<textarea name="Planning_Content" rows="10" cols="30" wrap="off"
+							<textarea name="plan_vo" rows="10" cols="30" wrap="off"
 								style="margin-top: 0px; margin-bottom: 0px; height: 100px;"
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
 							<br>
 						</div>
-					</form>
-					<form class="" method="post" action="plan.do">
-						<button type="submit" class="btn btn-primary">
-							<a herf=''>Add 
-						</button>
+						<button type="submit" class="btn btn-primary">Add</button>
 						<button type="submit" class="btn btn-primary">Reset</button>
 						<button type="submit" class="btn btn-primary">cancel</button>
 						<input type="hidden" name="action" value="insert">
+
 					</form>
 				</div>
 			</div>
