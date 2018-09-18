@@ -14,6 +14,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.plan.model.PlanService;
 import com.plan.model.PlanVO;
@@ -90,18 +91,17 @@ public class PlanServlet extends HttpServlet {
 			}
 			Timestamp plan_end_date = (new Timestamp(du2.getTime()));
 
-			
-			InputStream in = getInputStream();
-			byte[] buf = new byte[in.available()];
-			in.read(buf);
-			in.close();
-//			out.println("buffer length: " + buf.length);
-			
-			
+			Part part = req.getPart("plan_cover");
+			InputStream is = part.getInputStream();
+			byte[] picture = new byte[is.available()];
+			is.read(picture);
+
+			Part plan_cover = req.getPart("plan_cover");
+			plan_cover.getInputStream();
+			System.out.println(plan_cover);
 			PlanService planSvc = new PlanService();
-			planVO = planSvc.addPlan(req.getParameter("plan_name"), req.getParameter("plan_vo"),
-					req.getParameter("plan_cover").getBytes(), plan_start_date, plan_end_date,
-					req.getParameter("sptype_id"), req.getParameter("plan_privacy"));
+			planVO = planSvc.addPlan(req.getParameter("plan_name"), req.getParameter("plan_vo"), picture,
+					plan_start_date, plan_end_date, req.getParameter("sptype_id"), req.getParameter("plan_privacy"));
 
 //				// Send the use back to the form, if there were errors
 //				if (!errorMsgs.isEmpty()) {

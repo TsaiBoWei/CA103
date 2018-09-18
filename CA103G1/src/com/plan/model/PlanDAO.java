@@ -56,7 +56,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setTimestamp(6, planVO.getPlan_start_date());
 			pstmt.setTimestamp(7, planVO.getPlan_end_date());
 			pstmt.setString(8, planVO.getSptype_id());
-			pstmt.setInt(9, planVO.getPlan_view());
+			pstmt.setInt(9, 1);
 			pstmt.setString(10, planVO.getPlan_privacy());
 			pstmt.setDate(11, planVO.getPlan_create_time());
 			pstmt.setString(12, planVO.getPlan_status());
