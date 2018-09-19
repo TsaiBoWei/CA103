@@ -38,7 +38,7 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/Front-end/Mem_Login_Signup/Mem_Login_Signup.jsp");
+							.getRequestDispatcher("/front_end/mem/Mem_Login_Signup.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -73,14 +73,14 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				memVO = memSvc.addMem(email, memName, psw);
 				
-				String url = "/Front-end/Mem_Login_Signup/Mem_Login_Signup.jsp";
+				String url = "/front_end/mem/Mem_Login_Signup.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 				
 			}catch(Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/Front-end/Mem_Login_Signup/Mem_Login_Signup.jsp");
+						.getRequestDispatcher("/front_end/mem/Mem_Login_Signup.jsp");
 				failureView.forward(req, res);
 			}
 			

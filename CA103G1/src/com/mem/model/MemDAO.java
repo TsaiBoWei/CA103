@@ -51,6 +51,8 @@ public class MemDAO implements MemDAO_interface{
 		try {
 
 			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT);
+			
 			pstmt.setString(1, memVO.getMem_name());
 			pstmt.setString(2, memVO.getMem_account());
 			pstmt.setString(3, memVO.getMem_password());
