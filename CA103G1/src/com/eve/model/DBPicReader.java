@@ -33,10 +33,10 @@ public class DBPicReader extends HttpServlet {
 			String eve_id=req.getParameter("eve_id").trim();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-				"SELECT EVE_LOGO from EVENT where eve_id='"+eve_id+"' ");
+				"SELECT EVE_PHOTO from EVENT where eve_id='"+eve_id+"' ");
 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("EVE_LOGO"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("EVE_PHOTO"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
