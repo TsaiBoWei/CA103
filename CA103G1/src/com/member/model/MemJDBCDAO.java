@@ -13,7 +13,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String userId = "CA103";
-	private static final String psw = "123456";
+	private static final String psw = "oracle";
 	
 	private static final String INSERT_mem = 
 			"INSERT INTO MEM (MEM_ID, MEM_ACCOUNT, MEM_NAME, MEM_PASSWORD, MEM_BIRTH,MEM_PHOTO ,MEM_MAIL, MEM_STATUS, MEM_INTRO) VALUES ('M'||LPAD(to_char(mem_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?)";
