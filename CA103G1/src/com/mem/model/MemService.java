@@ -1,4 +1,4 @@
-package com.member.model;
+package com.mem.model;
 
 public class MemService {
 	

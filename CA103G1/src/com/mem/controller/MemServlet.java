@@ -1,13 +1,13 @@
-package com.member.controller;
+package com.mem.controller;
 
 import java.io.*; 
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.member.model.MemJDBCDAO;
-import com.member.model.MemService;
-import com.member.model.MemVO;
+import com.mem.model.MemJDBCDAO;
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 
 public class MemServlet extends HttpServlet {
 

@@ -38,4 +38,14 @@
 		<servlet-name>PlanServlet</servlet-name>
 		<url-pattern>/plan/plan.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+    	<servlet-name>MemServlet</servlet-name>
+    	<servlet-class>com.mem.controller.MemServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>MemServlet</servlet-name>
+    	<url-pattern>/Front-end/Mem_Login_Signup/mem.do</url-pattern>
+  	</servlet-mapping>
+	
 </web-app>

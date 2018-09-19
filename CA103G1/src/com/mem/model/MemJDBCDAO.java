@@ -1,22 +1,19 @@
-package com.member.model;
+package com.mem.model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
-public class MemDAO implements MemDAO_interface{
+public class MemJDBCDAO implements MemDAO_interface{
+	
+	private static final String driver = "oracle.jdbc.driver.OracleDriver";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	private static final String userId = "CA103";
+	private static final String psw = "oracle";
 	
 	private static final String INSERT_mem = 
 			"INSERT INTO MEM (MEM_ID, MEM_ACCOUNT, MEM_NAME, MEM_PASSWORD, MEM_BIRTH,MEM_PHOTO ,MEM_MAIL, MEM_STATUS, MEM_INTRO) VALUES ('M'||LPAD(to_char(mem_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?)";
@@ -35,16 +32,7 @@ public class MemDAO implements MemDAO_interface{
 	
 	private static final String UPDATE_STATUS = 
 			"UPDATE MEM set MEM_STATUS=? where MEM_ID=?";
-	
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		File file = new File(path);
@@ -66,8 +54,8 @@ public class MemDAO implements MemDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(INSERT_mem);
 			
 			pstmt.setString(1, memVO.getMemAcccount());
@@ -81,8 +69,10 @@ public class MemDAO implements MemDAO_interface{
 			
 			pstmt.executeUpdate();
 			
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -107,8 +97,8 @@ public class MemDAO implements MemDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(UPDATE_mem);
 			
 			pstmt.setString(1, memVO.getMemAcccount());
@@ -123,9 +113,10 @@ public class MemDAO implements MemDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -153,8 +144,8 @@ public class MemDAO implements MemDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			
 			pstmt.setString(1, status);
@@ -162,9 +153,10 @@ public class MemDAO implements MemDAO_interface{
 	
 			pstmt.executeUpdate();
 			
-
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -192,8 +184,8 @@ public class MemDAO implements MemDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(GET_ONE_mem);
 			
 			pstmt.setString(1, memID);
@@ -214,9 +206,10 @@ public class MemDAO implements MemDAO_interface{
 				memVO.setMemIntro(rs.getString("MEM_INTRO"));
 			}
 			
-
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if(rs != null) {
 				try {
@@ -253,8 +246,8 @@ public class MemDAO implements MemDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(GET_ALL_mem);
 			
 
@@ -276,8 +269,10 @@ public class MemDAO implements MemDAO_interface{
 				list.add(memVO);
 			}
 			
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if(rs != null) {
 				try {
@@ -310,17 +305,18 @@ public class MemDAO implements MemDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId,psw);
 			pstmt = con.prepareStatement(DELETE_mem);
 			
 			pstmt.setString(1, memID);
 			
 			pstmt.executeUpdate();
 			
-
+		}catch(ClassNotFoundException e){
+			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
 		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
+			throw new RuntimeException("A DB error occured.");
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -340,4 +336,72 @@ public class MemDAO implements MemDAO_interface{
 		
 	}
 	
+	public static void main(String[] args) throws IOException {
+		MemJDBCDAO dao = new MemJDBCDAO();
+		
+		//新增
+//		byte[] pic =  getPictureByteArray("WebContent/Front-end/Mem_Login_Signup/items/Monet.jpg");
+//		MemVO memVO = new MemVO();
+//		memVO.setMemAcccount("GILL");
+//		memVO.setMemName("Gill");
+//		memVO.setMemPsw("GILL0825");
+//		memVO.setMemBirDay(java.sql.Date.valueOf("1988-6-20"));
+//		memVO.setMemPhoto(pic);
+//		memVO.setMemMail("gill@mset.com.tw");
+//		memVO.setMemStatus("MS0");
+//		memVO.setMemIntro("我是吉兒");
+//		dao.insert(memVO);
+		
+		//修改
+//		MemVO memVO2 = new MemVO();
+//		memVO2.setMemID("M000002");
+//		memVO2.setMemAcccount("abc");
+//		memVO2.setMemName("abc");
+//		memVO2.setMemPsw("abc");
+//		memVO2.setMemBirDay(java.sql.Date.valueOf("2018-9-8"));
+//		memVO2.setMemPhoto(null);
+//		memVO2.setMemMail("abc");
+//		memVO2.setMemIntro("abc");
+//		dao.update(memVO2);
+		
+		//查詢
+//		MemVO memVO3 = dao.findByPrimaryKey("M000005");
+//		System.out.print(memVO3.getMemID() + ",");
+//		System.out.print(memVO3.getMemAcccount() + ",");
+//		System.out.print(memVO3.getMemName() + ",");
+//		System.out.print(memVO3.getMemPsw() + ",");
+//		System.out.print(memVO3.getMemBirDay()+ ",");
+//		System.out.print(memVO3.getMemPhoto()+ ",");
+//		System.out.print(memVO3.getMemMail()+",");
+//		System.out.print(memVO3.getMemStatus()+",");
+//		System.out.println(memVO3.getMemIntro());	
+//		System.out.println("---------------------");
+		
+		//修改狀態
+		MemVO memVO4 = new MemVO();
+		memVO4.setMemID("M000002");
+		memVO4.setMemStatus("MS1");
+		dao.updateStatus(memVO4.getMemID(), memVO4.getMemStatus());
+		
+		//查詢ALL
+//		List<MemVO> list =dao.getAll();
+//		for(MemVO aMem : list) {
+//		System.out.print(aMem.getMemID() + ",");
+//		System.out.print(aMem.getMemAcccount() + ",");
+//		System.out.print(aMem.getMemName() + ",");
+//		System.out.print(aMem.getMemPsw() + ",");
+//		System.out.print(aMem.getMemBirDay()+ ",");
+//		System.out.print(aMem.getMemPhoto()+ ",");
+//		System.out.print(aMem.getMemMail()+",");
+//		System.out.print(aMem.getMemStatus()+",");
+//		System.out.println(aMem.getMemIntro());	
+//		System.out.println("---------------------");
+//		}
+		
+		
+		//刪除
+//		dao.delete("M000011");
+		
+	}
+
 }
