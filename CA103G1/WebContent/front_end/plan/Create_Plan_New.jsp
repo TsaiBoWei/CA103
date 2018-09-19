@@ -80,7 +80,7 @@ body {
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;images/assets/conference/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
