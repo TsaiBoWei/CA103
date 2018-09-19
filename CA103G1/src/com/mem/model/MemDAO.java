@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,24 +19,6 @@ import javax.sql.DataSource;
 
 public class MemDAO implements MemDAO_interface{
 	
-	private static final String INSERT_mem = 
-			"INSERT INTO MEM (MEM_ID, MEM_ACCOUNT, MEM_NAME, MEM_PASSWORD, MEM_BIRTH,MEM_PHOTO ,MEM_MAIL, MEM_STATUS, MEM_INTRO) VALUES ('M'||LPAD(to_char(mem_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?)";
-	
-	private static final String GET_ONE_mem = 
-			"SELECT MEM_ID,MEM_ACCOUNT,MEM_NAME,MEM_PASSWORD,to_char(MEM_BIRTH,'yyyy-mm-dd') MEM_BIRTH,MEM_PHOTO,MEM_MAIL,MEM_STATUS,MEM_INTRO FROM MEM where MEM_ID = ?";
-	
-	private static final String UPDATE_mem = 
-			"UPDATE MEM set MEM_ACCOUNT=?, MEM_NAME=?, MEM_PASSWORD=?, MEM_BIRTH=?, MEM_PHOTO=?, MEM_MAIL=?, MEM_INTRO=? where MEM_ID=?";
-	
-	private static final String GET_ALL_mem = 
-			"SELECT MEM_ID,MEM_ACCOUNT,MEM_NAME,MEM_PASSWORD,to_char(MEM_BIRTH,'yyyy-mm-dd') MEM_BIRTH,MEM_PHOTO,MEM_MAIL,MEM_STATUS,MEM_INTRO FROM MEM order by MEM_ID";
-	
-	private static final String DELETE_mem = 
-			"DELETE FROM MEM WHERE MEM_ID=?";
-	
-	private static final String UPDATE_STATUS = 
-			"UPDATE MEM set MEM_STATUS=? where MEM_ID=?";
-	
 	private static DataSource ds = null;
 	static {
 		try {
@@ -45,197 +28,236 @@ public class MemDAO implements MemDAO_interface{
 			e.printStackTrace();
 		}
 	}
-
-	public static byte[] getPictureByteArray(String path) throws IOException {
-		File file = new File(path);
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] buffer = new byte[8192];
-		int i;
-		while ((i = fis.read(buffer)) != -1) {
-			baos.write(buffer, 0, i);
-		}
-		baos.close();
-		fis.close();
-
-		return baos.toByteArray();
-	}
+		
+	private static final String INSERT = 
+			"INSERT INTO MEM (MEM_ID,  MEM_NAME, MEM_ACCOUNT,MEM_PASSWORD, MEM_BIRTH, MEM_PHOTO ,MEM_EMAIL, MEM_STATUS, MEM_INTRO) VALUES ('M'||LPAD(to_char(mem_seq.NEXTVAL), 6, '0'), ?, ?, ?, ?, ?, ?, 'MS0', ?)";
+	private static final String UPDATE = 
+			"UPDATE MEM SET MEM_NAME = ?,MEM_ACCOUNT = ? , MEM_PASSWORD = ?, MEM_BIRTH = ?, MEM_PHOTO = ?, MEM_EMAIL = ?, MEM_INTRO = ? WHERE MEM_ID = ?";
+	private static final String UPDATE_STATUS = 
+			"UPDATE MEM SET MEM_STATUS = ? WHERE MEM_ID = ?";
+	private static final String DELETE = 
+			"DELETE FROM MEM WHERE MEM_ID = ?";
+	private static final String GET_ONE_STMT = 
+			"SELECT MEM_ID, MEM_NAME, MEM_ACCOUNT,  MEM_PASSWORD, TO_CHAR(MEM_BIRTH, 'yyyy-mm-dd') MEM_BIRTH, MEM_PHOTO, MEM_EMAIL, MEM_STATUS, MEM_INTRO FROM MEM WHERE MEM_ID = ?";
+	private static final String GET_ALL_STMT = 
+			"SELECT MEM_ID, MEM_NAME, MEM_ACCOUNT,  MEM_PASSWORD, TO_CHAR(MEM_BIRTH, 'yyyy-mm-dd') MEM_BIRTH, MEM_PHOTO, MEM_EMAIL, MEM_STATUS, MEM_INTRO FROM MEM ORDER BY MEM_ID";
+	
 	
 	@Override
 	public void insert(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try {
-			
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_mem);
-			
-			pstmt.setString(1, memVO.getMemAcccount());
-			pstmt.setString(2, memVO.getMemName());
-			pstmt.setString(3, memVO.getMemPsw());
-			pstmt.setDate(4, memVO.getMemBirDay());
-			pstmt.setBytes(5, memVO.getMemPhoto());
-			pstmt.setString(6, memVO.getMemMail());
-			pstmt.setString(7, memVO.getMemStatus());
-			pstmt.setString(8, memVO.getMemIntro());
-			
-			pstmt.executeUpdate();
-			
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
-			if (pstmt != null) {
-				try {
-					 pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					 con.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
 		
-	}
-	
-	@Override
- 	public void update(MemVO memVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
 		try {
-			
+
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_mem);
-			
-			pstmt.setString(1, memVO.getMemAcccount());
-			pstmt.setString(2, memVO.getMemName());
-			pstmt.setString(3, memVO.getMemPsw());
-			pstmt.setDate(4, memVO.getMemBirDay());
-			pstmt.setBytes(5, memVO.getMemPhoto());
-			pstmt.setString(6, memVO.getMemMail());
-			
-			pstmt.setString(7, memVO.getMemIntro());
-			pstmt.setString(8, memVO.getMemID());
+			pstmt.setString(1, memVO.getMem_name());
+			pstmt.setString(2, memVO.getMem_account());
+			pstmt.setString(3, memVO.getMem_password());
+			pstmt.setDate(4, memVO.getMem_birth());
+			pstmt.setBytes(5, memVO.getMem_photo());
+			pstmt.setString(6, memVO.getMem_email());
+			pstmt.setString(7, memVO.getMem_intro());
 			
 			pstmt.executeUpdate();
 			
-
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "	+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
 			if (pstmt != null) {
 				try {
-					 pstmt.close();
+					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
-					 con.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
-		
-		
 	}
-
-	
+ 
 	@Override
-	public void updateStatus(String memID, String status) {
-
+	public void update(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE);
 			
+			
+			pstmt.setString(1, memVO.getMem_name());
+			pstmt.setString(2, memVO.getMem_account());
+			pstmt.setString(3, memVO.getMem_password());
+			pstmt.setDate(4, memVO.getMem_birth());
+			pstmt.setBytes(5, memVO.getMem_photo());
+			pstmt.setString(6, memVO.getMem_email());
+			pstmt.setString(7, memVO.getMem_intro());
+			pstmt.setString(8,memVO.getMem_id());
+			
+			
+			pstmt.executeUpdate();
+			
+		
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "	+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void updateStatus(String mem_id, String mem_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
-			
-			pstmt.setString(1, status);
-			pstmt.setString(2, memID);
-	
+				
+			pstmt.setString(1, mem_status);
+			pstmt.setString(2, mem_id);			
 			pstmt.executeUpdate();
 			
-
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
+		
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "	+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
 			if (pstmt != null) {
 				try {
-					 pstmt.close();
+					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
-					 con.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
-		}	
+		}
+		
+		
 	}
-
-	
 	@Override
-	public MemVO findByPrimaryKey(String memID) {
+	public void delete(String mem_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			pstmt = con.prepareStatement(DELETE);
+			
+			pstmt.setString(1, mem_id);
+			
+			pstmt.executeUpdate();
+			
+		
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "	+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	@Override
+	public MemVO findByPrimaryKey(String mem_id) {
+		
 		MemVO memVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
-			
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_mem);
-			
-			pstmt.setString(1, memID);
-			
-			rs = pstmt.executeQuery();
-			
-			
-			while(rs.next()) {
-				memVO = new MemVO();
-				memVO.setMemID(rs.getString("MEM_ID"));
-				memVO.setMemAcccount(rs.getString("MEM_ACCOUNT"));
-				memVO.setMemName(rs.getString("MEM_NAME"));
-				memVO.setMemPsw(rs.getString("MEM_PASSWORD"));
-				memVO.setMemBirDay(rs.getDate("MEM_BIRTH"));
-				memVO.setMemPhoto(rs.getBytes("MEM_PHOTO"));
-				memVO.setMemMail(rs.getString("MEM_MAIL"));
-				memVO.setMemStatus(rs.getString("MEM_STATUS"));
-				memVO.setMemIntro(rs.getString("MEM_INTRO"));
-			}
-			
 
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
-			if(rs != null) {
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+
+			pstmt.setString(1, mem_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// memVo 也稱為 Domain objects
+				memVO = new MemVO();
+				memVO.setMem_id(rs.getString("mem_id"));
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_account(rs.getString("mem_account"));
+				memVO.setMem_password(rs.getString("mem_password"));
+				memVO.setMem_birth(rs.getDate("mem_birth"));
+				memVO.setMem_photo(rs.getBytes("mem_photo"));
+				memVO.setMem_email(rs.getString("mem_email"));
+				memVO.setMem_status(rs.getString("mem_status"));
+				memVO.setMem_intro(rs.getString("mem_intro"));
+			}
+
+			// Handle any SQL errors
+		} catch (NullPointerException e){
+			e.getMessage();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException se){
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
-			
 			if (pstmt != null) {
 				try {
-					 pstmt.close();
+					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
-					 con.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
@@ -243,101 +265,66 @@ public class MemDAO implements MemDAO_interface{
 		}
 		return memVO;
 	}
-
 	@Override
 	public List<MemVO> getAll() {
 		List<MemVO> list = new ArrayList<MemVO>();
 		MemVO memVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
-			
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_mem);
-			
 
-			
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
+				// memVO 也稱為 Domain objects
 				memVO = new MemVO();
-				memVO.setMemID(rs.getString("MEM_ID"));
-				memVO.setMemAcccount(rs.getString("MEM_ACCOUNT"));
-				memVO.setMemName(rs.getString("MEM_NAME"));
-				memVO.setMemPsw(rs.getString("MEM_PASSWORD"));
-				memVO.setMemBirDay(rs.getDate("MEM_BIRTH"));
-				memVO.setMemPhoto(rs.getBytes("MEM_PHOTO"));
-				memVO.setMemMail(rs.getString("MEM_MAIL"));
-				memVO.setMemStatus(rs.getString("MEM_STATUS"));
-				memVO.setMemIntro(rs.getString("MEM_INTRO"));
+				memVO.setMem_id(rs.getString("mem_id"));
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_account(rs.getString("mem_account"));
+				memVO.setMem_password(rs.getString("mem_password"));
+				memVO.setMem_birth(rs.getDate("mem_birth"));
+				memVO.setMem_photo(rs.getBytes("mem_photo"));
+				memVO.setMem_email(rs.getString("mem_email"));
+				memVO.setMem_status(rs.getString("mem_status"));
+				memVO.setMem_intro(rs.getString("mem_intro"));
 				list.add(memVO);
+				
 			}
-			
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
-			if(rs != null) {
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
-				}catch(SQLException se){
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
-			
 			if (pstmt != null) {
 				try {
-					 pstmt.close();
+					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
-					 con.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
 		return list;
-	}
-	
-	public void delete(String memID) {
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_mem);
-			
-			pstmt.setString(1, memID);
-			
-			pstmt.executeUpdate();
-			
-
-		}catch(SQLException se) {
-			throw new RuntimeException("A DB error occured."+ se.getMessage());
-		}finally {
-			if (pstmt != null) {
-				try {
-					 pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					 con.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
 	}
 	
 }

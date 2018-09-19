@@ -3,89 +3,106 @@ package com.mem.model;
 import java.sql.Date;
 
 public class MemVO implements java.io.Serializable{
-	private String memID;
-	private String memAcccount;
-	private String memName;
-	private String memPsw;
-	private Date memBirDay;
-	private byte[] memPhoto;
-	private String memMail;
-	private String memStatus;
-	private String MemIntro;
+	private String mem_id;
+	private String mem_name;
+	private String mem_account;
+	private String mem_password;
+	private Date mem_birth;
+	private byte[] mem_photo;
+	private String mem_email;
+	private String mem_status;
+	private String mem_intro;
 	
 	public MemVO() {
 		super();
 	}
-	
-	public MemVO(String memID, String memAcccount, String memName, String memPsw, Date memBirDay, byte[] memPhoto,
-			String memMail, String memStatus, String memIntro) {
-		super();
-		this.memID = memID;
-		this.memAcccount = memAcccount;
-		this.memName = memName;
-		this.memPsw = memPsw;
-		this.memBirDay = memBirDay;
-		this.memPhoto = memPhoto;
-		this.memMail = memMail;
-		this.memStatus = memStatus;
-		MemIntro = memIntro;
-	}
-	public String getMemID() {
-		return memID;
-	}
-	public void setMemID(String memID) {
-		this.memID = memID;
-	}
-	public String getMemAcccount() {
-		return memAcccount;
-	}
-	public void setMemAcccount(String memAcccount) {
-		this.memAcccount = memAcccount;
-	}
-	public String getMemName() {
-		return memName;
-	}
-	public void setMemName(String memName) {
-		this.memName = memName;
-	}
-	public String getMemPsw() {
-		return memPsw;
-	}
-	public void setMemPsw(String memPsw) {
-		this.memPsw = memPsw;
-	}
-	public Date getMemBirDay() {
-		return memBirDay;
-	}
-	public void setMemBirDay(Date memBirDay) {
-		this.memBirDay = memBirDay;
-	}
-	public byte[] getMemPhoto() {
-		return memPhoto;
-	}
-	public void setMemPhoto(byte[] memPhoto) {
-		this.memPhoto = memPhoto;
-	}
-	public String getMemMail() {
-		return memMail;
-	}
-	public void setMemMail(String memMail) {
-		this.memMail = memMail;
-	}
-	public String getMemStatus() {
-		return memStatus;
-	}
-	public void setMemStatus(String memStatus) {
-		this.memStatus = memStatus;
-	}
-	public String getMemIntro() {
-		return MemIntro;
-	}
-	public void setMemIntro(String memIntro) {
-		MemIntro = memIntro;
-	}
-	 
 
+	public MemVO(String mem_id, String mem_name, String mem_account, String mem_password, Date mem_birth,
+			byte[] mem_photo, String mem_email, String mem_status, String mem_intro) {
+		super();
+		this.mem_id = mem_id;
+		this.mem_name = mem_name;
+		this.mem_account = mem_account;
+		this.mem_password = mem_password;
+		this.mem_birth = mem_birth;
+		this.mem_photo = mem_photo;
+		this.mem_email = mem_email;
+		this.mem_status = mem_status;
+		this.mem_intro = mem_intro;
+	}
+
+	public String getMem_id() {
+		return mem_id;
+	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+
+	public String getMem_account() {
+		return mem_account;
+	}
+
+	public void setMem_account(String mem_account) {
+		this.mem_account = mem_account;
+	}
+
+	public String getMem_password() {
+		return mem_password;
+	}
+
+	public void setMem_password(String mem_password) {
+		this.mem_password = mem_password;
+	}
+
+	public Date getMem_birth() {
+		return mem_birth;
+	}
+
+	public void setMem_birth(Date mem_birth) {
+		this.mem_birth = mem_birth;
+	}
+
+	public byte[] getMem_photo() {
+		return mem_photo;
+	}
+
+	public void setMem_photo(byte[] mem_photo) {
+		this.mem_photo = mem_photo;
+	}
+
+	public String getMem_email() {
+		return mem_email;
+	}
+
+	public void setMem_email(String mem_email) {
+		this.mem_email = mem_email;
+	}
+
+	public String getMem_status() {
+		return mem_status;
+	}
+
+	public void setMem_status(String mem_status) {
+		this.mem_status = mem_status;
+	}
+
+	public String getMem_intro() {
+		return mem_intro;
+	}
+
+	public void setMem_intro(String mem_intro) {
+		this.mem_intro = mem_intro;
+	}
+	
 	
 	
 }

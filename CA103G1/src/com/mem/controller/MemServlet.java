@@ -64,11 +64,11 @@ public class MemServlet extends HttpServlet {
 				String email = req.getParameter("email");
 				String memName = req.getParameter("memName");
 				String psw = req.getParameter("psw");
-				memVO.setMemAcccount(email);
-				memVO.setMemName(memName);
-				memVO.setMemPsw(psw);
-				memVO.setMemMail(email);
-				memVO.setMemStatus("MS0");
+				memVO.setMem_account(email);
+				memVO.setMem_name(memName);
+				memVO.setMem_password(psw);
+				memVO.setMem_email(email);
+				memVO.setMem_status("MS0");
 				
 				MemService memSvc = new MemService();
 				memVO = memSvc.addMem(email, memName, psw);
