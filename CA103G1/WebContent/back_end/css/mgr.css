@@ -1,0 +1,12 @@
+@charset "BIG5";
+
+
+ body {
+      overflow-x: hidden;
+    }
+
+
+ #mgrbackground{
+     background-image: url(../img/back.jpg)
+    
+    }
