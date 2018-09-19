@@ -13,7 +13,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "CA103";
-	String passwd = "oracle";
+	String passwd = "123456";
 
 	//INSERT INTO "MEMSPLIKE" (MEM_ID,SPTYPE_ID,LIKE_STATUS) VALUES ('M000001','SP000001','LS0');
 	private static String INSERT_STMT 
