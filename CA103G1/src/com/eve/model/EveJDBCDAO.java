@@ -24,18 +24,26 @@ public class EveJDBCDAO implements EventDAO_interface{
 	String passwd = "123456";
 	
 	private static final String INSERT_STMT = 
-		"Insert into EVENT (EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_CONTENT,EVE_STARTDATE,EVE_ENDDATE,EREG_STARTDATE,EREG_ENDDATE,"+
+		"Insert into EVENT (EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT,EVE_STARTDATE,EVE_ENDDATE,EREG_STARTDATE,EREG_ENDDATE,"+
 		"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE ) "+
-		" values ('E'||LPAD(to_char(event_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
+		" values ('E'||LPAD(to_char(event_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 	private static final String GET_ALL_STMT = 
-		"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
-		"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT order by EVE_ID";
+		"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
+		"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS != 'E0' order by EVE_ID";
 	private static final String GET_ONE_STMT = 
-		"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_CONTENT,EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
-		"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_ID= ?";		
+		"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT,EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
+		"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_ID= ? AND EVE_STATUS != 'E0'";		
 	private static final String UPDATE = 
-		"UPDATE EVENT set EVE_PHOTO=?,EVE_LOGO=?,EVE_CONTENT=?,EVE_STARTDATE=? ,EVE_ENDDATE =?,EREG_STARTDATE =?,EREG_ENDDATE=?," + 
+		"UPDATE EVENT set EVE_PHOTO=?,EVE_LOGO=?,EVE_PTYPE=?,EVE_TITLE=?,EVE_CONTENT=?,EVE_STARTDATE=? ,EVE_ENDDATE =?,EREG_STARTDATE =?,EREG_ENDDATE=?," + 
 		"ESTART_LIMIT=? ,EVE_STATUS=?,EVE_LOCATION=?,EVE_LONG=?,EVE_LAT=?,CITY_ID=?,SPTYPE_ID=?,EVE_VIEW=?,EVE_CHARGE=?,ECONTACT_INFO=?  where EVE_ID = ?";
+	private static final String UPDATE_STATUS = 
+			"UPDATE EVENT set EVE_STATUS=? where EVE_ID = ?";
+	private static final String GET_EVE_BY_MEM = 
+			"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
+			"ESTART_LIMIT,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE MEM_ID=? order by EVE_ID";
+	
+	//塞假資料用
+	private static final String UPDATE_PIC="UPDATE EVENT SET EVE_PHOTO=? WHERE EVE_ID=?";
 
 
 	@Override
@@ -53,21 +61,23 @@ public class EveJDBCDAO implements EventDAO_interface{
 			pstmt.setString(1,eventVO.getMem_id());
 			pstmt.setBytes(2,eventVO.getEve_photo());
 			pstmt.setBytes(3,eventVO.getEve_logo());
-			pstmt.setString(4,eventVO.getEve_content());
-			pstmt.setTimestamp(5,eventVO.getEve_startdate());
-			pstmt.setTimestamp(6,eventVO.getEve_enddate());
-			pstmt.setDate(7,eventVO.getEreg_startdate());
-			pstmt.setDate(8,eventVO.getEreg_enddate() );
-			pstmt.setInt(9, eventVO.getEstart_limit());
-			pstmt.setString(10, eventVO.getEve_status());
-			pstmt.setString(11, eventVO.getEve_location());
-			pstmt.setDouble(12, eventVO.getEve_long());
-			pstmt.setDouble(13, eventVO.getEve_lat());
-			pstmt.setString(14, eventVO.getCity_id());
-			pstmt.setString(15,eventVO.getSptype_id());
-			pstmt.setInt(16, eventVO.getEve_view());
-			pstmt.setInt(17, eventVO.getEve_charge());
-			pstmt.setString(18, eventVO.getEcontact_info());
+			pstmt.setString(4,eventVO.getEve_ptype());
+			pstmt.setString(5, eventVO.getEve_title());
+			pstmt.setString(6,eventVO.getEve_content());			
+			pstmt.setTimestamp(7,eventVO.getEve_startdate());
+			pstmt.setTimestamp(8,eventVO.getEve_enddate());
+			pstmt.setDate(9,eventVO.getEreg_startdate());
+			pstmt.setDate(10,eventVO.getEreg_enddate() );
+			pstmt.setInt(11, eventVO.getEstart_limit());
+			pstmt.setString(12, eventVO.getEve_status());
+			pstmt.setString(13, eventVO.getEve_location());
+			pstmt.setDouble(14, eventVO.getEve_long());
+			pstmt.setDouble(15, eventVO.getEve_lat());
+			pstmt.setString(16, eventVO.getCity_id());
+			pstmt.setString(17,eventVO.getSptype_id());
+			pstmt.setInt(18, eventVO.getEve_view());
+			pstmt.setInt(19, eventVO.getEve_charge());
+			pstmt.setString(20, eventVO.getEcontact_info());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -109,22 +119,24 @@ public class EveJDBCDAO implements EventDAO_interface{
 			
 			pstmt.setBytes(1,eventVO.getEve_photo());
 			pstmt.setBytes(2,eventVO.getEve_logo());
-			pstmt.setString(3,eventVO.getEve_content());
-			pstmt.setTimestamp(4,eventVO.getEve_startdate());
-			pstmt.setTimestamp(5,eventVO.getEve_enddate());
-			pstmt.setDate(6,eventVO.getEreg_startdate());
-			pstmt.setDate(7,eventVO.getEreg_enddate() );
-			pstmt.setInt(8, eventVO.getEstart_limit());
-			pstmt.setString(9, eventVO.getEve_status());
-			pstmt.setString(10, eventVO.getEve_location());
-			pstmt.setDouble(11, eventVO.getEve_long());
-			pstmt.setDouble(12, eventVO.getEve_lat());
-			pstmt.setString(13, eventVO.getCity_id());
-			pstmt.setString(14,eventVO.getSptype_id());
-			pstmt.setInt(15, eventVO.getEve_view());
-			pstmt.setInt(16, eventVO.getEve_charge());
-			pstmt.setString(17, eventVO.getEcontact_info());
-			pstmt.setString(18,eventVO.getEve_id() );
+			pstmt.setString(3,eventVO.getEve_ptype());
+			pstmt.setString(4,eventVO.getEve_title());
+			pstmt.setString(5,eventVO.getEve_content());		
+			pstmt.setTimestamp(6,eventVO.getEve_startdate());
+			pstmt.setTimestamp(7,eventVO.getEve_enddate());
+			pstmt.setDate(8,eventVO.getEreg_startdate());
+			pstmt.setDate(9,eventVO.getEreg_enddate() );
+			pstmt.setInt(10, eventVO.getEstart_limit());
+			pstmt.setString(11, eventVO.getEve_status());
+			pstmt.setString(12, eventVO.getEve_location());
+			pstmt.setDouble(13, eventVO.getEve_long());
+			pstmt.setDouble(14, eventVO.getEve_lat());
+			pstmt.setString(15, eventVO.getCity_id());
+			pstmt.setString(16,eventVO.getSptype_id());
+			pstmt.setInt(17, eventVO.getEve_view());
+			pstmt.setInt(18, eventVO.getEve_charge());
+			pstmt.setString(19, eventVO.getEcontact_info());
+			pstmt.setString(20,eventVO.getEve_id() );
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -154,6 +166,46 @@ public class EveJDBCDAO implements EventDAO_interface{
 		}
 		
 	}
+	
+	@Override
+	public void update_status(String eve_id,String eve_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_STATUS);		
+			pstmt.setString(1, eve_status);		
+			pstmt.setString(2, eve_id);
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+			
+	}
 
 
 
@@ -180,6 +232,8 @@ public class EveJDBCDAO implements EventDAO_interface{
 				eventVO.setMem_id(rs.getString("Mem_id"));
 				eventVO.setEve_photo(rs.getBytes("Eve_photo"));
 				eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+				eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+				eventVO.setEve_title(rs.getString("Eve_title"));
 				eventVO.setEve_content(rs.getString("Eve_content"));
 				eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
 				eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
@@ -256,6 +310,88 @@ public class EveJDBCDAO implements EventDAO_interface{
 				eventVO.setMem_id(rs.getString("Mem_id"));
 				eventVO.setEve_photo(rs.getBytes("Eve_photo"));
 				eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+				eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+				eventVO.setEve_title(rs.getString("Eve_title"));
+				eventVO.setEve_content(rs.getString("Eve_content"));
+				eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
+				eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
+				eventVO.setEreg_startdate(rs.getDate("Ereg_startdate"));
+				eventVO.setEreg_enddate(rs.getDate("Ereg_enddate"));
+				eventVO.setEstart_limit(rs.getInt("Estart_limit"));
+				eventVO.setEve_status(rs.getString("Eve_status"));
+				eventVO.setEve_location(rs.getString("Eve_location"));
+				eventVO.setEve_long(rs.getDouble("Eve_long"));
+				eventVO.setEve_lat(rs.getDouble("Eve_lat"));
+				eventVO.setCity_id(rs.getString("City_id"));
+				eventVO.setSptype_id(rs.getString("Sptype_id"));
+				eventVO.setEve_view(rs.getInt("Eve_view"));
+				eventVO.setEve_charge(rs.getInt("Eve_charge"));
+				eventVO.setEcontact_info(rs.getString("Econtact_info"));
+				eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
+	
+				list.add(eventVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<EventVO> getEvesByMem(String mem_id) {
+		List<EventVO> list = new ArrayList<EventVO>();
+		EventVO eventVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_EVE_BY_MEM);
+			pstmt.setString(1,mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				eventVO = new EventVO();
+				eventVO.setEve_id(rs.getString("Eve_id"));
+				eventVO.setMem_id(rs.getString("Mem_id"));
+				eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+				eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+				eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+				eventVO.setEve_title(rs.getString("Eve_title"));
 				eventVO.setEve_content(rs.getString("Eve_content"));
 				eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
 				eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
@@ -318,11 +454,13 @@ public class EveJDBCDAO implements EventDAO_interface{
 		// 新增
 //		EventVO eventVO1=new EventVO();
 //		eventVO1.setMem_id("M000003");
-//		byte[] photo1=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run\\banner_maokong_run.jpg");
+//		byte[] photo1=getPicBytes("C:\\Users\\Java\\Desktop\\專題架構\\SingleEventPage\\SingleEventPage0828\\assets\\eventpic\\run\\banner_Huwei_marathon .jpg");
 //		eventVO1.setEve_photo(photo1);
-//		byte[] logo1=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\oripic\\run\\maokong_run.jpg");
+//		byte[] logo1=getPicBytes("C:\\Users\\Java\\Desktop\\專題架構\\SingleEventPage\\SingleEventPage0828\\assets\\eventpic\\run\\banner_Huwei_marathon .jpg");
 //		eventVO1.setEve_logo(logo1);
-//		eventVO1.setEve_content("");
+//		eventVO1.setEve_ptype("image/jpeg");
+//		eventVO1.setEve_title("日月光路跑");
+//		eventVO1.setEve_content("由桃園市政府攜手日月光集團共同主辦，堪稱今年必跑、最值得參加的頂規賽事，並透過極地探險家林義傑協助規劃之「桃園日月光半程馬拉松」，訂於今(107)年10月7日選定國立體育大學盛大登場。本賽事規劃3K休閒組、10K挑戰組、21K半馬組等三大組別，報名費依不同組別從200至450元，活動內容十分豐富、有趣，除了有吸睛啦啦隊、在地特色補給站及賽後嘉年華音樂會外，更有超值的活動贈品，名額有限，報名從速！");
 //		eventVO1.setEve_startdate(java.sql.Timestamp.valueOf("2018-10-10 08:08:08"));
 //		eventVO1.setEve_enddate(java.sql.Timestamp.valueOf("2018-10-10 14:15:16"));
 //		eventVO1.setEreg_startdate(java.sql.Date.valueOf("2018-09-13"));
@@ -339,13 +477,16 @@ public class EveJDBCDAO implements EventDAO_interface{
 //		eventVO1.setEcontact_info("0912-345-678");
 //		
 //		dao.insert(eventVO1);
-//		
+		
 //		// 修改
 //		EventVO eventVO2=new EventVO();		
-//		byte[] photo=getPicBytes("");
-//		eventVO2.setEve_photo(photo);
-//		byte[] logo=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\oripic\\run\\maokong_run.jpg");
+////		byte[] photo=getPicBytes("");
+////		eventVO2.setEve_photo(photo);
+//		byte[] logo=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run\\banner_mioli_marathon.jpg");
+////		byte[] logo=getPicBytes("WebContent\\front_end\\event\\eve\\assets\\eventpic\\run\\banner_maokong_run.jpg");
 //		eventVO2.setEve_logo(logo);
+//		eventVO2.setEve_ptype("image/png");
+//		eventVO2.setEve_title("跑2");
 //		eventVO2.setEve_content("11111");
 //		eventVO2.setEve_startdate(java.sql.Timestamp.valueOf("2018-10-10 09:09:09"));
 //		eventVO2.setEve_enddate(java.sql.Timestamp.valueOf("2018-10-10 16:17:18"));
@@ -361,14 +502,16 @@ public class EveJDBCDAO implements EventDAO_interface{
 //		eventVO2.setEve_view(3);
 //		eventVO2.setEve_charge(50);
 //		eventVO2.setEcontact_info("0934-555-678");
-//		eventVO2.setMem_id("M000001");
-//		eventVO2.setEve_id("E000001");
+//		eventVO2.setMem_id("M000002");
+//		eventVO2.setEve_id("E000002");
 //		dao.update(eventVO2);
-//		
-//		// 查詢一個
-//		EventVO eventVO3=dao.findByPrimaryKey("E000002");
+////		
+////		// 查詢一個
+//		EventVO eventVO3=dao.findByPrimaryKey("E000001");
 //		System.out.println(eventVO3.getEve_id());
 //		System.out.println(eventVO3.getMem_id());
+//		System.out.println(eventVO3.getEve_ptype());
+//		System.out.println(eventVO3.getEve_title());
 //		System.out.println(eventVO3.getEve_content());
 //		System.out.println(eventVO3.getEve_startdate());
 //		System.out.println(eventVO3.getEve_enddate());
@@ -390,36 +533,74 @@ public class EveJDBCDAO implements EventDAO_interface{
 //		byte[] logo3=eventVO3.getEve_logo();
 //		readpic(logo3,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO3.getEve_id()+"_logo3.jpg");
 //		System.out.println("==================================");
-//		
-//		// 查詢全部
-		List<EventVO> list = dao.getAll();
-		for (EventVO eventVO : list) {
-			
-			System.out.println(eventVO.getEve_id());
-			System.out.println(eventVO.getMem_id());
-			System.out.println(eventVO.getEve_content());
-			System.out.println(eventVO.getEve_startdate());
-			System.out.println(eventVO.getEve_enddate());
-			System.out.println(eventVO.getEreg_startdate());
-			System.out.println(eventVO.getEreg_enddate());
-			System.out.println(eventVO.getEstart_limit());
-			System.out.println(eventVO.getEve_status());
-			System.out.println(eventVO.getEve_location());
-			System.out.println(eventVO.getEve_long());
-			System.out.println(eventVO.getEve_lat());
-			System.out.println(eventVO.getCity_id());
-			System.out.println(eventVO.getSptype_id());
-			System.out.println(eventVO.getEve_view());
-			System.out.println(eventVO.getEve_charge());	
-			System.out.println(eventVO.getEcontact_info());
-			System.out.println(eventVO.getEestablish_date());
-			
-			byte[] photo5=eventVO.getEve_photo();
-			readpic(photo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_photo.jpg");
-			byte[] logo5=eventVO.getEve_logo();
-			readpic(logo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_logo.jpg");
-			System.out.println("==================================");
-		}
+////		
+////		// 查詢全部
+//		List<EventVO> list = dao.getAll();
+//		for (EventVO eventVO : list) {
+//			
+//			System.out.println(eventVO.getEve_id());
+//			System.out.println(eventVO.getMem_id());	
+//			System.out.println(eventVO.getEve_ptype());
+//			System.out.println(eventVO.getEve_title());
+//			System.out.println(eventVO.getEve_content());
+//			System.out.println(eventVO.getEve_startdate());
+//			System.out.println(eventVO.getEve_enddate());
+//			System.out.println(eventVO.getEreg_startdate());
+//			System.out.println(eventVO.getEreg_enddate());
+//			System.out.println(eventVO.getEstart_limit());
+//			System.out.println(eventVO.getEve_status());
+//			System.out.println(eventVO.getEve_location());
+//			System.out.println(eventVO.getEve_long());
+//			System.out.println(eventVO.getEve_lat());
+//			System.out.println(eventVO.getCity_id());
+//			System.out.println(eventVO.getSptype_id());
+//			System.out.println(eventVO.getEve_view());
+//			System.out.println(eventVO.getEve_charge());	
+//			System.out.println(eventVO.getEcontact_info());
+//			System.out.println(eventVO.getEestablish_date());
+//			
+//			byte[] photo5=eventVO.getEve_photo();
+//			readpic(photo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_photo.jpg");
+//			byte[] logo5=eventVO.getEve_logo();
+//			readpic(logo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_logo.jpg");
+//			System.out.println("==================================");
+//		}
+		//改狀態
+//		dao.update_status("E000005", "E7");
+		
+		// 查詢會員主辦的全部活動
+//		List<EventVO> list = dao.getEvesByMem("M000003");
+//		for (EventVO eventVO : list) {
+//			
+//			System.out.println(eventVO.getEve_id());
+//			System.out.println(eventVO.getMem_id());	
+//			System.out.println(eventVO.getEve_ptype());
+//			System.out.println(eventVO.getEve_title());
+//			System.out.println(eventVO.getEve_content());
+//			System.out.println(eventVO.getEve_startdate());
+//			System.out.println(eventVO.getEve_enddate());
+//			System.out.println(eventVO.getEreg_startdate());
+//			System.out.println(eventVO.getEreg_enddate());
+//			System.out.println(eventVO.getEstart_limit());
+//			System.out.println(eventVO.getEve_status());
+//			System.out.println(eventVO.getEve_location());
+//			System.out.println(eventVO.getEve_long());
+//			System.out.println(eventVO.getEve_lat());
+//			System.out.println(eventVO.getCity_id());
+//			System.out.println(eventVO.getSptype_id());
+//			System.out.println(eventVO.getEve_view());
+//			System.out.println(eventVO.getEve_charge());	
+//			System.out.println(eventVO.getEcontact_info());
+//			System.out.println(eventVO.getEestablish_date());
+//			
+//			byte[] photo5=eventVO.getEve_photo();
+//			readpic(photo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_photo.jpg");
+//			byte[] logo5=eventVO.getEve_logo();
+//			readpic(logo5,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventVO.getEve_id()+"_logo.jpg");
+//			System.out.println("==================================");
+//		}
+		
+		dao. updatePic();
 
 	}	
 	
@@ -462,6 +643,8 @@ public class EveJDBCDAO implements EventDAO_interface{
 		}
 		
 		return pic;
+		
+		
 	}
 	public static void readpic(byte[] bytes,String filepath) {
 		try{
@@ -475,5 +658,75 @@ public class EveJDBCDAO implements EventDAO_interface{
 			e.printStackTrace();
 		}
 	}
+	
+	public void updatePic(){
+		int row=7;	//要更新的table的總欄位數量
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		FileInputStream fi=null;
+		ByteArrayOutputStream baos=null;
+		byte[] pic=null;
+			
+			
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_PIC);
+			//圖片存放路徑
+			File[] files=new File("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run").listFiles();
+			for(int i=1;i<=row;i++) {
+				System.out.println(i);
+				File file=files[i];
+				fi=new FileInputStream(file);
+				baos=new ByteArrayOutputStream();
+				
+				byte[] buffer=new byte[fi.available()];
+				fi.read(buffer);
+				baos.write(buffer);
+				pic=baos.toByteArray();		
+				pstmt.setBytes(1,pic);
+				pstmt.setString(2,"E00000"+i);				
+				pstmt.executeUpdate();
+				
+			}
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if(baos!=null) {
+				try {
+					baos.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (fi != null) {
+				try {
+					fi.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+
+	
 
 }

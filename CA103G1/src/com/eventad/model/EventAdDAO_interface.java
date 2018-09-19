@@ -7,6 +7,7 @@ public interface EventAdDAO_interface {
 	
 	public void insert(EventAdVO eventAdVO);
     public void update(EventAdVO eventAdVO);
+    public void updateStatus(String ead_id,String ead_status);
     public EventAdVO findByPrimaryKey(String ead_id);
     public List<EventAdVO> getAll();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)

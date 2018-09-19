@@ -8,12 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class EveCommentJDBCDAO implements EveCommentDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CA103";
-	String passwd = "123456";
+public class EveCommentDAO implements EveCommentDAO_interface{
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = 
 		"Insert into EVENTCOMMENT(ECOMMENT_ID,MEM_ID,EVE_ID,ECOMMENT,ECOM_TIME,ECOM_STATUS)values('EC'||LPAD(to_char(ecomment_seq.NEXTVAL), 6, '0'),?,?,?,CURRENT_TIMESTAMP,'EC1')";
@@ -35,8 +45,7 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1,eveCommentVO.getMem_id());
@@ -45,10 +54,6 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -79,17 +84,12 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setString(1, eveCommentVO.getEcomment());
 			pstmt.setString(2, eveCommentVO.getEcomment_id());
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -120,17 +120,12 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_ECOM_STATUS);
 			pstmt.setString(1, ecom_status);
 			pstmt.setString(2, ecomment_id);		
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -164,8 +159,7 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, ecomment_id);
 			rs = pstmt.executeQuery();
@@ -180,10 +174,6 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 				eveCommentVO.setEcomment(rs.getString("Ecomment"));	
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -224,8 +214,7 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -240,10 +229,7 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 				list.add(eveCommentVO);
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+		
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -274,49 +260,5 @@ public class EveCommentJDBCDAO implements EveCommentDAO_interface {
 		}
 		return list;
 	}
-	
-	public static void main(String args[]) {
-		EveCommentJDBCDAO dao=new EveCommentJDBCDAO();
-//		//新增
-//		EveCommentVO eveCommentVO1=new EveCommentVO();
-//		eveCommentVO1.setEcomment("請問之後還有活動嗎?");
-//		eveCommentVO1.setEve_id("E000001");
-//		eveCommentVO1.setMem_id("M000002");
-//		dao.insert(eveCommentVO1);
-		
-		//修改
-//		EveCommentVO eveCommentVO2=new EveCommentVO();
-//		eveCommentVO2.setEcomment("請問還能報名嗎?");
-//		eveCommentVO2.setEcomment_id("EC000001");
-//		dao.update(eveCommentVO2);
-//		
-		//查一
-//		EveCommentVO eveCommentVO3=dao.findByPrimaryKey("EC000001");
-//		System.out.println(eveCommentVO3.getEcomment_id());
-//		System.out.println(eveCommentVO3.getEve_id());
-//		System.out.println(eveCommentVO3.getMem_id());
-//		System.out.println(eveCommentVO3.getEcom_time());
-//		System.out.println(eveCommentVO3.getEcom_status());
-//		System.out.println(eveCommentVO3.getEcomment());
-//		System.out.println("================================");
-		
-		
-		//查全部
-//		List<EveCommentVO> list =dao.getAll();
-//		for(EveCommentVO eveCommentVO4:list) {
-//			System.out.println(eveCommentVO4.getEcomment_id());
-//			System.out.println(eveCommentVO4.getEve_id());
-//			System.out.println(eveCommentVO4.getMem_id());
-//			System.out.println(eveCommentVO4.getEcom_time());
-//			System.out.println(eveCommentVO4.getEcom_status());
-//			System.out.println(eveCommentVO4.getEcomment());
-//			System.out.println("================================");	
-//		}
-		
-//		dao.updateStatus("EC000002", "EC1");
-		
-	}
-
-	
 
 }

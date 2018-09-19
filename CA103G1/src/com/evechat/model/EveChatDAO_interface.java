@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.eventad.model.EventAdVO;
 
-public interface EveChat_interface {
+public interface EveChatDAO_interface {
 	public void insert(EveChatVO eveChatVO);
     public void updateEchatCont(EveChatVO eveChatVO);
     public void updateEchatStatus(String echat_id,String echat_status);

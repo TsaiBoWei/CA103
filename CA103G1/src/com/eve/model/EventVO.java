@@ -10,6 +10,8 @@ public class EventVO implements Serializable{
 	private String mem_id;
 	private byte[] eve_photo;
 	private byte[] eve_logo;
+	private String eve_ptype;
+	private String eve_title;
 	private String eve_content;
 	private Timestamp eve_startdate;
 	private Timestamp eve_enddate;
@@ -32,17 +34,21 @@ public class EventVO implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 
-	public EventVO(String eve_id, String mem_id, byte[] eve_photo, byte[] eve_logo, String eve_content,
-			Timestamp eve_startdate, Timestamp eve_enddate, Date ereg_startdate, Date ereg_enddate, Integer estart_limit,
-			String eve_status, String eve_location, Double eve_long, Double eve_lat, String city_id, String sptype_id,
-			Integer eve_view, Integer eve_charge, String econtact_info, Timestamp eestablish_date) {
+	public EventVO(String eve_id, String mem_id, byte[] eve_photo, byte[] eve_logo, String eve_ptype, String eve_title,
+			String eve_content, Timestamp eve_startdate, Timestamp eve_enddate, Date ereg_startdate, Date ereg_enddate,
+			Integer estart_limit, String eve_status, String eve_location, Double eve_long, Double eve_lat,
+			String city_id, String sptype_id, Integer eve_view, Integer eve_charge, String econtact_info,
+			Timestamp eestablish_date) {
 		super();
 		this.eve_id = eve_id;
 		this.mem_id = mem_id;
 		this.eve_photo = eve_photo;
 		this.eve_logo = eve_logo;
+		this.eve_ptype = eve_ptype;
+		this.eve_title = eve_title;
 		this.eve_content = eve_content;
 		this.eve_startdate = eve_startdate;
 		this.eve_enddate = eve_enddate;
@@ -60,6 +66,7 @@ public class EventVO implements Serializable{
 		this.econtact_info = econtact_info;
 		this.eestablish_date = eestablish_date;
 	}
+
 
 
 	public String getEve_id() {
@@ -100,6 +107,30 @@ public class EventVO implements Serializable{
 	public void setEve_logo(byte[] eve_logo) {
 		this.eve_logo = eve_logo;
 	}
+	
+	
+	public String getEve_ptype() {
+		return eve_ptype;
+	}
+
+
+
+	public void setEve_ptype(String eve_ptype) {
+		this.eve_ptype = eve_ptype;
+	}
+	
+
+
+	public String getEve_title() {
+		return eve_title;
+	}
+
+
+
+	public void setEve_title(String eve_title) {
+		this.eve_title = eve_title;
+	}
+
 
 
 	public String getEve_content() {

@@ -6,6 +6,8 @@ import java.util.List;
 public interface EventListDAO_interface {
 	public void insert(EventListVO eventListVO);
     public void update(EventListVO eventListVO);
+    public void updateListStatus(String mem_id,String eve_id,String evelist_status);
+    public void updateShareStatus(String mem_id,String eve_id,String eve_share);
     public EventListVO findByPrimaryKey(String mem_id,String eve_id);
     public List<EventListVO> findByMemId(String mem_id);
     public List<EventListVO> findByEveId(String eve_id);

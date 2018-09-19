@@ -5,26 +5,29 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-
-public class EveChatJDBCDAO implements EveChatDAO_interface{
+public class EveChatDAO implements EveChatDAO_interface{
 	
-	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CA103";
-	String passwd = "123456";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = 
 		"Insert into EVENTCHAT(ECHAT_ID ,MEM_ID,EVE_ID,ECHAT_CONTENT,ECHAT_TIME,ECHAT_STATUS ) values(to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(eventchat_seq.NEXTVAL), 6, '0'),?,?,?,CURRENT_TIMESTAMP,'ECHAT1')" ;
-		
+			
 	private static final String GET_ALL_STMT = 
 		"SELECT ECHAT_ID ,MEM_ID,EVE_ID,ECHAT_CONTENT,ECHAT_TIME ,ECHAT_STATUS FROM EVENTCHAT order by ECHAT_ID";
 	
@@ -46,8 +49,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 				
 			pstmt.setString(1,eveChatVO.getMem_id());
@@ -56,10 +58,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -94,8 +93,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, echat_id);
 			rs = pstmt.executeQuery();
@@ -110,10 +108,6 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 				eveChatVO.setEchat_content(rs.getString("Echat_content"));	
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -154,8 +148,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_EVE_ECHAT);
 			pstmt.setString(1,eve_id);
 			rs = pstmt.executeQuery();
@@ -171,15 +164,11 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 				list.add(eveChatVO);
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			se.printStackTrace();
-//			throw new RuntimeException("A database error occured. "
-//					+ se.getMessage());
+//				throw new RuntimeException("A database error occured. "
+//						+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -217,8 +206,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -233,10 +221,6 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 				list.add(eveChatVO);
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -276,8 +260,7 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_ECHAT_CONTENT);
 						
 			pstmt.setString(1, eveChatVO.getEchat_content());
@@ -285,10 +268,6 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -319,18 +298,13 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_ECHAT_STATUS);
 						
 			pstmt.setString(1, echat_status);
 			pstmt.setString(2, echat_id);
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -354,75 +328,5 @@ public class EveChatJDBCDAO implements EveChatDAO_interface{
 		}		
 		
 	}
-	
-	public static void main(String args[]) {
-		EveChatJDBCDAO dao=new EveChatJDBCDAO();
-		
-		//新增
-		EveChatVO eveChatVO1 =new EveChatVO();
-		eveChatVO1.setMem_id("M000002");
-		eveChatVO1.setEve_id("E000002");
-		eveChatVO1.setEchat_content("have fun");
-		dao.insert(eveChatVO1);
-//		
-		//修改內容
-//		EveChatVO eveChatVO2 =new EveChatVO();
-//		eveChatVO2.setEchat_id("20180908-000001");
-//		eveChatVO2.setEchat_content("yoyo");
-//		dao.updateEchatCont(eveChatVO2);
-		
-		//修改狀態
-		
-//		dao.updateEchatStatus("20180908-000001", "ECHAT1");
-		
-		//查一
-//		EveChatVO eveChatVO4=dao.findByPrimaryKey("20180908-000001");
-//		System.out.println(eveChatVO4.getEchat_id());
-//		System.out.println(eveChatVO4.getEve_id());
-//		System.out.println(eveChatVO4.getMem_id());
-//		Timestamp ts= eveChatVO4.getEchat_time();
-//		//--------SimpleDateFormat寫法--------
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
-//		System.out.println(sdf.format(ts));
-//		System.out.println(eveChatVO4.getEchat_status());
-//		System.out.println(eveChatVO4.getEchat_content());
-//		
-//		
-//		
-//		//用活動查
-		List<EveChatVO> list1=dao.getEve_Echat("E000001");
-		for(EveChatVO eveChatVO5:list1) {
-			System.out.println(eveChatVO5.getEchat_id());
-			System.out.println(eveChatVO5.getEve_id());
-			System.out.println(eveChatVO5.getMem_id());
-			Timestamp ts1= eveChatVO5.getEchat_time();
-			//--------SimpleDateFormat寫法--------
-			SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
-			System.out.println(sdf1.format(ts1));			
-			System.out.println(eveChatVO5.getEchat_status());
-			System.out.println(eveChatVO5.getEchat_content());
-			System.out.println("==============================");
-		}
-////		
-////		//查全部
-//		List<EveChatVO> list2=dao.getAll();
-//		for(EveChatVO eveChatVO6:list2) {
-//			System.out.println(eveChatVO6.getEchat_id());
-//			System.out.println(eveChatVO6.getEve_id());
-//			System.out.println(eveChatVO6.getMem_id());
-//			Timestamp ts2= eveChatVO6.getEchat_time();
-//			//--------SimpleDateFormat寫法--------
-//			SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
-//			System.out.println(sdf2.format(ts2));			
-//			System.out.println(eveChatVO6.getEchat_status());
-//			System.out.println(eveChatVO6.getEchat_content());
-//			System.out.println("==============================");
-//		}
-		
-	}
-
-
-
-	
 
 }

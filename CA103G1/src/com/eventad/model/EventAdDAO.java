@@ -1,11 +1,5 @@
 package com.eventad.model;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,12 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class EventAdJDBCDAO implements EventAdDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CA103";
-	String passwd = "123456";
+public class EventAdDAO implements EventAdDAO_interface{
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = 
 		"Insert into EVENTAD(EAD_ID ,MEM_ID,EAD_PIC,EAD_PTYPE, EAD_STATUS )values ('EAD'||LPAD(to_char(eventad_seq.NEXTVAL), 6, '0'),?,?,?,'EAD0')";
@@ -42,8 +46,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1,eventAdVO.getMem_id());
@@ -52,10 +55,6 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -87,8 +86,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1,eventAdVO.getMem_id());
@@ -98,10 +96,6 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -133,8 +127,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			
 			pstmt.setString(1,ead_status);
@@ -142,10 +135,6 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 			
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -178,8 +167,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, ead_id);
 			rs = pstmt.executeQuery();
@@ -194,10 +182,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 				
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -237,8 +222,7 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -253,10 +237,6 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 				
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -288,102 +268,5 @@ public class EventAdJDBCDAO implements EventAdDAO_interface {
 		
 		return list;
 	}
-	
-	public static void main(String args[]) {
-		EventAdJDBCDAO dao=new EventAdJDBCDAO();
-		//新增
-//		EventAdVO eventAdVO1=new EventAdVO();
-//		byte[] bannerpic=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run\\banner_maokong_run.jpg");
-//		eventAdVO1.setEad_ptype("IMAGE/JPEG");
-//		eventAdVO1.setEad_pic(bannerpic);
-//		eventAdVO1.setMem_id("M000003");
-//		dao.insert(eventAdVO1);
-//		修改
-//		EventAdVO eventAdVO2=new EventAdVO();
-//		byte[] bannerpic2=getPicBytes("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run\\banner_maokong_run.jpg");
-//		eventAdVO2.setEad_pic(bannerpic2);
-//		eventAdVO2.setEad_ptype("IMAGE/JPEG");
-//		eventAdVO2.setMem_id("M000004");
-//		eventAdVO2.setEad_id("EAD000001");
-//		dao.update(eventAdVO2);
-		
-//		//查一
-//		EventAdVO eventAdVO3=dao.findByPrimaryKey("EAD000001");
-//		System.out.println(eventAdVO3.getEad_id());
-//		System.out.println(eventAdVO3.getEad_ptype());		
-//		System.out.println(eventAdVO3.getEad_status());
-//		System.out.println(eventAdVO3.getMem_id());
-//		byte[] photo=eventAdVO3.getEad_pic();
-//		readpic(photo,"C:\\Users\\user\\Desktop\\專題\\images\\eventad_photo1.jpg");
-//		System.out.println("===============================");
-		
-		//查全部
-//		List<EventAdVO> list=dao.getAll();
-//		for(EventAdVO eventAdVO:list) {
-//			System.out.println(eventAdVO.getEad_id());
-//			System.out.println(eventAdVO.getEad_status());
-//			System.out.println(eventAdVO.getEad_ptype());
-//			System.out.println(eventAdVO.getMem_id());
-//			byte[] photo1=eventAdVO.getEad_pic();
-//			readpic(photo1,"C:\\Users\\user\\Desktop\\專題\\images\\"+eventAdVO.getEad_id()+".jpg");
-//			System.out.println("===============================");			
-//		}
-		
-		dao.updateStatus("EAD000003", "EAD1");
-		
-		
-	}
-	
-	public  static byte[] getPicBytes(String filepath) {
-		File file=new File(filepath);
-		byte[] pic=null;
-		FileInputStream fi=null;
-		ByteArrayOutputStream baos=null;
-		try{
-			fi =new FileInputStream(file);
-			baos=new ByteArrayOutputStream();
-			byte[] buffer=new byte[fi.available()];
-			fi.read(buffer);
-			baos.write(buffer);
-			pic=baos.toByteArray();
-			
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}finally {
-			if(baos!=null) {
-				try {
-					baos.close();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(fi!=null) {
-				try {
-					fi.close();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-					
-		}
-		
-		return pic;
-	}
-	public static void readpic(byte[] bytes,String filepath) {
-		try{
-			FileOutputStream fo=new FileOutputStream(new File(filepath));
-			fo.write(bytes);
-		
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
-
 
 }
