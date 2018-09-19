@@ -1,4 +1,4 @@
-package com.memreport.model_undone;
+package com.memreport.model_cancel;
 
 import java.sql.Date;
 
