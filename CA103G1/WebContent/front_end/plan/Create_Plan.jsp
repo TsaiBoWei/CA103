@@ -16,8 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
-<link rel="icon"
-	href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+<link rel="icon" href="images/weight-lifting.png">
 <title>TRY</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -25,11 +24,12 @@
 	content="Pingendo conference event neon free template bootstrap 4">
 
 <!-- CSS dependencies -->
-<link rel="stylesheet" href="css/neon.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
-<link rel="stylesheet" href="css/PersonalPageBase.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/PersonalPageBase.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
 <script src="js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
@@ -150,7 +150,7 @@ body {
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Plan</a>
+								href="#">Interesting Plan</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="#"> <i
 							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
@@ -184,30 +184,33 @@ body {
 			</div>
 		</div>
 	</nav>
-	<div class="py-5 text-secondary opaque-overlay"
-		style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_restaurant.jpg&quot;);">
+
+
+		<!--  class="d-flex align-items-center cover section-fade-in-out" -->
+	<div class="d-flex align-items-center cover "
+		style="background-image: url(&quot;images/test2.jpg&quot;);">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-6">
+				<div>
 					<form method="post"
 						action="<%=request.getContextPath()%>/plan/plan.do"
 						enctype="multipart/form-data">
 						<h1 class="text-gray-dark">Create A New Plan</h1>
 						<div class="form-group">
-							<label><h5>Plan Name ：</h5></label> <input type="TEXT"
-								name="plan_name" size="45"
+							<label>
+								<h1>Plan Name ：</h1>
+							</label> <input type="TEXT" name="plan_name" size="45"
+								class="form-control"
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>" />
 						</div>
 
 
-
-
-						<label><h5>Plan Cover ：</h5></label> <label class="btn btn-info">
-							<input id="upload_img" style="display: none;" type="file"
-							name="plan_cover"> <i class="fa fa-photo"></i> 上傳圖片
-						</label>
-
+						<div class="form-group">
+							<label><h5>Plan Cover ：</h5></label> <label class="btn btn-info">
+								<input id="upload_img" style="display: none;" type="file"
+								name="plan_cover"> <i class="fa fa-photo">上傳圖片</i>
+							</label>
+						</div>
 
 						<jsp:useBean id="PlanSvc" scope="page"
 							class="com.plan.model.PlanService" />

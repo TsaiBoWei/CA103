@@ -7,14 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 <link rel="icon"
-	href="https://templates.pingendo.com/images/assets/Pingendo_favicon.ico">
+	href="images/weight-lifting.png">
 <title>Conference Neon - Pingendo template</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
 <meta name="keywords"
 	content="Pingendo conference event neon free template bootstrap 4">
 <!-- CSS dependencies -->
-<link rel="stylesheet" href="css/neon.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
