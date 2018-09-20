@@ -32,7 +32,7 @@ public class Test_DataSource extends HttpServlet {
 
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 			if (ds != null) {
 				Connection conn = ds.getConnection();
 

@@ -80,7 +80,7 @@ body {
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;images/assets/conference/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -184,113 +184,7 @@ body {
 			</div>
 		</div>
 	</nav>
-	<div class="py-5 text-secondary opaque-overlay"
-		style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_restaurant.jpg&quot;);">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-6">
-					<h1 class="text-gray-dark">Create A New Plan</h1>
-					<form method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>Plan Name ：</h5></label> <input type="TEXT"
-								name="plan_name" size="45"
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>" />
-						</div>
-					</form>
 
-					<form method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>Plan Cover ：</h5></label> <input type="submit"
-								name="plan_name"
-								value="<%=(planVO == null) ? "選擇檔案" : planVO.getPlan_name()%>" />
-						</div>
-					</form>
-
-					<form>
-						<label class="btn btn-info"> <input id="upload_img"
-							style="display: none;" type="file"> <i
-							class="fa fa-photo"></i> 上傳圖片
-						</label>
-
-					</form>
-
-					<jsp:useBean id="PlanSvc" scope="page"
-						class="com.plan.model.PlanService" />
-
-					<form method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>plan_start_time_undone :</h5></label> <input
-								type="text" name="plan_create_time" id="f_date1">
-						</div>
-					</form>
-
-					<form method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>plan_end_time_undone :</h5></label> <input type="text"
-								name="plan_create_time" id="f_date1">
-						</div>
-					</form>
-
-
-					<form class="" method="post" action="plan.do">
-						<div class="form-group">
-							<label>Plan SportType</label> <select size="1" name="sptype_id">
-								<c:forEach var="planVO" items="${planSvc.all}">
-									<option value="${planVO.sptype_id}"
-										${(PlanVO.sptype_id==SptypeVO.sptype_id)? 'selected':'' }>${planVO.sptype_id}
-								</c:forEach>
-							</select>
-						</div>
-					</form>
-
-					<form class="" method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>Privacy Setting :</h5></label> <select size="1"
-								name="privacy">
-								<option value="PLANPR0">公開</option>
-								<option value="PLANPR1">不公開</option>
-								<option value="PLANPR2">只對朋友公開</option>
-							</select>
-						</div>
-					</form>
-
-					<form class="" method="post" action="plan.do">
-						<div class="form-group">
-							<label><h5>Sport Type :</h5></label> <select size="1"
-								name="privacy">
-								<option value="SP000001">田徑</option>
-								<option value="SP000002">單車</option>
-								<option value="SP000003">球類</option>
-								<option value="SP000004">重訓</option>
-								<option value="SP000005">有氧</option>
-								<option value="SP000006">武術</option>
-								<option value="SP000007">水上</option>
-								<option value="SP000008">其他</option>
-							</select>
-						</div>
-					</form>
-
-					<form class="" method="post" action="plan.do">
-						<div class="form-group">
-							<label>Plan Content(plan vo) </label>
-							<textarea name="Planning_Content" rows="10" cols="30" wrap="off"
-								style="margin-top: 0px; margin-bottom: 0px; height: 100px;"
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
-							<br>
-						</div>
-					</form>
-					<form class="" method="post" action="plan.do">
-						<button type="submit" class="btn btn-primary">
-							<a herf=''>Add 
-						</button>
-						<button type="submit" class="btn btn-primary">Reset</button>
-						<button type="submit" class="btn btn-primary">cancel</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="container containerHrB ">
 		<hr>
 	</div>
@@ -369,11 +263,6 @@ body {
 		crossorigin="anonymous"></script>
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
-	<pingendo onclick="window.open('https://pingendo.com/', '_blank')"
-		style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made
-	with Pingendo Free&nbsp;&nbsp; <img
-		src="https://pingendo.com/site-assets/Pingendo_logo_big.png"
-		class="d-block" alt="Pingendo logo" height="16"> </pingendo>
 
 </body>
 

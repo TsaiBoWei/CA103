@@ -45,7 +45,7 @@
   	</servlet>
   	<servlet-mapping>
     	<servlet-name>MemServlet</servlet-name>
-    	<url-pattern>/Front-end/Mem_Login_Signup/mem.do</url-pattern>
+    	<url-pattern>/front_end/mem/mem.do</url-pattern>
   	</servlet-mapping>
   	
   	  <servlet>
