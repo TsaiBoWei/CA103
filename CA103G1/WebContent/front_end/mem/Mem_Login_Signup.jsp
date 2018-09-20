@@ -13,7 +13,7 @@
   <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
   <!-- CSS dependencies -->
-  <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/mem/neon.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
   <script src="<%=request.getContextPath() %>/front_end/mem/js/navbar-ontop.js"></script>
