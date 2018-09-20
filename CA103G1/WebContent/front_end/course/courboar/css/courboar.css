@@ -1,0 +1,103 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskannada.css);
+.commentbottomline{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);
+}
+
+.postsubtitle .border-right {
+    border-right: 0.8px solid rgba(239, 239, 239,0.8)!important;
+}
+.courboarlistinnerline{
+  border-bottom: 0.8px solid rgba(239, 239, 239,0.4); 
+}
+
+.h5{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+
+p.h6{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+
+body{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+    
+.replyinreplynametext{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);  
+}
+
+
+   .commenttextarea {
+      height: 120px;
+    }
+
+    .courboarsearchbar {
+      background: none;
+      border: 0.7px solid #303030;
+    }
+
+    .courboarsearchbar:focus {
+      background: none;
+    }
+
+    .courboarformtitle {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarformtitle:focus {
+      background: none;
+    }
+
+    .courboarqform {
+      background: rgba(48, 48, 48, 0.8);
+      /*width: 700px;*/
+    }
+
+    .courboardqtext {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboardqtext:focus {
+      background: none;
+    }
+
+    .courboarmodalheader {
+      border-bottom: none;
+    }
+
+    .courboarmodal {
+      border-top: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarlistinnerline {
+      border-bottom: 0.5px solid rgba(239, 239, 239, 0.4);
+    }
+    
+    .crposticon:hover{
+    
+    color:#009ac0;
+    }
+
+
+    /*20180915  courboarform  彈出表單修改尺寸*/
+
+    .form-group-100{
+        width:100%;
+    }
+
+    .modal-dialog.modal-dialog-700{
+        max-width: 700px;
+    }
+
+    .popModel-close-bt{
+        position: absolute;
+        right: 0;
+        height: 50px;
+        width: 50px;
+    }
+
+    /*//20180915  courboarform  彈出表單修改尺寸*/

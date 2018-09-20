@@ -74,5 +74,31 @@
     <servlet-name>DBPicReader</servlet-name>
     <url-pattern>/eve/DBPicReader</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>BoardresServlet</servlet-name>
+    <servlet-class>com.boardres.controller.BoardresServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardresServlet</servlet-name>
+    <url-pattern>/boardres/boardres.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CourBoarServlet</servlet-name>
+    <servlet-class>com.courboar.controller.CourBoarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourBoarServlet</servlet-name>
+    <url-pattern>/courboar/courboar.do</url-pattern>
+  </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>CourBoar_DBGifReader4</servlet-name>
+    <servlet-class>com.courboar.controller.CourBoar_DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourBoar_DBGifReader4</servlet-name>
+    <url-pattern>/courboar/CourBoar_DBGifReader4.do</url-pattern>
+  </servlet-mapping>
 	
 </web-app>
