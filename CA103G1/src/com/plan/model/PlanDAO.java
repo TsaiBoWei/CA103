@@ -48,18 +48,16 @@ public class PlanDAO implements PlanDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, planVO.getPlan_id());
-			pstmt.setString(2, planVO.getMem_id());
-			pstmt.setString(3, planVO.getPlan_name());
-			pstmt.setString(4, planVO.getPlan_vo());
-			pstmt.setBytes(5, planVO.getPlan_cover());
-			pstmt.setTimestamp(6, planVO.getPlan_start_date());
-			pstmt.setTimestamp(7, planVO.getPlan_end_date());
-			pstmt.setString(8, planVO.getSptype_id());
-			pstmt.setInt(9, 1);
-			pstmt.setString(10, planVO.getPlan_privacy());
-			pstmt.setDate(11, planVO.getPlan_create_time());
-			pstmt.setString(12, planVO.getPlan_status());
+			pstmt.setString(1, planVO.getMem_id());
+			pstmt.setString(2, planVO.getPlan_name());
+			pstmt.setString(3, planVO.getPlan_vo());
+			pstmt.setBytes(4, planVO.getPlan_cover());
+			pstmt.setTimestamp(5, planVO.getPlan_start_date());
+			pstmt.setTimestamp(6, planVO.getPlan_end_date());
+			pstmt.setString(7, planVO.getSptype_id());
+			pstmt.setInt(8, 1);
+			pstmt.setString(9, planVO.getPlan_privacy());
+			pstmt.setString(10, planVO.getPlan_status());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -102,6 +100,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(6, planVO.getSptype_id());
 			pstmt.setString(7, planVO.getPlan_privacy());
 			pstmt.setString(8, planVO.getPlan_status());
+			pstmt.setString(9, planVO.getPlan_id());
 
 			pstmt.executeUpdate();
 

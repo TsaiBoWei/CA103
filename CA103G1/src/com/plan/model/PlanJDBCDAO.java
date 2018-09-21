@@ -287,7 +287,7 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		PlanJDBCDAO dao = new PlanJDBCDAO();
 
 		try {
-			File file = new File("WebContent/plan/images/workitout2.png");
+			File file = new File("WebContent/front_end/plan/images/workitout2.png");
 			FileInputStream fis = new FileInputStream(file);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -309,7 +309,6 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 			planVO1.setSptype_id("SP000001");
 			planVO1.setPlan_view(new Integer(99));
 			planVO1.setPlan_privacy("PLANPR1");
-//			planVO1.setPlan_create_time(java.sql.Date.valueOf("2018-09-09"));
 			planVO1.setPlan_status("PLANST1");
 			dao.insert(planVO1);
 			

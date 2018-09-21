@@ -273,6 +273,11 @@ body {
 			</div>
 		</div>
 	</div>
+	<div>
+		<h5>此計畫被瀏覽數：</h5>
+		<%! int count=0; %>
+		<%= count++ %>
+	</div>
 	<div class="container containerHrB ">
 		<hr>
 	</div>
