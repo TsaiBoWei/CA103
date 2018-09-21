@@ -17,7 +17,7 @@
 
 <!-- PAGE settings -->
 <link rel="icon" href="images/weight-lifting.png">
-<title>TRY</title>
+<title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
 <meta name="keywords"
@@ -38,6 +38,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
 <style>
 /*頁面設定*/
 body {
@@ -62,7 +63,7 @@ body {
 			<div class="collapse navbar-collapse justify-content-center"
 				id="navbar2SupportedContent">
 				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
+					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
 					href="#">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
@@ -146,7 +147,7 @@ body {
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Add Plan</a> <a
+								href="#">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
@@ -186,57 +187,53 @@ body {
 	</nav>
 
 
-		<!--  class="d-flex align-items-center cover section-fade-in-out" -->
-	<div class="d-flex align-items-center cover "
-		style="background-image: url(&quot;images/test2.jpg&quot;);">
+	<div class="py-5 text-light opaque-overlay section-fade-in-out"
+		style="background-image: url(&quot;images/CreatPlan_picture.jpeg&quot;);">
 		<div class="container">
 			<div class="row">
-				<div>
+				<div class="col-12 col-md-6 mx-auto">
 					<form method="post"
 						action="<%=request.getContextPath()%>/plan/plan.do"
 						enctype="multipart/form-data">
-						<h1 class="text-gray-dark">Create A New Plan</h1>
-						<div class="form-group">
-							<label>
-								<h1>Plan Name ：</h1>
-							</label> <input type="TEXT" name="plan_name" size="45"
-								class="form-control"
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>" />
-						</div>
+
+
+						<div class="form-group text-primary" style="font-size:50px">
+							<h1>Create A New Plan</h1>
+						</div><br>
 
 
 						<div class="form-group">
-							<label><h5>Plan Cover ：</h5></label> <label class="btn btn-info">
-								<input id="upload_img" style="display: none;" type="file"
-								name="plan_cover"> <i class="fa fa-photo">上傳圖片</i>
+							<h3>Plan Name:</h3>
+							<input type="text" name="plan_name" id=""
+								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"
+								class="form-control">
+						</div><br>
+						
+						
+						<div class="form-group">
+							<label><h3>Plan Cover:　　</h3></label> <label
+								class="btn btn-info btn-lg"> <input id="upload_img"
+								style="display: none;" type="file" name="plan_cover"> <i
+								class="fa fa-photo">上傳圖片</i>
 							</label>
 						</div>
 
-						<jsp:useBean id="PlanSvc" scope="page"
-							class="com.plan.model.PlanService" />
 
 						<div class="form-group">
-							<label><h5>plan_start_date_undone :</h5></label> <input
-								type="date" name="plan_start_date" id="f_date1">
+							<label><h3>PlanStartDate:　</h3></label> <input type="date"
+								name="plan_start_date" id="f_date1">
 						</div>
 
+
 						<div class="form-group">
-							<label><h5>plan_end_time_undone :</h5></label> <input type="date"
+							<label><h3>Plan EndDate:　</h3></label> <input type="date"
 								name="plan_end_date" id="f_date1">
 						</div>
 
-						<div class="form-group">
-							<label><h5>Privacy Setting :</h5></label> <select size="1"
-								name="plan_privacy">
-								<option value="PLANPR0">公開</option>
-								<option value="PLANPR1">不公開</option>
-								<option value="PLANPR2">只對朋友公開</option>
-							</select>
-						</div>
 
 						<div class="form-group">
-							<label><h5>Sport Type :</h5></label> <select size="1"
-								name="sptype_id">
+							<label><h3>Sport Type:　　　</h3></label> <select size="1"
+								name="sptype_id" style="width: 150px; font-size:18px;">
 								<option value="SP000001">田徑</option>
 								<option value="SP000002">單車</option>
 								<option value="SP000003">球類</option>
@@ -247,19 +244,30 @@ body {
 								<option value="SP000008">其他</option>
 							</select>
 						</div>
-
+						
+						
 						<div class="form-group">
-							<label>Plan Content(plan vo) </label>
-							<textarea name="plan_vo" rows="10" cols="30" wrap="off"
-								style="margin-top: 0px; margin-bottom: 0px; height: 100px;"
+							<label><h3>Privacy Setting:　</h3></label> <select size="1"
+								name="plan_privacy" style="width: 150px; font-size:18px;">
+								<option value="PLANPR0">公開</option>
+								<option value="PLANPR1">不公開</option>
+								<option value="PLANPR2">只對朋友公開</option>
+							</select>
+						</div>
+
+						
+						<div class="form-group">
+							<label><h3>Plan Content:</h3></label><br>
+							<textarea name="plan_vo" rows="10" class="form-control"
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
 							<br>
 						</div>
-						<button type="submit" class="btn btn-primary">Add</button>
-						<button type="submit" class="btn btn-primary">Reset</button>
-						<button type="submit" class="btn btn-primary">cancel</button>
-						<input type="hidden" name="action" value="insert">
-
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Add</button>
+							<button type="submit" class="btn btn-primary">Reset</button>
+							<button type="submit" class="btn btn-primary">cancel</button>
+							<input type="hidden" name="action" value="insert">
+						</div>
 					</form>
 				</div>
 			</div>
@@ -343,7 +351,6 @@ body {
 		crossorigin="anonymous"></script>
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
-
 </body>
 
 <%

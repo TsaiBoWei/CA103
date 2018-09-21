@@ -17,8 +17,8 @@
 
 <!-- PAGE settings -->
 <link rel="icon"
-	href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
-<title>TRY</title>
+	href="images/weight-lifting.png">
+<title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
 <meta name="keywords"

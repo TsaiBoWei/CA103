@@ -190,7 +190,7 @@ public class PlanDAO implements PlanDAO_interface {
 		return planVO;
 	}
 
-	// 子串比對找出關鍵字，未完成。
+	// 字串比對找出關鍵字，未完成。
 	@Override
 	public PlanVO findPlanByKeyWord(String plan_name) {
 

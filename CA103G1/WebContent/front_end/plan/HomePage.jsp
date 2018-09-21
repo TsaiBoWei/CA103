@@ -6,15 +6,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
-<link rel="icon"
-	href="images/weight-lifting.png">
-<title>Conference Neon - Pingendo template</title>
+<link rel="icon" href="images/weight-lifting.png">
+<title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
 <meta name="keywords"
 	content="Pingendo conference event neon free template bootstrap 4">
 <!-- CSS dependencies -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
@@ -37,14 +37,18 @@
 			<div class="collapse navbar-collapse justify-content-center"
 				id="navbar2SupportedContent">
 				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
+					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
 					href="#">WORK it OUT</a>
+				<form class="form-inline my-2 my-lg-0">
+	      			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	      			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+	    		</form>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">activity</a>
+					<li class="nav-item mx-25 btn-lg"><a class="nav-link" href="#">activity</a>
 					</li>
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
+					<li class="nav-item mx-25 btn-lg"><a class="nav-link"
 						href="#speakers">Course</a></li>
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
+					<li class="nav-item mx-25 btn-lg"><a class="nav-link"
 						href="#schedule">User</a></li>
 				</ul>
 				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
