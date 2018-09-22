@@ -94,6 +94,9 @@
   	  	<url-pattern>/mem/memAndroid.do</url-pattern>
   	  </servlet-mapping>
   	  <servlet>
+<<<<<<< HEAD
+>>>>>>> a88feac6fe79efb63680741daefccacd7e23f7b8
+=======
 >>>>>>> a88feac6fe79efb63680741daefccacd7e23f7b8
     <servlet-name>EveListServlet</servlet-name>
     <servlet-class>com.eventlist.controller.EveListServlet</servlet-class>
