@@ -58,11 +58,20 @@
     	<servlet-name>MemServlet</servlet-name>
     	<servlet-class>com.mem.controller.MemServlet</servlet-class>
   	</servlet>
-  	<servlet-mapping>
+	
+	<servlet-mapping>
     	<servlet-name>MemServlet</servlet-name>
     	<url-pattern>/mem/mem.do</url-pattern>
   	</servlet-mapping>
   	
+  	  <servlet>
+		<servlet-name>MemAndroidServlet</servlet-name>
+		<servlet-class>com.mem.controller.MemAndroidServlet</servlet-class>
+  	  </servlet>
+  	  <servlet-mapping>
+  	  	<servlet-name>MemAndroidServlet</servlet-name>
+  	  	<url-pattern>/mem/memAndroid.do</url-pattern>
+  	  </servlet-mapping>
   	  <servlet>
     <servlet-name>EveListServlet</servlet-name>
     <servlet-class>com.eventlist.controller.EveListServlet</servlet-class>

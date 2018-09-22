@@ -33,9 +33,11 @@ public class MemJDBCDAO implements MemDAO_interface{
 	
 	private static final String UPDATE_STATUS = 
 			"UPDATE MEM set MEM_STATUS=? where MEM_ID=?";
+	
+	private static final String GET_ONE_BY_ACCOUNT_AND_PASSWORD=
+			"SELECT * FROM MEM WHERE MEM_ACCOUNT=? AND MEM_PASSWORD=?";
 
-
-	public static byte[] getPictureByteArray(String path) throws IOException {
+ 	public static byte[] getPictureByteArray(String path) throws IOException {
 		File file = new File(path);
 		FileInputStream fis = new FileInputStream(file);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -62,7 +64,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 			pstmt.setString(1, memVO.getMem_account());
 			pstmt.setString(2, memVO.getMem_name());			
 			pstmt.setString(3, memVO.getMem_password());
-			pstmt.setDate(4, memVO.getMem_birth());
+			pstmt.setDate(4, new java.sql.Date(memVO.getMem_birth().getTime()));
 			pstmt.setBytes(5, memVO.getMem_photo());
 			pstmt.setString(6, memVO.getMem_email());
 			pstmt.setString(7, memVO.getMem_status());
@@ -108,7 +110,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 			pstmt.setString(2, memVO.getMem_account());
 			pstmt.setString(1, memVO.getMem_name());
 			pstmt.setString(3, memVO.getMem_password());
-			pstmt.setDate(4, memVO.getMem_birth());
+			pstmt.setDate(4, new java.sql.Date(memVO.getMem_birth().getTime()));
 			pstmt.setBytes(5, memVO.getMem_photo());
 			pstmt.setString(6, memVO.getMem_email());
 			pstmt.setString(7, memVO.getMem_intro());
@@ -342,6 +344,60 @@ public class MemJDBCDAO implements MemDAO_interface{
 		
 	}
 	
+	@Override
+	public MemVO findByAccountAndPassword(String memAccount, String memPassword) {
+		MemVO memVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userId, psw);
+			pstmt = con.prepareStatement(GET_ONE_BY_ACCOUNT_AND_PASSWORD);
+			pstmt.setString(1, memAccount);
+			pstmt.setString(2, memPassword);
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				memVO = new MemVO();				
+				memVO.setMem_id(rs.getString("mem_id"));
+				memVO.setMem_name(rs.getString("mem_name"));
+				memVO.setMem_account(rs.getString("mem_account"));
+				memVO.setMem_password(rs.getString("mem_password"));
+				// GSON無法解析SQL_DATE格式				
+				memVO.setMem_birth( rs.getDate("mem_birth"));
+				memVO.setMem_photo(rs.getBytes("mem_photo"));
+				memVO.setMem_email(rs.getString("mem_email"));
+				memVO.setMem_status(rs.getString("mem_status"));
+				memVO.setMem_intro(rs.getString("mem_intro"));
+			}			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch ( SQLException se ) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if ( pstmt != null ) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}				
+			}
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}			
+		}		
+		return memVO;
+	}
+	
 	public static void main(String[] args) {
 		MemJDBCDAO dao = new MemJDBCDAO();
 		
@@ -404,7 +460,12 @@ public class MemJDBCDAO implements MemDAO_interface{
 //			System.out.println();
 //		}
 		
-		dao.updateStatus("M000003", "MS1");
+//		dao.updateStatus("M000003", "MS1");
+		
+		
+//		MemVO memvo = dao.findByAccountAndPassword("CA10301", "123456");
+//		if ( memvo != null )
+//			System.out.println(memvo.getMem_account());
 	}
 
 }
