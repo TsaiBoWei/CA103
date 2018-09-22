@@ -1,0 +1,14 @@
+@charset "BIG5";
+
+
+    .loginbox {
+      background-color: #808080
+    }
+
+    .logbt {
+      width: 100px
+    }
+    
+    .errormsg{
+      color:red
+    }

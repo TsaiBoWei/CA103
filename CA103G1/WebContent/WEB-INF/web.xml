@@ -19,6 +19,21 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
+	  <filter>
+    <filter-name>MgrLoginFilter</filter-name>
+    <filter-class>com.Mgr.controller.MgrLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MgrLoginFilter</filter-name>
+    <url-pattern>/back_end/mgrview.jsp</url-pattern>
+    
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
 
 
 	<servlet>
@@ -99,6 +114,42 @@
   <servlet-mapping>
     <servlet-name>CourBoar_DBGifReader4</servlet-name>
     <url-pattern>/courboar/CourBoar_DBGifReader4.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MgrLoginServlet</servlet-name>
+    <servlet-class>com.Mgr.controller.MgrLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MgrLoginServlet</servlet-name>
+    <url-pattern>/mgr/MgrLg.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MgrRegistServlet</servlet-name>
+    <servlet-class>com.Mgr.controller.MgrRegistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MgrRegistServlet</servlet-name>
+    <url-pattern>/mgr/MgrRg.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MgrPhototest</servlet-name>
+    <servlet-class>com.Mgr.controller.MgrPhototest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MgrPhototest</servlet-name>
+    <url-pattern>/MgrPhototest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MgrLostPSServlet</servlet-name>
+    <servlet-class>com.Mgr.controller.MgrLostPSServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MgrLostPSServlet</servlet-name>
+    <url-pattern>/mgr/MgrLoPS.do</url-pattern>
   </servlet-mapping>
 	
 </web-app>
