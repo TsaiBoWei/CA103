@@ -28,6 +28,7 @@
     <dispatcher>ERROR</dispatcher>
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
+<<<<<<< HEAD
   <servlet>
     <servlet-name>MemSpLikeServlet</servlet-name>
     <servlet-class>com.memsplike.controller.MemSpLikeServlet</servlet-class>
@@ -53,6 +54,47 @@
     <url-pattern>/mem/mem.do</url-pattern>
   </servlet-mapping>
   <servlet>
+=======
+
+
+	<servlet>
+		<servlet-name>MemSpLikeServlet</servlet-name>
+		<servlet-class>com.memsplike.controller.MemSpLikeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemSpLikeServlet</servlet-name>
+		<url-pattern>/memsplike/memsplike.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PlanServlet</servlet-name>
+		<servlet-class>com.plan.controller_undone.PlanServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PlanServlet</servlet-name>
+		<url-pattern>/plan/plan.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<servlet-name>MemServlet</servlet-name>
+    	<servlet-class>com.mem.controller.MemServlet</servlet-class>
+  	</servlet>
+	
+	<servlet-mapping>
+    	<servlet-name>MemServlet</servlet-name>
+    	<url-pattern>/mem/mem.do</url-pattern>
+  	</servlet-mapping>
+  	
+  	  <servlet>
+		<servlet-name>MemAndroidServlet</servlet-name>
+		<servlet-class>com.mem.controller.MemAndroidServlet</servlet-class>
+  	  </servlet>
+  	  <servlet-mapping>
+  	  	<servlet-name>MemAndroidServlet</servlet-name>
+  	  	<url-pattern>/mem/memAndroid.do</url-pattern>
+  	  </servlet-mapping>
+  	  <servlet>
+>>>>>>> a88feac6fe79efb63680741daefccacd7e23f7b8
     <servlet-name>EveListServlet</servlet-name>
     <servlet-class>com.eventlist.controller.EveListServlet</servlet-class>
   </servlet>
