@@ -38,7 +38,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	
+
 <style>
 /*頁面設定*/
 body {
@@ -197,9 +197,10 @@ body {
 						enctype="multipart/form-data">
 
 
-						<div class="form-group text-primary" style="font-size:50px">
+						<div class="form-group text-primary" style="font-size: 50px">
 							<h1>Create A New Plan</h1>
-						</div><br>
+						</div>
+						<br>
 
 
 						<div class="form-group">
@@ -207,11 +208,12 @@ body {
 							<input type="text" name="plan_name" id=""
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"
 								class="form-control">
-						</div><br>
-						
-						
+						</div>
+						<br>
+
+
 						<div class="form-group">
-							<label><h3>Plan Cover:　　</h3></label> <label
+							<label><h3>Plan Cover:</h3></label> <label
 								class="btn btn-info btn-lg"> <input id="upload_img"
 								style="display: none;" type="file" name="plan_cover"> <i
 								class="fa fa-photo">上傳圖片</i>
@@ -220,20 +222,20 @@ body {
 
 
 						<div class="form-group">
-							<label><h3>PlanStartDate:　</h3></label> <input type="date"
+							<label><h3>PlanStartDate:</h3></label> <input type="date"
 								name="plan_start_date" id="f_date1">
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Plan EndDate:　</h3></label> <input type="date"
+							<label><h3>Plan EndDate:</h3></label> <input type="date"
 								name="plan_end_date" id="f_date1">
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Sport Type:　　　</h3></label> <select size="1"
-								name="sptype_id" style="width: 150px; font-size:18px;">
+							<label><h3>Sport Type:</h3></label> <select size="1"
+								name="sptype_id" style="width: 150px; font-size: 18px;">
 								<option value="SP000001">田徑</option>
 								<option value="SP000002">單車</option>
 								<option value="SP000003">球類</option>
@@ -244,18 +246,18 @@ body {
 								<option value="SP000008">其他</option>
 							</select>
 						</div>
-						
-						
+
+
 						<div class="form-group">
-							<label><h3>Privacy Setting:　</h3></label> <select size="1"
-								name="plan_privacy" style="width: 150px; font-size:18px;">
+							<label><h3>Privacy Setting:</h3></label> <select size="1"
+								name="plan_privacy" style="width: 150px; font-size: 18px;">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
 								<option value="PLANPR2">只對朋友公開</option>
 							</select>
 						</div>
 
-						
+
 						<div class="form-group">
 							<label><h3>Plan Content:</h3></label><br>
 							<textarea name="plan_vo" rows="10" class="form-control"
@@ -274,9 +276,9 @@ body {
 		</div>
 	</div>
 	<div>
-		<h5>此計畫被瀏覽數：</h5>
-		<%! int count=0; %>
-		<%= count++ %>
+		<h5>
+			瀏覽數：<%!int count = 0;%><%=count++%>
+		</h5>
 	</div>
 	<div class="container containerHrB ">
 		<hr>

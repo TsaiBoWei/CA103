@@ -19,7 +19,7 @@ import javax.servlet.http.Part;
 import com.plan.model.PlanService;
 import com.plan.model.PlanVO;
 
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1021, maxRequestSize = 5 * 5 * 1024 * 1024)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class PlanServlet extends HttpServlet {
 
