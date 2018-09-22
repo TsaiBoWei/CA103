@@ -1,6 +1,7 @@
 package com.plan.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,11 +30,9 @@ public class PlanJNDIDAO implements PlanDAO_interface {
 	}
 
 	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_ens_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES (plan_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
-
-	// plan_start(end)_date 暫定可供修改。
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
-
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
+	private static final String DELETE = "DELETE FROM plan where plan_id=?";
 
 	// 自訂方法(尚未完成)
 	private static final String GET_ONE_STMT2 = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd'),plan_create_time,plan_status FROM plan where plan_name =?";
@@ -124,6 +123,41 @@ public class PlanJNDIDAO implements PlanDAO_interface {
 					se.printStackTrace();
 				}
 			}
+		}
+
+	}
+
+	@Override
+	public void delete(String plan_id) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE);
+
+			pstmt.setString(1, "plan_id");
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
 		}
 
 	}

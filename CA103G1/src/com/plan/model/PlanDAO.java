@@ -28,16 +28,15 @@ public class PlanDAO implements PlanDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_ens_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES (plan_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
-
+	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_end_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES ('PLAN'||LPAD(to_char(plan_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,sysdate,?)";
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
-
-	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
+	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
+	private static final String DELETE = "DELETE FROM plan where plan_id=?";
 
 	// 自訂方法(尚未完成)
-	private static final String GET_ONE_STMT2 = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd'),plan_create_time,plan_status FROM plan where plan_name =?";
+	private static final String GET_ONE_STMT2 = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd'),plan_create_time,plan_status FROM plan where plan_name =?";
 
-	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
+	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
 
 	@Override
 	public void insert(PlanVO planVO) {
@@ -122,6 +121,40 @@ public class PlanDAO implements PlanDAO_interface {
 					se.printStackTrace();
 				}
 			}
+		}
+
+	}
+
+	public void delete(String plan_id) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE);
+
+			pstmt.setString(1, "plan_id");
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
 		}
 
 	}

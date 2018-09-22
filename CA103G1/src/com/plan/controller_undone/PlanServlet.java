@@ -100,8 +100,8 @@ public class PlanServlet extends HttpServlet {
 			plan_cover.getInputStream();
 			System.out.println(plan_cover);
 			PlanService planSvc = new PlanService();
-			planVO = planSvc.addPlan(req.getParameter("plan_name"), req.getParameter("plan_vo"), picture,
-					plan_start_date, plan_end_date, req.getParameter("sptype_id"), req.getParameter("plan_privacy"));
+//			planVO = planSvc.addPlan(req.getParameter("plan_name"), req.getParameter("plan_vo"), picture,
+//					plan_start_date, plan_end_date, req.getParameter("sptype_id"), req.getParameter("plan_privacy"));
 
 //				// Send the use back to the form, if there were errors
 //				if (!errorMsgs.isEmpty()) {
