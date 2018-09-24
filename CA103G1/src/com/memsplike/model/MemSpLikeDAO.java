@@ -8,12 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CA103";
-	String passwd = "123456";
+	 private static DataSource ds = null;
+	 static {
+			try {
+				Context ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		}
 
 	//INSERT INTO "MEMSPLIKE" (MEM_ID,SPTYPE_ID,LIKE_STATUS) VALUES ('M000001','SP000001','LS0');
 	private static String INSERT_STMT 
@@ -46,8 +56,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		PreparedStatement pstmt = null;		
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);			
 			// 重複使用
 			pstmt.setString( 1, memSpLikeVO.getMem_id());
@@ -55,10 +64,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			pstmt.setString( 3, memSpLikeVO.getLike_status());			
 			pstmt.executeUpdate();			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-		} catch ( SQLException se ) {
+		}  catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 		} finally {
@@ -85,17 +91,13 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		PreparedStatement pstmt = null;		
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);			
 			// 重複使用
 			pstmt.setString( 1, mem_id);
 			pstmt.setString( 2, sptype_id);		
 			pstmt.executeUpdate();			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -126,8 +128,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		PreparedStatement pstmt = null;		
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);			
 			// 重複使用
 			pstmt.setString( 1, memSpLikeVO.getLike_status());
@@ -135,9 +136,6 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			pstmt.setString( 3, memSpLikeVO.getSptype_id());						
 			pstmt.executeUpdate();			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -168,8 +166,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		ResultSet rs = null;
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_BY_MEM_ID_AND_SPTYPE_ID);
 			pstmt.setString(1, memid);
 			pstmt.setString(2, sptype_id);
@@ -184,9 +181,6 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			}
 	
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -220,8 +214,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		MemSpLikeVO vo = null;
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_LIST_BY_MEM_ID);
 			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
@@ -236,9 +229,6 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			}
 	
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -272,8 +262,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		MemSpLikeVO vo = null;
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_LIST_BY_SPTYPE_ID);
 			pstmt.setString(1, sptype_id);
 			rs = pstmt.executeQuery();
@@ -288,9 +277,6 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			}
 	
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -324,8 +310,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 		MemSpLikeVO vo = null;
 		try {
 			// JDBC重點4行
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
@@ -339,10 +324,7 @@ public class MemSpLikeDAO implements MemSpLikeDAO_interface {
 			}
 	
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-		} catch ( SQLException se ) {
+		}  catch ( SQLException se ) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 		} finally {
