@@ -1,5 +1,4 @@
-# Compiled class file
-*.class
-
-# Log file
-*.log
+/Test_DataSource.class
+/com/
+/create_tables
+/test/

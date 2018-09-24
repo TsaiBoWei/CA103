@@ -64,7 +64,7 @@ body {
 				id="navbar2SupportedContent">
 				<a
 					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
-					href="#">WORK it OUT</a>
+					href="sHomePage.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -73,7 +73,7 @@ body {
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="#speakers">Course</a></li>
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="#schedule">User</a></li>
+						href="personalPage.jsp">User</a></li>
 				</ul>
 				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
 			</div>
@@ -212,7 +212,7 @@ body {
 						<br>
 
 
-						<div class="form-group">
+			<%-- 			<div class="form-group">
 							<label><h3>Plan Cover:</h3></label> <label
 								class="btn btn-info btn-lg"> <input id="upload_img"
 								style="display: none;" type="file" name="plan_cover"> <i
@@ -264,11 +264,12 @@ body {
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
 							<br>
 						</div>
+			--%>
 						<div class="form-group">
+							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-primary">Add</button>
 							<button type="submit" class="btn btn-primary">Reset</button>
 							<button type="submit" class="btn btn-primary">cancel</button>
-							<input type="hidden" name="action" value="insert">
 						</div>
 					</form>
 				</div>

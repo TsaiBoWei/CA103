@@ -46,7 +46,7 @@
   
   <servlet>
     <servlet-name>PlanServlet</servlet-name>
-    <servlet-class>com.plan.controller_undone.PlanServlet</servlet-class>
+    <servlet-class>com.plan.controller.PlanServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PlanServlet</servlet-name>
