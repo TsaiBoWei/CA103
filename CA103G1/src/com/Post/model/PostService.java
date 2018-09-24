@@ -27,7 +27,7 @@ public class PostService {
 		return postVO;
 	}
 	
-	public PostVO updatePost(String post_id,String mem_id,String post_con,Timestamp post_time,Integer post_view,
+   public PostVO updatePost(String post_id,String mem_id,String post_con,Timestamp post_time,Integer post_view,
 			String sptype_id,String post_status)
 		{
 		
@@ -44,20 +44,20 @@ public class PostService {
 		return postVO;
 	}
 	
-	public void deletePost(String post_id) {
+   public void deletePost(String post_id) {
 		 dao.delete(post_id);
 	}
 	
-	public PostVO getOnePost(String post_id) {
+   public PostVO getOnePost(String post_id) {
 		return dao.findByPK(post_id);
 		
 	}
 	
-	public List<PostVO> getAll(){
+   public List<PostVO> getAll(){
 		return dao.getAll();
 	}
 	
-	public PostVO updatePostStatus(String post_id,String post_status) 
+   public PostVO updatePostStatus(String post_id,String post_status) 
 	
 		{
 		PostVO postVO = new PostVO();
@@ -69,5 +69,7 @@ public class PostService {
 		return postVO;
 	}
 	
-
+   public List<PostVO> getByMemID( String mem_id ) {
+		return dao.getByMemID(mem_id);
+   } 
 }
