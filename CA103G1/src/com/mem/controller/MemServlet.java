@@ -82,7 +82,7 @@ public class MemServlet extends HttpServlet {
 			}catch(NullPointerException npe) {
 				errorMsgs.add("±b¸¹±K½X¦³»~" + npe.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front_end/mem/Mem_Login_Signup.jsp");
+						.getRequestDispatcher("/front_end/mem/login/Mem_Login_Signup.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -140,7 +140,7 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				memVO = memSvc.addMem(regaccount, regName, regPsw);
 				
-				String url = "/front_end/mem/Mem_Login_Signup.jsp";
+				String url = "/front_end/mem/login/Mem_Login_Signup.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 				
