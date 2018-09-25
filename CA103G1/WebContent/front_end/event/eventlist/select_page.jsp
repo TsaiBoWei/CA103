@@ -135,5 +135,18 @@
   <li><a href='<%=request.getContextPath() %>/front_end/event/eventlist/addeveList.jsp'>Add</a> a new EventList.</li>
 </ul>
 
+<h3>聊天室</h3>
+
+<jsp:useBean id="evelistSvc" scope="page" class="com.eventlist.model.EventlistService" />
+<c:forEach var="evelsVO" items="${evelistSvc.getEveListsByMem(memVO.mem_id)}">	
+	<ul>
+		<li>
+			活動名稱: ${evelsVO.eve_id}-${eveSvc.getOneEve(evelsVO.eve_id).eve_title}
+			<a href='<%=request.getContextPath() %>/front_end/event/evechat/evechat.jsp?eve_id=${evelsVO.eve_id}'>Enter</a>
+		</li>
+	</ul>	
+</c:forEach>
+
+
 </body>
 </html>

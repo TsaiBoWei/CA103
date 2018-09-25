@@ -6,9 +6,14 @@
 
 <%
 	EveService eveSvc = new EveService();
-	List<EventVO> list = eveSvc.getAll();
+	List<EventVO> list = eveSvc.getEvesInViewPage();
 	pageContext.setAttribute("list",list);
 %>
+
+
+
+<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+<jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
 
 
 <!DOCTYPE html>
@@ -76,60 +81,52 @@
 
 <table>
 	<tr>   
-		<th>活動編號</th>
-		<th>主辦人ID</th>
-		<th>活動標題</th>	
-		<th>活動頁面圖片</th>
+		<th>活動標題</th>
 		<th>活動圖片</th>
-		<th>活動圖片檔案格式</th>
-		<th>活動敘述</th>
-		<th>活動開始時間</th>
-		<th>活動結束時間</th>
-		<th>活動開始報名日</th>
-		<th>活動結束報名日</th>
-		<th>活動成行底線人數</th>
+<!-- 		<th>主辦人姓名</th> -->
+		<th>活動時間</th>
+		<th>報名期間</th>
 		<th>活動狀態</th>
-		<th>活動地點</th>
-		<th>活動地經度</th>
-		<th>活動地緯度</th>
-		<th>地區縣市編號</th>
-		<th>運動類別編號</th>
+		<th>地區縣市</th>
+		<th>運動類別</th>
 		<th>活動瀏覽次數</th>
 		<th>收費金額</th>
-		<th>主辦人聯絡電話</th>
-		<th>活動建立時間</th>
+
 			
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="eveVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr ${(eveVO.eve_id==param.eve_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-			<td>${eveVO.eve_id}</td>
-			<td>${eveVO.mem_id}</td>
-			<td>${eveVO.eve_title}</td>
-			<td>${eveVO.eve_photo}</td>
+			<td>${eveVO.eve_title}</td>						
 			<td>
 			<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
 			</td>
-			<td>${eveVO.eve_ptype}</td>
-			<td>${eveVO.eve_content}</td>			
-			<td>${eveVO.eve_startdate}</td>			
-			<td>${eveVO.eve_enddate}</td>			
-			<td>${eveVO.ereg_startdate}</td>			
-			<td>${eveVO.ereg_enddate}</td>			
-			<td>${eveVO.estart_limit}</td>			
-			<td>${eveVO.eve_status}</td>			
-			<td>${eveVO.eve_location}</td>			
-			<td>${eveVO.eve_long}</td>			
-			<td>${eveVO.eve_lat}</td>			
-			<td>${eveVO.city_id}</td>			
-			<td>${eveVO.sptype_id}</td>			
-			<td>${eveVO.eve_view}</td>			
-			<td>${eveVO.eve_charge}</td>			
-			<td>${eveVO.econtact_info}</td>			
-			<td>${eveVO.eestablish_date}</td>			
+<%-- 			<td>${memSvc.getOneMem(eveVO.mem_id).mem_name}</td>		 --%>
+			<td><fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>~			
+				<fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/></td>
+			<td><fmt:formatDate value="${eveVO.ereg_startdate}" pattern="yyyy/MM/dd "/>~					
+				<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy/MM/dd"/></td>					
 			
 		
+			<td>
+				<c:if test="${eveVO.ereg_startdate.getTime()<System.currentTimeMillis()}">		
+					${eveVO.eve_status=='E4'?'已額滿':'線上報名'}					
+				</c:if>
+			</td>
+			<td>${citySvc.getCityName(eveVO.city_id)}</td>			
+			<td>${sportTypeMap.get(eveVO.sptype_id)}</td>			
+			<td>${eveVO.eve_view}</td>			
+			<td>
+				<c:if test="${eveVO.eve_charge==0}">
+				    免費
+				</c:if>
+				
+				<c:if test="${eveVO.eve_charge!=0}">
+				   ${eveVO.eve_charge}元/人
+				</c:if>		
+			</td>					
 		</tr>
+		
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>

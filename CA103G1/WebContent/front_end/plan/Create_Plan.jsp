@@ -64,7 +64,7 @@ body {
 				id="navbar2SupportedContent">
 				<a
 					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
-					href="sHomePage.jsp">WORK it OUT</a>
+					href="HomePage.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -212,8 +212,8 @@ body {
 						<br>
 
 
-			<%-- 			<div class="form-group">
-							<label><h3>Plan Cover:</h3></label> <label
+						<div class="form-group">
+							<label><h3>Plan Cover:　　 </h3></label> <label
 								class="btn btn-info btn-lg"> <input id="upload_img"
 								style="display: none;" type="file" name="plan_cover"> <i
 								class="fa fa-photo">上傳圖片</i>
@@ -222,19 +222,19 @@ body {
 
 
 						<div class="form-group">
-							<label><h3>PlanStartDate:</h3></label> <input type="date"
+							<label><h3>PlanStartDate:　</h3></label> <input type="date"
 								name="plan_start_date" id="f_date1">
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Plan EndDate:</h3></label> <input type="date"
+							<label><h3>Plan EndDate:　</h3></label> <input type="date"
 								name="plan_end_date" id="f_date1">
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Sport Type:</h3></label> <select size="1"
+							<label><h3>Sport Type:　　　</h3></label> <select size="1"
 								name="sptype_id" style="width: 150px; font-size: 18px;">
 								<option value="SP000001">田徑</option>
 								<option value="SP000002">單車</option>
@@ -249,7 +249,7 @@ body {
 
 
 						<div class="form-group">
-							<label><h3>Privacy Setting:</h3></label> <select size="1"
+							<label><h3>Privacy Setting:　</h3></label> <select size="1"
 								name="plan_privacy" style="width: 150px; font-size: 18px;">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
@@ -264,7 +264,8 @@ body {
 								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
 							<br>
 						</div>
-			--%>
+		
+		
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-primary">Add</button>

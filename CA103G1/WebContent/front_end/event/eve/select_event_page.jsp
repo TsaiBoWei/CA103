@@ -6,7 +6,7 @@
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 
 <%  //模擬會員的SESSION
-	session.setAttribute("memVO", memSvc.getOneMem("M000003"));
+	session.setAttribute("memVO", memSvc.getOneMem("M000002"));
 %>
 
 <%	//取出會員的SESSION
@@ -76,11 +76,16 @@
   </li>
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp" >
        <b>主辦會員的活動管理:</b>
-       <input type="text"  name="mem_id" value="${memVO.mem_id}">
+<!--        <select size="1" name="eve_id"> -->
+<%--          <c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}" >  --%>
+<%--          	 <option value="${eveVO.eve_id}">${eveVO.eve_title} --%>
+<%--          </c:forEach>    --%>
+<!--        </select> -->
        <input type="submit" value="送出">
-       <input type="hidden" name="action" value="get_Eves_By_Mem">
+<%--        <input type="hidden" name="mem_id" value="${memVO.mem_id}"> --%>
+<!--        <input type="hidden" name="action" value="get_Eves_By_Mem">     -->
     </FORM>
   </li>
 </ul>
@@ -134,6 +139,19 @@
 <ul>
   <li><a href='<%=request.getContextPath()%>/front_end/event/eve/addEve.jsp'>Add</a> Event </li>
 </ul>
+
+
+<h3>聊天室</h3>
+
+<jsp:useBean id="evelistSvc" scope="page" class="com.eventlist.model.EventlistService" />
+<c:forEach var="evelsVO" items="${evelistSvc.getEveListsByMem(memVO.mem_id)}">	
+	<ul>
+		<li>
+			活動名稱: ${evelsVO.eve_id}-${eveSvc.getOneEve(evelsVO.eve_id).eve_title}
+			<a href='<%=request.getContextPath() %>/front_end/event/evechat/evechat.jsp?eve_id=${evelsVO.eve_id}'>Enter</a>
+		</li>
+	</ul>	
+</c:forEach>
 
 </body>
 </html>

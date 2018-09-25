@@ -103,7 +103,7 @@
 		<th>活動分享</th>
 		<th>活動付款截止日</th>
 		<th>修改</th>
-		<th>刪除</th>
+		<th>退出</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="eventListVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -124,19 +124,42 @@
 					${(eventListVO.eve_rating==0)?"":eventListVO.eve_rating}				
 				</c:if>	
 			</td>
-			<td>${eveListStatusMap.get(eventListVO.evelist_status)}</td>
+			<td>
+				${eveListStatusMap.get(eventListVO.evelist_status)}
+				<c:if test="${eventListVO.evelist_status=='EL1'}">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
+				     <input type="submit" value="付款">
+				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
+				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
+				     <input type="hidden" name="evelist_status"  value="${eventListVO.evelist_status}">
+				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
+				     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
+				     <input type="hidden" name="action"	value="Update_ELStatus"></FORM>	
+			     </c:if>
+			     
+			     <c:if test="${eventListVO.evelist_status=='EL5'}">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
+				     <input type="submit" value="確認">
+				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
+				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
+				     <input type="hidden" name="evelist_status"  value="${eventListVO.evelist_status}">
+				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
+				     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
+				     <input type="hidden" name="action"	value="Update_ELStatus"></FORM>	
+			     </c:if>		
+			</td>
 			<td>${eventListVO.evepay_amount}</td>
 			<td>
 				<c:if test="${eventListVO.eve_share=='ES0'}">
 						<BUTTON >
-							<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_status&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES1">
+							<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES1">
 							分享
 							</A>
 						</BUTTON>					
 				</c:if>
 				<c:if test="${eventListVO.eve_share=='ES1'}">
 						<BUTTON >
-						<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_status&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES0">
+						<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES0">
 							取消分享
 							</A>
 						</BUTTON>
@@ -164,15 +187,30 @@
 <%-- 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller--> --%>
 <!-- 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
 <!-- 			</td> -->
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
-			     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
-			     <input type="hidden" name="action" value="delete"></FORM>
+			<td>				
+				<c:if test="${eventListVO.evelist_status=='EL0'|| eventListVO.evelist_status=='EL1'|| eventListVO.evelist_status=='EL3'}">
+				
+				  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
+				     <input type="submit" value="退出">
+				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
+				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
+				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
+				     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
+				     <input type="hidden" name="action" value="delete_By_Participant"></FORM>
+				</c:if>
+				
+<%-- 				<c:if test="${eventListVO.evelist_status =='EL6'}"> --%>
+				
+<%-- 				  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;"> --%>
+<!-- 				     <input type="submit" value="刪除"> -->
+<%-- 				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}"> --%>
+<%-- 				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}"> --%>
+<%-- 				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller--> --%>
+<%-- 				     <input type="hidden" name="whichPage"	value="<%=whichPage%>"> --%>
+<!-- 				     <input type="hidden" name="action" value="delete_By_Participant"></FORM> -->
+<%-- 				</c:if> --%>
 			</td>
+			
 		</tr>
 	</c:forEach>
 </table>

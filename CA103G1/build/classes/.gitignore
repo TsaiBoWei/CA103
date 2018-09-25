@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Compiled class file
 *.class
 
@@ -7,6 +8,8 @@
 /com/
 =======
 /Test_DataSource.class
+=======
+>>>>>>> 734fc5686c9eeb51305a50a101d3a4a0a76f3264
 /com/
 /create_tables
 /test/

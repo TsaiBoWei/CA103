@@ -49,9 +49,9 @@
 					<li class="nav-item mx-25 btn-lg"><a class="nav-link"
 						href="#speakers">Course</a></li>
 					<li class="nav-item mx-25 btn-lg"><a class="nav-link"
-						href="#schedule">User</a></li>
+						href="personalPage.jsp">User</a></li>
 				</ul>
-				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
+				<a class="btn btn-lg btn-primary" href="/CA103G10908/front_end/mem/Mem_Login_Signup.jsp">Register now</a>
 			</div>
 		</div>
 	</nav>
