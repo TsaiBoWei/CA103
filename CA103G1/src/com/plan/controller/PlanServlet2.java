@@ -77,31 +77,31 @@ public class PlanServlet2 extends HttpServlet {
 				}
 
 				Integer deptno = new Integer(req.getParameter("deptno").trim());
-
-				EmpVO empVO = new EmpVO();
-				empVO.setEname(ename);
-				empVO.setJob(job);
-				empVO.setHiredate(hiredate);
-				empVO.setSal(sal);
-				empVO.setComm(comm);
-				empVO.setDeptno(deptno);
-
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/emp/addEmp.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-
-				/*************************** 2.開始新增資料 ***************************************/
-				EmpService empSvc = new EmpService();
-				empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
-
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/emp/listAllEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);
+//
+//				EmpVO empVO = new EmpVO();
+//				empVO.setEname(ename);
+//				empVO.setJob(job);
+//				empVO.setHiredate(hiredate);
+//				empVO.setSal(sal);
+//				empVO.setComm(comm);
+//				empVO.setDeptno(deptno);
+//
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
+//					RequestDispatcher failureView = req.getRequestDispatcher("/emp/addEmp.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
+//
+//				/*************************** 2.開始新增資料 ***************************************/
+//				EmpService empSvc = new EmpService();
+//				empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
+//
+//				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+//				String url = "/emp/listAllEmp.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
