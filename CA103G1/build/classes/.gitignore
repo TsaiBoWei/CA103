@@ -1,16 +1,1 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Compiled class file
-*.class
-
-# Log file
-*.log
 /com/
-=======
-/Test_DataSource.class
-=======
->>>>>>> 734fc5686c9eeb51305a50a101d3a4a0a76f3264
-/com/
-/create_tables
-/test/
->>>>>>> f9301c05e033c4be8bd06916638f1dda8df7208f

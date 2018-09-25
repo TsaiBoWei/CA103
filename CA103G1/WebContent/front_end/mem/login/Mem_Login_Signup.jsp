@@ -16,9 +16,9 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-  <script src="<%=request.getContextPath() %>/front_end/mem/js/navbar-ontop.js"></script>
+  <script src="<%=request.getContextPath() %>/front_end/mem/login/js/navbar-ontop.js"></script>
   <!-- Script: Animated entrance -->
-  <script src="<%=request.getContextPath() %>/front_end/mem/js/animate-in.js"></script>
+  <script src="<%=request.getContextPath() %>/front_end/mem/login/js/animate-in.js"></script>
 </head>
 
 <body class="text-center">
@@ -47,7 +47,7 @@
     </div>
   </nav>
   <!-- Cover -->
-  <div class="d-flex py-5 cover section-fade-in-out align-items-center" style="background-image: url(&quot;<%=request.getContextPath() %>/front_end/mem/assets/conference/Top-5-Best-Running-Shoes-for-Women-in-2015.jpg&quot;);">
+  <div class="d-flex py-5 cover section-fade-in-out align-items-center" style="background-image: url(&quot;<%=request.getContextPath() %>/front_end/mem/login/assets/conference/Top-5-Best-Running-Shoes-for-Women-in-2015.jpg&quot;);">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -57,25 +57,35 @@
       </div>
       <div class="row">
         <div class="col-6 offset-3 col-md-6 offset-md-3">
-          <form class="">
+          <form method="post" action= "<%=request.getContextPath() %>/mem/mem.do">
+          ---
+            <c:if test="${not empty errorMsgs}">
+				<font style="color:red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+						<li style="color:red">${message}</li>
+						</c:forEach>
+					</ul>
+			</c:if>
+          ---
             <div class="form-group">
               <label>電子郵件</label>
-              <input type="email" class="form-control" placeholder="電子郵件"> 
+              <input type="email" name="email" class="form-control" placeholder="電子郵件"> 
             </div>
             
             <div class="form-group">
               <label>密碼</label>
-              <input type="password" class="form-control" placeholder="密碼"> 
+              <input type="password" name="password" class="form-control" placeholder="密碼"> 
             </div>
             <br>
-
+			<input type="hidden" name="action" value="login">
             <button type="submit" class="btn btn-primary flex-row-reverse form-control" id="btnLogIn">
-            登入
+           		 登入
             </button>
             
             <div class="col-md-12" style="margin-bottom: 14px;">
-              <a href="#">忘記密碼了嗎？</a>
-              <a href="#" data-toggle="modal" data-target="#exampleModalCenter">快速註冊xx</a>
+              <a href="#">忘記密碼</a>
+              <a href="#" data-toggle="modal" data-target="#exampleModalCenter">快速註冊</a>
             </div>
           </form>
         </div>
@@ -107,30 +117,30 @@
           <form METHOD="post" action="<%=request.getContextPath() %>/mem/mem.do" > 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="regName">信箱*</span>
+                <span class="input-group-text" >信箱*</span>
               </div>
-              <input type="email" name="email" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
+              <input type="email" name="regEmail" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
             </div><br>
 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="regName2">暱稱 </span>
+                <span class="input-group-text" >暱稱 </span>
               </div>
-              <input type="text" name="memName" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
+              <input type="text" name="regName" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
             </div><br>
 
 
 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="regEmail">密碼*</span>
+                <span class="input-group-text" >密碼*</span>
               </div>
-              <input type="password" name="psw" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm " >
+              <input type="password" name="regPassword" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm " >
             </div><br>
 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="regPassword">確認密碼*</span>
+                <span class="input-group-text" >確認密碼*</span>
               </div>
               <input type="password" name="confirmedPsw" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div><br>
@@ -160,18 +170,18 @@
       <div class="row">
         <div class="col-md-2 col-6"></div>
         <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/assets/conference/logo_1.png"> </div>
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_1.png"> </div>
         <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/assets/conference/logo_4.png"> </div>
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_4.png"> </div>
         <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/assets/conference/logo_3.png"> </div>
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_3.png"> </div>
         <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/assets/conference/logo_2.png"> </div>
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_2.png"> </div>
       </div>
     </div>
   </div>
   <!-- Call to action -->
-  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('assets/conference/cover_2.jpg');">
+  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url(&quot;<%=request.getContextPath() %>/front_end/mem/login/assets/conference/cover_2.jpg&quot;);">
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-left">

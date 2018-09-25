@@ -23,11 +23,17 @@ public class MemService {
 		return memVO;
 	}
 	
+	public MemVO loginMem(String mem_account, String mem_password) {
+		
+		MemVO memVO = dao.logIn(mem_account, mem_password);
+		return memVO;
+	}
+	
 	public MemVO updateMem(String mem_id, String mem_name, String mem_account, String mem_password, Date mem_birth,
 			byte[] mem_photo, String mem_email, String mem_intro) {
 		
 		MemVO memVO = new MemVO();
-		memVO .setMem_id(mem_id);
+		memVO.setMem_id(mem_id);
 		memVO.setMem_name(mem_name);
 		memVO.setMem_account(mem_account);
 		memVO.setMem_password(mem_password);
