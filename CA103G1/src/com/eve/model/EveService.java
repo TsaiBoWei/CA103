@@ -14,8 +14,9 @@ public class EveService {
 	
 	public EventVO addEve(String mem_id, byte[] eve_photo, byte[] eve_logo, String eve_ptype, String eve_title,
 			String eve_content, Timestamp eve_startdate, Timestamp eve_enddate, Date ereg_startdate, Date ereg_enddate,
-			Integer estart_limit, String eve_status, String eve_location, Double eve_long, Double eve_lat,
+			Integer estart_limit,Integer estart_max, String eve_status, String eve_location, Double eve_long, Double eve_lat,
 			String city_id, String sptype_id, Integer eve_view, Integer eve_charge, String econtact_info) {
+		
 		
 		EventVO eventVO=new EventVO();
 		eventVO.setMem_id(mem_id);		
@@ -29,6 +30,7 @@ public class EveService {
 		eventVO.setEreg_startdate(ereg_startdate);
 		eventVO.setEreg_enddate(ereg_enddate);
 		eventVO.setEstart_limit(estart_limit);
+		eventVO.setEstart_max(estart_max);
 		eventVO.setEve_status(eve_status);
 		eventVO.setEve_location(eve_location);
 		eventVO.setEve_long(eve_long);
@@ -46,8 +48,8 @@ public class EveService {
 	
 	public EventVO updateEve(String eve_id,String mem_id, byte[] eve_photo, byte[] eve_logo, String eve_ptype, String eve_title,
 			String eve_content, Timestamp eve_startdate, Timestamp eve_enddate, Date ereg_startdate, Date ereg_enddate,
-			Integer estart_limit, String eve_status, String eve_location, Double eve_long, Double eve_lat,
-			String city_id, String sptype_id, Integer eve_view, Integer eve_charge, String econtact_info,Timestamp eestablish_date) {
+			Integer estart_limit,Integer estart_max, String eve_status, String eve_location, Double eve_long, Double eve_lat,
+			String city_id, String sptype_id, Integer eve_view, Integer eve_charge, String econtact_info) {
 		
 		EventVO eventVO=new EventVO();
 		eventVO.setEve_id(eve_id);
@@ -62,6 +64,7 @@ public class EveService {
 		eventVO.setEreg_startdate(ereg_startdate);
 		eventVO.setEreg_enddate(ereg_enddate);
 		eventVO.setEstart_limit(estart_limit);
+		eventVO.setEstart_max(estart_max);
 		eventVO.setEve_status(eve_status);
 		eventVO.setEve_location(eve_location);
 		eventVO.setEve_long(eve_long);
@@ -71,7 +74,7 @@ public class EveService {
 		eventVO.setEve_view(eve_view);
 		eventVO.setEve_charge(eve_charge);
 		eventVO.setEcontact_info(econtact_info);
-		eventVO.setEestablish_date(eestablish_date);
+	
 		
 		dao.update(eventVO);
 		return eventVO;
@@ -83,6 +86,12 @@ public class EveService {
 		return dao.findByPrimaryKey(eve_id);		
 	}
 	
+	public EventVO updatePhoto(byte[] eve_photo,String eve_id) {
+		dao.updatePhoto(eve_photo, eve_id);
+		return dao.findByPrimaryKey(eve_id);
+	}
+	
+	
 	public EventVO getOneEve(String eve_id) {
 		return dao.findByPrimaryKey(eve_id);
 	}
@@ -93,6 +102,14 @@ public class EveService {
 	
 	public List<EventVO> getEvesByMem(String mem_id){
 		return dao.getEvesByMem(mem_id);
+	}
+	
+	public List<EventVO> getEvesInViewPage(){
+		return dao.getAllinViewPage();
+	}
+	
+	public List<EventVO> getReviewEves(){
+		return dao.getReviewEves();
 	}
 	
 	

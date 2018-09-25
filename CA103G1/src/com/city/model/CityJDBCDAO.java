@@ -172,6 +172,39 @@ public class CityJDBCDAO implements CityDAO_interface{
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public String findNameById(String city_id) {
+		String city_name;
+		Connection con=null;
+		try{
+			Class.forName(driver);
+			con=DriverManager.getConnection(url, userid, passwd);
+			PreparedStatement pstmt=con.prepareStatement(GET_ONE_STMT);
+			pstmt.setString(1, city_id);			
+			ResultSet rs=pstmt.executeQuery();
+			rs.next();
+			city_name=rs.getString("CITY_NAME");
+			
+			
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally {
+			if(con!=null) {
+				try{
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return city_name;
+	}
 		
 		
 
@@ -197,14 +230,17 @@ public class CityJDBCDAO implements CityDAO_interface{
 //		System.out.println(cityVO2.getCity_name());
 		
 		//¬d¥þ³¡
-		List<CityVO> list=dao.getAll();
-		for(CityVO cityVO3:list) {
-			System.out.println(cityVO3.getCity_id());
-			System.out.println(cityVO3.getCity_name());
-			System.out.println("======================");
-		}
+//		List<CityVO> list=dao.getAll();
+//		for(CityVO cityVO3:list) {
+//			System.out.println(cityVO3.getCity_id());
+//			System.out.println(cityVO3.getCity_name());
+//			System.out.println("======================");
+//		}
+		System.out.println(dao.findNameById("CITY03"));
 		
 		
 	}
+
+	
 
 }

@@ -14,6 +14,10 @@ public class CityService {
 		return dao.findByPrimaryKey(city_id);
 	}
 	
+	public String getCityName(String city_id) {
+		return dao.findNameById(city_id);
+	}
+	
 	public List<CityVO> getall(){
 		return dao.getAll();
 	}

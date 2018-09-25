@@ -1,6 +1,7 @@
 package com.city.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -160,6 +161,33 @@ public class CityDAO implements CityDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public String findNameById(String city_id) {
+		String city_name;
+		Connection con=null;
+		try{
+			con = ds.getConnection();
+			PreparedStatement pstmt=con.prepareStatement(GET_ONE_STMT);
+			pstmt.setString(1, city_id);			
+			ResultSet rs=pstmt.executeQuery();
+			rs.next();
+			city_name=rs.getString("CITY_NAME");
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		}finally {
+			if(con!=null) {
+				try{
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return city_name;
 	}
 
 }
