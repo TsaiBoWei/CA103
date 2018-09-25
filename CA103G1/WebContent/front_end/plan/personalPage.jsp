@@ -62,8 +62,8 @@ body {
 			<div class="collapse navbar-collapse justify-content-center"
 				id="navbar2SupportedContent">
 				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
-					href="#">WORK it OUT</a>
+					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
+					href="HomePage.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -74,7 +74,7 @@ body {
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="#schedule">User</a></li>
 				</ul>
-				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
+				<a class="btn btn-lg btn-primary" href="mem/Mem_Login_Signup.jsp">Register now</a>
 			</div>
 		</div>
 	</nav>
@@ -146,7 +146,7 @@ body {
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Create Plan</a> <a
+								href="Create_Plan.jsp">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
