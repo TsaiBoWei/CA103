@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 # Compiled class file
 *.class
 
 # Log file
 *.log
 /com/
+=======
+/Test_DataSource.class
+/com/
+/create_tables
+/test/
+>>>>>>> f9301c05e033c4be8bd06916638f1dda8df7208f
