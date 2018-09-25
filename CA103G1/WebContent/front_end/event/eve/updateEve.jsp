@@ -1,11 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.eve.model.*"%>
 <%@ page import="com.mem.model.*" %>
 <%
   MemVO memVO=(MemVO)session.getAttribute("memVO");
   EventVO eveVO = (EventVO) request.getAttribute("eveVO");
 %>
+
+
 
 
 <!DOCTYPE html>
@@ -43,7 +46,7 @@
 
 
 
-<title>新增活動 - addEve.jsp</title>
+<title>修改活動 - updateEve.jsp</title>
 
 </head>
 <body style="color:black; background-color:#e9ecef !important;"> <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
@@ -106,12 +109,12 @@
   
   <table id="table-1">
 	<tr><td>
-		 <h3>新增活動 - addEve.jsp</h3></td><td>
+		 <h3>修改活動 - updateEve.jsp</h3></td><td>
 		 <h4><a href="<%=request.getContextPath()%>/front_end/event/eve/select_event_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<h3>新增活動:</h3>
+<h3>修改活動:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -130,9 +133,12 @@
 	<tr>
 		<td>活動圖片:</td>
 		<td>			
+				<div id="updateImgDiv">
+				<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=<%=eveVO.getEve_id()%>">
+				</div>
 				<div class="imgdiv" style="display: none;"><img src="#" id="upload_pic1"  /></div>
 				<input type="file" name="eve_photo" id="eve_photo"/>
-				<input type="button" id="btn_cancel" value="取消"><br>
+				<input type="button" id="btn_cancel" value="取消更換圖片"><br>
 		</td>
 	
 	</tr>
@@ -141,7 +147,7 @@
 	<tr>
 		<td>活動標題:</td>
 		<td><input type="TEXT" name="eve_title" size="45" 
-			 value="<%=(eveVO==null)? "" : eveVO.getEve_title()%>" /></td>
+			 value="<%=eveVO.getEve_title()%>" /></td>
 		<td>${errorMsgs.eve_title}</td>	 
 	</tr>
 	<tr>
@@ -169,15 +175,15 @@
 	<tr>
 		<td>活動人數:</td>
 		<td> 是否有活動最低人數限制
-			<input type="radio" name="estart_limit_check" id="estart_limit_no" value="0" ${(param.estart_limit_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>  >無
-			<input type="radio" name="estart_limit_check" id="estart_limit_yes" value="1"  ${(param.estart_limit_check=='1') ? 'checked':''} >有
+			<input type="radio" name="estart_limit_check" id="estart_limit_no" value="0" <%=(eveVO.getEstart_limit()==0) ? "checked":"" %>  >無
+			<input type="radio" name="estart_limit_check" id="estart_limit_yes" value="1"  <%=(eveVO.getEstart_limit()>0) ? "checked":"" %> >有
 		     <input type="TEXT" name="estart_limit" id="estart_limit" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEstart_limit()==0)? "" : eveVO.getEstart_limit()%>" ${(param.estart_limit_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>/>人<br>
+			 value="<%= (eveVO.getEstart_limit()==0)? "" : eveVO.getEstart_limit()%>" />人<br>
 			  是否有活動人數上限
-			 <input type="radio" name="estart_max_check" id="estart_max_no" value="0" ${(param.estart_max_check=='0') ? 'checked':''}<%= (eveVO==null)? "checked" :"" %>>無
-			 <input type="radio" name="estart_max_check" id="estart_max_yes" value="1" ${(param.estart_max_check=='1') ? 'checked':''} >有
+			 <input type="radio" name="estart_max_check" id="estart_max_no" value="0" <%=(eveVO.getEstart_max()==0) ? "checked":"" %>>無
+			 <input type="radio" name="estart_max_check" id="estart_max_yes" value="1" <%=(eveVO.getEstart_max()>0) ? "checked":"" %> >有
 		     <input type="TEXT" name="estart_max" id="estart_max" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEstart_max()==0)? "" : eveVO.getEstart_max() %>"${(param.estart_max_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>/>人
+			 value="<%= (eveVO.getEstart_max()==0)? "" : eveVO.getEstart_max() %>"/>人
 		</td>
 		<td>${errorMsgs.estart_max}</td>
 	</tr>
@@ -209,10 +215,10 @@
 	<tr>
 		<td>報名活動費用:</td>
 		<td>
-			<input type="radio" name="eve_charge_check" id="eve_charge_no" value="0" ${(param.eve_charge_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>>免費
-			<input type="radio" name="eve_charge_check" id="eve_charge_yes" value="1" ${(param.eve_charge_check=='1') ? 'checked':''}>每人
+			<input type="radio" name="eve_charge_check" id="eve_charge_no" value="0" <%=(eveVO.getEve_charge()==0) ? "checked":"" %>>免費
+			<input type="radio" name="eve_charge_check" id="eve_charge_yes" value="1"  <%=(eveVO.getEve_charge()>0) ? "checked":"" %>>每人
 		    <input type="TEXT" name="eve_charge" id="eve_charge" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEve_charge()==0)? "" : eveVO.getEve_charge()%>" ${(param.eve_charge_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %> />元<br>			 
+			 value="<%=(eveVO.getEve_charge()==0)? "" : eveVO.getEve_charge()%>" />元<br>			 
 		</td>
 		<td>${errorMsgs.eve_charge}</td>
 	</tr>
@@ -230,21 +236,27 @@
 		</td>
 		<td>${errorMsgs.eve_content}</td>
 	</tr>
-<!-- 	<tr> -->
-<!-- 		<td>活動圖片:</td> -->
-<!-- 		<td> -->
-<!-- 			<div class="imgdiv" style="display: none;"><img src="#" id="pic1"  /></div> -->
-<!-- 			<input type="file" name="eve_photo" id="view1"/> -->
-<!-- 			<input type="button" id="btn1" value="取消"><br> -->
-			
-<!-- 		</td> -->
-<!-- 	</tr> -->
+	<tr>
+		<td>活動建立時間:</td>
+		<td>
+			<fmt:formatDate value="${eveVO.eestablish_date}" pattern="yyyy-MM-dd HH:mm "/>   
+		</td>
+		<td>${errorMsgs.eve_content}</td>
+	</tr>
+	
 </table>
 <br>
+<input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+<input type="hidden" name="action" value="update">
 <input type="hidden" name="mem_id" value="${memVO.mem_id}">
-<input type="hidden" name="action" value="insert">
-<button  id="addBtnSubmit" type="submit">送出</button></FORM>	
+<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>">  
+<button  id="addBtnSubmit" type="submit">確認修改</button></FORM>	
 
+
+<br>送出修改的來源網頁路徑:<br><b>
+   <font color=blue>request.getParameter("requestURL"):</font> <%=request.getParameter("requestURL")%><br>
+   <font color=blue>request.getParameter("whichPage"): </font> <%=request.getParameter("whichPage")%></b>
 <script>
 $(document).ready(function(){
 	$("#estart_limit_no").focus(function(){
@@ -306,7 +318,9 @@ $(document).ready(function(){
     <!--     上傳圖片 -->
     <script>
 		$("#eve_photo").change(function(){
+			
 			if(this.files&&this.files[0]){
+				$("#updateImgDiv").hide();
 				$("#upload_pic1").parent().show();
 				var reader=new FileReader();
 				reader.onload=function(e){
@@ -316,6 +330,7 @@ $(document).ready(function(){
 			}
 		});
 		 $("#btn_cancel").click(function () {
+			    $("#updateImgDiv").show();
 		 		$("#upload_pic1").parent().hide();
 			  $("#eve_photo").val("");        	 
 	    });	

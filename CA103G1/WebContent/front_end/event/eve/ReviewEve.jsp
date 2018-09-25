@@ -6,7 +6,7 @@
 
 <%
 	EveService eveSvc = new EveService();
-	List<EventVO> list = eveSvc.getEvesInViewPage();
+	List<EventVO> list = eveSvc.getReviewEves();
 	pageContext.setAttribute("list",list);
 %>
 
@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>listAllEve.jsp</title>
+<title>ReviewEve.jsp</title>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -53,7 +53,7 @@
     text-align: center;
   }
   .eveImg{
-  width:100%;
+  width:30%;
   }
   
 </style>
@@ -64,7 +64,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>所有活動資料 - listAllEve.jsp</h3>
+		 <h3>審核活動 - ReviewEve.jsp</h3>
 		 <h4><a href="<%=request.getContextPath()%>/front_end/event/eve/select_event_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -83,14 +83,14 @@
 	<tr>   
 		<th>活動標題</th>
 		<th>活動圖片</th>
-<!-- 		<th>主辦人姓名</th> -->
+		<th>主辦人姓名</th>
 		<th>活動時間</th>
 		<th>報名期間</th>
-		<th>活動狀態</th>
-		<th>地區縣市</th>
-		<th>運動類別</th>
-		<th>活動瀏覽次數</th>
 		<th>收費金額</th>
+		<th>活動最低人數</th>
+		<th>活動最高人數</th>
+		<th>審核狀態</th>
+		
 
 			
 	</tr>
@@ -101,21 +101,11 @@
 			<td>
 			<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
 			</td>
-<%-- 			<td>${memSvc.getOneMem(eveVO.mem_id).mem_name}</td>		 --%>
+			<td>${memSvc.getOneMem(eveVO.mem_id).mem_name}</td>		
 			<td><fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>~			
 				<fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/></td>
 			<td><fmt:formatDate value="${eveVO.ereg_startdate}" pattern="yyyy/MM/dd "/>~					
 				<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy/MM/dd"/></td>					
-			
-		
-			<td>
-				<c:if test="${eveVO.ereg_startdate.getTime()<System.currentTimeMillis()}">		
-					${eveVO.eve_status=='E4'?'已額滿':'線上報名'}					
-				</c:if>
-			</td>
-			<td>${citySvc.getCityName(eveVO.city_id)}</td>			
-			<td>${sportTypeMap.get(eveVO.sptype_id)}</td>			
-			<td>${eveVO.eve_view}</td>			
 			<td>
 				<c:if test="${eveVO.eve_charge==0}">
 				    免費
@@ -124,7 +114,30 @@
 				<c:if test="${eveVO.eve_charge!=0}">
 				   ${eveVO.eve_charge}元/人
 				</c:if>		
-			</td>					
+			</td>
+			<td>${eveVO.estart_limit}人</td>			
+			<td>${eveVO.estart_max}人</td>						
+		
+			<td>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
+			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
+			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+			     <input type="hidden" name="action"	    value="review">
+			     <input type="hidden" name="result"	    value="review_pass">
+				 <input type="submit" value="通過">			
+					
+			</FORM>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
+			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
+			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+			     <input type="hidden" name="action"	    value="review">
+			     <input type="hidden" name="result"	    value="review_fail">
+				 <input type="submit" value="不通過">								
+			</FORM>
+		 	
+			</td>			
 		</tr>
 		
 	</c:forEach>

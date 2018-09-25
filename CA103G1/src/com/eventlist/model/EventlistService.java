@@ -42,9 +42,10 @@ public class EventlistService {
 		
 	}
 	
-	public void changeEveListStatus(String mem_id, String eve_id,  String evelist_status) {
+	public EventListVO changeEveListStatus(String mem_id, String eve_id,  String evelist_status) {
 		
 		dao.updateListStatus(mem_id, eve_id, evelist_status);
+		return  dao.findByPrimaryKey(mem_id,eve_id); 
 		
 	}
 	

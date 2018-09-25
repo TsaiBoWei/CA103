@@ -18,6 +18,7 @@ public class EventVO implements Serializable{
 	private Date ereg_startdate;
 	private Date ereg_enddate;
 	private Integer estart_limit;
+	private Integer estart_max;
 	private String eve_status;
 	private String eve_location;
 	private Double eve_long;
@@ -35,13 +36,11 @@ public class EventVO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-
-
 	public EventVO(String eve_id, String mem_id, byte[] eve_photo, byte[] eve_logo, String eve_ptype, String eve_title,
 			String eve_content, Timestamp eve_startdate, Timestamp eve_enddate, Date ereg_startdate, Date ereg_enddate,
-			Integer estart_limit, String eve_status, String eve_location, Double eve_long, Double eve_lat,
-			String city_id, String sptype_id, Integer eve_view, Integer eve_charge, String econtact_info,
-			Timestamp eestablish_date) {
+			Integer estart_limit, Integer estart_max, String eve_status, String eve_location, Double eve_long,
+			Double eve_lat, String city_id, String sptype_id, Integer eve_view, Integer eve_charge,
+			String econtact_info, Timestamp eestablish_date) {
 		super();
 		this.eve_id = eve_id;
 		this.mem_id = mem_id;
@@ -55,6 +54,7 @@ public class EventVO implements Serializable{
 		this.ereg_startdate = ereg_startdate;
 		this.ereg_enddate = ereg_enddate;
 		this.estart_limit = estart_limit;
+		this.estart_max = estart_max;
 		this.eve_status = eve_status;
 		this.eve_location = eve_location;
 		this.eve_long = eve_long;
@@ -66,6 +66,9 @@ public class EventVO implements Serializable{
 		this.econtact_info = econtact_info;
 		this.eestablish_date = eestablish_date;
 	}
+
+
+
 
 
 
@@ -191,7 +194,13 @@ public class EventVO implements Serializable{
 	public void setEstart_limit(Integer estart_limit) {
 		this.estart_limit = estart_limit;
 	}
-
+		
+	public Integer getEstart_max() {
+		return estart_max;
+	}
+	public void setEstart_max(Integer estart_max) {
+		this.estart_max = estart_max;
+	}
 
 	public String getEve_status() {
 		return eve_status;
@@ -291,6 +300,14 @@ public class EventVO implements Serializable{
 	public void setEestablish_date( Timestamp eestablish_date) {
 		this.eestablish_date = eestablish_date;
 	}
+
+
+
+	
+
+
+
+	
 	
 	
 	
