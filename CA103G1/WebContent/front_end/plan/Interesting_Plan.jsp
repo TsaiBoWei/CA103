@@ -12,11 +12,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
-<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/images/weight-lifting.png">
+<link rel="icon" href="images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -38,7 +38,6 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
 <style>
 /*頁面設定*/
 body {
@@ -48,10 +47,8 @@ body {
 
 
 </head>
-
-
+<body>
 <body class="text-center">
-	<% session.setAttribute("mem_id" , "M000001");%>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
 		<span class="navbar-text"></span>
@@ -66,7 +63,7 @@ body {
 				id="navbar2SupportedContent">
 				<a
 					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
-					href="<%=request.getContextPath() %>/front_end/plan/HomePage.jsp">WORK it OUT</a>
+					href="HomePage.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -75,15 +72,16 @@ body {
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="#speakers">Course</a></li>
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="personalPage.jsp">User</a></li>
-				</ul>									
-				<a class="btn btn-lg btn-primary" href="/CA103G10908/front_end/mem/login/Mem_Login_Signup.jsp">Register now</a>
+						href="#schedule">User</a></li>
+				</ul>
+				<a class="btn btn-lg btn-primary" href="mem/Mem_Login_Signup.jsp">Register
+					now</a>
 			</div>
 		</div>
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;images/assets/conference/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -113,7 +111,7 @@ body {
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
-					src="<%=request.getContextPath()%>/front_end/plan/images/assets/styleguide/people_2.jpg">
+					src="images/assets/styleguide/people_2.jpg">
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-3">
@@ -149,11 +147,12 @@ body {
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Create Plan</a> <a
+								href="Create_Plan.jsp">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interesting Plan</a>
+								href="<%=request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interesting
+								Plan</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="#"> <i
 							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
@@ -188,116 +187,10 @@ body {
 		</div>
 	</nav>
 
-
-	<div class="py-5 text-light opaque-overlay section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/CreatPlan_picture.jpeg&quot;);">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-md-6 mx-auto">
-					<form method="post"
-						action="<%=request.getContextPath()%>/plan/plan.do"
-						enctype="multipart/form-data">
-
-
-						<div class="form-group text-primary" style="font-size: 50px">
-							<h1>Create A New Plan</h1>
-						</div>
-						<br>
-						
-						<%-- 錯誤表列 --%>
-							<c:if test="${not empty errorMsgs}">
-								<font style="color:red" size="5">Amend The Following Errors</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color:red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-						
-
-						<div class="form-group">
-							<h3>Plan Name:</h3>
-							<input type="text" name="plan_name" id=""
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"
-								class="form-control">
-						</div>
-						<br>
-
-
-						<div class="form-group">
-							<label><h3>Plan Cover:　　 </h3></label> <label
-								class="btn btn-info btn-lg"> <input id="upload_img"
-								style="display: none;" type="file" name="plan_cover"> <i
-								class="fa fa-photo">上傳圖片</i>
-							</label>
-						</div>
-
-
-						<div class="form-group">
-							<label><h3>PlanStartDate:　</h3></label> <input type="date"
-								name="plan_start_date" id="f_date1">
-						</div>
-
-
-						<div class="form-group">
-							<label><h3>Plan EndDate:　</h3></label> <input type="date"
-								name="plan_end_date" id="f_date1">
-						</div>
-
-
-						<div class="form-group">
-							<label><h3>Sport Type:　　　</h3></label> <select size="1"
-								name="sptype_id" style="width: 150px; font-size: 18px;">
-								<option value="SP000001">田徑</option>
-								<option value="SP000002">單車</option>
-								<option value="SP000003">球類</option>
-								<option value="SP000004">重訓</option>
-								<option value="SP000005">有氧</option>
-								<option value="SP000006">武術</option>
-								<option value="SP000007">水上</option>
-								<option value="SP000008">其他</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label><h3>Privacy Setting:　</h3></label> <select size="1"
-								name="plan_privacy" style="width: 150px; font-size: 18px;">
-								<option value="PLANPR0">公開</option>
-								<option value="PLANPR1">不公開</option>
-								<option value="PLANPR2">只對朋友公開</option>
-							</select>
-						</div>
-
-
-						<div class="form-group">
-							<label><h3>Plan Content:</h3></label><br>
-							<textarea name="plan_vo" rows="10" class="form-control"
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
-							<br>
-						</div>
-		
-		
-						<div class="form-group">
-							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-primary">Add</button>
-							<button type="submit" class="btn btn-primary">Reset</button>
-							<button type="submit" class="btn btn-primary">cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div>
-		<h5>
-			瀏覽數：<%!int count = 0;%><%=count++%>
-		</h5>
-	</div>
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<!-- Here you go -->
+	<h5>觀看收藏及有興趣的計畫頁面</h5>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">
 		<div class="container">
@@ -310,26 +203,26 @@ body {
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_1.png">
+						src="images/assets/conference/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_4.png">
+						src="images/assets/conference/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_3.png">
+						src="images/assets/conference/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_2.png">
+						src="images/assets/conference/logo_2.png">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/cover_2.jpg');">
+		style="background-image: url('images/assets/conference/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">
@@ -372,6 +265,7 @@ body {
 		crossorigin="anonymous"></script>
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
+
 </body>
 
 <%

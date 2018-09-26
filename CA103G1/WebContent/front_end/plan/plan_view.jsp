@@ -17,7 +17,7 @@
 
 <!-- PAGE settings -->
 <link rel="icon"
-	href="images/weight-lifting.png">
+	href="<%=request.getContextPath()%>/front_end/plan/images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -80,7 +80,7 @@ body {
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;images/assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -110,7 +110,7 @@ body {
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
-					src="images/assets/styleguide/people_2.jpg">
+					src="<%=request.getContextPath()%>/front_end/plan/images/assets/styleguide/people_2.jpg">
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-3">
@@ -201,26 +201,26 @@ body {
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_1.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_4.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_3.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_2.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_2.png">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('images/assets/conference/cover_2.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">

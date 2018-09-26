@@ -25,7 +25,7 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 	String userid = "CA103";
 	String password = "123456";
 
-	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_end_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES ('PLAN'||LPAD(to_char(plan_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,sysdate,?)";
+	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_end_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES ('PLAN'||LPAD(to_char(plan_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,0,?,sysdate,'PLANST0')";
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
@@ -52,9 +52,7 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 			pstmt.setTimestamp(5, planVO.getPlan_start_date());
 			pstmt.setTimestamp(6, planVO.getPlan_end_date());
 			pstmt.setString(7, planVO.getSptype_id());
-			pstmt.setInt(8, planVO.getPlan_view());
-			pstmt.setString(9, planVO.getPlan_privacy());
-			pstmt.setString(10, planVO.getPlan_status());
+			pstmt.setString(8, planVO.getPlan_privacy());
 
 			pstmt.executeUpdate();
 
@@ -343,9 +341,7 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 			planVO1.setPlan_start_date(java.sql.Timestamp.valueOf("2018-09-09 22:22:22"));
 			planVO1.setPlan_end_date(java.sql.Timestamp.valueOf("2018-10-10 22:22:22"));
 			planVO1.setSptype_id("SP000001");
-			planVO1.setPlan_view(new Integer(99));
 			planVO1.setPlan_privacy("PLANPR1");
-			planVO1.setPlan_status("PLANST1");
 			dao.insert(planVO1);
 
 			baos.close();
@@ -359,7 +355,6 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 
 		// 修改
 		PlanVO planVO2 = new PlanVO();
-		planVO2.setPlan_id("PLAN000001");
 		planVO2.setPlan_name("計畫名稱修改中1......");
 		planVO2.setPlan_vo("計畫內容修改中1.....");
 		planVO2.setPlan_cover(null);
@@ -367,7 +362,8 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		planVO2.setPlan_end_date(java.sql.Timestamp.valueOf("2018-09-10 16:16:16"));
 		planVO2.setSptype_id("SP000003");
 		planVO2.setPlan_privacy("PLANPR2");
-		planVO2.setPlan_status("PLANST2");
+		planVO2.setPlan_status("PLANST1");
+		planVO2.setPlan_id("PLAN000001");
 		dao.update(planVO2);
 
 		// 查詢

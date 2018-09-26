@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
-<link rel="icon" href="images/weight-lifting.png">
+<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -50,14 +50,14 @@
 						href="#speakers">Course</a></li>
 					<li class="nav-item mx-25 btn-lg"><a class="nav-link"
 						href="personalPage.jsp">User</a></li>
-				</ul>
-				<a class="btn btn-lg btn-primary" href="/CA103G10908/front_end/mem/Mem_Login_Signup.jsp">Register now</a>
+				</ul>									
+				<a class="btn btn-lg btn-primary" href="<%=request.getContextPath() %>/front_end/mem/login/Mem_Login_Signup.jsp">Register now</a>
 			</div>
 		</div>
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center py-5 cover section-fade-in-out"
-		style="background-image: url(&quot;images/assets/conference/Top-5-Best-Running-Shoes-for-Women-in-2015.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/Top-5-Best-Running-Shoes-for-Women-in-2015.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -69,7 +69,7 @@
 	</div>
 	<!-- Intro section -->
 	<div class="py-5 section-fade-in"
-		style="background-image: url('images/assets/conference/56930f225e8db.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/56930f225e8db.jpg');">
 		<div class="container p-4 my-5">
 			<div class="row">
 				<div class="col-12">
@@ -113,7 +113,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/02.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/02.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -125,7 +125,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/01.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/01.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -137,7 +137,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/03.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/03.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -180,7 +180,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/04.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/04.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -192,7 +192,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/ANQ_2018_2.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/ANQ_2018_2.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -204,7 +204,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/07.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/07.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -247,7 +247,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/06.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/06.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -259,7 +259,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/05.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/05.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -271,7 +271,7 @@
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-4">
-					<a href="#"> <img src="images/assets/conference/08.png"
+					<a href="#"> <img src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/08.png"
 						class="center-block img-fluid my-3 shadowed" width="300">
 						<h3 class="mb-0 text-left text-primary">
 							<b>Post title</b>
@@ -298,26 +298,26 @@
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_1.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_4.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_3.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_2.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_2.png">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('images/assets/conference/cover_2.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">

@@ -16,8 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
-<link rel="icon"
-	href="images/weight-lifting.png">
+<link rel="icon" href="images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -25,11 +24,12 @@
 	content="Pingendo conference event neon free template bootstrap 4">
 
 <!-- CSS dependencies -->
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/PersonalPageBase.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/PersonalPageBase.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
 <script src="js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
@@ -74,7 +74,8 @@ body {
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="#schedule">User</a></li>
 				</ul>
-				<a class="btn btn-lg btn-primary" href="mem/Mem_Login_Signup.jsp">Register now</a>
+				<a class="btn btn-lg btn-primary" href="mem/Mem_Login_Signup.jsp">Register
+					now</a>
 			</div>
 		</div>
 	</nav>
@@ -150,7 +151,8 @@ body {
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Plan</a>
+								href="<%=request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interesting
+								Plan</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="#"> <i
 							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
@@ -263,7 +265,7 @@ body {
 		crossorigin="anonymous"></script>
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
-
+瀏覽數：<%!int count = 0;%><%=count++%>
 </body>
 
 <%

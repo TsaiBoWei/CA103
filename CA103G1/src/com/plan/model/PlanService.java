@@ -13,20 +13,18 @@ public class PlanService {
 		dao = new PlanDAO();
 	}
 
-	public PlanVO addPlan(String mem_id, String plan_name, String plan_vo, byte[] plan_cover, Timestamp plan_start_date,
-			Timestamp plan_end_date, String sptype_id, Integer plan_view, String plan_privacy, String plan_status) {
+	public PlanVO addPlan(String mem_id,String plan_name, byte[] plan_cover, Timestamp plan_start_date,
+			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_vo) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setMem_id(mem_id);
 		planVO.setPlan_name(plan_name);
-		planVO.setPlan_vo(plan_vo);
 		planVO.setPlan_cover(plan_cover);
 		planVO.setPlan_start_date(plan_start_date);
 		planVO.setPlan_end_date(plan_end_date);
 		planVO.setSptype_id(sptype_id);
-		planVO.setPlan_view(plan_view);
 		planVO.setPlan_privacy(plan_privacy);
-		planVO.setPlan_status(plan_status);
+		planVO.setPlan_vo(plan_vo);
 		dao.insert(planVO);
 
 		return planVO;

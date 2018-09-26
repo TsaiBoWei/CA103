@@ -28,7 +28,7 @@ public class PlanDAO implements PlanDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_end_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES ('PLAN'||LPAD(to_char(plan_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?,sysdate,?)";
+	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_end_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES ('PLAN'||LPAD(to_char(plan_seq.NEXTVAL),6,'0'),?,?,?,?,?,?,?,0,?,sysdate,'PLANST0')";
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
@@ -54,9 +54,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setTimestamp(5, planVO.getPlan_start_date());
 			pstmt.setTimestamp(6, planVO.getPlan_end_date());
 			pstmt.setString(7, planVO.getSptype_id());
-			pstmt.setInt(8, 1);
-			pstmt.setString(9, planVO.getPlan_privacy());
-			pstmt.setString(10, planVO.getPlan_status());
+			pstmt.setString(8, planVO.getPlan_privacy());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
