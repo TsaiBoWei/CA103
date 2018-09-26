@@ -46,6 +46,12 @@ body {
 }
 </style>
 
+<%--上傳圖片 --%>
+<script
+	src="<%=request.getContextPath()%>/front_end/plan/js/UploadPlan_Cover.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/plan/img.css">
+
 
 </head>
 
@@ -225,13 +231,15 @@ body {
 
 
 						<div class="form-group">
-							<label><h3>Plan Cover:　　 </h3></label> <label
-								class="btn btn-info btn-lg"> <input id="upload_img"
-								style="display: none;" type="file" name="plan_cover"> <i
-								class="fa fa-photo">上傳圖片</i>
+							<label><h3>Plan Cover:　　 </h3></label> 
+							<label class="btn btn-info btn-lg"> 
+								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
+									 onchange="openFile(event)" style="display: none;"> 
+									<i class="fa fa-photo">上傳圖片</i>
 							</label>
+							<img class="img" id="output" width="120" height="120" style="display: none;">
 						</div>
-
+						
 
 						<div class="form-group">
 							<label><h3>PlanStartDate:　</h3></label> <input type="date"

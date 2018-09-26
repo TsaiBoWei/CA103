@@ -45,7 +45,7 @@ public class PlanServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				// mem_id
@@ -124,11 +124,11 @@ public class PlanServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage()+"test");
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/Create_Plan.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage()+"test");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/Create_Plan.jsp");
+				failureView.forward(req, res);
+			}
 		}
 
 	}
