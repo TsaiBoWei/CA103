@@ -46,19 +46,6 @@ public class MemServlet extends HttpServlet {
 					return;//程式中斷
 				}
 				
-//				Integer empno = null;
-//				try {
-//					empno = new Integer(psw);
-//				} catch (Exception e) {
-//					errorMsgs.add("員工編號格式不正確");
-//				}
-				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;//程式中斷
-//				}
 
 				/*****************************2.登入*****************************************/
 				
@@ -104,26 +91,14 @@ public class MemServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
+					boolean openModal=true;
+					req.setAttribute("openModal",openModal );
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front_end/mem/login/Mem_Login_Signup.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
-//				Integer empno = null;
-//				try {
-//					empno = new Integer(regPsw);
-//				} catch (Exception e) {
-//					errorMsgs.add("員工編號格式不正確");
-//				}
-				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;//程式中斷
-//				}
-
 				/***************************2.開始註冊資料*****************************************/
 				
 				MemVO memVO = new MemVO();
