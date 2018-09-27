@@ -348,7 +348,7 @@
                         });
 
                         $("#name").val(calEvent.id); //關於對話框內各數值的設定，從後端叫資料
-                        $("#title").val(calEvent.title); //calEvent.xx是底下events裡的各計畫json
+                        $("#title").val(calEvent.title); 
                         $("#con").val("拉筋10分鐘,啞鈴3套，間隔1分鐘");
                         $('#dialog').dialog('open');
                     },

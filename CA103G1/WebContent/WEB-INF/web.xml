@@ -60,7 +60,7 @@
     <servlet-name>MemAndroidServlet</servlet-name>
     <url-pattern>/mem/memAndroid.do</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>EveListServlet</servlet-name>
     <servlet-class>com.eventlist.controller.EveListServlet</servlet-class>
     <load-on-startup>2</load-on-startup>
@@ -72,7 +72,7 @@
   <servlet>
     <servlet-name>EveServlet</servlet-name>
     <servlet-class>com.eve.controller.EveServlet</servlet-class>
-     <load-on-startup>1</load-on-startup>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>EveServlet</servlet-name>
@@ -142,7 +142,6 @@
     <servlet-name>MgrLostPSServlet</servlet-name>
     <url-pattern>/mgr/MgrLoPS.do</url-pattern>
   </servlet-mapping>
-  
   <context-param>
     <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
     <param-value>307200</param-value>
