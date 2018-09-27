@@ -1,9 +1,10 @@
 package com.eventlist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.eve.model.*;
 import com.eventlist.model.*;
 import com.mem.model.MemService;
+import com.mem.model.MemVO;
 
 
 
@@ -51,9 +56,9 @@ public class EveListServlet extends HttpServlet {
 				/***************************2.開始查詢資料*****************************************/
 				EventlistService eveListSvc = new EventlistService();
 				List<EventListVO> eveListsByEve=eveListSvc.getEveListsByEve(eve_id);
-				if(eveListsByEve.size()==0) {
-					errorMsgs.add("查無資料");
-				}
+//				if(eveListsByEve.size()==0) {
+//					errorMsgs.add("查無資料");
+//				}
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -556,6 +561,67 @@ public class EveListServlet extends HttpServlet {
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
+		}
+		
+		if("get_Mem_Evelist".equals(action)) {
+			
+			res.setContentType("text/html;charset=UTF8");
+			PrintWriter out=res.getWriter();
+			String mem_account=req.getParameter("mem_account");
+			String mem_password=req.getParameter("mem_password");
+			String eve_id=req.getParameter("eve_id");
+			System.out.println( mem_account);
+			System.out.println( mem_password);
+			System.out.println( eve_id);
+			MemService memSvc=new MemService();
+			MemVO memVO=memSvc.loginMem(mem_account, mem_password);
+			if(memVO==null) {
+				out.print("noneMem");
+				return;
+			}
+			HttpSession session=req.getSession();
+//			session.setAttribute("memVO", memVO);
+			EventlistService evelistSvc =new EventlistService();
+			EventListVO evelistVO=evelistSvc.getOneEveList(memVO.getMem_id(), eve_id);
+			 if(evelistVO==null){
+				out.print("noneEvelist");				
+			}else if(evelistVO.getMem_id()==memVO.getMem_id()) {
+				out.print("organizer");
+				
+			}else {			
+				JSONObject evelist = new JSONObject();	
+				Map eveListStatusMap=(Map)getServletContext().getAttribute("eveListStatusMap");
+				
+				String pay_deadline;
+				
+				if(evelistVO.getEvepay_deadline()==null) {
+					pay_deadline="無";
+				}else {
+					pay_deadline=evelistVO.getEvepay_deadline().toString();
+				}
+				
+				String pay_amount=null;
+				if(evelistVO.getEvepay_amount()==null||evelistVO.getEvepay_amount()==0) {
+					pay_amount="無";
+				}else {
+					pay_amount=evelistVO.getEvepay_amount().toString();
+				}
+				System.out.println(pay_amount);
+				System.out.println(pay_deadline);
+				try {
+					//將資料轉成JSONObject	
+					evelist.put("mem_name", memVO.getMem_name());
+					evelist.put("evepay_amount", pay_amount);
+					evelist.put("evepay_deadline",pay_deadline);
+					evelist.put("evelist_status",eveListStatusMap.get(evelistVO.getEvelist_status()));
+					out.print(evelist);
+				}catch(JSONException e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+			
 		}
 
 

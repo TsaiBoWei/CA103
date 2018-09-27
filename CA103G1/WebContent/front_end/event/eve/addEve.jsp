@@ -2,51 +2,91 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.eve.model.*"%>
 <%@ page import="com.mem.model.*" %>
+
 <%
   MemVO memVO=(MemVO)session.getAttribute("memVO");
   EventVO eveVO = (EventVO) request.getAttribute("eveVO");
 %>
 
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
 
+<head>
+  <meta charset="utf-8">
   <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
   <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
-  <!-- CSS dependencies -->  
+  
+  <!-- CSS  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <!--  self-defined css  -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/eve/css/SingleEventPage.css">
+  
+  <!-- JS  -->
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
   <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   <script src="<%=request.getContextPath() %>/front_end/event/eve/js/SingleEventPage.js"></script>
-
-
-<!-- datetimepicker-->	
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>	
-	
-	
-	
-<!-- summernote-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">  
+ 
+ <!-- datetimepicker-->	
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+  <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>	
+ 
+ 
+ <!-- summernote-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <link href="<%=request.getContextPath() %>/front_end/event/eve/summernote/summernote-bs4.css" rel="stylesheet">
   <script src="<%=request.getContextPath() %>/front_end/event/eve/summernote/summernote-bs4.js"></script>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+  
+    
+  <title>新增活動 - addEve.jsp</title>
 
+    <style type="text/css">
+    body {
+      font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei";
+      font-weight: bold;
+      
+    }
 
+    h1,h2,h3,h4,h5,h6 {
+        font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei";
+        color: #efefef;
+      }
 
-<title>新增活動 - addEve.jsp</title>
+    .form-group label{
+      font-size: 20px;
+    }
+
+    .form-check-input,.form-check{
+       font-size: 20px;
+    }
+    #addEveBtn{
+       font-weight: bold;
+    }
+    
+    #upload_pic1{
+    	width:100%;
+    }
+    
+    .errorMsg{
+    	color:red;
+    
+    }
+    
+    
+
+  </style>
 
 </head>
-<body style="color:black; background-color:#e9ecef !important;"> <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+
+<body>
+
+
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <span class="navbar-text"></span>
     <div class="container">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,22 +138,8 @@
       </div>
     </div>
   </nav>
-
-  <div class="align-items-center py-5 section-fade-in-out " id="coverfirstImg" style="background: url(&quot;assets/conference/cover_marathon.png&quot;);">
-  </div>
   
-  
-  
-  <table id="table-1">
-	<tr><td>
-		 <h3>新增活動 - addEve.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/front_end/event/eve/select_event_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>新增活動:</h3>
-
-<%-- 錯誤表列 --%>
+  <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -122,130 +148,366 @@
 		</c:forEach>
 	</ul>
 </c:if>
+  <!-- Cover -->
+  <div class="align-items-center py-5 section-fade-in-out " id="coverfirstImg" style="background: url(&quot;<%=request.getContextPath() %>/front_end/event/eve/assets/conference/cover_marathon.png&quot;);"> </div>
+  <div class="container" style="padding-top: 100px;">
+    <div class="py-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            <div class="card text-white p-5 bg-info">
+              <div>
+                <h1 class="mb-4 bg-info text-center text-white">建立新活動</h1>
+              </div>
+              <div class="card-body bg-info">
+              
+                <form METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1" enctype="multipart/form-data">
+                  
+                  <div class="imgdiv" style="display: none;"><img src="#" id="upload_pic1"  /></div>
+					<input type="file" name="eve_photo" id="eve_photo"/>
+					<input type="button" id="btn_cancel" value="取消">
+                  
+                  <div class="form-row">
+                    <div class="form-group col-md-10"> 
+                      <label for="eve_title">活動標題</label><b class='errorMsg'>${errorMsgs.eve_title}</b>
+                      <input type="text"  name="eve_title" class="form-control" id="eve_title"  value="<%=(eveVO==null)? "" : eveVO.getEve_title()%>">
+                    
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="sportType">類別</label>
+                      <select class="custom-select" id="sportType" size="1" name="sptype_id">
+                        <c:forEach var="sptype" items="${sportTypeMap}">
+							<option value="${sptype.key}" ${(sptype.key==eveVO.sptype_id)? 'selected':'' } >${sptype.value}
+						</c:forEach>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-7 py-2">
+                      <label for="mem_name">主辦人姓名</label><b class='errorMsg'> ${errorMsgs.mem_id}</b>
+                      <input type="text" class="form-control" id="mem_name" readonly="readonly" value="<%= (memVO==null)? "" :memVO.getMem_name() %>"> 
+                     	
+                    </div>
+                    <div class="form-group col-md-5 py-2">
+                      <label for="econtact_info">主辦人手機號碼</label> <b class='errorMsg'>${errorMsgs.econtact_info}</b> 
+                      <input type="text" class="form-control" id="econtact_info" name="econtact_info" placeholder="格式09XX-XXXXXX"
+                     	 value="<%= (eveVO==null)? "" : eveVO.getEcontact_info()%>" >      	  
+                    </div>
+                     	
+                  </div>
+                  <div class="form-row">                
+                    <div class="form-group col-md-6 pt-3">
+                      <label for="ereg_startdate">報名開始日期</label> <b class='errorMsg'>${errorMsgs.ereg_startdate}</b>
+                      <input type="text" class="form-control" name="ereg_startdate" id="ereg_startdate" value="${eveVO.ereg_startdate}" > </div>
+                    <div class="form-group col-md-6 pt-3">
+                      <label for="ereg_enddate">報名結束日期</label>
+                      <input type="text" class="form-control" name="ereg_enddate" id="ereg_enddate"  value="${eveVO.ereg_enddate}">                     
+                    </div>
+                    
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="eve_startdate">活動開始時間</label><b class='errorMsg'> ${errorMsgs.eve_startdate}</b>
+                      <input name="eve_startdate" id="eve_startdate" type="text" class="form-control"  > </div>
+                    <div class="form-group col-md-6">
+                      <label for="eve_enddate">活動結束時間</label>
+                      <input type="text" class="form-control" name="eve_enddate" id="eve_enddate" >
+                     </div>
+                    
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2">
+                      <label  class="pt-3">活動人數</label>
+                    </div>
+                    <div class="form-group col-md-12">
+                    <div class='errorMsg'>  ${errorMsgs.estart_max}</div> 
+                      <div class="form-check form-check-inline col-md-4
+                      "> 是否有活動最低人數限制 </div>
+                      <div class="form-check form-check-inline justify-content-between">
+                        <input class="form-check-input" type="radio" name="estart_limit_check" id="estart_limit_no" value="0" ${(param.estart_limit_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>>
+                        <label class="form-check-label" for="estart_limit_no" >無</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="estart_limit_check" id="estart_limit_yes" value="1" ${(param.estart_limit_check=='1') ? 'checked':''}>
+                        <label class="form-check-label" for="estart_limit_yes">有</label>
+                      </div>
+                      <div class="form-check form-check-inline col-md-2">
+                        <input type="text" class="form-control" name="estart_limit" id="estart_limit" value="<%= (eveVO==null)||(eveVO.getEstart_limit()==0)? "" : eveVO.getEstart_limit()%>" ${(param.estart_limit_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>/> </div>
+                      <div class="form-check form-check-inline col-md-1"> 人 </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    <div class="form-group col-md-12">
+                      <div class="form-check form-check-inline col-md-4
+                      "> 是否有活動人數上限 </div> 
+                      
+                      <div class="form-check form-check-inline justify-content-between">
+                        <input class="form-check-input" type="radio"name="estart_max_check" id="estart_max_no" value="0" ${(param.estart_max_check=='0') ? 'checked':''}<%= (eveVO==null)? "checked" :"" %>>
+                        <label class="form-check-label" for="estart_max_no">無</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="estart_max_check" id="estart_max_yes" value="1" ${(param.estart_max_check=='1') ? 'checked':''} >
+                        <label class="form-check-label" for="estart_max_yes">有</label>
+                      </div>
+                      <div class="form-check form-check-inline col-md-2">
+                        <input type="text" class="form-control" name="estart_max" id="estart_max"  value="<%= (eveVO==null)||(eveVO.getEstart_max()==0)? "" : eveVO.getEstart_max() %>"${(param.estart_max_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>> </div>
+                      <div class="form-check form-check-inline col-md-1"> 人 </div>
+                                         
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                      <div class="form-check form-check-inline col-md-4
+                      "> 報名活動費用 </div>
+                      <div class="form-check form-check-inline justify-content-between">
+                        <input class="form-check-input" type="radio" name="eve_charge_check" id="eve_charge_no" value="0" ${(param.eve_charge_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>>
+                        <label class="form-check-label" for="eve_charge_no">免費</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="eve_charge_check" id="eve_charge_yes" value="1" ${(param.eve_charge_check=='1') ? 'checked':''}>
+                        <label class="form-check-label" for="eve_charge_yes">每人</label>
+                      </div>
+                      <div class="form-check form-check-inline col-md-2">
+                        <input type="text" class="form-control" name="eve_charge" id="eve_charge" value="<%= (eveVO==null)||(eveVO.getEve_charge()==0)? "" : eveVO.getEve_charge()%>" ${(param.eve_charge_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %> > </div>
+                      <div class="form-check form-check-inline col-md-1"> 元 </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-2 py-2">
+                      
+                      <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
+                      <label for="city_id">活動地區</label>
+                      <select size="1" name="city_id" class="custom-select" id="city_id">
+						  <c:forEach var="cityVO" items="${citySvc.all}">
+							<option value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
+						  </c:forEach>
+					  </select>
+                      
+                    </div>
+                    <div class="form-group col-md-10 py-2">
+                      <label for="eve_loc">活動地點</label> <b class='errorMsg'> ${errorMsgs.eve_location}</b>
+                      <input type="text" class="form-control" id="eve_loc" name="eve_location" value="<%= (eveVO==null)? "" : eveVO.getEve_location()%>"> </div>
+ 					               
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-12 py-2">
+                      <label >活動敘述</label> <b class='errorMsg'> ${errorMsgs.eve_content}</b>
+                    </div>
+                    <div class="col-md-12 py-2">
+                      <textarea id="econtent_summernote" name="editordata"></textarea></textarea>
+                      <input type="hidden" name="eve_content"  id="eve_content">
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-5 offset-md-3">
+                  	<input type="hidden" name="mem_id" value="${memVO.mem_id}">
+					<input type="hidden" name="action" value="insert">
+                    <button id="addBtnSubmit" type="submit" class="btn m-3 btn-lg btn-block btn-warning" id="addEveBtn">送出</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+      
+      $(document).ready(function(){
+    	  
+      	//初始化summernote
+          $('#econtent_summernote').summernote({
+              height: 200,                 
+              minHeight: 400,             
+              maxHeight: 400,             
+              focus: true ,
+            });
+      	
+          //summernote賦值(將文字顯示在summernote上)     
+  		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)? "" : eveVO.getEve_content()%>');
+  		
+          //summernote取值
+          $("#addBtnSubmit").click(function(){
+            var markupStr = $('#econtent_summernote').summernote('code');
+            $("#eve_content").val(markupStr);
+            console.log( $("#eve_content").val());
 
+          });
 
+        });
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1" enctype="multipart/form-data" >
-<table>
-	<tr>
-		<td>活動圖片:</td>
-		<td>			
-				<div class="imgdiv" style="display: none;"><img src="#" id="upload_pic1"  /></div>
-				<input type="file" name="eve_photo" id="eve_photo"/>
-				<input type="button" id="btn_cancel" value="取消"><br>
-		</td>
-	
-	</tr>
-
-	
-	<tr>
-		<td>活動標題:</td>
-		<td><input type="TEXT" name="eve_title" size="45" 
-			 value="<%=(eveVO==null)? "" : eveVO.getEve_title()%>" /></td>
-		<td>${errorMsgs.eve_title}</td>	 
-	</tr>
-	<tr>
-		<td>主辦人姓名:</td>
-		<td><input type="TEXT"  size="45" readonly="readonly"
-			 value="<%= (memVO==null)? "" :memVO.getMem_name() %>" /></td>
-		<td>${errorMsgs.mem_id}</td>	 
-	</tr>	
-	<tr>
-		<td>報名期間:</td>
-		<td>
-			<input name="ereg_startdate" id="ereg_startdate" type="text" value="${eveVO.ereg_startdate}">~
-			<input name="ereg_enddate" id="ereg_enddate" type="text" value="${eveVO.ereg_enddate}">
-		</td>
-		<td>${errorMsgs.ereg_startdate}</td>
-	</tr>
-	<tr>
-		<td>活動時間:</td>
-		<td>
-			<input name="eve_startdate" id="eve_startdate" type="text">~
-			<input name="eve_enddate" id="eve_enddate" type="text">
-		</td>
-		<td>${errorMsgs.eve_startdate}</td>
-	</tr>
-	<tr>
-		<td>活動人數:</td>
-		<td> 是否有活動最低人數限制
-			<input type="radio" name="estart_limit_check" id="estart_limit_no" value="0" ${(param.estart_limit_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>  >無
-			<input type="radio" name="estart_limit_check" id="estart_limit_yes" value="1"  ${(param.estart_limit_check=='1') ? 'checked':''} >有
-		     <input type="TEXT" name="estart_limit" id="estart_limit" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEstart_limit()==0)? "" : eveVO.getEstart_limit()%>" ${(param.estart_limit_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>/>人<br>
-			  是否有活動人數上限
-			 <input type="radio" name="estart_max_check" id="estart_max_no" value="0" ${(param.estart_max_check=='0') ? 'checked':''}<%= (eveVO==null)? "checked" :"" %>>無
-			 <input type="radio" name="estart_max_check" id="estart_max_yes" value="1" ${(param.estart_max_check=='1') ? 'checked':''} >有
-		     <input type="TEXT" name="estart_max" id="estart_max" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEstart_max()==0)? "" : eveVO.getEstart_max() %>"${(param.estart_max_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %>/>人
-		</td>
-		<td>${errorMsgs.estart_max}</td>
-	</tr>
-	
-	<tr>
-		<td>運動類別</td>
-		<td>
-			<select size="1" name="sptype_id">
-				<c:forEach var="sptype" items="${sportTypeMap}">
-					<option value="${sptype.key}" ${(sptype.key==eveVO.sptype_id)? 'selected':'' } >${sptype.value}
-				</c:forEach>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>活動地點:</td>
-		<td> 
-			<jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
-			<select size="1" name="city_id">
-				<c:forEach var="cityVO" items="${citySvc.all}">
-					<option value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
-				</c:forEach>
-			</select>
-			<input type="TEXT" name="eve_location" 
-			 value="<%= (eveVO==null)? "" : eveVO.getEve_location()%>" />
-		</td>
-		<td>${errorMsgs.eve_location}</td>
-	</tr>
-	<tr>
-		<td>報名活動費用:</td>
-		<td>
-			<input type="radio" name="eve_charge_check" id="eve_charge_no" value="0" ${(param.eve_charge_check=='0') ? 'checked':''} <%= (eveVO==null)? "checked" :"" %>>免費
-			<input type="radio" name="eve_charge_check" id="eve_charge_yes" value="1" ${(param.eve_charge_check=='1') ? 'checked':''}>每人
-		    <input type="TEXT" name="eve_charge" id="eve_charge" size="10"
-			 value="<%= (eveVO==null)||(eveVO.getEve_charge()==0)? "" : eveVO.getEve_charge()%>" ${(param.eve_charge_check=='0') ? 'disabled':''} <%= (eveVO==null)? "disabled" :"" %> />元<br>			 
-		</td>
-		<td>${errorMsgs.eve_charge}</td>
-	</tr>
-	<tr>
-		<td>主辦人手機號碼:</td>
-		<td><input type="TEXT" name="econtact_info" size="45" placeholder="格式09XX-XXXXXX"
-			 value="<%= (eveVO==null)? "" : eveVO.getEcontact_info()%>" /></td>
-		<td>${errorMsgs.econtact_info}</td>	 
-	</tr>
-	<tr>
-		<td>活動敘述:</td>
-		<td>
-			<textarea id="econtent_summernote" name="editordata"></textarea>
-	      	<input type="hidden" name="eve_content"  id="eve_content">   
-		</td>
-		<td>${errorMsgs.eve_content}</td>
-	</tr>
-<!-- 	<tr> -->
-<!-- 		<td>活動圖片:</td> -->
-<!-- 		<td> -->
-<!-- 			<div class="imgdiv" style="display: none;"><img src="#" id="pic1"  /></div> -->
-<!-- 			<input type="file" name="eve_photo" id="view1"/> -->
-<!-- 			<input type="button" id="btn1" value="取消"><br> -->
-			
-<!-- 		</td> -->
-<!-- 	</tr> -->
-</table>
-<br>
-<input type="hidden" name="mem_id" value="${memVO.mem_id}">
-<input type="hidden" name="action" value="insert">
-<button  id="addBtnSubmit" type="submit">送出</button></FORM>	
-
-<script>
+//         $(document).ready(function(){
+//             $('#summernote').summernote({
+//                 height: 200,                 
+//                 minHeight: 400,             
+//                 maxHeight: 400,             
+//                 focus: true ,
+    
+//               });
+    
+//             $("#noteBtn").click(function(){
+//               var markupStr = $('#summernote').summernote('code');
+//               console.log(markupStr);
+    
+//             });
+    
+//           });
+      </script> 
+      <div class="py-5" id="speakers">
+        <div class="container ">
+          <div class="row ">
+            <div class="col-12 col-md-12">
+              <h2>專屬推薦活動</h2>
+              <div class="tab-content mt-2">
+                <div class="tab-pane fade" id="tabthree" role="tabpanel">
+                  <p class="text-primary">Tab pane three. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="carousel slide" data-ride="carousel" id="bs4-multi-slide-carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 img-group ">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title1</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+               
+                    <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
+                      <span class="carousel-control-prev-icon"></span>
+                    </a>
+                  </div>
+                  <div class="col-lg-4 col-md-4 img-group">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title2</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-4 col-md-4 img-group">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title3</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+                 
+                    <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
+                      <span class="carousel-control-next-icon"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 img-group">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title4</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+                  
+                    <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
+                      <span class="carousel-control-prev-icon"></span>
+                    </a>
+                  </div>
+                  <div class="col-lg-4 col-md-4 img-group">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title5</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-4 col-md-4 img-group">
+                    <a href="#">
+                      <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
+                      <div class="carousel-caption img-tip">
+                        <h1>Event title6</h1>
+                        <h4>about the Event!</h4>
+                      </div>
+                    </a>
+              
+                    <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
+                      <span class="carousel-control-next-icon"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sponsor logos -->
+      <div class="py-5 section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="mb-4">Sponsors</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 col-6"></div>
+            <div class="col-md-2 col-6">
+              <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_1.png"> </div>
+            <div class="col-md-2 col-6">
+              <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_4.png"> </div>
+            <div class="col-md-2 col-6">
+              <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_3.png"> </div>
+            <div class="col-md-2 col-6">
+              <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_2.png"> </div>
+          </div>
+        </div>
+      </div>
+      <!-- Call to action -->
+      <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('<%=request.getContextPath() %>/front_end/event/eve/assets/conference/cover_2.jpg');">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <h1 class="mb-3">Something Here</h1>
+              <p>Pre-register to get a priority access to the event. Fares will be published later on.&nbsp;
+                <br>Get the maximum from the lectures together with the possibility of joining exclusive side-events.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="text-md-left text-center p-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12"> </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-muted">
+                <br>
+                <br> Copyright 2018 Pingendo - All rights reserved.
+                <br>
+                <br> </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+    </div>
+  </div>
+  
+  
+  <script>
 $(document).ready(function(){
 	$("#estart_limit_no").focus(function(){
 		$('#estart_limit').attr('disabled', true);
@@ -283,7 +545,7 @@ $(document).ready(function(){
     	//初始化summernote
         $('#econtent_summernote').summernote({
             height: 200,                 
-            minHeight: null,             
+            minHeight: 400,             
             maxHeight: 400,             
             focus: true ,
           });
@@ -520,166 +782,8 @@ $(document).ready(function(){
              }});
         });
         
-
-        
-        
-        	
+       	
 </script>
-
-
-
-  <div class="py-5" id="speakers">
-    <div class="container ">
-      <div class="row ">
-        <div class="col-12 col-md-12">
-          <h2>專屬推薦活動</h2>
-          <div class="tab-content mt-2">
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              <p class="text-primary">Tab pane three. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="carousel slide" data-ride="carousel" id="bs4-multi-slide-carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-lg-4 col-md-4 img-group ">
-                <a href="#">
-                  <img src="assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title1</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-              
-                <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group">
-                <a href="#">
-                  <img src="assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title2</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group">
-                <a href="#">
-                  <img src="assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title3</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-           
-                <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-lg-4 col-md-4 img-group">
-                <a href="#">
-                  <img src="assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title4</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-          
-                <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group">
-                <a href="#">
-                  <img src="assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title5</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group">
-                <a href="#">
-                  <img src="assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title6</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-             
-                <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-     <!-- Sponsor logos -->
-  <div class="py-5 section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="mb-4">Sponsors</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2 col-6"></div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="assets/conference/logo_1.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="assets/conference/logo_4.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="assets/conference/logo_3.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="assets/conference/logo_2.png"> </div>
-      </div>
-    </div>
-  </div>
-  <!-- Call to action -->
-  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('assets/conference/cover_2.jpg');">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <h1 class="mb-3">Something Here</h1>
-          <p>Pre-register to get a priority access to the event. Fares will be published later on.&nbsp;
-            <br>Get the maximum from the lectures together with the possibility of joining exclusive side-events.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="text-md-left text-center p-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p class="text-muted">
-            <br>
-            <br> Copyright 2018 Pingendo - All rights reserved.
-            <br>
-            <br> </p>
-        </div>
-      </div>
-    </div>
-  </footer>
     
 </body>
 
