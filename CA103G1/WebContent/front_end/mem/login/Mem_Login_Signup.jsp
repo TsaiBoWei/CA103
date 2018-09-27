@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -53,30 +53,30 @@
         <div class="col-md-12">
           <h1 class="display-1">Log Into
             <br>Work It Out</h1>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-6 offset-3 col-md-6 offset-md-3">
-          <form method="post" action= "<%=request.getContextPath() %>/mem/mem.do">
-            <div class="form-group">
-              <label>電子郵件</label>
-              <input type="email" name="email" class="form-control" placeholder="電子郵件"> 
-            </div>
-            
-            <div class="form-group">
-              <label>密碼</label>
-              <input type="password" name="password" class="form-control" placeholder="密碼"> 
-            </div>
-            <br>
-			<input type="hidden" name="action" value="login">
-            <button type="submit" class="btn btn-primary flex-row-reverse form-control" id="btnLogIn">
-           		 登入
-            </button>
-          </form>
-        	</div>
-        <div class="col-md-12" style="margin-bottom: 14px;">
-            <a href="#">忘記密碼</a>
-            <a href="#" data-toggle="modal" data-target="#idModal">快速註冊</a>
+        <div class="row">
+          <div class="col-6 offset-3 col-md-6 offset-md-3">
+            <form method="post" action= "<%=request.getContextPath() %>/mem/mem.do">
+              <div class="form-group">
+                <label>電子郵件</label>
+                <input type="email" name="email" class="form-control" placeholder="電子郵件"> 
+              </div>
+              
+              <div class="form-group">
+                <label>密碼</label>
+                <input type="password" name="password" class="form-control" placeholder="密碼"> 
+              </div>
+              <br>
+              <input type="hidden" name="action" value="login">
+              <button type="submit" class="btn btn-primary flex-row-reverse form-control" id="btnLogIn">
+               	登入
+             </button>
+           	</form>         
+          </div>
+         <div class="col-md-12" style="margin-bottom: 14px;">
+          <a href="#">忘記密碼</a>
+          <a href="#" data-toggle="modal" data-target="#idModal">快速註冊</a>
         </div>
       </div>
     </div>
@@ -95,13 +95,13 @@
         <div class="modal-body">
           <form METHOD="post" action="<%=request.getContextPath() %>/mem/mem.do" >
            <c:if test="${not empty errorMsgs}">
-			<font style="color:red">請修正以下錯誤:</font>
-				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
+				<font style="color:red">請修正以下錯誤:</font>
+					<ul >
+						<c:forEach var="message" items="${errorMsgs}">
 						<li style="color:red">${message}</li>
-					</c:forEach>
-				</ul>
-		  </c:if> 
+						</c:forEach>
+					</ul>
+		   </c:if> 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
                 <span class="input-group-text" >信箱*</span>
@@ -156,50 +156,50 @@
         <div class="col-md-2 col-6"></div>
         <div class="col-md-2 col-6">
           <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_1.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_4.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_3.png"> </div>
-        <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_2.png"> </div>
-      </div>
-    </div>
-  </div>
-  <!-- Call to action -->
-  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url(&quot;<%=request.getContextPath() %>/front_end/mem/login/assets/conference/cover_2.jpg&quot;);">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <h1 class="mb-3">Something Here</h1>
-          <p>Pre-register to get a priority access to the event. Fares will be published later on.&nbsp;
-            <br>Get the maximum from the lectures together with the possibility of joining exclusive side-events.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="text-md-left text-center p-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p class="text-muted">
-            <br>
-            <br>© Copyright 2018 Pingendo - All rights reserved.
-            <br>
-            <br> </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- JavaScript dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <!-- Script: Smooth scrolling between anchors in a same page -->
-  <script src="js/smooth-scroll.js"></script>
+          <div class="col-md-2 col-6">
+            <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_4.png"> </div>
+            <div class="col-md-2 col-6">
+              <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_3.png"> </div>
+              <div class="col-md-2 col-6">
+                <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_2.png"> </div>
+              </div>
+            </div>
+          </div>
+          <!-- Call to action -->
+          <div class="py-5 section section-fade-in-out" id="register" style="background-image: url(&quot;<%=request.getContextPath() %>/front_end/mem/login/assets/conference/cover_2.jpg&quot;);">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 text-left">
+                  <h1 class="mb-3">Something Here</h1>
+                  <p>Pre-register to get a priority access to the event. Fares will be published later on.&nbsp;
+                    <br>Get the maximum from the lectures together with the possibility of joining exclusive side-events.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <footer class="text-md-left text-center p-4">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12"> </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p class="text-muted">
+                      <br>
+                      <br>© Copyright 2018 Pingendo - All rights reserved.
+                      <br>
+                      <br> </p>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+<!-- JavaScript dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!-- Script: Smooth scrolling between anchors in a same page -->
+<script src="js/smooth-scroll.js"></script>
 
 <c:if test="${openModal!=null}">
         <script>
@@ -214,7 +214,7 @@
                 });
       });
     </script>
-
+        
 </body>
 
 </html>

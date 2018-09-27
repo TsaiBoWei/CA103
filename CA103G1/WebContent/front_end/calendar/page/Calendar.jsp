@@ -203,23 +203,37 @@
                 <!--行事曆-->
                 <div class="col-md-12 cal1" id="calendar1"></div>
                 <!-- 計畫列表-->
-                <div id="dialog" class="dialog_inpu" title="My dialog" style="display:none">
-                    <form>
+                  
+                <div id="evedialog" class="dialog_inpu" title="My dialog" style="display:none">
+                    
                        <fieldset>
-                        
-       
-                            <label for="Id">標題</label>
-                            <input type="text" name="title" id="title" class="text <<<<u></u>i-w></ui-w>idg></ui-widg>et-></ui-widget->content ui-corner-all">
-                     
-                            <label for="con">內容</label>
-                            <textarea name="title" id="con" class="text <<<<u></u>i-w></ui-w>idg></ui-widg>et-></ui-widget->content ui-corner-all"></textarea>
-                           
-                        <div>
-                            <input type="submit" name="send" value="修改">
-                            <input type="button" name="delete" value="刪除"> </div>  
+                      	 
+                           <table>
+                            <div id="eve_id" style="display:none"></div>
+                            <tr>
+                            <th><div>活動標題:</div></th>
+                            <th><div id="eve_title"></div></th>
+                           </tr>
+                           <tr><th><div>活動內容:</div></th>
+                           <th><div id="eve_content">活動內容測試活動內容測試活動內容測試</div></th>
+                           </tr>
+                           <tr>
+                           <th><div>活動地點:</div></th>
+                           <th><div id="eve_location"></div></th>
+                           </tr>
+                           <tr>
+                           <th><div>收費金額:</div></th>
+                           <th><div id="eve_charge"></div></th>
+                           </tr>
+                           </table> 
+                         <form METHOD="post" ACTION="">
+                            <div>
+                            <input type="button" name="deleteEve" value="退出活動" class="m-1 btn"></div>
+                        </form>
                         </fieldset>
-                    </form>
+                    
                 </div>
+                
             </div>
         </div>
     </div>
@@ -284,7 +298,7 @@
     	<% 	
     		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
     	for(EventVO ii: listEve){
-    		System.out.println(sdFormat.format(ii.getEve_startdate()));
+    		
     			
     	%>
     	
@@ -293,19 +307,23 @@
         	title: '<%=ii.getEve_title()%>',
         	start: '<%=sdFormat.format(ii.getEve_startdate())%>',
         	end: '<%=sdFormat.format(ii.getEve_enddate())%>',
+        	description:'<%=ii.getEve_content()%>',
+        	money:'<%=ii.getEve_charge()%>',
+        	location:'<%=ii.getEve_location()%>',
         	allDay: true
     		},
       
     	<%
           }
-        %>   
-    {
+        %>  
+       
+    	{
         id: 'test2',
         title: 'Birthday Party',
         start: '2018-09-15',
         end: '2018-09-22',
         allDay: true
-    }]
+    	}]
         $(document).ready(function() {
             (function() {
                 var date = new Date();
@@ -325,36 +343,35 @@
                         center: '',
                         right: 'today prev,next'
                     },
+					
+                    events: events,
+                    
+                    eventClick: function(calEvent, jsEvent, view) { //表示點擊計畫條之後要衝三小
+                    	 var eventcheck = calEvent.id;
+                    	 if(eventcheck.indexOf('E00')>-1){
 
-                    eventClick: function(calEvent, jsEvent, view) { //表示點擊計畫之後要衝三小
-                    	
-
-                        $("#dialog").dialog({ //對話框的設定
+                        $("#evedialog").dialog({ //對話框的設定
                             autoOpen: false,
                             draggable: true,
                              height: 480,
                             width:480,
                             title: "work it out!",
-
-                            //                 buttons: {
-                            //        "Ok": function() {
-                            //            $(this).dialog("close");
-                            //        },
-                            //        "Cancel": function() {
-                            //            $(this).dialog("close");
-                            //        }
-                            //    }
-
                         });
-
-                        $("#name").val(calEvent.id); //關於對話框內各數值的設定，從後端叫資料
-                        $("#title").val(calEvent.title); 
-                        $("#con").val("拉筋10分鐘,啞鈴3套，間隔1分鐘");
-                        $('#dialog').dialog('open');
-                    },
+                        
+                        
+                        $("#eve_id").html(calEvent.id); //關於對話框內各數值的設定
+                        $("#eve_title").html(calEvent.title); 
+                        $("#eve_content").html(calEvent.description);
+                        $("#eve_charge").html(calEvent.money);
+                        $("#eve_location").html(calEvent.location);
+                    
+                        $('#evedialog').dialog('open');
+                        
+                    	 }
+                    }
 
                     
-                    events: events
+                   
                 });
             }());
         });
