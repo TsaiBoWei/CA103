@@ -18,6 +18,9 @@
 <meta charset="utf-8">
 <title>select_event_page.jsp</title>
 
+
+
+
 <style>
   table#table-1 {
 	width: 450px;
