@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.mem.model.*"%>
 
-<%--
+<%
 	MemVO memVO = new MemService().getOneMem("M000004");
 	session.setAttribute("memVO", memVO);
 
@@ -21,8 +21,7 @@
 
 	session.setAttribute("perpageloc", perpageloc);
 	String sessionPerpageloc = (String) session.getAttribute("perpageloc");
---%>
-
+%>
 
 
 <!DOCTYPE html>
@@ -41,16 +40,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/plan2/purchcour/css/PersonalPage.css">
+	href="<%=request.getContextPath()%>/front_end/plan/css/PersonalPage.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/plan/js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script src="<%=request.getContextPath()%>/plan/js/animate-in.js"></script>
 
 
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/plan2/purchcour/css/buttonfix.css">
+	href="<%=request.getContextPath()%>/front_end/plan/css/buttonfix.css">
 
 <!-- fafaicon -->
 <link rel="stylesheet"
@@ -100,7 +99,7 @@ body {
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/course/purchcour/assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/jogback.jpg&quot;);">
 	</div>
 	<!-- Personal Pic -->
 	<div class="row mb-5 personalarea" id="personalnav">
@@ -128,8 +127,7 @@ body {
 	%>
 
 	<script>
-	 $(document).ready(function() {
-      
+	 $(document).ready(function() {   
         $("<%=sessionPerpagelocClass%>
 		").css({
 				"color" : "#12bbad",
@@ -169,7 +167,7 @@ body {
 				<ul class="navbar-nav">
 					<!-- mypage-->
 					<li class="nav-item"><a class="nav-link personalnavlink"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mypage#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=mypage#personalnav"
 						id="mypage"> <i class="fa fa-file"></i> &nbsp; &nbsp; MyPage
 							&nbsp; &nbsp;&nbsp;
 					</a></li>
@@ -177,26 +175,26 @@ body {
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle personalnavlink"
 						aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=workoutplan#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=workoutplan#personalnav"
 						id="workoutplan"> <i class="fa fa-calculator"></i> &nbsp;
 							WorkOutPlan &nbsp;
 					</a>
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light dropdown-item-custom"
-								href="#">My Plan</a> <a
+								href="<%=request.getContextPath()%>/front_end/plan/Create_plan.jsp">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Plan</a>
+								href="#">Interesting Plan</a>
 						</div></li>
 					<!-- Friend-->
 					<li class="nav-item"><a class="nav-link personalnavlink"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=friend#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=friend#personalnav"
 						id="friend"> <i class="fa fa-users" aria-hidden="true"></i>&nbsp;
 							&nbsp; Friends &nbsp;&nbsp;
 					</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle personalnavlink"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=course#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=course#personalnav"
 						aria-expanded="false" aria-haspopup="true" data-toggle="dropdown"
 						id="course"> <i class="fa fa-film" aria-hidden="true"></i>&nbsp;
 							&nbsp; Course &nbsp; &nbsp;
@@ -206,21 +204,21 @@ body {
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">MyCourse</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Course</a>
+								href="#">Interesting Course</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link personalnavlink"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=event#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=event#personalnav"
 						id="event"> <i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event
 							&nbsp;&nbsp;
 					</a></li>
 					<li class="nav-item"><a class="nav-link personalnavlink"
 						id="post"
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=post#personalnav">
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=post#personalnav">
 							<i class="fa fa-sticky-note" aria-hidden="true"></i>&nbsp;&nbsp;Post&nbsp;&nbsp;
 					</a></li>
 					<li class="nav-item"><a class="nav-link personalnavlink "
-						rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mycalender#personalnav"
+						rel="<%=request.getContextPath()%>/front_end/plan/personltemplete.jsp?perpageloc=mycalender#personalnav"
 						id="mycalender"> <i class="fa fa-sticky-note"
 							aria-hidden="true"></i> &nbsp;MyCalender&nbsp;
 					</a></li>
@@ -268,19 +266,19 @@ body {
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan2/purchcour/assets/conference/logo_1.png">
+						src="<%=request.getContextPath()%>/front_end/assets/conference/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan2/purchcour/assets/conference/logo_4.png">
+						src="<%=request.getContextPath()%>/front_end/assets/conference/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan2/purchcour/assets/conference/logo_3.png">
+						src="<%=request.getContextPath()%>/front_end/assets/conference/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan2/purchcour/assets/conference/logo_2.png">
+						src="<%=request.getContextPath()%>/front_end/assets/conference/logo_2.png">
 				</div>
 			</div>
 		</div>
@@ -289,7 +287,7 @@ body {
 
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('<%=request.getContextPath()%>/front_end/plan2/purchcour/assets/conference/cover_2.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/front_end/assets/conference/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">
