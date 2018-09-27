@@ -205,8 +205,8 @@ body {
 						enctype="multipart/form-data">
 
 
-						<div class="form-group text-primary" style="font-size: 50px">
-							<h1>Create A New Plan</h1>
+						<div class="form-group text-primary" style="font-size: 48px">
+							Create A New Plan
 						</div>
 						<br>
 						
@@ -237,10 +237,14 @@ body {
 									 onchange="openFile(event)" style="display: none;"> 
 									<i class="fa fa-photo">上傳圖片</i>
 							</label>
-							<img class="img" id="output" width="120" height="120" style="display: none;">
 						</div>
 						
-
+						
+						<div class="form-group">
+							　　　　　　　　　<img class="img" id="output" width="120" height="120" style="display: none;">
+						</div>
+						
+						
 						<div class="form-group">
 							<label><h3>PlanStartDate:　</h3></label> <input type="date"
 								name="plan_start_date" id="f_date1">
