@@ -4,10 +4,10 @@
 <%@ page import="com.plan.model.*"%>
 
 <%
-	PlanVO planVO = (PlanVO) request.getAttribute("PlanVO");
+	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 %>
 
-
+<%-- 下拉式選單 做<請選擇>選項，並作錯誤驗證及導向。 --%>
 
 <!DOCTYPE html>
 <html>
@@ -212,10 +212,10 @@ body {
 						
 						<%-- 錯誤表列 --%>
 							<c:if test="${not empty errorMsgs}">
-								<font style="color:red" size="5">Amend The Following Errors</font>
+								<font style="color:red" size="5">Amend　The　Following　Errors</font><br>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color:red">${message}</li>
+										<li style="color:red ; font-size:20px ">${message}</li>
 									</c:forEach>
 								</ul>
 							</c:if>
@@ -223,9 +223,9 @@ body {
 
 						<div class="form-group">
 							<h3>Plan Name:</h3>
-							<input type="text" name="plan_name" id=""
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"
-								class="form-control">
+							<input type="text" name="plan_name"
+								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
+								class="form-control"/>
 						</div>
 						<br>
 
@@ -234,7 +234,7 @@ body {
 							<label><h3>Plan Cover:　　 </h3></label> 
 							<label class="btn btn-info btn-lg"> 
 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
-									 onchange="openFile(event)" style="display: none;"> 
+									 onchange="openFile(event)" style="display: none;"/>
 									<i class="fa fa-photo">上傳圖片</i>
 							</label>
 						</div>
@@ -247,13 +247,13 @@ body {
 						
 						<div class="form-group">
 							<label><h3>PlanStartDate:　</h3></label> <input type="date"
-								name="plan_start_date" id="f_date1">
+								name="plan_start_date" id="f_date1" value="<%= (planVO== null) ? "" : planVO.getPlan_start_date()%>"/>
 						</div>
 
 
 						<div class="form-group">
 							<label><h3>Plan EndDate:　</h3></label> <input type="date"
-								name="plan_end_date" id="f_date1">
+								name="plan_end_date" id="f_date1"value="<%= (planVO== null) ? "" : planVO.getPlan_end_date()%>"/>
 						</div>
 
 
@@ -284,8 +284,9 @@ body {
 
 						<div class="form-group">
 							<label><h3>Plan Content:</h3></label><br>
-							<textarea name="plan_vo" rows="10" class="form-control"
-								value="<%=(planVO == null) ? "JoggingDay" : planVO.getPlan_name()%>"> </textarea>
+							<textarea name="plan_vo" rows="10" class="form-control">
+								<%=(planVO == null) ? "First Day : Jogging" : planVO.getPlan_name()%>
+							</textarea>
 							<br>
 						</div>
 		
@@ -293,8 +294,8 @@ body {
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-primary">Add</button>
-							<button type="submit" class="btn btn-primary">Reset</button>
-							<button type="submit" class="btn btn-primary">cancel</button>
+						 	<%--<button type="submit" class="btn btn-primary">Reset</button>
+							<button type="submit" class="btn btn-primary">cancel</button>--%>
 						</div>
 					</form>
 				</div>
@@ -385,6 +386,8 @@ body {
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
 </body>
+
+<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
 <%
 	java.sql.Date plan_create_time = null;

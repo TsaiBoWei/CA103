@@ -22,6 +22,8 @@ import com.plan.model.PlanVO;
 
 import oracle.net.aso.e;
 
+//未完成:
+//新增 錯誤處理 圖片、
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class PlanServlet extends HttpServlet {
@@ -51,42 +53,53 @@ public class PlanServlet extends HttpServlet {
 				// mem_id
 				HttpSession session = req.getSession();
 				String mem_id = (String) session.getAttribute("mem_id");
+				if (mem_id == null || mem_id.trim().length() == 0) {
+					errorMsgs.add("未登入");
+				}
 
 				// plan_name
 				String plan_name = req.getParameter("plan_name");
-				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
+				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 				if (plan_name == null || plan_name.trim().length() == 0) {
-					errorMsgs.add("Plan Name: Do Not Blank ");
+					errorMsgs.add("Plan Name : Do Not Blank ");
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
-					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在1到10之間");
+					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
 
 				// plan_cover
-				Part part = req.getPart("plan_cover");
-				InputStream is = part.getInputStream();
-				byte[] plan_cover = new byte[is.available()];
-				is.read(plan_cover);
-				
+				byte[] plan_cover = null;
+				if (req.getParameter("plan_cover") == null) {
+					errorMsgs.add("請上傳圖片");
+				} else {
+					Part part = req.getPart("plan_cover");
+					InputStream is = part.getInputStream();
+					plan_cover = new byte[is.available()];
+					is.read(plan_cover);
+				}
 
 				// plan_start_date
 				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date du = null;
+				Timestamp plan_start_date = null;
 				try {
 					du = df.parse(req.getParameter("plan_start_date"));
+					plan_start_date = (new Timestamp(du.getTime()));
 				} catch (ParseException e) {
-					errorMsgs.add("是不會輸入日期?");
+					errorMsgs.add("請輸入起始日期");
 					e.printStackTrace();
 				}
-				Timestamp plan_start_date = (new Timestamp(du.getTime()));
 
 				// plan_end_date
+				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date du2 = null;
+				Timestamp plan_end_date = null;
 				try {
-					du2 = df.parse(req.getParameter("plan_end_date"));
+					du2 = df2.parse(req.getParameter("plan_end_date"));
+					plan_end_date = (new Timestamp(du2.getTime()));
 				} catch (ParseException e) {
+					errorMsgs.add("請輸入結束日期");
 					e.printStackTrace();
 				}
-				Timestamp plan_end_date = (new Timestamp(du2.getTime()));
 
 				// sptype_id
 				String sptype_id = req.getParameter("sptype_id");
@@ -94,6 +107,9 @@ public class PlanServlet extends HttpServlet {
 				String plan_privacy = req.getParameter("plan_privacy");
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo");
+				if (plan_vo == null || plan_vo.trim().length() == 0) {
+					errorMsgs.add("計畫內容不得空白");
+				}
 
 				PlanVO planVO = new PlanVO();
 				planVO.setMem_id(mem_id);
@@ -125,7 +141,7 @@ public class PlanServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage()+"test");
+				errorMsgs.add(e.getMessage() + "test");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/Create_Plan.jsp");
 				failureView.forward(req, res);
 			}
