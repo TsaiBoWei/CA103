@@ -2,7 +2,7 @@ package com.postreport.model;
 
 import java.sql.Date;
 
-public class PostReportVO {
+public class PostReportVO implements java.io.Serializable {
 
 	private String postre_id;
 	private String post_id;
@@ -11,6 +11,7 @@ public class PostReportVO {
 	private String postre_cont;
 	private Date postre_time;
 	private String postre_status;
+	private String reply_mgr_id;
 
 	public String getPostre_id() {
 		return postre_id;
@@ -75,7 +76,5 @@ public class PostReportVO {
 	public void setReply_mgr_id(String reply_mgr_id) {
 		this.reply_mgr_id = reply_mgr_id;
 	}
-
-	private String reply_mgr_id;
 
 }
