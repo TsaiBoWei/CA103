@@ -19,7 +19,7 @@ public class PostDAO implements PostDAO_interface{
 	 static {
 			try {
 				Context ctx = new InitialContext();
-				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
