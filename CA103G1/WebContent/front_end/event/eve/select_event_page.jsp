@@ -6,8 +6,8 @@
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 
 <%  //模擬會員的SESSION
-	session.setAttribute("memVO", memSvc.getOneMem("M000002"));
-%>
+	session.setAttribute("memVO", memSvc.getOneMem("M000001"));
+ %> 
 
 <%	//取出會員的SESSION
 	MemVO memVO = (MemVO) session.getAttribute("memVO"); 

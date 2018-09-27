@@ -92,12 +92,13 @@ public class EveServlet extends HttpServlet {
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String eve_title = req.getParameter("eve_title");
-				String etitleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
+//				String etitleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
 				if (eve_title == null || eve_title.trim().length() == 0) {
 					errorMsgs.put("eve_title","活動標題: 請勿空白");
-				} else if(!eve_title.trim().matches(etitleReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.put("eve_title","活動標題: 只能是中、英文字母、數字、_ , 且長度在1到20之間");
-	            }
+				} 
+//				else if(!eve_title.trim().matches(etitleReg)) { //以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.put("eve_title","活動標題: 只能是中、英文字母、數字、_ , 且長度在1到20之間");
+//	            }
 				
 				
 				String mem_id = req.getParameter("mem_id").trim();
@@ -331,12 +332,13 @@ public class EveServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String eve_id=req.getParameter("eve_id");
 				String eve_title = req.getParameter("eve_title");
-				String etitleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
+//				String etitleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
 				if (eve_title == null || eve_title.trim().length() == 0) {
 					errorMsgs.put("eve_title","活動標題: 請勿空白");
-				} else if(!eve_title.trim().matches(etitleReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.put("eve_title","活動標題: 只能是中、英文字母、數字、_ , 且長度在1到20之間");
-	            }
+				} 
+//				else if(!eve_title.trim().matches(etitleReg)) { //以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.put("eve_title","活動標題: 只能是中、英文字母、數字、_ , 且長度在1到20之間");
+//	            }
 				
 				
 				String mem_id = req.getParameter("mem_id").trim();
@@ -601,7 +603,7 @@ public class EveServlet extends HttpServlet {
 	
 	public void init() {
 		eveStatusMap=new LinkedHashMap<>();
-		eveStatusMap.put("E0", "隱藏");
+		eveStatusMap.put("E0", "下架");
 		eveStatusMap.put("E1", "待審核");
 		eveStatusMap.put("E2", "人數尚未達成"); 
 		eveStatusMap.put("E3", "人數達成 接受報名");
