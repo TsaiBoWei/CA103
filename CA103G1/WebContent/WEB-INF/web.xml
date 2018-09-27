@@ -146,4 +146,7 @@
     <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
     <param-value>307200</param-value>
   </context-param>
+  <listener>
+    <listener-class>listener.Initialize_Listener</listener-class>
+  </listener>
 </web-app>

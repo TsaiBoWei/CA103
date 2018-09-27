@@ -601,48 +601,48 @@ public class EveServlet extends HttpServlet {
 		
 	}
 	
-	public void init() {
-		eveStatusMap=new LinkedHashMap<>();
-		eveStatusMap.put("E0", "下架");
-		eveStatusMap.put("E1", "待審核");
-		eveStatusMap.put("E2", "人數尚未達成"); 
-		eveStatusMap.put("E3", "人數達成 接受報名");
-		eveStatusMap.put("E4", "已額滿");//人數達成 活動未結束
-		eveStatusMap.put("E5", "已結束");
-		eveStatusMap.put("E6", "審核未通過");
-		eveStatusMap.put("E7", "取消活動作業中");
-		eveStatusMap.put("E8", "活動已取消");
-		getServletContext().setAttribute("eveStatusMap", eveStatusMap);
-		
-		sportTypeMap=new LinkedHashMap<>();
-		sportTypeMap.put("SP000001", "田徑");
-		sportTypeMap.put("SP000002", "單車");
-		sportTypeMap.put("SP000003", "球類");
-		sportTypeMap.put("SP000004", "重訓");
-		sportTypeMap.put("SP000005", "有氧");
-		sportTypeMap.put("SP000006", "武術");
-		sportTypeMap.put("SP000007", "水上");
-		sportTypeMap.put("SP000008", "其他");
-		getServletContext().setAttribute("sportTypeMap", sportTypeMap);
-		
-		eveListStatusMap=new HashMap<>();
-		eveListStatusMap.put("EL0", "不須付款");
-		eveListStatusMap.put("EL1", "未付款");
-		eveListStatusMap.put("EL2", "已付款未確認");
-		eveListStatusMap.put("EL3", "確認已付款");
-		eveListStatusMap.put("EL4", "退款未處理");
-		eveListStatusMap.put("EL5", "已退款 待確認");
-		eveListStatusMap.put("EL6", "退款已確認");
-//		eveListStatusMap.put("EL7", "已退出");//不須付款
-		eveListStatusMap.put("EL9", "隱藏");
-		getServletContext().setAttribute("eveListStatusMap", eveListStatusMap);
-		
-		
-	}
-	
-	//暫放 關閉redis連線池 之後要放在listener
-	public void destroy() {
-		JedisPoolUtil.shutdownJedisPool();
-	}
+//	public void init() {
+//		eveStatusMap=new LinkedHashMap<>();
+//		eveStatusMap.put("E0", "下架");
+//		eveStatusMap.put("E1", "待審核");
+//		eveStatusMap.put("E2", "人數尚未達成"); 
+//		eveStatusMap.put("E3", "人數達成 接受報名");
+//		eveStatusMap.put("E4", "已額滿");//人數達成 活動未結束
+//		eveStatusMap.put("E5", "已結束");
+//		eveStatusMap.put("E6", "審核未通過");
+//		eveStatusMap.put("E7", "取消活動作業中");
+//		eveStatusMap.put("E8", "活動已取消");
+//		getServletContext().setAttribute("eveStatusMap", eveStatusMap);
+//		
+//		sportTypeMap=new LinkedHashMap<>();
+//		sportTypeMap.put("SP000001", "田徑");
+//		sportTypeMap.put("SP000002", "單車");
+//		sportTypeMap.put("SP000003", "球類");
+//		sportTypeMap.put("SP000004", "重訓");
+//		sportTypeMap.put("SP000005", "有氧");
+//		sportTypeMap.put("SP000006", "武術");
+//		sportTypeMap.put("SP000007", "水上");
+//		sportTypeMap.put("SP000008", "其他");
+//		getServletContext().setAttribute("sportTypeMap", sportTypeMap);
+//		
+//		eveListStatusMap=new HashMap<>();
+//		eveListStatusMap.put("EL0", "不須付款");
+//		eveListStatusMap.put("EL1", "未付款");
+//		eveListStatusMap.put("EL2", "已付款未確認");
+//		eveListStatusMap.put("EL3", "確認已付款");
+//		eveListStatusMap.put("EL4", "退款未處理");
+//		eveListStatusMap.put("EL5", "已退款 待確認");
+//		eveListStatusMap.put("EL6", "退款已確認");
+////		eveListStatusMap.put("EL7", "已退出");//不須付款
+//		eveListStatusMap.put("EL9", "隱藏");
+//		getServletContext().setAttribute("eveListStatusMap", eveListStatusMap);
+//		
+//		
+//	}
+//	
+//	//暫放 關閉redis連線池 之後要放在listener
+//	public void destroy() {
+//		JedisPoolUtil.shutdownJedisPool();
+//	}
 
 }
