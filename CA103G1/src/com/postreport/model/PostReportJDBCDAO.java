@@ -73,9 +73,9 @@ public class PostReportJDBCDAO implements PostReportDAO_interface {
 			con = DriverManager.getConnection(url, user, password);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, postReportVO.getPostre_cont());
+			pstmt.setString(1, postReportVO.getPostre_item());
 			pstmt.setString(2, postReportVO.getPostre_status());
-			pstmt.setString(3, postReportVO.getReply_mgr_id());
+			pstmt.setString(3, postReportVO.getPostre_id());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException ce) {
