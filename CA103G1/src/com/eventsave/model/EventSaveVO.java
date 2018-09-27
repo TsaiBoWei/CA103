@@ -23,5 +23,18 @@ public class EventSaveVO implements java.io.Serializable{
 	public void setEs_status(String es_status) {
 		this.es_status = es_status;
 	}
+	
+	public EventSaveVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public EventSaveVO(String mem_id, String eve_id, String es_status) {
+		super();
+		this.mem_id = mem_id;
+		this.eve_id = eve_id;
+		this.es_status = es_status;
+	}
+	
 
 }

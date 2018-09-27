@@ -17,7 +17,7 @@ public class EventSaveJNDIDAO implements EventSaveDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +75,6 @@ public class EventSaveJNDIDAO implements EventSaveDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, eventsaveVO.getEs_status());
-
 			pstmt.setString(2, eventsaveVO.getMem_id());
 			pstmt.setString(3, eventsaveVO.getEve_id());
 
@@ -190,15 +189,16 @@ public class EventSaveJNDIDAO implements EventSaveDAO_interface{
 	}
 
 	@Override
-	public List<EventSaveVO> getALL() {
-		List<EventSaveVO> eventsave_List = new ArrayList<EventSaveVO>();
+	public List<EventSaveVO> getAll() {
+		List<EventSaveVO> list = new ArrayList<EventSaveVO>();
 		EventSaveVO eventsaveVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -207,7 +207,7 @@ public class EventSaveJNDIDAO implements EventSaveDAO_interface{
 				eventsaveVO.setMem_id(rs.getString("mem_id"));
 				eventsaveVO.setEve_id(rs.getString("eve_id"));
 				eventsaveVO.setEs_status(rs.getString("es_status"));
-				eventsave_List.add(eventsaveVO);	
+				list.add(eventsaveVO);	
 			}
 
 		}catch(SQLException se) {
@@ -235,6 +235,6 @@ public class EventSaveJNDIDAO implements EventSaveDAO_interface{
 				}
 			}
 		}
-		return eventsave_List;
+		return list;
 	}
 }

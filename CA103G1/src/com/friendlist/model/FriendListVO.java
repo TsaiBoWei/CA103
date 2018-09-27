@@ -7,7 +7,23 @@ public class FriendListVO implements java.io.Serializable {
 	private String fl_status;
 	private String fl_block;
 	
+//	2018/9/20新增
+	public FriendListVO() {
+		super();
+	}
 	
+//	2018/9/20新增
+	public FriendListVO(String fl_memA_id, String fl_memB_id, String fl_friend_name, String fl_status,
+			String fl_block) {
+		super();
+		this.fl_memA_id = fl_memA_id;
+		this.fl_memB_id = fl_memB_id;
+		this.fl_friend_name = fl_friend_name;
+		this.fl_status = fl_status;
+		this.fl_block = fl_block;
+	}
+
+
 	public String getFl_memA_id() {
 		return fl_memA_id;
 	}

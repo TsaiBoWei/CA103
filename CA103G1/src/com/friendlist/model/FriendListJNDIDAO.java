@@ -1,6 +1,5 @@
 package com.friendlist.model;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +18,7 @@ public class FriendListJNDIDAO implements FriendListDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -207,7 +206,7 @@ public class FriendListJNDIDAO implements FriendListDAO_interface {
 
 	@Override
 	public List<FriendListVO> getAll() {
-		List<FriendListVO> friendlist_List = new ArrayList<>();
+		List<FriendListVO> list = new ArrayList<>();
 		FriendListVO friendlistVO = null;
 		
 		Connection con = null;
@@ -227,7 +226,7 @@ public class FriendListJNDIDAO implements FriendListDAO_interface {
 				friendlistVO.setFl_friend_name(rs.getString("FL_FRIEND_NAME"));
 				friendlistVO.setFl_status(rs.getString("FL_STATUS"));
 				friendlistVO.setFl_block(rs.getString("FL_BLOCK"));
-				friendlist_List.add(friendlistVO);
+				list.add(friendlistVO);
 			}
 
 		} catch (SQLException se) {
@@ -256,6 +255,6 @@ public class FriendListJNDIDAO implements FriendListDAO_interface {
 				}
 			}
 		}
-		return friendlist_List;
+		return list;
 	}
 }

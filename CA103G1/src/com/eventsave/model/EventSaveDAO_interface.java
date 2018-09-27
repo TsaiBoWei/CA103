@@ -7,5 +7,5 @@ public interface EventSaveDAO_interface {
 	public void update(EventSaveVO eventsaveVO);
 	public void delete(String mem_id,String eve_id);
 	public EventSaveVO findByPrimaryKey(String mem_id,String eve_id);
-	public List<EventSaveVO> getALL();
+	public List<EventSaveVO> getAll();
 }

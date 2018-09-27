@@ -19,7 +19,7 @@ public class FriendListDAO implements FriendListDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -207,7 +207,7 @@ public class FriendListDAO implements FriendListDAO_interface{
 	
 	@Override
 	public List<FriendListVO> getAll() {
-		List<FriendListVO> friendlist_List = new ArrayList<>();
+		List<FriendListVO> list = new ArrayList<>();
 		FriendListVO friendlistVO = null;
 		
 		Connection con = null;
@@ -227,7 +227,7 @@ public class FriendListDAO implements FriendListDAO_interface{
 				friendlistVO.setFl_friend_name(rs.getString("FL_FRIEND_NAME"));
 				friendlistVO.setFl_status(rs.getString("FL_STATUS"));
 				friendlistVO.setFl_block(rs.getString("FL_BLOCK"));
-				friendlist_List.add(friendlistVO);
+				list.add(friendlistVO);
 			}
 
 		} catch (SQLException se) {
@@ -256,50 +256,6 @@ public class FriendListDAO implements FriendListDAO_interface{
 				}
 			}
 		}
-		return friendlist_List;
-	}
-	
-	public static void main(String[] args) throws IOException{
-	FriendListJDBCDAO dao = new FriendListJDBCDAO();
-		
-	// 新增
-//    FriendListVO friendlistVO1 = new FriendListVO();
-//	friendlistVO1.setFl_memA_id("M000002");
-//	friendlistVO1.setFl_memB_id("M000004");
-//	friendlistVO1.setFl_friend_name("JAVA班7號");
-//	friendlistVO1.setFl_status("FLB0");
-//	friendlistVO1.setFl_block("FLS0");;
-//	dao.insert(friendlistVO1);
-		
-	//修改
-//	FriendListVO friendlistVO2 = new FriendListVO();
-//	friendlistVO2.setFl_memA_id("M000002");
-//	friendlistVO2.setFl_memB_id("M000004");
-//	friendlistVO2.setFl_friend_name("JAVA班8號");
-//	friendlistVO2.setFl_status("FLB1");
-//	friendlistVO2.setFl_block("FLS1");;
-//	dao.update(friendlistVO2);
-		
-	//刪除
-//	dao.delete("M000002","M000004");
-		
-//	查詢
-//	FriendListVO friendlistVO4= dao.findByPK("M000001","M000002");
-//	System.out.print(friendlistVO4.getFl_memA_id() + ",");
-//	System.out.print(friendlistVO4.getFl_memB_id() + ",");
-//	System.out.print(friendlistVO4.getFl_friend_name() + ",");
-//	System.out.print(friendlistVO4.getFl_status() + ",");
-//	System.out.println(friendlistVO4.getFl_block() + ",");
-//	System.out.println("---------------------");
-		
-	// 查詢
-	List<FriendListVO> list = dao.getAll();
-	for (FriendListVO friendlistVO5 : list) {
-	System.out.print(friendlistVO5.getFl_memA_id() + ",");
-	System.out.print(friendlistVO5.getFl_memB_id() + ",");
-	System.out.print(friendlistVO5.getFl_friend_name() + ",");
-	System.out.print(friendlistVO5.getFl_status() + ",");
-	System.out.print(friendlistVO5.getFl_block() + ",");
-	System.out.println();}
+		return list;
 	}
 }

@@ -216,7 +216,7 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 
 	@Override
 	public List<FriendListVO> getAll() {
-		List<FriendListVO> friendlist_List = new ArrayList<>();
+		List<FriendListVO> list = new ArrayList<>();
 		FriendListVO friendlistVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -236,7 +236,7 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 				friendlistVO.setFl_friend_name(rs.getString("FL_FRIEND_NAME"));
 				friendlistVO.setFl_status(rs.getString("FL_STATUS"));
 				friendlistVO.setFl_block(rs.getString("FL_BLOCK"));
-				friendlist_List.add(friendlistVO);
+				list.add(friendlistVO);
 			}
 
 		} catch (ClassNotFoundException ce) {
@@ -268,11 +268,12 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 				}
 			}
 		}
-		return friendlist_List;
+		return list;
 	}
 	
 
 	public static void main(String[] args) throws IOException{
+		
 		FriendListJDBCDAO dao = new FriendListJDBCDAO();
 			
 		// 新增
@@ -294,7 +295,7 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 //		dao.update(friendlistVO2);
 			
 		//刪除
-//		dao.delete("M000002","M000004");
+//		dao.delete("M000004","M000003");
 			
 //		查詢
 //		FriendListVO friendlistVO4= dao.findByPrimaryKey("M000001","M000002");

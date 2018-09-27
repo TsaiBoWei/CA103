@@ -17,7 +17,7 @@ public class EventSaveDAO implements EventSaveDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -190,15 +190,15 @@ public class EventSaveDAO implements EventSaveDAO_interface{
 	}
 
 	@Override
-	public List<EventSaveVO> getALL() {
-		List<EventSaveVO> eventsave_List = new ArrayList<EventSaveVO>();
+	public List<EventSaveVO> getAll() {
+		List<EventSaveVO> list = new ArrayList<EventSaveVO>();
 		EventSaveVO eventsaveVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -207,7 +207,7 @@ public class EventSaveDAO implements EventSaveDAO_interface{
 				eventsaveVO.setMem_id(rs.getString("mem_id"));
 				eventsaveVO.setEve_id(rs.getString("eve_id"));
 				eventsaveVO.setEs_status(rs.getString("es_status"));
-				eventsave_List.add(eventsaveVO);	
+				list.add(eventsaveVO);	
 			}
 
 		}catch(SQLException se) {
@@ -235,7 +235,6 @@ public class EventSaveDAO implements EventSaveDAO_interface{
 				}
 			}
 		}
-		return eventsave_List;
-
+		return list;
 	}
 }

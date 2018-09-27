@@ -192,7 +192,7 @@ public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 		return eventsaveVO;
 	}
 	@Override
-	public List<EventSaveVO> getALL() {
+	public List<EventSaveVO> getAll() {
 		List<EventSaveVO> list = new ArrayList<EventSaveVO>();
 		EventSaveVO eventsaveVO = null;
 		Connection con = null;
@@ -271,8 +271,8 @@ public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 //		System.out.print(eventsaveVO3.getEs_status());
 //		System.out.println("---------------------------------");
 		
-		//查詢
-		List<EventSaveVO> list = dao.getALL();
+		//查詢全部
+		List<EventSaveVO> list = dao.getAll();
 		for(EventSaveVO eventsaveVO4 : list) {
 			System.out.print(eventsaveVO4.getMem_id() + ",");
 			System.out.print(eventsaveVO4.getEve_id() + ",");
