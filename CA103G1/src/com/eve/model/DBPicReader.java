@@ -45,7 +45,7 @@ public class DBPicReader extends HttpServlet {
 				in.close();
 			} else {
 //				res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in=getServletContext().getResourceAsStream("/img/NoData/no.png");
+				InputStream in=getServletContext().getResourceAsStream("/front_end/event/eve/assets/eventpic/run/cover_soccor_team.jpg");
 				byte[] b=new byte[in.available()];
 				in.read(b);
 				out.write(b);
@@ -55,7 +55,7 @@ public class DBPicReader extends HttpServlet {
 			stmt.close();
 		} catch (Exception e) {
 //			System.out.println(e);
-			InputStream in=getServletContext().getResourceAsStream("/img/NoData/null.png");
+			InputStream in=getServletContext().getResourceAsStream("/front_end/event/eve/assets/eventpic/run/cover_sunsetrun.jpg");
 			byte[] b=new byte[in.available()];
 			in.read(b);
 			out.write(b);
@@ -67,7 +67,7 @@ public class DBPicReader extends HttpServlet {
 	public void init() throws ServletException {
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 			con = ds.getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
