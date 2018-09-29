@@ -96,7 +96,7 @@ public class PlanServlet extends HttpServlet {
 					du2 = df2.parse(req.getParameter("plan_end_date"));
 					plan_end_date = (new Timestamp(du2.getTime()));
 					System.out.println(plan_end_date);
-					
+
 				} catch (ParseException e) {
 					errorMsgs.add("Enter The End Date");
 					e.printStackTrace();
@@ -150,6 +150,63 @@ public class PlanServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage() + "test");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/Create_Plan.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		if ("getOne_For_Update".equals(action)) { // 來自My_Plan.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String plan_id = new String(req.getParameter("plan_id"));
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				PlanService planSvc = new PlanService();
+				PlanVO planVO = planSvc.getOnePlan(plan_id);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("planVO", planVO); // 資料庫取出的empVO物件,存入req
+				String url = "/plan/plan_update.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage() + "testing20180929");
+				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				String plan_id = new String(req.getParameter("plan_id"));
+
+				/*************************** 2.開始刪除資料 ***************************************/
+				PlanService planSvc = new PlanService();
+				planSvc.deletePlan(plan_id);
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/plan/plan_delete.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage() + "test20180929-2");
+				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
 		}

@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.plan.model.*"%>
+
 <%
-	PlanService planSvc = new PlanService();
-	List<PlanVO> list = planSvc.getAll();
-	pageContext.setAttribute("list", list);
+	PlanVO planVO = (PlanVO) request.getAttribute("PlanVO");
 %>
 
 
@@ -18,7 +16,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
-<link rel="icon" href="images/weight-lifting.png">
+<link rel="icon"
+	href="<%=request.getContextPath()%>/front_end/plan/images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -26,7 +25,8 @@
 	content="Pingendo conference event neon free template bootstrap 4">
 
 <!-- CSS dependencies -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
@@ -48,28 +48,6 @@ body {
 </style>
 
 
-/* 老師範例 */
-<style>
-table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-table, th, td {
-	border: 1px solid #CCCCFF;
-}
-
-th, td {
-	padding: 5px;
-	text-align: center;
-}
-</style>
-
-
-
-
 </head>
 <body>
 <body class="text-center">
@@ -86,8 +64,8 @@ th, td {
 			<div class="collapse navbar-collapse justify-content-center"
 				id="navbar2SupportedContent">
 				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-info btn-lg"
-					href="HomePage.jsp">WORK it OUT</a>
+					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
+					href="#">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -98,14 +76,13 @@ th, td {
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="#schedule">User</a></li>
 				</ul>
-				<a class="btn btn-lg btn-primary" href="mem/Mem_Login_Signup.jsp">Register
-					now</a>
+				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
 			</div>
 		</div>
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;images/assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -135,7 +112,7 @@ th, td {
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
-					src="images/assets/styleguide/people_2.jpg">
+					src="<%=request.getContextPath()%>/front_end/plan/images/assets/styleguide/people_2.jpg">
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-3">
@@ -171,13 +148,11 @@ th, td {
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="Create_Plan.jsp">Create Plan</a> <a
+								href="#">Add Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">My
-								Plan</a> <a
+								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="<%=request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interesting
-								Plan</a>
+								href="#">Interetsting Plan</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="#"> <i
 							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
@@ -215,74 +190,8 @@ th, td {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<h5>我的計畫清單，可供修改、刪除。</h5>
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<table>
-		<tr>
-			<th>計畫編號</th>
-			<th>計畫創建人ID</th>
-			<th>計畫名稱</th>
-			<th>計畫內容</th>
-			<th>計畫封面</th>
-			<th>計畫開始日</th>
-			<th>計畫結束日</th>
-			<th>運動類別</th>
-			<th>計畫瀏覽數</th>
-			<th>計畫隱私權</th>
-			<th>計畫創建時間</th>
-			<th>計畫執行狀態</th>
-			<th>修改</th>
-			<th>刪除</th>
-		</tr>
-		<%@ include file="page1.file"%>
-		<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-
-			<tr>
-				<td>${planVO.plan_id}</td>
-				<td>${planVO.mem_id}</td>
-				<td>${planVO.plan_name}</td>
-				<td>${planVO.plan_vo}</td>
-				<td>${planVO.plan_cover}</td>
-				<td>${planVO.plan_start_date}</td>
-				<td>${planVO.plan_end_date}</td>
-				<td>${planVO.sptype_id}</td>
-				<td>${planVO.plan_view}</td>
-				<td>${planVO.plan_privacy}</td>
-				<td>${planVO.plan_create_time}</td>
-				<td>${planVO.plan_status}</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/plan/plan.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="empno" value="${planVO.plan_id}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/plan/plan.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> <input type="hidden"
-							name="empno" value="${planVO.plan_id}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="page2.file"%>
-
+	<h5>計畫刪除成功</h5>
+	
 	<!-- Sponsor logos -->
 	<div class="py-5 section">
 		<div class="container">
@@ -295,26 +204,26 @@ th, td {
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_1.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_4.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_3.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="images/assets/conference/logo_2.png">
+						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_2.png">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('images/assets/conference/cover_2.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">
@@ -359,6 +268,93 @@ th, td {
 	<script src="js/smooth-scroll.js"></script>
 
 </body>
+
+<%
+	java.sql.Date plan_create_time = null;
+	try {
+		plan_create_time = planVO.getPlan_create_time();
+	} catch (Exception e) {
+		plan_create_time = new java.sql.Date(System.currentTimeMillis());
+	}
+%>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+<script>
+        $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: '<%=plan_create_time%>
+	', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
+
+	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+
+	//      1.以下為某一天之前的日期無法選擇
+	//      var somedate1 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+
+	//      2.以下為某一天之後的日期無法選擇
+	//      var somedate2 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+
+	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
+	//      var somedate1 = new Date('2017-06-15');
+	//      var somedate2 = new Date('2017-06-25');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//		             ||
+	//		            date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
+</script>
+
 
 
 </html>
