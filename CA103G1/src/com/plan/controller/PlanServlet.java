@@ -22,6 +22,8 @@ import com.plan.model.PlanVO;
 
 import oracle.net.aso.e;
 
+//未完成:
+//新增 錯誤處理 圖片、
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class PlanServlet extends HttpServlet {
@@ -51,49 +53,70 @@ public class PlanServlet extends HttpServlet {
 				// mem_id
 				HttpSession session = req.getSession();
 				String mem_id = (String) session.getAttribute("mem_id");
+				if (mem_id == null || mem_id.trim().length() == 0) {
+					errorMsgs.add("未登入");
+				}
 
 				// plan_name
 				String plan_name = req.getParameter("plan_name");
-				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
+				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 				if (plan_name == null || plan_name.trim().length() == 0) {
-					errorMsgs.add("Plan Name: Do Not Blank ");
+					errorMsgs.add("Plan Name Can't Be Blank");
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
-					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在1到10之間");
+					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
 
 				// plan_cover
+//				byte[] plan_cover = null;
+//				if(plan_cover==null) {
+//				}
 				Part part = req.getPart("plan_cover");
 				InputStream is = part.getInputStream();
 				byte[] plan_cover = new byte[is.available()];
 				is.read(plan_cover);
-				
 
 				// plan_start_date
 				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date du = null;
+				Timestamp plan_start_date = null;
 				try {
 					du = df.parse(req.getParameter("plan_start_date"));
+					plan_start_date = (new Timestamp(du.getTime()));
 				} catch (ParseException e) {
-					errorMsgs.add("是不會輸入日期?");
+					errorMsgs.add("Enter The Start Date");
 					e.printStackTrace();
 				}
-				Timestamp plan_start_date = (new Timestamp(du.getTime()));
 
 				// plan_end_date
+				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date du2 = null;
+				Timestamp plan_end_date = null;
 				try {
-					du2 = df.parse(req.getParameter("plan_end_date"));
+					System.out.println("testing1");
+					du2 = df2.parse(req.getParameter("plan_end_date"));
+					plan_end_date = (new Timestamp(du2.getTime()));
+					System.out.println(plan_end_date);
+
 				} catch (ParseException e) {
+					errorMsgs.add("Enter The End Date");
 					e.printStackTrace();
 				}
-				Timestamp plan_end_date = (new Timestamp(du2.getTime()));
 
 				// sptype_id
 				String sptype_id = req.getParameter("sptype_id");
+
+//				String sptype_id =null;
+//				if("請選擇"
+//						)
+//					req.getParameter("sptype_id");
+
 				// plan_privacy
 				String plan_privacy = req.getParameter("plan_privacy");
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo");
+				if (plan_vo == null || plan_vo.trim().length() == 0) {
+					errorMsgs.add("Plan Content Can't Be Blank");
+				}
 
 				PlanVO planVO = new PlanVO();
 				planVO.setMem_id(mem_id);
@@ -125,8 +148,65 @@ public class PlanServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage()+"test");
+				errorMsgs.add(e.getMessage() + "test");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/Create_Plan.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		if ("getOne_For_Update".equals(action)) { // 來自My_Plan.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String plan_id = new String(req.getParameter("plan_id"));
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				PlanService planSvc = new PlanService();
+				PlanVO planVO = planSvc.getOnePlan(plan_id);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("planVO", planVO); // 資料庫取出的empVO物件,存入req
+				String url = "/plan/plan_update.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage() + "testing20180929");
+				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				String plan_id = new String(req.getParameter("plan_id"));
+
+				/*************************** 2.開始刪除資料 ***************************************/
+				PlanService planSvc = new PlanService();
+				planSvc.deletePlan(plan_id);
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = "/plan/plan_delete.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage() + "test20180929-2");
+				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
 		}

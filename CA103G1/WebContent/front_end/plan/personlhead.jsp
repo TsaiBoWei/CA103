@@ -5,7 +5,7 @@
 <%@ page import="com.mem.model.*"%>
 
 <%
-	MemVO memVO = new MemService().getOneMem("M000004");
+	MemVO memVO = new MemService().getOneMem("M000001");
 	session.setAttribute("memVO", memVO);
 
 	String perpageloc = request.getParameter("perpageloc");

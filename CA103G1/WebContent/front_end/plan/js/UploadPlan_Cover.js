@@ -1,17 +1,3 @@
-
-function doClick() {
-	var el = document.getElementById("fileElem");
-
-	if (el) {
-		el.click();
-	}
-}
-
-function handleFiles() {
-	var file = document.getElementById("fileElem").files[0];
-	document.getElementById('img').src = window.URL.createObjectURL(file);
-}
-
 function openFile(event) {
 	var input = event.target; // 取得上傳檔案
 	var reader = new FileReader(); // 建立FileReader物件

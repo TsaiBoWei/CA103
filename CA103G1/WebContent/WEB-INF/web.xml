@@ -63,7 +63,6 @@
   <servlet>
     <servlet-name>EveListServlet</servlet-name>
     <servlet-class>com.eventlist.controller.EveListServlet</servlet-class>
-    <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>EveListServlet</servlet-name>
@@ -72,7 +71,6 @@
   <servlet>
     <servlet-name>EveServlet</servlet-name>
     <servlet-class>com.eve.controller.EveServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>EveServlet</servlet-name>
@@ -162,4 +160,7 @@
     <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
     <param-value>307200</param-value>
   </context-param>
+  <listener>
+    <listener-class>listener.Initialize_Listener</listener-class>
+  </listener>
 </web-app>

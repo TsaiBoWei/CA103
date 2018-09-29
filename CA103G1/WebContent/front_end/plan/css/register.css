@@ -1,22 +1,11 @@
       
-body{      	
-	background-image: url("/chiapao/front_end/img/woodbackground3.png");
-}
 
 
 
-#back {
-	background-color: rgba(255, 255, 255, 0.45);
-	margin-top: 40px;
-	margin-bottom: 40px;
-	border-radius: 2rem;
-	
-}
 
-input{
-	width:200px;
-	border-radius: 0.5rem;
-}
+
+
+
 
 .td1 {
 	width: 10%;
