@@ -7,7 +7,18 @@
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 %>
 
-<%-- 下拉式選單 做<請選擇>選項，並作錯誤驗證及導向。 --%>
+<%/*1.下拉式選單 做<請選擇>選項，並作錯誤驗證及導向。 
+	2.計畫封面圖片錯誤處理不做，不放圖預設圖未做。
+	3.計畫內容拖拉圖片未做。
+	4.計畫開始/結束時間
+
+
+
+
+
+
+*/%>
+
 
 <!DOCTYPE html>
 <html>
@@ -51,6 +62,7 @@ body {
 	src="<%=request.getContextPath()%>/front_end/plan/js/UploadPlan_Cover.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/plan/img.css">
+
 
 
 </head>
@@ -234,32 +246,34 @@ body {
 							<label><h3>Plan Cover:　　 </h3></label> 
 							<label class="btn btn-info btn-lg"> 
 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
-									 onchange="openFile(event)" style="display: none;"/>
+									 onchange="openFile(event)" style="display: none;" 
+									 <%--  value="= (planVO==null) ?"= request.getContextPath()>/front_end/plan/images/photo.png":planVO.getPlan_cover%>"--%>/>
 									<i class="fa fa-photo">上傳圖片</i>
 							</label>
 						</div>
 						
 						
 						<div class="form-group">
-							　　　　　　　　　<img class="img" id="output" width="120" height="120" style="display: none;">
+							　　　　　　　　　<img class="img" id="output"  style="display: none;">
 						</div>
 						
 						
 						<div class="form-group">
-							<label><h3>PlanStartDate:　</h3></label> <input type="date"
-								name="plan_start_date" id="f_date1" value="<%= (planVO== null) ? "" : planVO.getPlan_start_date()%>"/>
+							<label><h3>PlanStartDate:　</h3></label> 
+							<input type="text" name="plan_start_date" class="f_date1"/>
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Plan EndDate:　</h3></label> <input type="date"
-								name="plan_end_date" id="f_date1"value="<%= (planVO== null) ? "" : planVO.getPlan_end_date()%>"/>
+							<label><h3>Plan EndDate:　</h3></label> 
+							<input type="text" name="plan_end_date" class="f_date1"/>
 						</div>
-
+						
 
 						<div class="form-group">
 							<label><h3>Sport Type:　　　</h3></label> <select size="1"
 								name="sptype_id" style="width: 150px; font-size: 18px;">
+								<option value="SP000000">請選擇</option>
 								<option value="SP000001">田徑</option>
 								<option value="SP000002">單車</option>
 								<option value="SP000003">球類</option>
@@ -284,9 +298,7 @@ body {
 
 						<div class="form-group">
 							<label><h3>Plan Content:</h3></label><br>
-							<textarea name="plan_vo" rows="10" class="form-control">
-								<%=(planVO == null) ? "First Day : Jogging" : planVO.getPlan_name()%>
-							</textarea>
+							<textarea name="plan_vo" rows="10" class="form-control"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
 		
@@ -302,6 +314,10 @@ body {
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
 	<div>
 		<h5>
 			瀏覽數：<%!int count = 0;%><%=count++%>
@@ -385,43 +401,44 @@ body {
 		crossorigin="anonymous"></script>
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="js/smooth-scroll.js"></script>
+	<h1>123/h1> 
 </body>
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
 <%
-	java.sql.Date plan_create_time = null;
+	java.sql.Timestamp plan_start_date = null;
 	try {
-		plan_create_time = planVO.getPlan_create_time();
+		plan_start_date = planVO.getPlan_start_date();
 	} catch (Exception e) {
-		plan_create_time = new java.sql.Date(System.currentTimeMillis());
+		plan_start_date = new java.sql.Timestamp(System.currentTimeMillis());
 	}
 %>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
+	width: 300px;  
+	width:  300px; 
 }
 
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
+	height: 151px;  
+	height:  151px; 
+	
 }
 </style>
 
 <script>
         $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=plan_create_time%>
-	', // value:   new Date(),
+        $('.f_date1').datetimepicker({
+	       theme: '',              			//theme: 'dark',
+	       timepicker:true,        			//timepicker:true,
+	       step: 1,                			//step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d H:i:s',   			//format:'Y-m-d H:i:s', 
+	       value: '<%=plan_start_date%>',   // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前

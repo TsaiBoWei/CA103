@@ -61,21 +61,19 @@ public class PlanServlet extends HttpServlet {
 				String plan_name = req.getParameter("plan_name");
 				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 				if (plan_name == null || plan_name.trim().length() == 0) {
-					errorMsgs.add("Plan Name : Do Not Blank ");
+					errorMsgs.add("計畫名稱不得空白");
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
 					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
 
 				// plan_cover
-				byte[] plan_cover = null;
-				if (req.getParameter("plan_cover") == null) {
-					errorMsgs.add("請上傳圖片");
-				} else {
-					Part part = req.getPart("plan_cover");
-					InputStream is = part.getInputStream();
-					plan_cover = new byte[is.available()];
-					is.read(plan_cover);
-				}
+//				byte[] plan_cover = null;
+//				if(plan_cover==null) {
+//				}
+				Part part = req.getPart("plan_cover");
+				InputStream is = part.getInputStream();
+				byte[] plan_cover = new byte[is.available()];
+				is.read(plan_cover);
 
 				// plan_start_date
 				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -103,6 +101,12 @@ public class PlanServlet extends HttpServlet {
 
 				// sptype_id
 				String sptype_id = req.getParameter("sptype_id");
+
+//				String sptype_id =null;
+//				if("請選擇"
+//						)
+//					req.getParameter("sptype_id");
+
 				// plan_privacy
 				String plan_privacy = req.getParameter("plan_privacy");
 				// plan_vo
