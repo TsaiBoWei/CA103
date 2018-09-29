@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+	pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -59,24 +59,24 @@
           <div class="col-6 offset-3 col-md-6 offset-md-3">
             <form method="post" action= "<%=request.getContextPath() %>/mem/mem.do">
               <div class="form-group">
-                <label>é›»å­éƒµä»¶</label>
-                <input type="email" name="email" class="form-control" placeholder="é›»å­éƒµä»¶"> 
+                <label>¹q¤l¶l¥ó</label>
+                <input type="email" name="email" class="form-control" placeholder="¹q¤l¶l¥ó"> 
               </div>
               
               <div class="form-group">
-                <label>å¯†ç¢¼</label>
-                <input type="password" name="password" class="form-control" placeholder="å¯†ç¢¼"> 
+                <label>±K½X</label>
+                <input type="password" name="password" class="form-control" placeholder="±K½X"> 
               </div>
               <br>
               <input type="hidden" name="action" value="login">
               <button type="submit" class="btn btn-primary flex-row-reverse form-control" id="btnLogIn">
-               	ç™»å…¥
+               	µn¤J
              </button>
            	</form>         
           </div>
          <div class="col-md-12" style="margin-bottom: 14px;">
-          <a href="#">å¿˜è¨˜å¯†ç¢¼</a>
-          <a href="#" data-toggle="modal" data-target="#idModal">å¿«é€Ÿè¨»å†Š</a>
+          <a href="#">§Ñ°O±K½X</a>
+          <a href="#" data-toggle="modal" data-target="#idModal">§Ö³tµù¥U</a>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLongTitle">æœƒå“¡è¨»å†Š</h4>
+          <h4 class="modal-title" id="exampleModalLongTitle">·|­ûµù¥U</h4>
           <button type="button" class="close cancel" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="false">&times;</span>
           </button>
@@ -95,7 +95,7 @@
         <div class="modal-body">
           <form METHOD="post" action="<%=request.getContextPath() %>/mem/mem.do" >
            <c:if test="${not empty errorMsgs}">
-				<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+				<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
 					<ul >
 						<c:forEach var="message" items="${errorMsgs}">
 						<li style="color:red">${message}</li>
@@ -104,35 +104,35 @@
 		   </c:if> 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" >ä¿¡ç®±*</span>
+                <span class="input-group-text" >«H½c*</span>
               </div>
               <input type="email" name="regEmail" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
             </div><br>
 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" >æš±ç¨± </span>
+                <span class="input-group-text" >¼ÊºÙ </span>
               </div>
               <input type="text" name="regName" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
             </div><br>
             
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" >å¯†ç¢¼*</span>
+                <span class="input-group-text" >±K½X*</span>
               </div>
               <input type="password" name="regPassword" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm " >
             </div><br>
 
             <div class="input-group input-group-lg">
               <div class="input-group-prepend">
-                <span class="input-group-text" >ç¢ºèªå¯†ç¢¼*</span>
+                <span class="input-group-text" >½T»{±K½X*</span>
               </div>
               <input type="password" name="confirmedPsw" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div><br>
             <div class="modal-footer">
               <input type="hidden" name="action" value="mem_signUp">
-              <button type="submit" class="btn btn-primary" id="regSend">é€å‡º</button>
-              <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">å–æ¶ˆ</button>
+              <button type="submit" class="btn btn-primary" id="regSend">°e¥X</button>
+              <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">¨ú®ø</button>
               
             </div>
           </form>
@@ -187,7 +187,7 @@
                   <div class="col-md-12">
                     <p class="text-muted">
                       <br>
-                      <br>Â© Copyright 2018 Pingendo - All rights reserved.
+                      <br> Copyright 2018 Pingendo - All rights reserved.
                       <br>
                       <br> </p>
                     </div>

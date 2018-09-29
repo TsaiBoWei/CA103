@@ -232,6 +232,7 @@ public class PostDAO implements PostDAO_interface{
 
 		try {
 			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_MEM_ID);
 			pstmt.setString(1, mem_id);
 			rs = pstmt.executeQuery();
 
