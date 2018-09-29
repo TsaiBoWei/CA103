@@ -61,7 +61,7 @@ public class PlanServlet extends HttpServlet {
 				String plan_name = req.getParameter("plan_name");
 				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
 				if (plan_name == null || plan_name.trim().length() == 0) {
-					errorMsgs.add("計畫名稱不得空白");
+					errorMsgs.add("Plan Name Can't Be Blank");
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
 					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
@@ -83,7 +83,7 @@ public class PlanServlet extends HttpServlet {
 					du = df.parse(req.getParameter("plan_start_date"));
 					plan_start_date = (new Timestamp(du.getTime()));
 				} catch (ParseException e) {
-					errorMsgs.add("請輸入起始日期");
+					errorMsgs.add("Enter The Start Date");
 					e.printStackTrace();
 				}
 
@@ -92,10 +92,13 @@ public class PlanServlet extends HttpServlet {
 				java.util.Date du2 = null;
 				Timestamp plan_end_date = null;
 				try {
+					System.out.println("testing1");
 					du2 = df2.parse(req.getParameter("plan_end_date"));
 					plan_end_date = (new Timestamp(du2.getTime()));
+					System.out.println(plan_end_date);
+					
 				} catch (ParseException e) {
-					errorMsgs.add("請輸入結束日期");
+					errorMsgs.add("Enter The End Date");
 					e.printStackTrace();
 				}
 
@@ -112,7 +115,7 @@ public class PlanServlet extends HttpServlet {
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo");
 				if (plan_vo == null || plan_vo.trim().length() == 0) {
-					errorMsgs.add("計畫內容不得空白");
+					errorMsgs.add("Plan Content Can't Be Blank");
 				}
 
 				PlanVO planVO = new PlanVO();

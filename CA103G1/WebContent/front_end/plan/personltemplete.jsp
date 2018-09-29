@@ -18,12 +18,12 @@
 <!-- CSS dependencies -->
  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/plan/css/neon.css">
+	href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/plan/css/PersonalPage.css">
+	href="<%=request.getContextPath()%>/css/PersonalPage.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
 <script src="<%=request.getContextPath()%>js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
