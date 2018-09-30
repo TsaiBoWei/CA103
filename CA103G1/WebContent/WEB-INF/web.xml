@@ -76,8 +76,18 @@
     <servlet-name>EveServlet</servlet-name>
     <url-pattern>/eve/event.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-  <servlet-name>EventSaveServlet</servlet-name>
+    <servlet-name>EveAndroidServlet</servlet-name>
+    <servlet-class>com.eve.controller.EveAndroidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EveAndroidServlet</servlet-name>
+    <url-pattern>/eve/EveAndroid.do</url-pattern>
+  </servlet-mapping>  
+  
+  <servlet>
+  	<servlet-name>EventSaveServlet</servlet-name>
     <servlet-class>com.eventsave.controller.EventSaveServlet</servlet-class>
   </servlet>
   <servlet-mapping>
@@ -163,4 +173,23 @@
   <listener>
     <listener-class>listener.Initialize_Listener</listener-class>
   </listener>
+  
+  <servlet>
+  	<servlet-name>PostAndroidServlet</servlet-name>
+  	<servlet-class>com.Post.controller.PostAndroidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PostAndroidServlet</servlet-name>
+  	<url-pattern>/post/PostAndroid.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>PostServlet</servlet-name>
+  	<servlet-class>com.Post.controller.PostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PostServlet</servlet-name>
+  	<url-pattern>/post/Post.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -248,12 +248,15 @@ public class MemSpLikeServlet extends HttpServlet {
 				if ( str == null || (str.trim()).length() == 0 ) {
 					errorMsgs.add("請輸入會員ID");
 				}
-				else {
-					
-				}
+
+				List<MemSpLikeVO> memsplikeList = new ArrayList<MemSpLikeVO>();
+				req.setAttribute("memsplikeList", memsplikeList);
 			}
 			catch(Exception e) {
-				
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/memsplike/select_page.jsp");
+				failureView.forward(req, res);
 			}
 		} // if get_list_by_mem_id
 		
