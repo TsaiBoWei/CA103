@@ -34,7 +34,7 @@ public class MemDAO implements MemDAO_interface{
 	private static final String UPDATE = 
 			"UPDATE MEM SET MEM_NAME = ?,MEM_ACCOUNT = ? , MEM_PASSWORD = ?, MEM_BIRTH = ?, MEM_PHOTO = ?, MEM_EMAIL = ?, MEM_INTRO = ? WHERE MEM_ID = ?";
 	private static final String UPDATE_STATUS = 
-			"UPDATE MEM SET MEM_STATUS = ? WHERE MEM_ID = ?";
+			"UPDATE MEM SET MEM_STATUS = ? WHERE MEM_ACCOUNT = ?";
 	private static final String DELETE = 
 			"DELETE FROM MEM WHERE MEM_ID = ?";
 	private static final String GET_ONE_STMT = 

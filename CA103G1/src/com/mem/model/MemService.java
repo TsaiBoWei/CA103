@@ -46,12 +46,13 @@ public class MemService {
 		return memVO;
 	}
 	
-	
+	public void updateStatus(String mem_account, String mem_status) {
+		dao.updateStatus(mem_account,mem_status);	
+	}
 	
 	public MemVO getOneMem(String mem_id) {
 		return dao.findByPrimaryKey(mem_id);
 	}
-	
 	
 	public List<MemVO> getAll() {
 		return dao.getAll();
