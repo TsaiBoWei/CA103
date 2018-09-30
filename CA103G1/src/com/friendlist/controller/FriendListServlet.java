@@ -218,6 +218,10 @@ public class FriendListServlet extends HttpServlet{
 				}else if(!fl_memB_id.trim().matches(fl_memB_idReg)) {
 					errorMsgs.add("格式輸入錯誤，會員編號只能是英文 M 開頭加六位 0-9 數字");
 				}
+				
+				if(fl_memA_id.equals(fl_memB_id)) {
+					errorMsgs.add("好友不會是自己");
+				}
 
 				
 				String fl_friend_name = req.getParameter("fl_friend_name");
