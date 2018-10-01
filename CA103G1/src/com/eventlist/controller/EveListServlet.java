@@ -70,7 +70,7 @@ public class EveListServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("eveListsByEve",eveListsByEve); // 資料庫取出的empVO物件,存入req				
-				String url =req.getContextPath()+ "/front_end/event/eventlist/EvelistsByEve.jsp";		
+				String url =req.getContextPath()+ "/front_end/event/eventlist/eveEventlist.jsp?perpageloc=event#personalnav";		
 				HttpSession session=req.getSession();
 //				session.setAttribute("eveListsByEve", eveListsByEve);
 				session.setAttribute("eve_id", eve_id);
@@ -129,6 +129,44 @@ public class EveListServlet extends HttpServlet {
 			}			
 		}
 		
+		if("openAddElModal".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			try{
+				
+				String eve_id = req.getParameter("eve_id");
+				EveService eveSvc = new EveService();
+				EventVO eveVO = eveSvc.getOneEve(eve_id);
+				
+				if (eveVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front_end/event/eve/select_event_page.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				req.setAttribute("eveVO", eveVO); // 資料庫取出的empVO物件,存入req				
+				
+				boolean openAddElModal=true;
+				req.setAttribute("openAddElModal",openAddElModal );
+				String url ="/front_end/event/eve/listOneEvent.jsp";		
+				RequestDispatcher sucessView = req.getRequestDispatcher(url);
+				sucessView.forward(req, res);
+				return;//程式中斷
+			}catch(Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/event/eve/listOneEvent.jsp");
+				failureView.forward(req, res);
+				e.printStackTrace();				
+			}
+			
+			
+			
+		}
+		
 		
 		if ("insert".equals(action)) { // 來自addeveList.jsp的請求  
 			
@@ -154,8 +192,7 @@ public class EveListServlet extends HttpServlet {
 				try {
 					evepay_deadline = java.sql.Date.valueOf(req.getParameter("evepay_deadline").trim());
 				} catch (IllegalArgumentException e) {
-					evepay_deadline=new java.sql.Date(System.currentTimeMillis()+1000*86400*3);
-					errorMsgs.add("請輸入日期!");
+					//若無繳費截止日 evepay_deadline = null 存入空值
 				}
 						
 				String evelist_status ="EL0";
@@ -207,13 +244,14 @@ public class EveListServlet extends HttpServlet {
 					return;//程式中斷		
 				}
 				//Bootstrap_modal
-				boolean openModal=true;
-				req.setAttribute("openModal",openModal );
+				boolean openPayModal=true;
+				req.removeAttribute("openAddElModal");
+				req.setAttribute("openPayModal",openPayModal );
 				req.setAttribute("eventListVO",eventListVO );
 				EveService eveSvc=new EveService();
 				EventVO eveVO=eveSvc.getOneEve(eve_id);
 				req.setAttribute("eveVO",eveVO );
-				String url ="/front_end/event/eventlist/addeveList.jsp";		
+				String url ="/front_end/event/eve/listOneEvent.jsp";		
 				RequestDispatcher sucessView = req.getRequestDispatcher(url);
 				sucessView.forward(req, res);
 				return;//程式中斷
@@ -390,7 +428,7 @@ public class EveListServlet extends HttpServlet {
 				/***************************2.開始刪除資料***************************************/
 				
 				eveListSvc.changeEveListStatus(mem_id, eve_id, evelist_status);
-				if("/front_end/event/eventlist/EvelistsByEve.jsp".equals(requestURL)) {
+				if("/front_end/event/eventlist/eveEventlist.jsp".equals(requestURL)) {
 //					List<EventListVO> list=eveListSvc.getEveListsByEve(eve_id);
 					HttpSession session=req.getSession();
 					session.setAttribute("eve_id", eve_id);	
