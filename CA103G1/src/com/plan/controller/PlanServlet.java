@@ -84,7 +84,7 @@ public class PlanServlet extends HttpServlet {
 					plan_start_date = (new Timestamp(du.getTime()));
 				} catch (ParseException e) {
 					errorMsgs.add("Enter The Start Date");
-					e.printStackTrace();
+//					e.printStackTrace();
 				}
 
 				// plan_end_date
