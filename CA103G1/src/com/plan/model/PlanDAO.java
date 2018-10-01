@@ -58,7 +58,7 @@ public class PlanDAO implements PlanDAO_interface {
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage() + "testing_insert");
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -102,7 +102,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
+			throw new RuntimeException("A database error occured." + se.getMessage() + "testing_update");
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -135,7 +135,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(1, "plan_id");
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage() + "testing_delete");
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -190,7 +190,7 @@ public class PlanDAO implements PlanDAO_interface {
 			}
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occurred. " + se.getMessage());
+			throw new RuntimeException("A database error occurred. " + se.getMessage() + "testing_fingbyprimarykey");
 		} finally {
 			if (rs != null) {
 				try {
@@ -268,13 +268,14 @@ public class PlanDAO implements PlanDAO_interface {
 				planVO.setSptype_id(rs.getString("sptype_id"));
 				planVO.setPlan_view(rs.getInt("plan_view"));
 				planVO.setPlan_privacy(rs.getString("plan_privacy"));
-				planVO.setPlan_create_time(rs.getDate("plan_creat_time"));
+				planVO.setPlan_create_time(rs.getDate("plan_create_time"));
 				planVO.setPlan_status(rs.getString("plan_status"));
 				list.add(planVO);
 			}
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occurred. " + se.getMessage());
+			throw new RuntimeException("A database error occurred. " + se.getMessage() + "testing_getall");
+
 		} finally {
 			if (rs != null) {
 				try {

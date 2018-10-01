@@ -171,14 +171,14 @@ public class PlanServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("planVO", planVO); // 資料庫取出的empVO物件,存入req
-				String url = "/plan/plan_update.jsp";
+				String url = "/front_end/plan/plan_update.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage() + "testing20180929");
-				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -199,14 +199,14 @@ public class PlanServlet extends HttpServlet {
 				planSvc.deletePlan(plan_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/plan/plan_delete.jsp";
+				String url = "/front_end/plan/plan_delete.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage() + "test20180929-2");
-				RequestDispatcher failureView = req.getRequestDispatcher("/plan/plan_wrong.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
 		}
