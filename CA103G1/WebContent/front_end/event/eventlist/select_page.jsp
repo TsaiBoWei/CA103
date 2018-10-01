@@ -7,7 +7,7 @@
 
 
 <%  //模擬會員的SESSION
-	session.setAttribute("memVO", memSvc.getOneMem("M000002"));
+	session.setAttribute("memVO", memSvc.getOneMem("M000001"));
 %>
 
 <%	//取出會員的SESSION
@@ -72,12 +72,21 @@
 <!--   </li> -->
   
     <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" >
         <b>session取出的會員名稱 (查該會員的所有活動清單):</b>${memVO.mem_name}
         <input type="hidden" name="mem_id" value="${memVO.mem_id}">    
         <input type="submit" value="送出">
     </FORM>
   </li>
+  
+   <li>
+    <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem_old.jsp" >
+        <b>session取出的會員名稱 (查該會員的所有活動清單)_old:</b>${memVO.mem_name}
+        <input type="hidden" name="mem_id" value="${memVO.mem_id}">    
+        <input type="submit" value="送出">
+    </FORM>
+  </li>
+  
 
   <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 <!--   <li> -->

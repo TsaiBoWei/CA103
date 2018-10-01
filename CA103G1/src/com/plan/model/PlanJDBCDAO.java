@@ -137,6 +137,7 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, "plan_id");
+			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException ce) {
 			throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());

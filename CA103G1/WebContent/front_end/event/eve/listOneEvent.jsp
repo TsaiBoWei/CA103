@@ -19,6 +19,7 @@
   <title>listOneEvent.jsp</title>
   <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
+  
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -30,6 +31,12 @@
   <!-- Script: Animated entrance -->
   <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   <script src="<%=request.getContextPath() %>/front_end/event/eve/js/SingleEventPage.js"></script>
+  <!--For Modal-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>	
+ 
+  
+  
+  
 
  <style>  
   .eveImg{
@@ -56,6 +63,8 @@ background-color:transparent;
 border:0px; 
 text-align:center;
 }
+
+
 
   
 </style>
@@ -188,10 +197,13 @@ text-align:center;
           <!-- 結束的活動 報名按鈕要改顯示評價 -->
           
           <jsp:useBean id="eveListSvc" scope="page" class="com.eventlist.model.EventlistService" />
-		  	<c:if test="${eveListSvc.getOneEveList(memVO.mem_id,eveVO.eve_id)==null||eveVO.eve_status=='E4'}"> 
-		  		<c:if test="${memVO.mem_id!=eveVO.mem_id}">
-					<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/event/eventlist/addeveList.jsp" style="margin-bottom: 0px;">
+          
+          	<!-- 立即報名按鈕顯示條件:會員清單無資料.活動狀態可報名.非活動主辦人.在報名期間內 -->
+		  	<c:if test="${eveListSvc.getOneEveList(memVO.mem_id,eveVO.eve_id)==null&&(eveVO.eve_status=='E2'||eveVO.eve_status=='E3')}"> 
+		  		<c:if test="${memVO.mem_id!=eveVO.mem_id&&eveVO.ereg_enddate.getTime()>System.currentTimeMillis()&&eveVO.ereg_startdate.getTime()<System.currentTimeMillis()}">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
 				    <input type="submit" value="立即報名" class="btn btn-lg btn-block btn-danger my-3 p-1"> 
+				    <input type="hidden" name="action"      value="openAddElModal">
 				    <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
 				    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			  		</FORM>
@@ -519,6 +531,71 @@ text-align:center;
       </div>
     </div>
   </footer>
+  
+  
+	   <!-- 報名開啟新增活動清單modal -->
+ <c:if test="${openAddElModal!=null}">
+	
+	<div class="modal fade" id="addEvelistModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+								
+				<div class="modal-body">
+	          		 <jsp:include page="/front_end/event/eventlist/addeveList.jsp" />
+	        	</div>
+	        			
+			</div>
+		</div>
+	</div>
+	        <script>
+	    		 $("#addEvelistModal").modal({show: true});
+	        </script>
+ </c:if>
+ 
+ 
+ ${openPayModal!=null}
+   <!-- The Modal -->
+<c:if test="${openPayModal!=null}">
+
+<div class="modal fade " id="elPayModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content bg-dark">
+		
+			<div class="modal-header " >
+				<h3 class="modal-title text-success" id="myModalLabel" style='font-weight:bold !important;'>付款資訊</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                
+            </div>
+							
+			<div class="modal-body " >
+				 <div class="row"><div class="col-md-4  h4 text-success " style='font-weight:bold !important;'>活動名稱 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>  ${eveVO.eve_title}</div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'> 付款金額 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_amount}&nbsp元</div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款帳號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'></div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款截止日 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_deadline}</div></div>
+
+        	</div>
+        	
+			<div class="modal-footer ">
+                <button type="button" class="btn btn-success" >
+                	<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?action=pay_Update_Status&mem_id=${memVO.mem_id}&eve_id=${eveVO.eve_id}" class='text-dark'>確認付款</A>
+                </button>
+                <button type="button" class="btn btn-success">
+                	<A href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp" class='text-dark'>稍後付款</A>
+                </button>
+            </div>
+		
+		</div>
+	</div>
+</div>
+        <script>
+    		 $("#elPayModal").modal({show: true});
+        </script>
+ </c:if>
+  
+  
+  
+  
+  
+  
   
    <script>  
 	   function reshowElCheck(){

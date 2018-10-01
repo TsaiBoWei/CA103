@@ -1,10 +1,11 @@
+@charset "BIG5";
 body {
-	font-family: Montserrat,Arial,"å¾®è»Ÿæ­£é»‘é«”","Microsoft JhengHei";
+	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei";
 	
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: Montserrat,Arial,"å¾®è»Ÿæ­£é»‘é«”","Microsoft JhengHei";
+	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei";
 	color: #efefef;
 }
 
@@ -80,14 +81,14 @@ li.dropdown {
     }
 
 
-/*coverè¨­å®š*/
+/*cover³]©w*/
 #coverfirstImg{
   height: 180px;
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
 
-/*bannerè¨­å®š*/
+/*banner³]©w*/
 .banner-div{
   padding-top: 1rem !important;
   padding-bottom: 0rem !important;
@@ -101,13 +102,13 @@ li.dropdown {
   padding-top: 0px;
 }
 
-/*æ´»å‹•ç€è¦½æ•¸*/
+/*¬¡°ÊÂsÄı¼Æ*/
 .eveview{
   font-size: 18px;
 }
 
 
-/*popular new friend çš„åœ–ç‰‡æ¨£å¼ */
+/*popular new friend ªº¹Ï¤ù¼Ë¦¡ */
 .img-group {
   position: relative;
   display: inline-block;
@@ -127,7 +128,7 @@ li.dropdown {
   display: block;
 }
 
-/*sponsorè¨­å®š */
+/*sponsor³]©w */
 .sponsor-div{
   padding-top: 0rem!important;
 }

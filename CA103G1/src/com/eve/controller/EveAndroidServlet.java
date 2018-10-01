@@ -2,6 +2,7 @@ package com.eve.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.List;
@@ -17,6 +18,8 @@ import com.eve.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+
+import com.util.*;
 
 @WebServlet("/EveAndroidServlet")
 public class EveAndroidServlet extends HttpServlet {
@@ -35,7 +38,7 @@ public class EveAndroidServlet extends HttpServlet {
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
 		String line = null;
-		EveService eveservice = new EveService();
+		EveAndroidDAO evedao = new EveAndroidDAO();
 		
 		while ((line = br.readLine()) != null) {
 			jsonIn.append(line);
@@ -48,13 +51,26 @@ public class EveAndroidServlet extends HttpServlet {
 		
 		if ( "get_one_eve".equals(action) ) {
 			String eve_id = jsonObject.get("eve_id").getAsString();
-			EventVO evevo = eveservice.getOneEve(eve_id);
+			EventVO evevo = evedao.findByPrimaryKey(eve_id);
 			writeText(res, evevo == null? "":gson.toJson(evevo));			
 		}
 		
 		if ( "get_all_eve".equals(action) ) {
-			List<EventVO> list = eveservice.getAll();
+			List<EventVO> list = evedao.getAll();
 			writeText(res, list == null? "":gson.toJson(list));			
+		}
+		
+		if ("get_image".equals(action)) {
+			OutputStream os = res.getOutputStream();
+			String eve_id = jsonObject.get("eve_id").getAsString();
+			int imageSize = jsonObject.get("imageSize").getAsInt();
+			
+			byte[] image = evedao.getEvePhotoByEveId(eve_id);
+			if ( image != null ) {
+				image = ImageUtil.shrink(image, imageSize);
+				res.setContentType("image/jpeg");
+				res.setContentLength(image.length);
+			}
 		}
 		
 	}	

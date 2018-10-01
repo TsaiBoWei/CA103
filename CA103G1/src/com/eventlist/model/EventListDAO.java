@@ -47,6 +47,9 @@ public class EventListDAO implements EventListDAO_interface{
 	private static final String UPDATE_SHARE_STATUS = 
 			"UPDATE EVENTLIST set EVE_SHARE=?  where EVE_ID = ? AND MEM_ID=?";
 	
+	private static final String GET_EVE_INCOME ="SELECT EVE_ID,SUM(EVEPAY_AMOUNT) FROM EVENTLIST WHERE (EVE_ID =?) AND (EVELIST_STATUS='EL3') GROUP BY EVE_ID" ;
+	
+	private static final String GET_NUM_OF_MEM_BY_EVE ="SELECT EVE_ID,COUNT(*) FROM EVENTLIST WHERE (EVE_ID =?) AND (EVELIST_STATUS='EL0' OR EVELIST_STATUS='EL3') GROUP BY EVE_ID";
 	
 //		private static final String DELETE = 
 //		"DELETE FROM EVENTLIST where EVE_ID = ?";
@@ -200,6 +203,72 @@ public class EventListDAO implements EventListDAO_interface{
 			}
 		}
 		return eventListVO;
+	}
+	
+	@Override
+	public int getEveIncome(String eve_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int income=0;
+		try {
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_EVE_INCOME);
+
+			pstmt.setString(1, eve_id);			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				income=rs.getInt(2);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return income;
+	}
+	
+	@Override
+	public int getNumOfMemByEve(String eve_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int numOfMem=0;
+		try {			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_NUM_OF_MEM_BY_EVE);
+
+			pstmt.setString(1, eve_id);			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				numOfMem=rs.getInt(2);
+			}
+
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return numOfMem;
 	}
 
 	

@@ -36,9 +36,9 @@ public class UpdateDBPic {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_PIC);
 			//存放圖片的資料夾路徑
-			File[] files=new File("C:\\Users\\user\\Desktop\\SingleEventPage\\assets\\eventpic\\run").listFiles();
+			File[] files=new File("C:\\Users\\Java\\Desktop\\pics").listFiles();
 			for(int i=1;i<=row;i++) {
-				File file=files[i];
+				File file=files[0];
 				System.out.println(file.getName());
 				
 				fi=new FileInputStream(file);

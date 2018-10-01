@@ -6,7 +6,7 @@
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 
 <%  //模擬會員的SESSION
-	session.setAttribute("memVO", memSvc.getOneMem("M000001"));
+	session.setAttribute("memVO", memSvc.getOneMem("M000003"));
  %> 
 
 <%	//取出會員的SESSION
@@ -17,9 +17,6 @@
 <head>
 <meta charset="utf-8">
 <title>select_event_page.jsp</title>
-
-
-
 
 <style>
   table#table-1 {
@@ -80,7 +77,21 @@
    
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp" >
-       <b>主辦會員的活動管理:</b>
+       <b>主辦會員的活動管理new:</b>
+<!--        <select size="1" name="eve_id"> -->
+<%--          <c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}" >  --%>
+<%--          	 <option value="${eveVO.eve_id}">${eveVO.eve_title} --%>
+<%--          </c:forEach>    --%>
+<!--        </select> -->
+       <input type="submit" value="送出">
+<%--        <input type="hidden" name="mem_id" value="${memVO.mem_id}"> --%>
+<!--        <input type="hidden" name="action" value="get_Eves_By_Mem">     -->
+    </FORM>
+  </li>
+  
+  <li>
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer_old.jsp" >
+       <b>主辦會員的活動管理old:</b>
 <!--        <select size="1" name="eve_id"> -->
 <%--          <c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}" >  --%>
 <%--          	 <option value="${eveVO.eve_id}">${eveVO.eve_title} --%>

@@ -56,7 +56,7 @@
 <div class="d-flex py-5 cover align-items-center">
  	<div class="container">
 		<h2 class="text-light">hello ${memVO.mem_name }</h2>
-		 <a class="btn btn-lg btn-primary" href="/CA103G1/front_end/mem/updateMember/updateMember.jsp">修改會員</a>		
+		 <a class="btn btn-lg btn-primary" href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp">修改會員</a>		
 	</div>	
 </div>
 
