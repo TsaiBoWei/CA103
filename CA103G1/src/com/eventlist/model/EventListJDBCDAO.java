@@ -39,6 +39,10 @@ public class EventListJDBCDAO implements EventListDAO_interface{
 	private static final String UPDATE_SHARE_STATUS = 
 			"UPDATE EVENTLIST set EVE_SHARE=?  where EVE_ID = ? AND MEM_ID=?";
 	
+	private static final String GET_EVE_INCOME ="SELECT EVE_ID,SUM(EVEPAY_AMOUNT) FROM EVENTLIST WHERE (EVE_ID =?) AND (EVELIST_STATUS='EL3') GROUP BY EVE_ID" ;
+	
+	private static final String GET_NUM_OF_MEM_BY_EVE ="SELECT EVE_ID,COUNT(*) FROM EVENTLIST WHERE (EVE_ID =?) AND (EVELIST_STATUS='EL0' OR EVELIST_STATUS='EL3') GROUP BY EVE_ID";
+	
 	
 //	private static final String DELETE = 
 //	"DELETE FROM EVENTLIST where EVE_ID = ?";
@@ -273,7 +277,86 @@ public class EventListJDBCDAO implements EventListDAO_interface{
 		}
 		return list;
 	}
+	
+	@Override
+	public int getEveIncome(String eve_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int income=0;
+		try {
 
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_EVE_INCOME);
+
+			pstmt.setString(1, eve_id);			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				income=rs.getInt(2);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return income;
+	}
+	
+	@Override
+	public int getNumOfMemByEve(String eve_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int numOfMem=0;
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_NUM_OF_MEM_BY_EVE);
+
+			pstmt.setString(1, eve_id);			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				numOfMem=rs.getInt(2);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return numOfMem;
+	}
 	@Override
 	public List<EventListVO> findByEveId(String eve_id) {
 		List<EventListVO> list = new ArrayList<EventListVO>();
@@ -499,16 +582,16 @@ public class EventListJDBCDAO implements EventListDAO_interface{
 		EventListJDBCDAO dao = new EventListJDBCDAO();
 		
 		// ·s¼W
-		EventListVO eventListVO1=new EventListVO();
-		eventListVO1.setMem_id("M000005");
-		eventListVO1.setEve_id("E000001");
-		eventListVO1.setEve_rating(4);
-		eventListVO1.setEvelist_status("EL2");
-		eventListVO1.setEvepay_amount(200);
-		eventListVO1.setEvepay_deadline(java.sql.Date.valueOf("2018-09-10"));
- //		eventListVO1.setEvepay_deadline(null);
-		eventListVO1.setEve_share("ES0");
-		dao.insert(eventListVO1);
+//		EventListVO eventListVO1=new EventListVO();
+//		eventListVO1.setMem_id("M000005");
+//		eventListVO1.setEve_id("E000001");
+//		eventListVO1.setEve_rating(4);
+//		eventListVO1.setEvelist_status("EL2");
+//		eventListVO1.setEvepay_amount(200);
+//		eventListVO1.setEvepay_deadline(java.sql.Date.valueOf("2018-09-10"));
+// //		eventListVO1.setEvepay_deadline(null);
+//		eventListVO1.setEve_share("ES0");
+//		dao.insert(eventListVO1);
 		
 		
 		//­×§ï
@@ -574,6 +657,9 @@ public class EventListJDBCDAO implements EventListDAO_interface{
 		
 //		dao.updateListStatus("M000001","E000001", "EL9");
 //		dao.updateShareStatus("M000001","E000001", "ES1");
+		
+		System.out.println(dao.getNumOfMemByEve("E000003"));
+		System.out.println(dao.getEveIncome("E000003"));
 		
 	}
 

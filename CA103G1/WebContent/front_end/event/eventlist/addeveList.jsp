@@ -24,31 +24,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>listOneEvent.jsp</title>
+  <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
+  <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
+  <!-- CSS dependencies -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <!--  self-defined css  -->
+ 
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
+  <script src="<%=request.getContextPath() %>/front_end/event/eve/js/SingleEventPage.js"></script>
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/eve/css/SingleEventPage.css">
+   
 <title>新增活動清單 - addeveList.jsp</title>
-
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
 <style>
   table {
@@ -57,28 +60,27 @@
 	margin-top: 1px;
 	margin-bottom: 1px;
   }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
   th, td {
     padding: 1px;
   }
    .eveImg{
-  width:100%;
+  width:60%;
+  }
+  
+  #addElTable th, #addElTable td,#addElTable input {
+  	font-size:16px;
+  	font-weight:bold;
+  }
+  
+   #addElTable input{
+  	border:0px;
   }
 </style>
 
 </head>
-<body bgcolor='white'>
+<body >
 
-<table id="table-1">
-	<tr><td>
-		 <h3>新增活動清單 - addeveList.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath() %>/front_end/event/eventlist/select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
 
-<h3>資料新增</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -90,33 +92,21 @@
 	</ul>
 </c:if>
 
+<h3 class="text-success">活動報名&nbsp-&nbsp ${eveVO.eve_title}</h3>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" name="form1">
-<table>
+<table class="table table-striped table-hover" id='addElTable'>
 
 	<tr>
-		<td>活動圖片:</td>
-		<td>
+		<td colspan='2' >
 			<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
 		</td>
 	</tr>
 	<tr>
-		<td>會員名稱:</td>
-		<td>${memVO.mem_name}</td>
+		<td >會員名稱:</td>
+		<td >${memVO.mem_name}</td>
 	</tr>
-		<jsp:useBean id="eveListSvc" scope="page" class="com.eventlist.model.EventlistService" />
-	<tr>
-		<td>活動名稱:<font color=red><b>*</b></font></td>
-		<td>${eveVO.eve_title}</td>
-<!-- 		<td><select size="1" name="eve_id"> -->
-<%-- 			<c:forEach var="evelsVO" items="${eveSvc.all}"> --%>
-<%-- 				<c:if test="${eveListSvc.getOneEveList(memVO.mem_id,evelsVO.eve_id)==null}">  --%>
-<%-- 					<option value="${evelsVO.eve_id}" ${(eventListVO.eve_id==evelsVO.eve_id)? 'selected':'' } >${evelsVO.eve_title} --%>
-<%-- 				</c:if>				 --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-	</tr>
-	
+
 	<tr>
 		<td>活動時間:</td>			
 		<td><fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>~			
@@ -128,22 +118,31 @@
 	</tr>	
 	<tr>
 		<td>活動付款金額:</td>
-		<td><input name="evepay_amount"  type="text" size="5" readonly
-			  value="${(eventListVO==null)?eveVO.eve_charge:eventListVO.evepay_amount}"  />元</td>
+		<td><input type=text name="evepay_amount" size='4' value="${(eventListVO==null)?eveVO.eve_charge:eventListVO.evepay_amount}"> 元</td>
 	</tr>
 	<tr>
 		<td>活動付款截止日:</td>
-		<td><input type="TEXT" name="evepay_deadline" size="45" readonly
-			  value="<%= (eventListVO==null)? new java.sql.Date(System.currentTimeMillis()+1000*86400*3) : eventListVO.getEvepay_deadline()%>" /></td>
+		<td>
+		
+			<c:if test="${eventListVO==null}">
+				<input type=text name="evepay_deadline" size='10' 
+				value="<%=(eveVO.getEve_charge()!=0)?new java.sql.Date(System.currentTimeMillis()+1000*86400*3):"無" %>">		
+			</c:if>
+			<c:if test="${eventListVO!=null}">
+				${eventListVO.evepay_deadline==null?'無':eventListVO.evepay_deadline}		
+			</c:if>
+		
+		</td>
 	</tr>
-
 </table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="hidden" name="mem_id" value="${memVO.mem_id}" />
-<input type="hidden" name="eve_id" value="${eveVO.eve_id}" />
-<input type="submit" value="確認報名"></FORM>
-
+<div class="d-flex justify-content-center">
+	<input type="hidden" name="action" value="insert">
+	<input type="hidden" name="mem_id" value="${memVO.mem_id}" />
+	<input type="hidden" name="eve_id" value="${eveVO.eve_id}" />
+	<input type="submit" class='btn btn-primary mx-1' value="確認報名">
+	<input type="button" class='btn btn-primary mx-1' data-dismiss="modal" value="取消">
+</div>
+</FORM>
   <!-- The Modal -->
 <c:if test="${openModal!=null}">
 

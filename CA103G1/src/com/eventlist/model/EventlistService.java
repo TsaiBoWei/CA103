@@ -68,5 +68,12 @@ public class EventlistService {
 	public List<EventListVO> getEveListsByMem(String mem_id)  {
 		return dao.findByMemId(mem_id);
 	}
+	
+	public int getEveIncome(String eve_id) {
+		return dao.getEveIncome(eve_id);
+	};
+    public int getNumOfMemByEve(String eve_id) {
+    	return dao.getNumOfMemByEve(eve_id);
+    };
 
 }

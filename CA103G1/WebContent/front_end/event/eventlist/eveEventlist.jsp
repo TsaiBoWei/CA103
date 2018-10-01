@@ -3,17 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.mem.model.*"%>
-<%@ page import="com.eve.model.*" %>
-<%@ page import="com.eventlist.model.*" %>
+<%@ page import="com.eventlist.model.*"%>
 
-<jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
+<jsp:useBean id="evelistSvc" scope="page" class="com.eventlist.model.EventlistService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
-<jsp:useBean id="evelistSvc" scope="page" class="com.eventlist.model.EventlistService" />
 
-<%  
-	MemVO memVO=(MemVO)session.getAttribute("memVO");
-	List<EventVO> list = eveSvc.getEvesByMem(memVO.getMem_id());
+<%	
+	String eve_id=(String)session.getAttribute("eve_id");
+	List<EventListVO> list= (List<EventListVO> )evelistSvc.getEveListsByEve(eve_id);
 	pageContext.setAttribute("list",list);
 %>
 
@@ -53,14 +51,25 @@
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
 <style>
- /*頁面設定*/
+ 
+
+/*頁面設定*/
 body {
 	overflow-x: hidden;
 }
 
-.eveImg{
- width:100%;
- }
+
+#evelistTable th{
+	background-color:#ffc107!important;
+}
+#evelistTable td{
+	background-color:#ffe3bae3!important;
+}
+
+
+#evelistTable tr,#evelistTable td{
+	color:black;
+}
 
 </style>
 
@@ -77,7 +86,7 @@ body {
 	      <div class="col-md  m-3  " >
 	      	<div class="d-flex align-items-end" >
 	      		<div class="col-md-1 " ></div>
-		        <h3 class="ml-5 mr-3">${memVO.mem_name}主辦的活動 </h3>
+		        <h3 class="ml-5 mr-3">${memVO.mem_name}主辦的活動 :  ${eveSvc.getOneEve(eve_id).eve_title} </h3>
 		        <%@ include file="page1.file" %> 
 	        </div>
 	      </div>
@@ -102,66 +111,66 @@ body {
 					</ul>
 				</c:if>
 				<% session.removeAttribute("errorMsgs"); %>
-<table>
-	<tr>   
-		<th class="w-25">活動名稱</th>	
-		<th>活動時間</th>
-		<th>確認報名&nbsp/<br>成行人數</th>
-		<th>活動狀態</th>
-		<th>總收費金額</th>
-		<th>檢視報名會員</th>		
-		<th>修改資訊</th>
-		<th>取消活動</th>
-	</tr>
-	<c:forEach var="eveVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr >	
-			<td>${eveVO.eve_title}
-				 <A href="<%=request.getContextPath() %>/eve/event.do?eve_id=${eveVO.eve_id}&action=getOne_For_Display&whichPage=<%=request.getParameter("whichPage")%>">               
-					<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
-				 </A>	
-			</td>		
-			<td><fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>~<br>		
-				<fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/></td>		
-			<td>${evelistSvc.getNumOfMemByEve(eveVO.eve_id)}/${eveVO.estart_limit}</td>			
-			<td>${eveStatusMap.get(eveVO.eve_status)}</td>					
-			<td>
-				<c:if test="${eveVO.eve_charge==0}">
-				    免費
-				</c:if>
-				
-				<c:if test="${eveVO.eve_charge!=0}">
-				   ${evelistSvc.getEveIncome(eveVO.eve_id)}元
-				</c:if>		
-			</td>										
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eventlist/eventlist.do" style="margin-bottom: 0px;">
-			     <input type="submit" class="btn btn-sm btn-danger " value="報名清單"> 
-			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     <input type="hidden" name="action"	    value="getEvelists_By_EVE"></FORM>
-			</td>
-	
-				
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
-			     <input type="submit" class="btn btn-sm btn-warning " value="修改資訊"> 
-			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     <input type="hidden" name="action"	    value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="取消活動" class="btn btn-sm ml-1" >
-			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-			     <input type="hidden" name="action"     value="delete"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
+				<table id="evelistTable" class="table table-striped table-hover">
+					<thead class="thead-light">
+					<tr >
+					
+						<th class="w-25">會員名稱</th>
+						<th>付款金額</th>		
+						<th class="w-20">付款截止日</th>
+						<th class="w-25">活動清單狀態</th>
+						<th>活動評價</th>
+						<th class="w-20">退出</th>
+					</tr>
+					</thead>
+					
+					<c:forEach var="eventListVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+						
+						<tr class="table-warning">
+							<td>${memSvc.getOneMem(eventListVO.mem_id).mem_name}</td>
+							
+							<td>
+								<c:if test="${eventListVO.evepay_amount!=0}">
+									${eventListVO.evepay_amount}元
+								</c:if>	
+								<c:if test="${eventListVO.evepay_amount==0}">
+									免費
+								</c:if>	
+							</td>
+							<td>${eventListVO.evepay_deadline==null?'無':eventListVO.evepay_deadline}</td>
+							<td><div class='d-flex justify-content-center'>
+								${eveListStatusMap.get(eventListVO.evelist_status)}
+								<c:if test="${eventListVO.evelist_status=='EL2'||eventListVO.evelist_status=='EL4'}">
+									<FORM METHOD="post"  ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
+								     <input type="submit" class="btn btn-sm btn-info ml-2" value="確認">
+								     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
+								     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
+								     <input type="hidden" name="evelist_status"  value="${eventListVO.evelist_status}">
+								     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
+								     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
+								     <input type="hidden" name="action"	value="Update_ELStatus"></FORM>	
+							     </c:if>
+							     </div>		
+							</td>		
+							<td>
+								<c:if test="${eveSvc.getOneEve(eventListVO.eve_id).eve_enddate.getTime()<System.currentTimeMillis()}">
+									${(eventListVO.eve_rating==0)?"":eventListVO.eve_rating}				
+								</c:if>	
+							</td>
+							<td>
+							  <c:if test="${eventListVO.evepay_amount==0}">				  
+								  <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
+								     <input type="submit" value="刪除">
+								     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
+								     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
+								     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
+								     <input type="hidden" name="whichPage"	value="<%=whichPage%>">
+								     <input type="hidden" name="action" value="delete_By_Organizer"></FORM>
+							  </c:if>			
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
 			
 			</div>	
 		</div>
