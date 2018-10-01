@@ -183,7 +183,7 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("delete".equals(action)) { // 來自My_plan_blank.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -192,14 +192,14 @@ public class PlanServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
-				String plan_id = new String(req.getParameter("plan_id"));
+				String plan_id = req.getParameter("plan_id");
 
 				/*************************** 2.開始刪除資料 ***************************************/
 				PlanService planSvc = new PlanService();
 				planSvc.deletePlan(plan_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/plan/plan_delete.jsp";
+				String url = "/front_end/plan/My_plan_blank.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 

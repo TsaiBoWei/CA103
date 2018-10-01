@@ -22,7 +22,7 @@ public class PlanDAO implements PlanDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -132,8 +132,9 @@ public class PlanDAO implements PlanDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, "plan_id");
-
+			pstmt.setString(1, plan_id);
+			pstmt.executeUpdate();
+				
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage() + "testing_delete");
 		} finally {

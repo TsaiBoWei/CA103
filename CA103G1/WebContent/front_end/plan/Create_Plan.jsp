@@ -55,9 +55,16 @@
 
 <style>
 /*頁面設定*/
-body {
-	overflow-x: hidden;
-}
+	body {
+		overflow-x: hidden;
+	}
+	
+	.date{
+		width: 170px;
+		height: 45px;
+		font-size: 20px;
+	}
+	
 </style>
 
 <%--上傳圖片 --%>
@@ -65,7 +72,6 @@ body {
 	src="<%=request.getContextPath()%>/front_end/plan/js/UploadPlan_Cover.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/plan/css/img.css">
-
 
 
 </head>
@@ -172,7 +178,7 @@ body {
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%= request.getContextPath()%>/front_end/plan/Create_Plan.jsp">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="<%= request.getContextPath()%>/front_end/plan/My_Plan.jsp">My Plan</a> <a
+								href="<%= request.getContextPath()%>/front_end/plan/My_plan_blank.jsp">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interesting Plan</a>
 						</div></li>
@@ -263,13 +269,13 @@ body {
 						
 						<div class="form-group">
 							<label><h3>PlanStartDate:</h3></label> 
-							<input type="text" name="plan_start_date" id="f_date1"/>
+							<input type="text" name="plan_start_date" id="f_date1" class="date"/>
 						</div>
 
 
 						<div class="form-group">
 							<label><h3>Plan EndDate:</h3></label> 
-							<input type="text" name="plan_end_date" id="f_date2"/>
+							<input type="text" name="plan_end_date" id="f_date2" class="date"/>
 						</div>
 						
  
@@ -301,7 +307,7 @@ body {
 
 						<div class="form-group">
 							<label><h3>Plan Content:</h3></label><br>
-							<textarea name="plan_vo" rows="10" class="form-control"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
+							<textarea name="plan_vo" rows="10" class="form-control" style="font-size: 22px"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
 		
@@ -443,7 +449,7 @@ body {
 	       step: 5,                			//step: 60 (這是timepicker的預設間隔60分鐘)
 	       format:'Y-m-d H:i',   			//format:'Y-m-d H:i:s', 
 	       value: '<%=plan_start_date%>',   // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後

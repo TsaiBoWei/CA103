@@ -29,7 +29,7 @@
 
 <style>
 table {
-	width: 1800px;
+	width: 1900px;
 	background-color: #AFEEEE;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -85,7 +85,7 @@ th, td {
 				<%@ include file="page1.file"%>
 				<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
- 
+
 					<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
 						<td>${planVO.plan_cover}</td>
 						<td>${planVO.plan_name}</td>
