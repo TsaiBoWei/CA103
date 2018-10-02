@@ -192,4 +192,32 @@
   	<url-pattern>/post/Post.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>CourlistServlet</servlet-name>
+    <servlet-class>com.courlist.controller.CourlistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourlistServlet</servlet-name>
+    <url-pattern>/courlist/courlist.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Courlist_DBGifReader</servlet-name>
+    <servlet-class>com.courlist.controller.Courlist_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Courlist_DBGifReader</servlet-name>
+    <url-pattern>/courlist/Courlist_DBGifReader.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Coach_DBGifReader</servlet-name>
+    <servlet-class>com.coach.controller.Coach_DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Coach_DBGifReader</servlet-name>
+    <url-pattern>/coach/Coach_DBGifReader.do</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
