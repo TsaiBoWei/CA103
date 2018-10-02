@@ -857,7 +857,7 @@ INSERT INTO PLAN (PLAN_ID,MEM_ID,PLAN_NAME,PLAN_VO,PLAN_COVER,PLAN_START_DATE, P
 
 
 --------------------------------------------------------
--- For Table PLAN_COLLECTION 收藏計畫清單 (盛紘)
+-- For Table PLANCOLLECTION 收藏計畫清單 (盛紘)
 --------------------------------------------------------
 CREATE TABLE PLANCOLLECTION(
   PLAN_COL_ID	  	VARCHAR2(10) 	NOT NULL, 
