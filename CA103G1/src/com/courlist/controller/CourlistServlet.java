@@ -84,7 +84,7 @@ public class CourlistServlet extends HttpServlet {
 					
 					/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("courlistVO", courlistVO); // 資料庫取出的courlistVO物件,存入req
-					String url = "/front_end/course/courlist/listOneCourlist.jsp";
+					String url = "/front_end/course/courlist/oneCourlist.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneCourlist.jsp
 					successView.forward(req, res);
 
@@ -115,7 +115,7 @@ public class CourlistServlet extends HttpServlet {
 									
 					/***************************3.查詢完成,準備轉交(Send the Success view)************/
 					req.setAttribute("courlistVO", courlistVO);         // 資料庫取出的courlistVO物件,存入req
-					String url = "/front_end/course/courlist/update_courlist_input.jsp";
+					String url = "/front_end/course/courlist/update_courlist.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_courlist_input.jsp
 					successView.forward(req, res);
 
@@ -236,7 +236,7 @@ System.out.println("111111");
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("courlistVO", courlistVO); // 含有輸入格式錯誤的courlistVO物件,也存入req
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/front_end/course/courlist/update_courlist_input.jsp");
+								.getRequestDispatcher("/front_end/course/courlist/update_courlist.jsp");
 						failureView.forward(req, res);
 						return; //程式中斷
 					}
@@ -249,7 +249,7 @@ System.out.println(courlistSvc);
 System.out.println(courlistVO);							
 					/***************************3.修改完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("courlistVO", courlistVO); // 資料庫update成功後,正確的的courlistVO物件,存入req
-					String url = "/front_end/course/courlist/listOneCourlist.jsp";
+					String url = "/front_end/course/courlist/oneCourlist.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneCourlist.jsp
 					successView.forward(req, res);
 
@@ -257,7 +257,7 @@ System.out.println(courlistVO);
 				} catch (Exception e) {
 					errorMsgs.add("修改資料失敗:"+e.getMessage());
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/course/courlist/update_courlist_input.jsp");
+							.getRequestDispatcher("/front_end/course/courlist/update_courlist.jsp");
 					failureView.forward(req, res);
 				}
 			}
