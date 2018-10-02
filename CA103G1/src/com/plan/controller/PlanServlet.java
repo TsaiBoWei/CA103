@@ -76,7 +76,7 @@ public class PlanServlet extends HttpServlet {
 				is.read(plan_cover);
 
 				// plan_start_date
-				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du = null;
 				Timestamp plan_start_date = null;
 				try {
@@ -88,14 +88,15 @@ public class PlanServlet extends HttpServlet {
 				}
 
 				// plan_end_date
-				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd");
+				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du2 = null;
 				Timestamp plan_end_date = null;
 				try {
 					System.out.println("testing1");
 					du2 = df2.parse(req.getParameter("plan_end_date"));
-					plan_end_date = (new Timestamp(du2.getTime()));
+					plan_end_date = (new Timestamp((int)du2.getTime()));
 					System.out.println(plan_end_date);
+					System.out.println(du2);
 
 				} catch (ParseException e) {
 					errorMsgs.add("Enter The End Date");

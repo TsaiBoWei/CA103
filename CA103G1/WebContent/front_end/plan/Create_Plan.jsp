@@ -61,7 +61,7 @@
 	
 	.date{
 		width: 170px;
-		height: 45px;
+		height: 33px;
 		font-size: 20px;
 	}
 	
@@ -252,7 +252,7 @@
 
 
 						<div class="form-group">
-							<label><h3>Plan Cover:　　 </h3></label> 
+							<label><h3>Plan Cover:　</h3></label> 
 							<label class="btn btn-info btn-lg"> 
 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
 									 onchange="openFile(event)" style="display: none;" 
@@ -268,29 +268,23 @@
 						
 						
 						<div class="form-group">
-							<label><h3>PlanStartDate:</h3></label> 
+							<label><h3>PlanStartDate:　</h3></label> 
 							<input type="text" name="plan_start_date" id="f_date1" class="date"/>
 						</div>
 
 
 						<div class="form-group">
-							<label><h3>Plan EndDate:</h3></label> 
+							<label><h3>Plan EndDate:　</h3></label> 
 							<input type="text" name="plan_end_date" id="f_date2" class="date"/>
 						</div>
+ 						<jsp:useBean id="sptypeSvc"  scope="page" class="com.sptype.model.SptypeService"/>
 						
- 
-						<div class="form-group"> 
-							<label><h3>Sport Type:　</h3></label> <select size="1"
+ 						<div class="form-group"> 
+							<label><h3>Sport Type5:　　</h3></label> <select size="1"
 								name="sptype_id" style="width: 150px; font-size: 18px;">
-								<option value="SP000000">請選擇</option>
-								<option value="SP000001">田徑</option>
-								<option value="SP000002">單車</option>
-								<option value="SP000003">球類</option>
-								<option value="SP000004">重訓</option>
-								<option value="SP000005">有氧</option>
-								<option value="SP000006">武術</option>
-								<option value="SP000007">水上</option>
-								<option value="SP000008">其他</option>
+								<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+									<option value="${sptypeVO.sptype_id}" ${(planVO.sptype_id==sptypeVO.sptype_id)? 'selected':''}>${sptypeVO.sport}
+								</c:forEach>
 							</select>
 						</div>
 
@@ -447,7 +441,7 @@
 	       theme: '',              			//theme: 'dark',
 	       timepicker:true,        			//timepicker:true,
 	       step: 5,                			//step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d H:i',   			//format:'Y-m-d H:i:s', 
+	       format:'Y-m-d  H:i',   			//format:'Y-m-d H:i:s', 
 	       value: '<%=plan_start_date%>',   // value:   new Date(),
 	       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
@@ -508,7 +502,7 @@
 	       theme: '',              			//theme: 'dark',
 	       timepicker:true,        			//timepicker:true,
 	       step: 5,                			//step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d H:i',   			//format:'Y-m-d H:i:s', 
+	       format:'Y-m-d  H:i',   			//format:'Y-m-d H:i:s', 
 	       value: '<%=plan_end_date%>', 
 	    });
 </script>
