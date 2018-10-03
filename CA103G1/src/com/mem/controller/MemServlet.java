@@ -52,13 +52,23 @@ public class MemServlet extends HttpServlet {
 				loggedMember.setMem_password(psw);
 				MemService memSvc = new MemService();
 				loggedMember = memSvc.loginMem(loggedMember.getMem_account(), loggedMember.getMem_password());
+				System.out.println(loggedMember.getMem_status());
 				
 				/***************************3.登入完成,準備轉交(Send the Success view)*************/
-				HttpSession session = req.getSession();
-				session.setAttribute("memVO", loggedMember);
-				String url = "/front_end/mem/login/TestView.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
-				successView.forward(req, res);
+				if("MS0".equals(loggedMember.getMem_status())) {
+					HttpSession session = req.getSession();
+					session.setAttribute("memVO", loggedMember);
+					String url = "/front_end/mem/login/Verify.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
+					successView.forward(req, res);
+				}else {
+					HttpSession session = req.getSession();
+					session.setAttribute("memVO", loggedMember);
+					String url = "/front_end/mem/login/TestView.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
+					successView.forward(req, res);
+					
+				}
 				
 				/***************************其他可能的錯誤處理**********************************/
 			}catch(NullPointerException npe) {
