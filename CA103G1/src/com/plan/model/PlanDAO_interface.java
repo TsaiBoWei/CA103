@@ -16,4 +16,13 @@ public interface PlanDAO_interface {
 
 	// (未完成) New Method 輸入計畫名稱關鍵字，可找到該計畫。
 	public List<PlanVO> getAll();
+	
+	/******************1004增加計畫interface*************/
+		//以會員id找到計畫
+		public List<PlanVO> getPlansByMem(String mem_id);		
+		//更新計畫(行事曆)
+		public void updateInCal(PlanVO planVO);
+		//刪除計畫(行事曆)
+		public void updatePlanStatusCal(String plan_id,String plan_status);
+	/*************************************************/	
 }
