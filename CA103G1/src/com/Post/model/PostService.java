@@ -12,7 +12,7 @@ public class PostService {
 	}
 	
    public PostVO addPost(String post_id,String mem_id,String post_con,Timestamp post_time,
-		Integer post_view,String sptype_id,String post_status) {
+		Integer post_view,String sptype_id,String post_title,String post_privacy) {
 		PostVO postVO = new PostVO();
 		
 		postVO.setPost_id(post_id);
@@ -21,14 +21,15 @@ public class PostService {
 		postVO.setPost_time(post_time);
 		postVO.setPost_view(post_view);
 		postVO.setSptype_id(sptype_id);
-		postVO.setPost_status(post_status);
+		postVO.setPost_title(post_title);
+		postVO.setPost_privacy(post_privacy);
 		dao.add(postVO);
 		
 		return postVO;
 	}
 	
    public PostVO updatePost(String post_id,String mem_id,String post_con,Timestamp post_time,Integer post_view,
-			String sptype_id,String post_status)
+			String sptype_id,String post_status,String post_title,String post_privacy)
 		{
 		
 		PostVO postVO = new PostVO();
@@ -39,6 +40,9 @@ public class PostService {
 		postVO.setPost_view(post_view);
 		postVO.setSptype_id(sptype_id);
 		postVO.setPost_status(post_status);
+		postVO.setPost_title(post_title);
+		postVO.setPost_privacy(post_privacy);
+		
 		dao.update(postVO);
 		
 		return postVO;

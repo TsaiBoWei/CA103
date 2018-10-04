@@ -95,7 +95,7 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_view(post_view);
 				postVO.setSptype_id(sptype_id);
 				postVO.setPost_status(post_status);
-				
+				//貼文增加了欄位，待修改   10/04
 				postservice.updatePost(post_id, mem_id, post_con, post_time, post_view, sptype_id, post_status);
 				//postservice.getOnePost(post_id);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/

@@ -26,8 +26,8 @@ public class PostDAO implements PostDAO_interface{
 		}
 	
 
-	private static final String INSERT_STMT = "INSERT INTO POST(POST_ID,MEM_ID,POST_CON,POST_TIME,POST_VIEW,SPTYPE_ID,POST_STATUS)values(to_char(sysdate,'yyyymmdd')||'-'||'PO'||LPAD(to_char(post_seq.NEXTVAL), 6, '0'),?,?,?,?,?,'POS0')";
-	private static final String UPDATE_STMT = "UPDATE POST SET MEM_ID = ?, POST_CON = ?, POST_TIME = ?,POST_VIEW = ?,SPTYPE_ID = ?,POST_STATUS = ? WHERE POST_ID = ?";
+	private static final String INSERT_STMT = "INSERT INTO POST(POST_ID,MEM_ID,POST_CON,POST_TIME,POST_VIEW,SPTYPE_ID,POST_STATUS,POST_TITLE,POST_PRIVACY)values(to_char(sysdate,'yyyymmdd')||'-'||'PO'||LPAD(to_char(post_seq.NEXTVAL), 6, '0'),?,?,?,?,?,'POS0',?,?)";
+	private static final String UPDATE_STMT = "UPDATE POST SET MEM_ID = ?, POST_CON = ?, POST_TIME = ?,POST_VIEW = ?,SPTYPE_ID = ?,POST_STATUS = ?,POST_TITLE = ?,POST_PRIVACY=? WHERE POST_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM POST WHERE POST_ID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM POST WHERE POST_ID = ?";
 //	private static final String FIND_BY_PK = "SELECT POST_ID,MEM_ID,POST_CON,to_char(Post_Time,'YYYY-MM-DD'),POST_VIEW,SPTYPE_ID,POST_STATUS FROM POST WHERE POST_ID = ?";
@@ -48,9 +48,9 @@ public class PostDAO implements PostDAO_interface{
 			pstmt.setString(2,postVO.getPost_con());
 			pstmt.setTimestamp(3,postVO.getPost_time());
 			pstmt.setInt(4,postVO.getPost_view());
-			pstmt.setString(5,postVO.getSptype_id());
-			pstmt.setString(6,postVO.getPost_status()); 
-			
+			pstmt.setString(5,postVO.getSptype_id());		
+			pstmt.setString(6,postVO.getPost_title());
+			pstmt.setString(7, postVO.getPost_privacy());
 			pstmt.executeUpdate();
 		
 //		catch (IOException ie) {
@@ -94,7 +94,10 @@ public class PostDAO implements PostDAO_interface{
 			pstmt.setTimestamp(3,postVO.getPost_time());
 			pstmt.setInt(4,postVO.getPost_view());
 			pstmt.setString(5,postVO.getSptype_id());
-			
+			pstmt.setString(6, postVO.getPost_status());
+			pstmt.setString(7,postVO.getPost_title());
+			pstmt.setString(8, postVO.getPost_privacy());
+			pstmt.setString(9,postVO.getPost_id());
 			pstmt.executeUpdate();
 			
 		
@@ -188,6 +191,8 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_view(rs.getInt("POST_VIEW"));
 				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				postVO.setPost_status(rs.getString("POST_STATUS"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postVO.setPost_privacy(rs.getString("POST_PRIVACY"));
 			}
 
 		
@@ -245,6 +250,8 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_view(rs.getInt("POST_VIEW"));
 				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				postVO.setPost_status(rs.getString("POST_STATUS"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postVO.setPost_privacy(rs.getString("POST_PRIVACY"));
 				postList.add(postVO);
 			}
 
@@ -300,6 +307,8 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setPost_view(rs.getInt("POST_VIEW"));
 				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				postVO.setPost_status(rs.getString("POST_STATUS"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postVO.setPost_privacy(rs.getString("POST_PRIVACY"));
 				postList.add(postVO);
 			}
 
