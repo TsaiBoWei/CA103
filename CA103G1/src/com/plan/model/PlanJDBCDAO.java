@@ -342,7 +342,8 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 			planVO1.setPlan_cover(bt);
 			planVO1.setPlan_start_date(java.sql.Timestamp.valueOf("2018-09-09 22:22:22"));
 			planVO1.setPlan_end_date(java.sql.Timestamp.valueOf("2018-10-10 22:22:22"));
-			planVO1.setSptype_id("SP000001");
+			planVO1.setSptype_id("SP000005");
+			planVO1.setPlan_view(99);
 			planVO1.setPlan_privacy("PLANPR1");
 			dao.insert(planVO1);
 

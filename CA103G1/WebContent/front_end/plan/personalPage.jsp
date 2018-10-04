@@ -16,6 +16,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.common-material.min.css" />
+	
+	<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.material.min.css" />
+	
+	<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.material.mobile.min.css" />
+
+	<script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>
 <link rel="icon" href="images/weight-lifting.png">
 <title>WORK it OUT</title>
 <meta name="description"
@@ -44,6 +52,11 @@ body {
 	overflow-x: hidden;
 }
 </style>
+
+
+
+
+
 
 
 </head>
@@ -190,7 +203,24 @@ body {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<!-- Here you go -->
+	<div id="example">
+
+		<div class="demo-section k-content">
+			<h4>Remind me on</h4>
+			<input id="datetimepicker" title="datetimepicker" style="width: 50%  color:info; " />
+		</div>
+
+		<script>
+			$(document).ready(function () {
+                    // create DateTimePicker from input HTML element
+                    $("#datetimepicker").kendoDateTimePicker({
+                    	value: new Date(),
+                    	dateInput: true
+                    });
+                });
+            </script>
+            
+        </div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">
 		<div class="container">

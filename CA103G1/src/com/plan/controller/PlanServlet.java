@@ -103,7 +103,6 @@ public class PlanServlet extends HttpServlet {
 				try {
 					du2 = df2.parse(req.getParameter("plan_end_date"));
 					plan_end_date = (new Timestamp(du2.getTime()));
-
 				} catch (ParseException e) {
 					errorMsgs.add("Enter The End Date");
 					e.printStackTrace();
@@ -119,14 +118,22 @@ public class PlanServlet extends HttpServlet {
 
 				// plan_privacy
 				String plan_privacy = req.getParameter("plan_privacy");
+
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo");
 				if (plan_vo == null || plan_vo.trim().length() == 0) {
 					errorMsgs.add("Plan Content Can't Be Blank");
 				}
+
 				// plan_view
 				System.out.println("testing");
-				Integer plan_view = Integer.parseInt(req.getParameter("plan_view"));
+				Integer plan_view = null;
+				try {
+					plan_view = Integer.parseInt(req.getParameter("plan_view"));
+					System.out.println(plan_view);
+				} catch (Exception s) {
+					errorMsgs.add("plan_view"+plan_view);
+				}
 				System.out.println("testing1");
 
 				PlanVO planVO = new PlanVO();
