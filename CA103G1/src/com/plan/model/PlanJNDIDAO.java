@@ -29,7 +29,7 @@ public class PlanJNDIDAO implements PlanDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_ens_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES (plan_seq.NEXTVAL,?,?,?,?,?,?,?,0,?,sysdate,'PLANST0')";
+	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_ens_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES (plan_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,sysdate,'PLANST0')";
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
@@ -48,18 +48,15 @@ public class PlanJNDIDAO implements PlanDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, planVO.getPlan_id());
-			pstmt.setString(2, planVO.getMem_id());
-			pstmt.setString(3, planVO.getPlan_name());
-			pstmt.setString(4, planVO.getPlan_vo());
-			pstmt.setBytes(5, planVO.getPlan_cover());
-			pstmt.setTimestamp(6, planVO.getPlan_start_date());
-			pstmt.setTimestamp(7, planVO.getPlan_end_date());
-			pstmt.setString(8, planVO.getSptype_id());
-			pstmt.setInt(9, planVO.getPlan_view());
-			pstmt.setString(10, planVO.getPlan_privacy());
-			pstmt.setDate(11, planVO.getPlan_create_time());
-			pstmt.setString(12, planVO.getPlan_status());
+			pstmt.setString(1, planVO.getMem_id());
+			pstmt.setString(2, planVO.getPlan_name());
+			pstmt.setString(3, planVO.getPlan_vo());
+			pstmt.setBytes(4, planVO.getPlan_cover());
+			pstmt.setTimestamp(5, planVO.getPlan_start_date());
+			pstmt.setTimestamp(6, planVO.getPlan_end_date());
+			pstmt.setString(7, planVO.getSptype_id());
+			pstmt.setInt(8, planVO.getPlan_view());
+			pstmt.setString(9, planVO.getPlan_status());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {

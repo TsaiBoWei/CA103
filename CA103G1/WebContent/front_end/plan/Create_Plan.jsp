@@ -62,7 +62,7 @@
 	.date{
 		width: 170px;
 		height: 33px;
-		font-size: 20px;
+		font-size: 18px;
 	}
 	
 </style>
@@ -73,6 +73,15 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/plan/css/img.css">
 
+<%-- 計畫內容 --%>
+<script src="https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js"></script>
+<script>
+CKEDITOR.plugins.addExternal("codesnippet", "https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.7.3/plugins/codesnippet/plugin.js", "");
+CKEDITOR.replace("editor1", {
+extraPlugins: "codesnippet",
+codeSnippet_theme: "solarized_dark"
+});
+</script>
 
 </head>
 
@@ -280,7 +289,7 @@
  						<jsp:useBean id="sptypeSvc"  scope="page" class="com.sptype.model.SptypeService"/>
 						
  						<div class="form-group"> 
-							<label><h3>Sport Type5:　　</h3></label> <select size="1"
+							<label><h3>Sport Type:　　</h3></label> <select size="1"
 								name="sptype_id" style="width: 150px; font-size: 18px;">
 								<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 									<option value="${sptypeVO.sptype_id}" ${(planVO.sptype_id==sptypeVO.sptype_id)? 'selected':''}>${sptypeVO.sport}
@@ -304,8 +313,36 @@
 							<textarea name="plan_vo" rows="10" class="form-control" style="font-size: 22px"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
+						
+						
+						<div class="from-group">
+							<script src="https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js"></script>
+<textarea name="editor1"></textarea>
+<script>
+CKEDITOR.plugins.addExternal("codesnippet", "https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.7.3/plugins/codesnippet/plugin.js", "");
+CKEDITOR.replace("editor1", {
+extraPlugins: "codesnippet",
+codeSnippet_theme: "solarized_dark"
+});
+</script>
+						</div>
 		
 		
+						<div class="from-group">
+							<input type="hidden" name="plan_view">
+							<h5>
+							<%Integer plan_view = (Integer)(application.getAttribute("plan_view"));
+							  if( plan_view ==null || plan_view == 0 ){
+      						  	out.println("Welcome to my website!");
+      							plan_view = 0;
+    						  }else{
+							  	out.println("Welcome back to my website!");
+								plan_view ++;
+							  }
+    							application.setAttribute("plan_view", plan_view);%>
+    							瀏覽數：<%=plan_view %>
+							</h5>
+						</div>
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-primary">Add</button>
@@ -323,11 +360,6 @@
 	
 	
 	
-	<div>
-		<h5>
-			瀏覽數：<%!int count = 0;%><%=count++%>
-		</h5>
-	</div>
 	<div class="container containerHrB ">
 		<hr>
 	</div>

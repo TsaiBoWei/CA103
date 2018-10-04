@@ -14,7 +14,7 @@ public class PlanService {
 	}
 
 	public PlanVO addPlan(String mem_id,String plan_name, byte[] plan_cover, Timestamp plan_start_date,
-			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_vo) {
+			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_vo ,Integer plan_view) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setMem_id(mem_id);
@@ -25,6 +25,7 @@ public class PlanService {
 		planVO.setSptype_id(sptype_id);
 		planVO.setPlan_privacy(plan_privacy);
 		planVO.setPlan_vo(plan_vo);
+		planVO.setPlan_view(plan_view);
 		dao.insert(planVO);
 
 		return planVO;
