@@ -60,4 +60,32 @@ public class PlanService {
 	public List<PlanVO> getAll() {
 		return dao.getAll();
 	}
+	/*********************1004增加計畫service***************/
+		//以會員id查詢計畫
+	public List<PlanVO> getPlansByMem(String mem_id){
+		return dao.getPlansByMem(mem_id);
+	}
+		//新增計畫(在行事曆)
+	public PlanVO updateInCal(String plan_name, String plan_vo, Timestamp plan_start_date,
+			Timestamp plan_end_date,String plan_id) {
+		PlanVO planVO = new PlanVO();
+
+		planVO.setPlan_name(plan_name);
+		planVO.setPlan_vo(plan_vo);
+		
+		planVO.setPlan_start_date(plan_start_date);
+		planVO.setPlan_end_date(plan_end_date);
+	
+		planVO.setPlan_id(plan_id);
+		dao.updateInCal(planVO);
+
+		return planVO;
+	}
+		//刪除計畫(改狀態碼)於行事曆
+	public PlanVO changePlanStatusCal(String plan_id,String plan_status) {
+		dao.updatePlanStatusCal(plan_id,plan_status);
+		return dao.findByPrimaryKey(plan_id);		
+	}
+	/************************************************************/
+	
 }

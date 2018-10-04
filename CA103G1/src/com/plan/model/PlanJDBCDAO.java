@@ -403,5 +403,24 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		}
 
 	}
+/****************1004增加計畫dao(僅於PlanDAO增加實際方法)******************/
+	@Override
+	public List<PlanVO> getPlansByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateInCal(PlanVO planVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePlanStatusCal(String plan_id, String plan_status) {
+		// TODO Auto-generated method stub
+		
+	}
+/******************************************************************/
 
 }
