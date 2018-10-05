@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+
 
 
 public class EveJDBCDAO implements EventDAO_interface{
@@ -43,7 +46,7 @@ public class EveJDBCDAO implements EventDAO_interface{
 			"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE MEM_ID=? order by EVE_ID";
 	private static final String GET_EVES_IN_VIEW_PAGE = 
 			"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
-			"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by EVE_ID";
+			"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by eve_view desc";
 	private static final String GET_REVIEW_EVES = 
 			"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
 					"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E1'";
@@ -640,6 +643,87 @@ public class EveJDBCDAO implements EventDAO_interface{
 		
 	}
 	
+	@Override
+	public List<EventVO> getAll(Map<String, String[]> map){
+		List<EventVO> list = new ArrayList<EventVO>();
+		EventVO eventVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String finalSQL = "select * from EVENT "
+		          + JdbcUtil_CompositeQuery_Eve.get_WhereCondition(map)
+		          + "order by eve_id";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				eventVO = new EventVO();
+				eventVO.setEve_id(rs.getString("Eve_id"));
+				eventVO.setMem_id(rs.getString("Mem_id"));
+				eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+				eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+				eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+				eventVO.setEve_title(rs.getString("Eve_title"));
+				eventVO.setEve_content(rs.getString("Eve_content"));
+				eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
+				eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
+				eventVO.setEreg_startdate(rs.getDate("Ereg_startdate"));
+				eventVO.setEreg_enddate(rs.getDate("Ereg_enddate"));
+				eventVO.setEstart_limit(rs.getInt("Estart_limit"));
+				eventVO.setEstart_max(rs.getInt("Estart_max"));
+				eventVO.setEve_status(rs.getString("Eve_status"));
+				eventVO.setEve_location(rs.getString("Eve_location"));
+				eventVO.setEve_long(rs.getDouble("Eve_long"));
+				eventVO.setEve_lat(rs.getDouble("Eve_lat"));
+				eventVO.setCity_id(rs.getString("City_id"));
+				eventVO.setSptype_id(rs.getString("Sptype_id"));
+				eventVO.setEve_view(rs.getInt("Eve_view"));
+				eventVO.setEve_charge(rs.getInt("Eve_charge"));
+				eventVO.setEcontact_info(rs.getString("Econtact_info"));
+				eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
+				
+				list.add(eventVO); // Store the row in the list
+			}
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	
 
 	
@@ -648,35 +732,35 @@ public class EveJDBCDAO implements EventDAO_interface{
 		EveJDBCDAO dao = new EveJDBCDAO();
 		
 		// 新增
-		EventVO eventVO1=new EventVO();
-		eventVO1.setMem_id("M000003");
-		byte[] photo1=getPicBytes("C:\\Users\\user\\Desktop\\專題\\images\\E000001_photo.jpg");
-		eventVO1.setEve_photo(photo1);
-//		eventVO1.setEve_photo(null);
-		byte[] logo1=getPicBytes("C:\\Users\\user\\Desktop\\專題\\images\\E000001_photo.jpg"
-				+ "");
-		eventVO1.setEve_logo(logo1);
-//		eventVO1.setEve_logo(null);
-		eventVO1.setEve_ptype("image/jpeg");
-		eventVO1.setEve_title("日月光路跑");
-		eventVO1.setEve_content("由桃園市政府攜手日月光集團共同主辦，堪稱今年必跑、最值得參加的頂規賽事，並透過極地探險家林義傑協助規劃之「桃園日月光半程馬拉松」，訂於今(107)年10月7日選定國立體育大學盛大登場。本賽事規劃3K休閒組、10K挑戰組、21K半馬組等三大組別，報名費依不同組別從200至450元，活動內容十分豐富、有趣，除了有吸睛啦啦隊、在地特色補給站及賽後嘉年華音樂會外，更有超值的活動贈品，名額有限，報名從速！");
-		eventVO1.setEve_startdate(java.sql.Timestamp.valueOf("2018-10-10 08:08:08"));
-		eventVO1.setEve_enddate(java.sql.Timestamp.valueOf("2018-10-10 14:15:16"));
-		eventVO1.setEreg_startdate(java.sql.Date.valueOf("2018-09-13"));
-		eventVO1.setEreg_enddate(java.sql.Date.valueOf("2018-09-30"));
-		eventVO1.setEstart_limit(10);
-		eventVO1.setEstart_max(1000);
-		eventVO1.setEve_status("E2");
-		eventVO1.setEve_location("桃園市中壢區石頭里中和路139號 中壢火車站");
-		eventVO1.setEve_long(121.2237819);
-		eventVO1.setEve_lat(24.9539722);
-		eventVO1.setCity_id("CITY03");
-		eventVO1.setSptype_id("SP000001");
-		eventVO1.setEve_view(0);
-		eventVO1.setEve_charge(100);
-		eventVO1.setEcontact_info("0912-345-678");
-		
-		dao.insert(eventVO1);
+//		EventVO eventVO1=new EventVO();
+//		eventVO1.setMem_id("M000003");
+//		byte[] photo1=getPicBytes("C:\\Users\\user\\Desktop\\專題\\images\\E000001_photo.jpg");
+//		eventVO1.setEve_photo(photo1);
+////		eventVO1.setEve_photo(null);
+//		byte[] logo1=getPicBytes("C:\\Users\\user\\Desktop\\專題\\images\\E000001_photo.jpg"
+//				+ "");
+//		eventVO1.setEve_logo(logo1);
+////		eventVO1.setEve_logo(null);
+//		eventVO1.setEve_ptype("image/jpeg");
+//		eventVO1.setEve_title("日月光路跑");
+//		eventVO1.setEve_content("由桃園市政府攜手日月光集團共同主辦，堪稱今年必跑、最值得參加的頂規賽事，並透過極地探險家林義傑協助規劃之「桃園日月光半程馬拉松」，訂於今(107)年10月7日選定國立體育大學盛大登場。本賽事規劃3K休閒組、10K挑戰組、21K半馬組等三大組別，報名費依不同組別從200至450元，活動內容十分豐富、有趣，除了有吸睛啦啦隊、在地特色補給站及賽後嘉年華音樂會外，更有超值的活動贈品，名額有限，報名從速！");
+//		eventVO1.setEve_startdate(java.sql.Timestamp.valueOf("2018-10-10 08:08:08"));
+//		eventVO1.setEve_enddate(java.sql.Timestamp.valueOf("2018-10-10 14:15:16"));
+//		eventVO1.setEreg_startdate(java.sql.Date.valueOf("2018-09-13"));
+//		eventVO1.setEreg_enddate(java.sql.Date.valueOf("2018-09-30"));
+//		eventVO1.setEstart_limit(10);
+//		eventVO1.setEstart_max(1000);
+//		eventVO1.setEve_status("E2");
+//		eventVO1.setEve_location("桃園市中壢區石頭里中和路139號 中壢火車站");
+//		eventVO1.setEve_long(121.2237819);
+//		eventVO1.setEve_lat(24.9539722);
+//		eventVO1.setCity_id("CITY03");
+//		eventVO1.setSptype_id("SP000001");
+//		eventVO1.setEve_view(0);
+//		eventVO1.setEve_charge(100);
+//		eventVO1.setEcontact_info("0912-345-678");
+//		
+//		dao.insert(eventVO1);
 		
 //		// 修改
 //		EventVO eventVO2=new EventVO();		

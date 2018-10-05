@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.city.model.CityService;
 import com.eve.model.EveService;
 import com.eve.model.EventVO;
 import com.evechat.controller.JedisPoolUtil;
@@ -34,9 +35,6 @@ import com.eventlist.model.EventlistService;
 * 1024)
 public class EveServlet extends HttpServlet {
 	
-	Map<String,String> eveStatusMap=null;
-	Map<String,String> sportTypeMap=null;
-	Map<String,String> eveListStatusMap=null;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -72,7 +70,9 @@ public class EveServlet extends HttpServlet {
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("eveVO", eveVO); // 資料庫取出的empVO物件,存入req
+				 // 資料庫取出的empVO物件,存入req
+				req.setAttribute("eveVO", eveVO);
+				
 				String url = "/front_end/event/eve/listOneEvent.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
@@ -223,21 +223,21 @@ public class EveServlet extends HttpServlet {
 				
 //				
 				
-				System.out.println("title :"+eve_title);
-				System.out.println("mem_id :"+mem_id);
-				System.out.println("ereg_startdate :"+ereg_startdate);
-				System.out.println("ereg_enddate :"+ereg_enddate);
-				System.out.println("evestart :"+eve_startdate);
-				System.out.println("eveend :"+eve_enddate);
-				System.out.println("limit :"+estart_limit);
-				System.out.println("max :"+estart_max);
-				System.out.println("city :"+city_id);
-				System.out.println("location :"+eve_location);
-				System.out.println("charge :"+eve_charge);
-				System.out.println("conctact :"+econtact_info);
-				System.out.println("estatus :"+eve_status);
-				System.out.println("sptype :"+sptype_id);
-				System.out.println("content :"+eve_content);
+//				System.out.println("title :"+eve_title);
+//				System.out.println("mem_id :"+mem_id);
+//				System.out.println("ereg_startdate :"+ereg_startdate);
+//				System.out.println("ereg_enddate :"+ereg_enddate);
+//				System.out.println("evestart :"+eve_startdate);
+//				System.out.println("eveend :"+eve_enddate);
+//				System.out.println("limit :"+estart_limit);
+//				System.out.println("max :"+estart_max);
+//				System.out.println("city :"+city_id);
+//				System.out.println("location :"+eve_location);
+//				System.out.println("charge :"+eve_charge);
+//				System.out.println("conctact :"+econtact_info);
+//				System.out.println("estatus :"+eve_status);
+//				System.out.println("sptype :"+sptype_id);
+//				System.out.println("content :"+eve_content);
 				
 				EventVO eveVO=new EventVO();
 				eveVO.setMem_id(mem_id);		
@@ -296,11 +296,9 @@ public class EveServlet extends HttpServlet {
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
 
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);			
 			String requestURL = req.getParameter("requestURL"); 
-//			System.out.println(requestURL);
+
 			try {
 				/***************************1.接收請求參數****************************************/
 				String eve_id = req.getParameter("eve_id").trim();	
@@ -310,7 +308,6 @@ public class EveServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("eveVO", eveVO); // 資料庫取出的eveVO物件,存入req
 				String url = "/front_end/event/eve/updateEve.jsp";
-//				System.out.println(url);
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -332,15 +329,11 @@ public class EveServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String eve_id=req.getParameter("eve_id");
 				String eve_title = req.getParameter("eve_title");
-//				String etitleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,20}$";
 				if (eve_title == null || eve_title.trim().length() == 0) {
 					errorMsgs.put("eve_title","活動標題: 請勿空白");
 				} 
-//				else if(!eve_title.trim().matches(etitleReg)) { //以下練習正則(規)表示式(regular-expression)
-//					errorMsgs.put("eve_title","活動標題: 只能是中、英文字母、數字、_ , 且長度在1到20之間");
-//	            }
-				
-				
+
+								
 				String mem_id = req.getParameter("mem_id").trim();
 				if (mem_id == null || mem_id.trim().length() == 0) {
 					errorMsgs.put("mem_id","主辦人須為會員");
@@ -447,20 +440,17 @@ public class EveServlet extends HttpServlet {
 				
 				Part photo = req.getPart("eve_photo");
 				byte[] eve_photo=null;	
-				System.out.println(photo.getSubmittedFileName().isEmpty());
-				System.out.println(photo.getContentType());
-				System.out.println(photo.getSubmittedFileName() != null && photo.getContentType() != null);
+//				System.out.println(photo.getSubmittedFileName().isEmpty());
 				if (!photo.getSubmittedFileName().isEmpty()) {
 					InputStream in = photo.getInputStream();
 					eve_photo=new byte[in.available()];
 					in.read(eve_photo);
 					in.close();				
 				}else {
-					System.out.println("else");
 					EveService eveSvc = new EveService();
 					eve_photo=eveSvc.getOneEve(eve_id).getEve_photo();	
 				}
-				System.out.println(eve_photo);
+//				System.out.println(eve_photo);
 				
 				String sptype_id=req.getParameter("sptype_id").trim();
 				byte[] eve_logo=null;
@@ -580,6 +570,106 @@ public class EveServlet extends HttpServlet {
 			}
 		}
 		
+		if ("listEves_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				if (req.getParameter("whichPage") == null){
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				} 
+				
+				Map<String,String> eveQuery = new LinkedHashMap<String,String>();
+				String keyword=req.getParameter("keyword");
+				String eve_startdate=req.getParameter("eve_startdate");
+				String eve_enddate=req.getParameter("eve_enddate");
+				String eve_charge=req.getParameter("eve_charge");
+				String city_id=req.getParameter("city_id");
+				String sptype_id=req.getParameter("sptype_id");
+				String orderBy=req.getParameter("orderBy");
+				
+				if(keyword!=null && keyword.trim().length() != 0) {
+					eveQuery.put("keyword","關鍵字 : "+keyword);
+				}
+				if(eve_startdate!=null && eve_startdate.trim().length() != 0) {
+					eveQuery.put("eve_startdate"," 活動時間 : "+eve_startdate);
+					
+				}
+				if(eve_enddate!=null && eve_enddate.trim().length() != 0) {
+					eveQuery.put("eve_enddate"," ~ " +eve_enddate);
+				}
+				if(eve_charge!=null && eve_charge.trim().length() != 0) {
+					switch(eve_charge) {
+					case "0": 
+						eve_charge="免費";
+						break;
+					case "300":	
+						eve_charge="0 ~ 300 元";
+						break;
+					case "500":	
+						eve_charge="300 ~ 500 元";
+						break;
+					case "1000":	
+						eve_charge="500 ~ 1000 元";
+						break;
+					case "1001":	
+						eve_charge="1000 元 以上";
+						break;		
+					}					
+					eveQuery.put("eve_charge"," 活動金額  : " +eve_charge);
+				}
+				if(city_id!=null && city_id.trim().length() != 0) {
+					CityService citySvc=new  CityService();
+					System.out.println();
+					eveQuery.put("city_id"," 地區 : " +citySvc.getCityName(city_id));
+				}
+				if(sptype_id!=null && sptype_id.trim().length() != 0) {
+					Map sportTypeMap=(Map)getServletContext().getAttribute("sportTypeMap");
+					eveQuery.put("sptype_id"," 運動類別 : "+sportTypeMap.get(sptype_id));
+				}
+				if(orderBy!=null && orderBy.trim().length() != 0) {
+					switch(orderBy) {
+					case "hot":
+						orderBy="熱門活動";
+						break;
+					case "eve_startdate":
+						orderBy="活動時間";
+						break;
+					case "new":
+						orderBy="最新刊登";
+						break;
+					}
+					eveQuery.put("orderBy"," 排序依 : "+orderBy);
+				}
+				session.setAttribute("eveQuery", eveQuery);
+				
+				
+				
+				/***************************2.開始複合查詢***************************************/
+				EveService eveSvc = new EveService();
+				List<EventVO> list  = eveSvc.getCompositeQueryEves(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				session.setAttribute("listEves_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				res.sendRedirect(req.getContextPath()+"/front_end/event/eve/listAllEve.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				return;
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/event/eve/select_event_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 
 		
 		
@@ -607,8 +697,8 @@ public class EveServlet extends HttpServlet {
 //		eveStatusMap.put("E1", "待審核");
 //		eveStatusMap.put("E2", "人數尚未達成"); 
 //		eveStatusMap.put("E3", "人數達成 接受報名");
-//		eveStatusMap.put("E4", "已額滿");//人數達成 活動未結束
-//		eveStatusMap.put("E5", "已結束");
+//		eveStatusMap.put("E4", "報名已結束");//人數達成 活動未開始or報名時間結束未開始
+//		eveStatusMap.put("E5", "活動已結束");
 //		eveStatusMap.put("E6", "審核未通過");
 //		eveStatusMap.put("E7", "取消活動作業中");
 //		eveStatusMap.put("E8", "活動已取消");
@@ -640,7 +730,7 @@ public class EveServlet extends HttpServlet {
 //		
 //	}
 //	
-//	//暫放 關閉redis連線池 之後要放在listener
+//	//關閉redis連線池 要放在listener
 //	public void destroy() {
 //		JedisPoolUtil.shutdownJedisPool();
 //	}

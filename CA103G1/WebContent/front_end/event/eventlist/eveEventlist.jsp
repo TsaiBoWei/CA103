@@ -50,6 +50,9 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/event/eventlist/css/eveEventlist.css">	
+	
 <style>
  
 
@@ -59,17 +62,7 @@ body {
 }
 
 
-#evelistTable th{
-	background-color:#ffc107!important;
-}
-#evelistTable td{
-	background-color:#ffe3bae3!important;
-}
 
-
-#evelistTable tr,#evelistTable td{
-	color:black;
-}
 
 </style>
 

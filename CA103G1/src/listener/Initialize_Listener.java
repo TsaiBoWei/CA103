@@ -22,8 +22,8 @@ public class Initialize_Listener implements ServletContextListener{
 		eveStatusMap.put("E1", "待審核");
 		eveStatusMap.put("E2", "人數尚未達成"); 
 		eveStatusMap.put("E3", "人數達成 接受報名");
-		eveStatusMap.put("E4", "已額滿");//人數達成 活動未結束
-		eveStatusMap.put("E5", "已結束");
+		eveStatusMap.put("E4", "報名已結束");//人數達成 活動未開始or報名時間結束未開始
+		eveStatusMap.put("E5", "活動已結束");
 		eveStatusMap.put("E6", "審核未通過");
 		eveStatusMap.put("E7", "取消活動作業中");
 		eveStatusMap.put("E8", "活動已取消");

@@ -1,0 +1,25 @@
+@charset "BIG5";
+
+body {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"  !important;
+	
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+	color: #efefef;
+}
+
+#evelistTable th{
+	background-color:#ffc107!important;
+}
+#evelistTable td{
+	background-color:#ffe3bae3!important;
+}
+
+
+#evelistTable tr,#evelistTable td{
+	color:black;
+}
+
+

@@ -78,70 +78,61 @@
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp" >
        <b>主辦會員的活動管理new:</b>
-<!--        <select size="1" name="eve_id"> -->
-<%--          <c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}" >  --%>
-<%--          	 <option value="${eveVO.eve_id}">${eveVO.eve_title} --%>
-<%--          </c:forEach>    --%>
-<!--        </select> -->
        <input type="submit" value="送出">
-<%--        <input type="hidden" name="mem_id" value="${memVO.mem_id}"> --%>
-<!--        <input type="hidden" name="action" value="get_Eves_By_Mem">     -->
     </FORM>
   </li>
   
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer_old.jsp" >
-       <b>主辦會員的活動管理old:</b>
-<!--        <select size="1" name="eve_id"> -->
-<%--          <c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}" >  --%>
-<%--          	 <option value="${eveVO.eve_id}">${eveVO.eve_title} --%>
-<%--          </c:forEach>    --%>
-<!--        </select> -->
-       <input type="submit" value="送出">
-<%--        <input type="hidden" name="mem_id" value="${memVO.mem_id}"> --%>
-<!--        <input type="hidden" name="action" value="get_Eves_By_Mem">     -->
-    </FORM>
-  </li>
-</ul>
+  </ul>
 
 <%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
 <ul>  
   <li>   
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1">
         <b><font color=blue>萬用複合查詢:</font></b> <br>
-        <b>輸入活動名稱:</b>
-        <input type="text" name="empno" value="7001"><br>
+        <b>關鍵字:</b>
+        <input type="text" name="keyword"><br>
            
-       <b>輸入活動開始時間:</b>
-        <input name="hiredate" id="f_date1" type="text">
+       <b>活動時間:</b>
+        <input name="eve_startdate" id="f_date1" type="text">~
+		<input name="eve_enddate" id="f_date1" type="text"><br>
        
-       <b>輸入活動結束時間:</b>
-       <input name="hiredate" id="f_date1" type="text"><br>
+        <b>活動金額:</b>
+       <select size="1" name="eve_charge" >
+       	  <option value="">不限
+          <option value="0">免費        
+          <option value="300">300元以下
+          <option value="500">300元~500元
+          <option value="1000">500元~1000元
+          <option value="1001">1000元以上
+       </select><br>
        
-        <b>輸入活動金額:</b>
-       <input type="text" name="ename" value="KING"><br>
-       
-       <b>輸入活動地點:</b>
-       <input type="text" name="job" value="PRESIDENT"><br>
-    
+          	
+    	
+       <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
        <b>選擇活動地區:</b>
-       <select size="1" name="deptno" >
-          <option value="">
-         <c:forEach var="deptVO" items="${deptSvc.all}" > 
-          <option value="${deptVO.deptno}">${deptVO.dname}
+       <select size="1" name="city_id" >
+          <option value="">全台灣
+         <c:forEach var="cityVO" items="${citySvc.all}" > 
+          <option value="${cityVO.city_id}">${cityVO.city_name}
          </c:forEach>   
        </select><br>
        
        <b>選擇運動種類:</b>
-       <select size="1" name="deptno" >
-          <option value="">
-         <c:forEach var="deptVO" items="${deptSvc.all}" > 
-          <option value="${deptVO.deptno}">${deptVO.dname}
+       <select size="1" name="sptype_id" >
+          <option value="">不限
+         <c:forEach var="sptype" items="${sportTypeMap}" > 
+          <option value="${sptype.key}">${sptype.value}
          </c:forEach>   
        </select><br>
-           		        
+       
+       <b>排序依:</b>
+       <input type="radio" name="orderBy" value="hot" checked >熱門活動
+       <input type="radio" name="orderBy" value="eve_startdate">活動時間
+       <input type="radio" name="orderBy" value="new">最新刊登
+
+        <br>  		        
         <input type="submit" value="送出">
-        <input type="hidden" name="action" value="listEmps_ByCompositeQuery">
+        <input type="hidden" name="action" value="listEves_ByCompositeQuery">
      </FORM>
   </li>
 </ul>

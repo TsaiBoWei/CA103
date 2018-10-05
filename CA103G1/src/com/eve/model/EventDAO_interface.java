@@ -1,6 +1,7 @@
 package com.eve.model;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EventDAO_interface {
     public void insert(EventVO eventVO);
@@ -12,10 +13,11 @@ public interface EventDAO_interface {
     public List<EventVO> getEvesByMem(String mem_id);
     public List<EventVO> getReviewEves();
     public List<EventVO> getAllinViewPage();
+    //窾ノ狡琩高(肚把计篈Map)(肚 List)
+    public List<EventVO> getAll(Map<String, String[]> map); 
   
     
 //    public void delete(String eve_id);
-    //窾ノ狡琩高(肚把计篈Map)(肚 List)
-//  public List<EmpVO> getAll(Map<String, String[]> map); 
+    
 
 }

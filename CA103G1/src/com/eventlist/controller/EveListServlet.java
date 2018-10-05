@@ -42,11 +42,9 @@ public class EveListServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getEvelists_By_EVE".equals(action)) { // 來自select_page.jsp的請求
+		if ("getEvelists_By_EVE".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -56,23 +54,11 @@ public class EveListServlet extends HttpServlet {
 				/***************************2.開始查詢資料*****************************************/
 				EventlistService eveListSvc = new EventlistService();
 				List<EventListVO> eveListsByEve=eveListSvc.getEveListsByEve(eve_id);
-//				if(eveListsByEve.size()==0) {
-//					errorMsgs.add("查無資料");
-//				}
-				
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventlist/select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("eveListsByEve",eveListsByEve); // 資料庫取出的empVO物件,存入req				
 				String url =req.getContextPath()+ "/front_end/event/eventlist/eveEventlist.jsp?perpageloc=event#personalnav";		
 				HttpSession session=req.getSession();
-//				session.setAttribute("eveListsByEve", eveListsByEve);
 				session.setAttribute("eve_id", eve_id);
 				res.sendRedirect(url);
 				return;//程式中斷
@@ -87,11 +73,9 @@ public class EveListServlet extends HttpServlet {
 		}
 		
 		
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -171,8 +155,6 @@ public class EveListServlet extends HttpServlet {
 		if ("insert".equals(action)) { // 來自addeveList.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -221,14 +203,14 @@ public class EveListServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println(mem_id);
-				System.out.println(eve_id);
-				System.out.println(eve_rating);
-				System.out.println(evelist_status);
-				System.out.println(evepay_amount);
-				System.out.println(eve_share);
-				System.out.println(evepay_deadline);
-				System.out.println();
+//				System.out.println(mem_id);
+//				System.out.println(eve_id);
+//				System.out.println(eve_rating);
+//				System.out.println(evelist_status);
+//				System.out.println(evepay_amount);
+//				System.out.println(eve_share);
+//				System.out.println(evepay_deadline);
+//				System.out.println();
 				/***************************2.開始新增資料***************************************/
 				EventlistService eveListSvc = new EventlistService();
 				eventListVO=eveListSvc.addEveList(mem_id, eve_id, eve_rating, evelist_status, evepay_amount, eve_share, evepay_deadline);
@@ -267,144 +249,9 @@ public class EveListServlet extends HttpServlet {
 		}
 		
 		
-//		if ("getOne_For_Update".equals(action)) { // 來自EvelistsByEve.jsp的請求  
-//			
-//			List<String> errorMsgs = new LinkedList<String>();
-//			try {
-//				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-//				String mem_id = req.getParameter("mem_id");
-//				String eve_id=req.getParameter("eve_id");
-//				
-//				/***************************2.開始查詢資料****************************************/
-//				EventlistService eveListSvc = new EventlistService();
-//				EventListVO eventListVO=eveListSvc.getOneEveList(mem_id, eve_id);
-//								
-//				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-//				
-//				req.setAttribute("eventListVO", eventListVO);         // 資料庫取出的eventListVO物件,存入req
-//				String url = "/front_end/event/eventlist/update_evelist_input.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_evelist_input.jsp
-//				successView.forward(req, res);
-//
-//				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-//				HttpSession session=req.getSession();
-//				session.setAttribute("errorMsgs", errorMsgs);
-//				res.sendRedirect(req.getContextPath()+"/front_end/event/eventlist/EvelistsByEve.jsp");
-//				return;
-//			}
-//		}
-		
-//		
-//		if ("update".equals(action)) { // 來自update_evelist_input.jsp的請求
-//		
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			
-//		
-//			try {
-//				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				
-//				String mem_id = req.getParameter("mem_id");
-//				
-//				String enameReg = "^M\\d{6}$";
-//				if (mem_id == null || mem_id.trim().length() == 0) {
-//					errorMsgs.add("會員編號: 請勿空白");
-//				} else if(!mem_id.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
-//					errorMsgs.add("會員編號: 只能開頭是M，且後接長度6的數字");
-//	            }
-//				
-//				String  eve_id= req.getParameter("eve_id").trim();
-//				
-//				Integer evepay_amount=null;
-//				try {
-//					evepay_amount=new Integer(req.getParameter("evepay_amount").trim());
-//				}catch(NumberFormatException e) {
-//					evepay_amount=0;
-//					errorMsgs.add("付款金額為整數數字.");
-//				}
-//			
-//				java.sql.Date evepay_deadline = null;
-//				if(req.getParameter("evepay_deadline")!=null) {
-//					try {
-//						evepay_deadline = java.sql.Date.valueOf(req.getParameter("evepay_deadline").trim());
-//					} catch (IllegalArgumentException e) {
-//						evepay_deadline=new java.sql.Date(System.currentTimeMillis()+1000*86400*3);
-//						errorMsgs.add("請輸入日期!");
-//					}
-//				}
-//				
-//				
-//				String evelist_status = req.getParameter("evelist_status").trim();
-//				if (evelist_status == null || evelist_status.trim().length() == 0) {
-//					errorMsgs.add("活動清單狀態請勿空白");
-//				}
-//				
-//				String eve_share = req.getParameter("eve_share").trim();
-//				if (eve_share == null || eve_share.trim().length() == 0) {
-//					errorMsgs.add("活動分享狀態請勿空白");
-//				}
-//				
-//				Integer eve_rating = 0;
-//				try {
-//					eve_rating=new Integer(req.getParameter("eve_rating").trim());
-//					if(eve_rating>5||eve_rating<1) {
-//						eve_rating=0;						
-//					}
-//				}catch(NumberFormatException e) {
-//					eve_rating=0;
-//					errorMsgs.add("活動評價為1-5之整數");
-//				}
-//				EventListVO eventListVO = new EventListVO();
-//				eventListVO.setMem_id(mem_id);
-//				eventListVO.setEve_id(eve_id);
-//				eventListVO.setEvepay_amount(evepay_amount);
-//				eventListVO.setEvepay_deadline(evepay_deadline);
-//				eventListVO.setEvelist_status(evelist_status);
-//				eventListVO.setEve_share(eve_share);
-//				eventListVO.setEve_rating(eve_rating);
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("eventListVO", eventListVO); // 含有輸入格式錯誤的eventListVO物件,也存入req
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front_end/event/eventlist/update_evelist_input.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//				
-//				/***************************2.開始修改資料***************************************/
-//				EventlistService eveListSvc = new EventlistService();
-//				eventListVO=eveListSvc.updateEveList(mem_id, eve_id, eve_rating, evelist_status, evepay_amount, eve_share, evepay_deadline);
-//				/***************************3.修改完成,準備轉交(Send the Success view)***********/
-//				req.setAttribute("eventListVO",eventListVO);
-//				String requestURL = req.getParameter("requestURL");
-//				if("/front_end/event/eventlist/EvelistsByEve.jsp".equals(requestURL)) {
-//					List<EventListVO> list=eveListSvc.getEveListsByEve(eve_id);
-//					HttpSession session=req.getSession();
-//					session.setAttribute("eveListsByEve", list);	
-//				}
-//				System.out.println(requestURL);
-//				RequestDispatcher successView = req.getRequestDispatcher(requestURL); // 修改成功後轉交 listOneEvelist.jsp
-//				successView.forward(req, res);	
-//				
-//				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front_end/event/eventlist/update_evelist_input.jsp");
-//				failureView.forward(req, res);
-//				e.printStackTrace();
-//			}
-//		}
-//		
 		if ("delete_By_Participant".equals(action)||"delete_By_Organizer".equals(action)) { // 來自listEvesByMem.jsp 或 listEvesByMem.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 		    req.setAttribute("errorMsgs",errorMsgs );
 		    String requestURL = req.getParameter("requestURL");
 			try {
@@ -429,15 +276,12 @@ public class EveListServlet extends HttpServlet {
 				
 				eveListSvc.changeEveListStatus(mem_id, eve_id, evelist_status);
 				if("/front_end/event/eventlist/eveEventlist.jsp".equals(requestURL)) {
-//					List<EventListVO> list=eveListSvc.getEveListsByEve(eve_id);
 					HttpSession session=req.getSession();
 					session.setAttribute("eve_id", eve_id);	
 					session.setAttribute("errorMsgs",errorMsgs );
 				}
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)*************/		
-//				RequestDispatcher successView = req.getRequestDispatcher(requestURL); // 刪除成功後,轉交回送出刪除的來源網頁
-//				successView.forward(req, res);
 				res.sendRedirect(requestURL+"?whichPage="+whichPage+"&eve_id="+eve_id+"&mem_id="+mem_id);
 				return;//程式中斷
 				
@@ -591,9 +435,6 @@ public class EveListServlet extends HttpServlet {
 				}				
 				return;
 				
-//				RequestDispatcher successView = req
-//				.getRequestDispatcher(requestURL);
-//				successView.forward(req, res);
 				
 				// Handle any unusual exceptions
 			} catch (Exception e) {
@@ -601,16 +442,18 @@ public class EveListServlet extends HttpServlet {
 			}
 		}
 		
-		if("get_Mem_Evelist".equals(action)) {
+		
+		//活動頁面查看報名狀態 以AJAX傳送
+		if("get_Mem_Evelist".equals(action)) { 
 			
 			res.setContentType("text/html;charset=UTF8");
 			PrintWriter out=res.getWriter();
 			String mem_account=req.getParameter("mem_account");
 			String mem_password=req.getParameter("mem_password");
 			String eve_id=req.getParameter("eve_id");
-			System.out.println( mem_account);
-			System.out.println( mem_password);
-			System.out.println( eve_id);
+//			System.out.println( mem_account);
+//			System.out.println( mem_password);
+//			System.out.println( eve_id);
 			MemService memSvc=new MemService();
 			MemVO memVO=memSvc.loginMem(mem_account, mem_password);
 			if(memVO==null) {
@@ -618,7 +461,7 @@ public class EveListServlet extends HttpServlet {
 				return;
 			}
 			HttpSession session=req.getSession();
-//			session.setAttribute("memVO", memVO);
+			session.setAttribute("memVO", memVO);
 			EventlistService evelistSvc =new EventlistService();
 			EventListVO evelistVO=evelistSvc.getOneEveList(memVO.getMem_id(), eve_id);
 			 if(evelistVO==null){
@@ -644,8 +487,8 @@ public class EveListServlet extends HttpServlet {
 				}else {
 					pay_amount=evelistVO.getEvepay_amount().toString();
 				}
-				System.out.println(pay_amount);
-				System.out.println(pay_deadline);
+//				System.out.println(pay_amount);
+//				System.out.println(pay_deadline);
 				try {
 					//將資料轉成JSONObject	
 					evelist.put("mem_name", memVO.getMem_name());
