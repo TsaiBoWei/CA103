@@ -54,6 +54,10 @@ public class EveDAO implements EventDAO_interface{
 						"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E1'";
 		
 		private static final String UPDATE_PIC="UPDATE EVENT SET EVE_PHOTO=? WHERE EVE_ID=?";
+		//查詢審核過的結果
+		private static final String GET_REVIEWE_END_EVES =
+						"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
+								"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E6'";
 
 
 		@Override
@@ -693,7 +697,80 @@ public class EveDAO implements EventDAO_interface{
 			return eveVO;
 		}
 		
+		public List<EventVO> getReviewEndEves() {
+			List<EventVO> list = new ArrayList<EventVO>();
+			EventVO eventVO = null;
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				con=ds.getConnection();
+				pstmt = con.prepareStatement(GET_REVIEWE_END_EVES);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					eventVO = new EventVO();
+					eventVO.setEve_id(rs.getString("Eve_id"));
+					eventVO.setMem_id(rs.getString("Mem_id"));
+					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+					eventVO.setEve_title(rs.getString("Eve_title"));
+					eventVO.setEve_content(rs.getString("Eve_content"));
+					eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
+					eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
+					eventVO.setEreg_startdate(rs.getDate("Ereg_startdate"));
+					eventVO.setEreg_enddate(rs.getDate("Ereg_enddate"));
+					eventVO.setEstart_limit(rs.getInt("Estart_limit"));
+					eventVO.setEstart_max(rs.getInt("Estart_max"));
+					eventVO.setEve_status(rs.getString("Eve_status"));
+					eventVO.setEve_location(rs.getString("Eve_location"));
+					eventVO.setEve_long(rs.getDouble("Eve_long"));
+					eventVO.setEve_lat(rs.getDouble("Eve_lat"));
+					eventVO.setCity_id(rs.getString("City_id"));
+					eventVO.setSptype_id(rs.getString("Sptype_id"));
+					eventVO.setEve_view(rs.getInt("Eve_view"));
+					eventVO.setEve_charge(rs.getInt("Eve_charge"));
+					eventVO.setEcontact_info(rs.getString("Econtact_info"));
+					eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
 		
+					list.add(eventVO); // Store the row in the list
+				}
+
+				
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
 		
 		
 
