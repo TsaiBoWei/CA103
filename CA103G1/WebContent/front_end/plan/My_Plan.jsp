@@ -50,13 +50,13 @@ body {
 </style>
 
 
-/* 老師範例 */
 <style>
+/*圖片專區*/
 table {
-	width: 2000px;
-	background-color: ##ooff;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	width: 1900px;
+	background-color: #E0FFFF;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 table, th, td {
@@ -64,9 +64,14 @@ table, th, td {
 }
 
 th, td {
-	padding: 10px;
+	padding: 5px;
 	text-align: center;
-	font-size: 18px;
+}
+
+.plan_cover {
+	width: 180px;
+	depth: 180px;
+	border-radius: 100%;
 }
 </style>
 
@@ -218,77 +223,84 @@ th, td {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<h5>我的計畫清單，可供修改、刪除。</h5>
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+	<div class="form-control" style="background-color: #000000" >
+		<h5>我的計畫清單，可供修改、刪除。</h5>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 
-	<table>
-		<tr>
-			<th>計畫編號</th>
-			<th>計畫創建人ID</th>
-			<th>計畫名稱</th>
-			<th>計畫內容</th>
-			<th>計畫封面</th>
-			<th>計畫開始日</th>
-			<th>計畫結束日</th>
-			<th>運動類別</th>
-			<th>計畫瀏覽數</th>
-			<th>計畫隱私權</th>
-			<th>計畫創建時間</th>
-			<th>計畫執行狀態</th>
-			<th>修改</th>
-			<th>刪除</th>
-		</tr>
-		<%@ include file="page1.file"%>
-		<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-
+		<table>
 			<tr>
-				<td>${planVO.plan_id}</td>
-				<td>${planVO.mem_id}</td>
-				<td>${planVO.plan_name}</td>
-				<td>${planVO.plan_vo}</td>
-				<td>${planVO.plan_cover}</td>
-				<td>${planVO.plan_start_date}</td>
-				<td>${planVO.plan_end_date}</td>
-				<td><c:forEach var="sptypeVO" items="${sptypeSvc.all }">
-						<c:if test="${planVO.sptype_id==sptypeVO.sptype_id }">
-							【${sptypeVO.sport}】 
-							</c:if>
-					</c:forEach></td>
-				<td>${planVO.plan_view}</td>
-				<td>${planVO.plan_privacy}</td>
-				<td>${planVO.plan_create_time}</td>
-				<td>${planVO.plan_status}</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/plan/plan.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="plan_id" value="${planVO.plan_id}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/plan/plan.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> <input type="hidden"
-							name="plan_id" value="${planVO.plan_id}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
+				<th>計畫封面</th>
+				<th>計畫名稱</th>
+				<th>計畫編號</th>
+				<th>計畫創建人ID</th>
+				<th>計畫內容</th>
+				<th>計畫開始日</th>
+				<th>計畫結束日</th>
+				<th>運動類別</th>
+				<th>計畫瀏覽數</th>
+				<th>計畫創建時間</th>
+				<th>計畫執行狀態</th>
+				<th>計畫隱私權</th>
+				<th>修改</th>
+				<th>刪除</th>
 			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="page2.file"%>
+			<%@ include file="page1.file"%>
+			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>"
+				end="<%=pageIndex+rowsPerPage-1%>">
+
+				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
+					<td><img class="plan_cover"
+						src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+					</td>
+					<td>${planVO.plan_name}</td>
+					<td>${planVO.plan_id}</td>
+					<td>${planVO.mem_id}</td>
+					<td>${planVO.plan_vo}</td>
+					<td>${planVO.plan_start_date}</td>
+					<td>${planVO.plan_end_date}</td>
+					<td><c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+							<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">
+								${sptypeVO.sport}
+								</c:if>
+						</c:forEach></td>
+					<td>${planVO.plan_view}</td>
+					<td>${planVO.plan_create_time}</td>
+					<td><c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if>
+						<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if></td>
+					<td><c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if>
+						<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> <c:if
+							test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if></td>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/plan/plan.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="修改"> <input type="hidden"
+								name="plan_id" value="${planVO.plan_id}"> <input
+								type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/plan/plan.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden"
+								name="plan_id" value="${planVO.plan_id}"> <input
+								type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<%@ include file="page2.file"%>
+	</div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">
 		<div class="container">

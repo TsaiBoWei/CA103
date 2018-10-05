@@ -103,6 +103,14 @@
     <url-pattern>/friendlist/friendlist.do</url-pattern>
   </servlet-mapping> 
   <servlet>
+    <servlet-name>DBGifReader4</servlet-name>
+    <servlet-class>com.plan.model.DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader4</servlet-name>
+    <url-pattern>/plan/DBGifReader4</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>DBPicReader</servlet-name>
     <servlet-class>com.eve.model.DBPicReader</servlet-class>
   </servlet>

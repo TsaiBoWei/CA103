@@ -30,7 +30,7 @@
 <style>
 table {
 	width: 1900px;
-	background-color: #AFEEEE;
+	background-color: #E0FFFF;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -44,8 +44,15 @@ th, td {
 	text-align: center;
 }
 </style>
+<style>
 
-
+.plan_cover {
+	width: 180px;
+	depth: 180px;
+	border-radius:100%;
+	
+}
+</style>
 
 
 </head>
@@ -76,9 +83,9 @@ th, td {
 					<th>計畫結束日</th>
 					<th>運動類別</th>
 					<th>計畫瀏覽數</th>
-					<th>計畫隱私權</th>
 					<th>計畫創建時間</th>
 					<th>計畫執行狀態</th>
+					<th>計畫隱私權</th>
 					<th>修改</th>
 					<th>刪除</th>
 				</tr>
@@ -87,7 +94,9 @@ th, td {
 					end="<%=pageIndex+rowsPerPage-1%>">
 
 					<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
-						<td>${planVO.plan_cover}</td>
+						<td><img class="plan_cover"
+							src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+						</td>
 						<td>${planVO.plan_name}</td>
 						<td>${planVO.plan_id}</td>
 						<td>${planVO.mem_id}</td>
@@ -96,13 +105,16 @@ th, td {
 						<td>${planVO.plan_end_date}</td>
 						<td><c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 								<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">
-								【${sptypeVO.sport}】
+								${sptypeVO.sport}
 								</c:if>
 							</c:forEach></td>
 						<td>${planVO.plan_view}</td>
-						<td>${planVO.plan_privacy}</td>
 						<td>${planVO.plan_create_time}</td>
-						<td>${planVO.plan_status}</td>
+						<td><c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if>
+							<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if></td>
+						<td><c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if>
+							<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> <c:if
+								test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if></td>
 						<td>
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/plan/plan.do"

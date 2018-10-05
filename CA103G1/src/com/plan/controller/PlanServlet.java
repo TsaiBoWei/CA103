@@ -126,15 +126,13 @@ public class PlanServlet extends HttpServlet {
 				}
 
 				// plan_view
-				System.out.println("testing");
 				Integer plan_view = null;
 				try {
 					plan_view = Integer.parseInt(req.getParameter("plan_view"));
 					System.out.println(plan_view);
 				} catch (Exception s) {
-					errorMsgs.add("plan_view"+plan_view);
+					errorMsgs.add("plan_view" + plan_view);
 				}
-				System.out.println("testing1");
 
 				PlanVO planVO = new PlanVO();
 				planVO.setMem_id(mem_id);
