@@ -117,5 +117,9 @@ public class EveService {
 		return dao.getAll(map);
 	}
 	
+	public List<EventVO> getReviewEndEves(){
+		return dao.getReviewEndEves();
+	}
+	
 	
 }

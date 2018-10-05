@@ -13,6 +13,8 @@ public interface EventDAO_interface {
     public List<EventVO> getEvesByMem(String mem_id);
     public List<EventVO> getReviewEves();
     public List<EventVO> getAllinViewPage();
+    //查詢活動審查結果
+    public List<EventVO> getReviewEndEves();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
     public List<EventVO> getAll(Map<String, String[]> map); 
   
