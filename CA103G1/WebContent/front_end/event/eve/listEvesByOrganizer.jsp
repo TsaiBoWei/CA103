@@ -37,6 +37,9 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
+
+	
+	
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
@@ -52,6 +55,9 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/event/eve/css/listEvesByOrganizer.css">	
+	
 <style>
  /*頁面設定*/
 body {
@@ -61,6 +67,10 @@ body {
 .eveImg{
  width:100%;
  }
+ 
+
+ 
+ 
 
 </style>
 
@@ -102,14 +112,14 @@ body {
 					</ul>
 				</c:if>
 				<% session.removeAttribute("errorMsgs"); %>
-<table>
+<table id='eveTable'>
 	<tr>   
 		<th class="w-25">活動名稱</th>	
 		<th>活動時間</th>
-		<th>確認報名&nbsp/<br>成行人數</th>
-		<th>活動狀態</th>
-		<th>總收費金額</th>
-		<th>檢視報名會員</th>		
+		<th>報名&nbsp/<br>成行人數</th>
+		<th>狀態</th>
+		<th>總收費</th>
+		<th>報名檢視</th>		
 		<th>修改資訊</th>
 		<th>取消活動</th>
 	</tr>

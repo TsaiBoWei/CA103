@@ -118,14 +118,14 @@
 	</tr>	
 	<tr>
 		<td>活動付款金額:</td>
-		<td><input type=text name="evepay_amount" size='4' value="${(eventListVO==null)?eveVO.eve_charge:eventListVO.evepay_amount}"> 元</td>
+		<td><input type=text name="evepay_amount" size='4' value="${(eventListVO==null)?eveVO.eve_charge:eventListVO.evepay_amount}" readonly> 元</td>
 	</tr>
 	<tr>
 		<td>活動付款截止日:</td>
 		<td>
 		
 			<c:if test="${eventListVO==null}">
-				<input type=text name="evepay_deadline" size='10' 
+				<input type=text name="evepay_deadline" size='10'  readonly
 				value="<%=(eveVO.getEve_charge()!=0)?new java.sql.Date(System.currentTimeMillis()+1000*86400*3):"無" %>">		
 			</c:if>
 			<c:if test="${eventListVO!=null}">

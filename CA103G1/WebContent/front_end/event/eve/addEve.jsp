@@ -77,6 +77,12 @@
     
     }
     
+    input{
+      font-size:18px;
+      color:black;
+      font-weight:bold;
+    }
+    
     
 
   </style>
@@ -509,6 +515,7 @@
   
   <script>
 $(document).ready(function(){
+	//設定當勾選人數限制 無 跟活動不收費時 input text disable
 	$("#estart_limit_no").focus(function(){
 		$('#estart_limit').attr('disabled', true);
 		$('#estart_limit').val("");
