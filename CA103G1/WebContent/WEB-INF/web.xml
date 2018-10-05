@@ -29,19 +29,14 @@
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
 
-  <filter>
-	<filter-name>Filter1</filter-name>
-	<filter-class>com.mem.filter.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-	<filter-name>Filter1</filter-name>
-	<url-pattern>/front_end/mem/login/*</url-pattern>
-	<dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
+<!--   <filter> -->
+<!-- 	<filter-name>Filter1</filter-name> -->
+<!-- 	<filter-class>com.mem.filter.LoginFilter</filter-class> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!-- 	<filter-name>Filter1</filter-name> -->
+<!-- 	<url-pattern>/front_end/mem/login/*</url-pattern> -->
+<!--   </filter-mapping> -->
   
   <servlet>
     <servlet-name>MemSpLikeServlet</servlet-name>

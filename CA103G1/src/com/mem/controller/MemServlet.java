@@ -92,7 +92,7 @@ public class MemServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.invalidate();
 			
-			String url = "/front_end/mem/login/Mem_Login_Signup.jsp";
+			String url = "/Mem_Login_Signup.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
 			successView.forward(req, res);
 		}
