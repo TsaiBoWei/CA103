@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -267,6 +268,12 @@ public class EveAndroidDAO implements EventDAO_interface {
 
 	@Override
 	public List<EventVO> getAllinViewPage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getAll(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}

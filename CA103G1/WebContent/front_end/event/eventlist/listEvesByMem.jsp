@@ -49,6 +49,8 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/event/eventlist/css/listEvesByMem.css">	
 <style>
  
 
@@ -56,9 +58,7 @@
 body {
 	overflow-x: hidden;
 }
-.card-body,.col-md-3 .list-group-item {
-      background-color: #09615a!important;
-    }
+
 </style>
 
 

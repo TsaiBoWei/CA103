@@ -155,7 +155,7 @@
       <div class="row">
         <div class="col-md-2 col-6"></div>
         <div class="col-md-2 col-6">
-          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_1.png"> </div>
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/img/index/logo_1.png"> </div>
           <div class="col-md-2 col-6">
             <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/mem/login/assets/conference/logo_4.png"> </div>
             <div class="col-md-2 col-6">

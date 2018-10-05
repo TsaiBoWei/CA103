@@ -1,0 +1,22 @@
+@charset "BIG5";
+
+body {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"  !important;
+	
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+	color: #efefef;
+}
+
+
+ #eveTable th{
+	font-size:18px!important;
+	color: #efefef;
+}
+
+ #eveTable td{
+	font-size:16px!important;
+	color: #efefef;
+}

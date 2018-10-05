@@ -1,75 +1,116 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.eve.model.*" %>
 
-<%
+<%	
+	List<EventVO> list =(List<EventVO>)session.getAttribute("listEves_ByCompositeQuery");
+	Map sportTypeMap =(Map)application.getAttribute("sportTypeMap");
 	EveService eveSvc = new EveService();
-	List<EventVO> list = eveSvc.getEvesInViewPage();
+	
+	if(list==null){		
+		list = eveSvc.getEvesInViewPage();		
+	}	
 	pageContext.setAttribute("list",list);
+	System.out.println(list.size());
 %>
-
-
 
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
-
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>listAllEve.jsp</title>
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Conference Neon - Pingendo template</title>
+  <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
+  <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
+  <!-- CSS dependencies -->
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <!--  self-defined css  -->
 
-<style>
-  table {
- 	width: 100%; 
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  .eveImg{
-  width:100%;
-  }
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+   <script src="<%=request.getContextPath() %>/front_end/event/eve/js/listAllView.js"></script>
+   <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   
-</style>
-
+  <!-- datetimepicker-->	
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+  <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+  <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>	
+ 
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/eve/css/listAllView.css">
+    
 </head>
-<body bgcolor='white'>
 
-
-<table id="table-1">
-	<tr><td>
-		 <h3>所有活動資料 - listAllEve.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/front_end/event/eve/select_event_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<%-- 錯誤表列 --%>
+<body class="text-center">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <span class="navbar-text"></span>
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="#">WORK it OUT</a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#schedule">WorkOutPlan</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#schedule">Event</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#speakers">Course</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg dropdown" id="navUserBtn">
+            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">User&nbsp;
+              <i class="fa fa-caret-down dropbtn"></i>
+            </a>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">
+                <i class="fa fa-file">&nbsp;&nbsp;個人頁面</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-calculator">&nbsp;&nbsp;計畫</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-users" aria-hidden="true">&nbsp;&nbsp;好友</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-film" aria-hidden="true">&nbsp;&nbsp;課程</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp;&nbsp;活動</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;貼文</i>
+              </a>
+              <a href="#">
+                <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;行事曆</i>
+              </a>
+              <a href="#">登出</a>
+            </div>
+          </li>
+        </ul>
+        <a class="btn btn-lg btn-primary" href="#" id="registerBtn">Register now</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Cover -->
+  <div class="align-items-center  section-fade-in-out " id="coverfirstImg" style="background: url(&quot;<%=request.getContextPath() %>/front_end/event/eve/assets/conference/cover_marathon.png&quot;);"> 
+  </div>
+  
+  <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -79,61 +120,444 @@
 	</ul>
 </c:if>
 
-<table>
-	<tr>   
-		<th>活動標題</th>
-		<th>活動圖片</th>
-<!-- 		<th>主辦人姓名</th> -->
-		<th>活動時間</th>
-		<th>報名期間</th>
-		<th>活動狀態</th>
-		<th>地區縣市</th>
-		<th>運動類別</th>
-		<th>活動瀏覽次數</th>
-		<th>收費金額</th>
 
-			
-	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="eveVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr ${(eveVO.eve_id==param.eve_id) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色而已-->
-			<td>${eveVO.eve_title}</td>						
-			<td>
-			<img class="eveImg" src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
-			</td>
-<%-- 			<td>${memSvc.getOneMem(eveVO.mem_id).mem_name}</td>		 --%>
-			<td><fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>~			
-				<fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/></td>
-			<td><fmt:formatDate value="${eveVO.ereg_startdate}" pattern="yyyy/MM/dd "/>~					
-				<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy/MM/dd"/></td>					
-			
-		
-			<td>
-				<c:if test="${eveVO.ereg_startdate.getTime()<System.currentTimeMillis()}">		
-					${eveVO.eve_status=='E4'?'已額滿':'線上報名'}					
-				</c:if>
-			</td>
-			<td>${citySvc.getCityName(eveVO.city_id)}</td>			
-			<td>${sportTypeMap.get(eveVO.sptype_id)}</td>			
-			<td>${eveVO.eve_view}</td>			
-			<td>
-				<c:if test="${eveVO.eve_charge==0}">
-				    免費
-				</c:if>
-				
-				<c:if test="${eveVO.eve_charge!=0}">
-				   ${eveVO.eve_charge}元/人
-				</c:if>		
-			</td>					
-		</tr>
-		
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
 
-<br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
 
+  <div class="container-fluid  pb-2 row   m-3">
+    <div class="col-md-10 bg-info  pt-3">
+      <form  METHOD="post" class="form-inline eveComQuery" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1">
+          <div class="col-md-3 mb-3 d-flex">
+            <label for="keyword" class="orderBy ">關鍵字&nbsp</label>
+            <input type="text" class="form-control" name="keyword"  style="width: 60%;" id="keyword" >
+          </div>
+          <div class="col-md-6 mb-3  d-flex">
+            <label for="eve_startdate " class="orderBy ">活動時間&nbsp</label>
+            <input type="text" name="eve_startdate" class="form-control" id="eve_startdate"  >
+             <input type="text" name="eve_enddate" class="form-control" id="eve_enddate" >
+          </div>
+          <div class="col-md-3 mb-3  d-flex">
+            <label for="validationDefaultUsername" class="orderBy">金額&nbsp</label>
+            <div class="input-group">
+              <select size="1" name="eve_charge"  class="custom-select" style="width: 20%;" >
+                <option value="">不限
+                <option value="0">免費        
+                <option value="300">300元以下
+                <option value="500">300元~500元
+                <option value="1000">500元~1000元
+                <option value="1001">1000元以上
+              </select>
+            </div>
+          </div>
+             
+          <div class="col-md-3 mb-2  d-flex">
+            <label for="validationDefault03" class="orderBy ">活動地區&nbsp</label>
+              <select size="1" name="city_id" class="custom-select" name="city_id" style="width: 50%;">
+                  <option value="">全台灣
+                 <c:forEach var="cityVO" items="${citySvc.all}" > 
+                  <option value="${cityVO.city_id}">${cityVO.city_name}
+                 </c:forEach>   
+               </select>
+          </div>
+          <div class="col-md-2   mb-2  d-flex">
+            <label for="validationDefault04" class="orderBy " >類別&nbsp</label>
+            <select size="1" name="sptype_id" class="custom-select" style="width: 60%;">
+               <option value="">不限
+              <c:forEach var="sptype" items="${sportTypeMap}" > 
+               <option value="${sptype.key}">${sptype.value}
+              </c:forEach>   
+            </select>
+          </div>
+          <div class="col-md-7 mb-2 form-inline">
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <div class="orderBy">排序依&nbsp&nbsp</div>
+                <input class="form-check-input" type="radio"  id="inlineRadio1" name="orderBy" value="hot" checked >
+                <label class="form-check-label orderBy" for="inlineRadio1">熱門活動</label>
+              </div>
+              <div class="form-check form-check-inline">
+
+                <input class="form-check-input" type="radio" name="orderBy" id="inlineRadio2" value="eve_startdate">
+                <label class="form-check-label orderBy" for="inlineRadio2">活動時間</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="orderBy" id="inlineRadio3" value="new" >
+                <label class="form-check-label orderBy" for="inlineRadio3">最新刊登</label>
+              </div>
+              
+            </div>
+            <div >
+          	  <button class="btn btn-primary btn-lg  ml-2" type="submit">Search</button>
+              <input type="hidden" name="action" value="listEves_ByCompositeQuery">
+          </div>
+          </div>
+          
+      </form>      
+    </div>
+    
+    <div class="btn btn-lg  btn-success  p-1 col-md-1  align-self-center addEveBtn mx-auto" ><a href='<%=request.getContextPath()%>/front_end/event/eve/addEve.jsp' class="text-light h3 text-center  ">New&nbsp ! <br>新增活動</a></div>
+  </div>
+  
+  
+
+	
+
+
+
+<!-- Carousel -->
+  <div class="container pb-4">
+    <div class="row">      
+      <div id="eveAllIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#eveAllIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#eveAllIndicators" data-slide-to="1"></li>
+          <li data-target="#eveAllIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="<%=request.getContextPath() %>/front_end/event/eve/assets/eventpic/run/cover_soccor_team.jpg" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="<%=request.getContextPath() %>/front_end/event/eve/assets/eventpic/run/cover_soccor_team.jpg" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="<%=request.getContextPath() %>/front_end/event/eve/assets/eventpic/run/cover_soccor_team.jpg" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#eveAllIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#eveAllIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+<c:if test='${eveQuery!=null}'>
+<div class='container' >
+	<div class="row">
+		<div class='col-md-8'>
+			<p class=' text-left searchCondition'>查詢條件-
+				${eveQuery.keyword} ${eveQuery.eve_startdate} ${eveQuery.eve_enddate} ${eveQuery.eve_charge}
+				${eveQuery.city_id} ${eveQuery.sptype_id} ${eveQuery.orderBy}
+			</p>
+		</div>
+		<div class='col-md-4'>
+			<p class='h4 text-right searchCondition' >資料筆數&nbsp<%=list.size() %></p>
+		</div>	
+	</div>
+</div>
+</c:if>
+
+<script>
+
+$.datetimepicker.setLocale('zh');
+$('#eve_startdate').datetimepicker({
+   theme: '',              //theme: 'dark',
+   timepicker:true,       //timepicker:true,
+   step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
+   format:'Y-m-d H:i',         //format:'Y-m-d H:i:s',
+});
+
+
+$.datetimepicker.setLocale('zh');
+$('#eve_enddate').datetimepicker({
+   theme: '',              //theme: 'dark',
+   timepicker:true,       //timepicker:true,
+   step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
+   format:'Y-m-d H:i',         //format:'Y-m-d H:i:s',
+});
+
+
+
+
+</script>
+
+
+<div class='container' id='content-wrapper'>
+
+	<div class='row py-2'>
+		<div class='d-flex w-100'>
+<c:forEach var="eveVO" items="${list}" begin="0" end="2">
+	
+					
+				<div class='bg-warning mr-3 col-md-4  text-left' >
+					 
+					 <img class='pt-2' style='width: 100%;' src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
+					  <div class="text-center"><h4 class='eveCardText pt-1 px-2 text-center'> ${eveVO.eve_title} </h4></div>
+					 <h4 class='eveCardText px-2'>活動時間 : <fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy-MM-dd H時m分 "/>~</h4>
+					 <h4 class='eveCardText px-2'><span style='visibility:hidden; '>活動日期 : </span><fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy-MM-dd H時m分"/></h4>
+				     <h4 class='eveCardText px-2'>報名日期 :
+						<fmt:formatDate value="${eveVO.ereg_startdate}" pattern="yyyy-M-d "/>~					
+						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
+					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
+					<div class='text-right px-2 h5'>						
+						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<i class="fa fa-eye"></i>${eveVO.eve_view}
+					</div>
+							
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
+						<c:if test="${eveVO.eve_status!='E5'}">
+							<button type='submit' class='btn btn-block regbtn'>${eveVO.eve_status=='E4'?'報名已結束':'立即報名'}</button>
+						</c:if>
+						<c:if test="${eveVO.eve_status=='E5'}">
+							<button type='submit' class='btn btn-block regbtn'>查看活動</button>
+						</c:if>					
+						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+				    </FORM>		
+				</div>				
+</c:forEach>
+		</div>	
+	</div>
+	
+		<div class='row py-2'>
+		<div class='d-flex w-100'>
+<c:forEach var="eveVO" items="${list}" begin="3" end="5">
+	
+					
+				<div class='bg-warning mr-3  text-left col-md-4 ' >
+					 
+					 <img class='pt-2' style='width: 100%;' src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
+					  <div class="text-center"><h4 class='eveCardText pt-1 px-2 text-center'> ${eveVO.eve_title} </h4></div>
+					 <h4 class='eveCardText px-2'>活動時間 : <fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy-MM-dd H時m分 "/>~</h4>
+					 <h4 class='eveCardText px-2'><span style='visibility:hidden; '>活動日期 : </span><fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy-MM-dd H時m分"/></h4>
+				     <h4 class='eveCardText px-2'>報名日期 :
+						<fmt:formatDate value="${eveVO.ereg_startdate	}" pattern="yyyy-M-d "/>~					
+						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
+					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
+					<div class='text-right px-2 h5'>						
+						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<i class="fa fa-eye"></i>${eveVO.eve_view}
+					</div>		
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
+						<button type='submit' class='btn btn-block regbtn'>${eveVO.eve_status=='E4'?'報名已結束':'立即報名'}</button>
+						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+				    </FORM>		
+				</div>				
+</c:forEach>
+		</div>	
+	</div>
+	
+	
+		<div class='row py-2'>
+		<div class='d-flex w-100'>
+<c:forEach var="eveVO" items="${list}" begin="6" end="8">
+	
+					
+				<div class='bg-warning mr-3  text-left col-md-4 ' >
+					 
+					 <img class='pt-2' style='width: 100%;' src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eveVO.eve_id}">
+					  <div class="text-center"><h4 class='eveCardText pt-1 px-2 text-center'> ${eveVO.eve_title} </h4></div>
+					 <h4 class='eveCardText px-2'>活動時間 : <fmt:formatDate value="${eveVO.eve_startdate}" pattern="yyyy-MM-dd H時m分 "/>~</h4>
+					 <h4 class='eveCardText px-2'><span style='visibility:hidden; '>活動日期 : </span><fmt:formatDate value="${eveVO.eve_enddate}" pattern="yyyy-MM-dd H時m分"/></h4>
+				     <h4 class='eveCardText px-2'>報名日期 :
+						<fmt:formatDate value="${eveVO.ereg_startdate	}" pattern="yyyy-M-d "/>~					
+						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
+					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
+					<div class='text-right px-2 h5'>						
+						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<i class="fa fa-eye"></i>${eveVO.eve_view}
+					</div>		
+					
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
+						<button type='submit' class='btn btn-block regbtn'>${eveVO.eve_status=='E4'?'報名已結束':'立即報名'}</button>
+						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+				    </FORM>		
+				</div>				
+
+</c:forEach>
+		</div>	
+	</div>
+	
+	
+	
+	
+</div>
+
+  
+  
+  <script >
+    $(document).ready(function(){
+        contentLoadTriggered = false;
+        var index=3;
+        $(window).scroll(function(){
+//         	console.log($(window).scrollTop());
+//         	console.log($(document).height() - $(window).height() );
+            if($(window).scrollTop() > ( $(document).height() - $(window).height() - 50) && contentLoadTriggered == false)
+            {
+            	console.log(index);
+                contentLoadTriggered = true;
+                var result="";
+                
+                
+                
+                $.ajax({
+              	  url: "<%=request.getContextPath() %>/ScrollTest?index="+index,
+              	  type: "GET",
+              	  dataType: "json",
+              	  success: function(JData) {
+              	  index++;
+              	  console.log(JData);
+              	  contentLoadTriggered = false;
+              		            		
+     
+              	  if(JData[0].eve_charge>=0){
+              		  
+              	  	var id="scrollresult"+index;
+              	  	var jid="#"+id;
+              	  	result="<div class='row py-2 '  ><div class='d-flex w-100' id='"+id+"'></div></div>";
+              
+              			
+          			$("#content-wrapper").append(result);
+          			
+              		$.each(JData, function(i, field) {
+              	              			              		
+	              		result="<div class='bg-warning mr-3 text-left col-md-4 ' >"+              				
+	              				"<img class='pt-2' style='width: 100%;' src='<%=request.getContextPath() %>/eve/DBPicReader?eve_id="+ field.eve_id +"'>";
+	              			
+	              		var newDate =field.eve_startdate.replace(/-/g,'/');
+	              		var eve_startdate=new Date(newDate);
+	              		var eve_startStr=eve_startdate.getFullYear().toString() +"-" +(eve_startdate.getMonth() + 1)+"-"  + eve_startdate.getDate()+" "  + eve_startdate.getHours()+"時"+ eve_startdate.getMinutes()+"分";
+	              		
+	              		var newDate1 =field.eve_enddate.replace(/-/g,'/');
+	              		var eve_enddate=new Date(newDate1);
+	              		var eve_endStr=eve_enddate.getFullYear().toString() +"-" +(eve_enddate.getMonth() + 1)+"-"  + eve_enddate.getDate()+" "  + eve_enddate.getHours()+"時"+ eve_enddate.getMinutes()+"分";
+	              		
+	              		var newDate2 =field.ereg_startdate.replace(/-/g,'/');
+	              		var ereg_startdate=new Date(newDate2);
+	              		var ereg_startStr=ereg_startdate.getFullYear().toString() +"-" +(ereg_startdate.getMonth() + 1)+"-"  + ereg_startdate.getDate();
+	              		
+	              		var newDate3 =field.ereg_enddate.replace(/-/g,'/');
+	              		var ereg_enddate=new Date(newDate3);
+	              		var ereg_endStr=ereg_enddate.getFullYear().toString() +"-" +(ereg_enddate.getMonth() + 1)+"-"  + ereg_enddate.getDate();
+	              		
+	              		result+="<div class='text-center'><h4 class='eveCardText pt-1 px-2'>"+ field.eve_title +"</h4></div>"+
+	              						 "<h4 class='eveCardText px-2'>活動時間 : &nbsp"+ eve_startStr +"~</h4>"+
+	              						 "<h4 class='eveCardText px-2'><span style='visibility:hidden; '>活動日期 : </span>"+ eve_endStr +"</h4>";
+	              			 
+	              						 
+	              						 
+	              		result+="<h4 class='eveCardText px-2'>報名日期 : "+ ereg_startStr+"~" +ereg_endStr+"</h4>";
+	              		
+	              		var eve_charge=field.eve_charge==0?'免費':field.eve_charge+'元';
+	              		
+	              		var eve_status;
+	              		if(ereg_startdate<new Date()){
+	              			if(field.eve_status=='E4'){
+	              				eve_status='已額滿';		              				
+	              			}else{
+	              				eve_status='立即報名';
+		              		}
+		              	}else{
+		              		eve_status='查看活動'
+		              	}
+		              		
+		          
+		              		
+	              		var sport_id=["SP000001","SP000002","SP000003","SP000004","SP000005","SP000006","SP000007",];
+	              		var sport_name=["田徑","單車","球類","重訓","有氧","武術","水上","其它"];
+	              		var sp_index=sport_id.indexOf(field.sptype_id);
+	              		var sptype=sport_name[sp_index];
+	              		
+	              		var city_id=["CITY01","CITY02","CITY03","CITY04","CITY05","CITY06","CITY07","CITY08","CITY09","CITY10","CITY11","CITY12","CITY13","CITY14","CITY15","CITY16"];
+	              		var city_name=["台北","新北","桃園","新竹","苗栗","台中","彰化","雲林","南投","嘉義","台南","高雄","屏東","宜蘭","花蓮","台東"];
+	              		var city_index=city_id.indexOf(field.city_id);
+	              		var city=city_name[city_index];
+	              		
+	              
+	              		result+="<h4 class='eveCardText px-2'>收費金額 : "+ eve_charge +"</h4>"+
+	              				"<div class='text-right px-2 h5'>"+
+	              				"<button class='btn btn-sm  btn-info mx-1'>"+sptype+"</button>"+
+	    						"<button class='btn btn-sm  btn-success mr-1'>"+city+"</button>"+
+	              				"<i class='fa fa-eye'></i>"+field.eve_view+"</div>"+
+	              				"<FORM METHOD='post' ACTION='<%=request.getContextPath()%>/eve/event.do' ><button type='submit' class='btn btn-block regbtn'>"+eve_status+"</button>"+
+	              				"<input type='hidden' name='action' value='getOne_For_Display'>"+
+	              				"<input type='hidden' name='eve_id' value='"+field.eve_id+"'></FORM>";
+              			              					
+	              		result+="</div>";
+	                    $(jid).append(result);
+	                      	  
+	              	});//.each
+              	   }  //if JData[0].eve_charge>=0
+              	 }  //sucess
+              }); //.ajax                
+            }  // if $(window).scrollTop()
+        }); //window.scroll
+    }); //document.ready
+    
+</script>
+ 
+
+
+ 
+
+  <!-- Sponsor logos -->
+  <div class="py-5 section sponsor-div">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="mb-4">Sponsors</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-6"></div>
+        <div class="col-md-2 col-6">
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_1.png"> </div>
+        <div class="col-md-2 col-6">
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_4.png"> </div>
+        <div class="col-md-2 col-6">
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_3.png"> </div>
+        <div class="col-md-2 col-6">
+          <img class="center-block img-fluid d-block" src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/logo_2.png"> </div>
+      </div>
+    </div>
+  </div>
+  <!-- Call to action -->
+  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('assets/conference/cover_2.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <h1 class="mb-3">Something Here</h1>
+          <p>Pre-register to get a priority access to the event. Fares will be published later on.&nbsp;
+            <br>Get the maximum from the lectures together with the possibility of joining exclusive side-events.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="text-md-left text-center p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12"> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-muted">
+            <br>
+            <br> Copyright 2018 Pingendo - All rights reserved.
+            <br>
+            <br> </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- JavaScript dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <button id="goTopBtn" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:80px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
+  GoTop </button>
+  
 </body>
+
 </html>

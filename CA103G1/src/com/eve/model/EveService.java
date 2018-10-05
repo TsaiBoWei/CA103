@@ -3,6 +3,7 @@ package com.eve.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class EveService {
 	
@@ -110,6 +111,10 @@ public class EveService {
 	
 	public List<EventVO> getReviewEves(){
 		return dao.getReviewEves();
+	}
+	
+	public List<EventVO> getCompositeQueryEves(Map<String, String[]> map){
+		return dao.getAll(map);
 	}
 	
 	

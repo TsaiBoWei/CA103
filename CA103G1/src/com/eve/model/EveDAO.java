@@ -1,12 +1,15 @@
 package com.eve.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -42,10 +45,10 @@ public class EveDAO implements EventDAO_interface{
 				"UPDATE EVENT set EVE_STATUS=? where EVE_ID = ?";
 		private static final String GET_EVE_BY_MEM = 
 				"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
-				"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE MEM_ID=? order by EVE_ID";
+				"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE MEM_ID=? AND EVE_STATUS !='E0' order by EVE_ID";
 		private static final String GET_EVES_IN_VIEW_PAGE = 
 				"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
-				"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by EVE_ID";
+				"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by eve_view desc";
 		private static final String GET_REVIEW_EVES = 
 				"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
 						"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E1'";
@@ -236,7 +239,17 @@ public class EveDAO implements EventDAO_interface{
 					eventVO.setEreg_enddate(rs.getDate("Ereg_enddate"));
 					eventVO.setEstart_limit(rs.getInt("Estart_limit"));
 					eventVO.setEstart_max(rs.getInt("Estart_max"));
-					eventVO.setEve_status(rs.getString("Eve_status"));
+			
+					String eve_status=rs.getString("Eve_status");
+					if(rs.getDate("Ereg_enddate").getTime()<System.currentTimeMillis()&&rs.getTimestamp("Eve_enddate").getTime()<System.currentTimeMillis()&&(eve_status.equals("E2")||eve_status.equals("E3"))) {		
+						update_status(eve_id,"E4"); 
+						eve_status="E4";
+					}
+					if(rs.getTimestamp("Eve_enddate").getTime()<System.currentTimeMillis()&&(eve_status.equals("E2")||eve_status.equals("E3")||eve_status.equals("E4"))) {		
+						update_status(eve_id,"E5"); 
+						eve_status="E5";
+					}			
+					eventVO.setEve_status(eve_status);
 					eventVO.setEve_location(rs.getString("Eve_location"));
 					eventVO.setEve_long(rs.getDouble("Eve_long"));
 					eventVO.setEve_lat(rs.getDouble("Eve_lat"));
@@ -255,20 +268,6 @@ public class EveDAO implements EventDAO_interface{
 						+ se.getMessage());
 				// Clean up JDBC resources
 			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
 				if (con != null) {
 					try {
 						con.close();
@@ -321,7 +320,11 @@ public class EveDAO implements EventDAO_interface{
 					eventVO.setEve_charge(rs.getInt("Eve_charge"));
 					eventVO.setEcontact_info(rs.getString("Econtact_info"));
 					eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
-		
+					
+					eventVO=checkEveStatus(eventVO);
+					if(!eventVO.getEve_status().equals("E5")) {
+						list.add(eventVO); // Store the row in the list
+					}
 					list.add(eventVO); // Store the row in the list
 				}
 
@@ -332,20 +335,7 @@ public class EveDAO implements EventDAO_interface{
 						+ se.getMessage());
 				// Clean up JDBC resources
 			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
+
 				if (con != null) {
 					try {
 						con.close();
@@ -398,7 +388,8 @@ public class EveDAO implements EventDAO_interface{
 					eventVO.setEve_charge(rs.getInt("Eve_charge"));
 					eventVO.setEcontact_info(rs.getString("Econtact_info"));
 					eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
-		
+					
+					eventVO=checkEveStatus(eventVO);
 					list.add(eventVO); // Store the row in the list
 				}
 
@@ -475,8 +466,13 @@ public class EveDAO implements EventDAO_interface{
 					eventVO.setEve_charge(rs.getInt("Eve_charge"));
 					eventVO.setEcontact_info(rs.getString("Econtact_info"));
 					eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
-		
-					list.add(eventVO); // Store the row in the list
+					
+					eventVO=checkEveStatus(eventVO);
+					if(!eventVO.getEve_status().equals("E5")) {
+						list.add(eventVO); // Store the row in the list
+					}
+//					System.out.println("getALLView dao:"+eventVO.getEve_status());
+					 // Store the row in the list
 				}
 
 				
@@ -486,20 +482,6 @@ public class EveDAO implements EventDAO_interface{
 						+ se.getMessage());
 				// Clean up JDBC resources
 			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
 				if (con != null) {
 					try {
 						con.close();
@@ -573,6 +555,11 @@ public class EveDAO implements EventDAO_interface{
 			return list;
 		}
 		
+		
+		
+		
+		
+		
 		@Override
 		public void updatePhoto(byte[] eve_photo,String eve_id){
 			Connection con = null;
@@ -603,6 +590,112 @@ public class EveDAO implements EventDAO_interface{
 			}
 			
 		}
+		
+		
+		@Override
+		public List<EventVO> getAll(Map<String, String[]> map){
+			List<EventVO> list = new ArrayList<EventVO>();
+			EventVO eventVO = null;
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				
+				con = ds.getConnection();
+				String finalSQL = "select * from EVENT JOIN mem using(mem_id) JOIN city using(city_id) JOIN sptype using(sptype_id) WHERE (EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4') "
+			          + JdbcUtil_CompositeQuery_Eve.get_WhereCondition(map);
+				pstmt = con.prepareStatement(finalSQL);
+//				System.out.println("¡´¡´finalSQL(by DAO) = "+finalSQL);
+				rs = pstmt.executeQuery();
+		
+				while (rs.next()) {
+					eventVO = new EventVO();
+					eventVO.setEve_id(rs.getString("Eve_id"));
+					eventVO.setMem_id(rs.getString("Mem_id"));
+					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
+					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
+					eventVO.setEve_title(rs.getString("Eve_title"));
+					eventVO.setEve_content(rs.getString("Eve_content"));
+					eventVO.setEve_startdate(rs.getTimestamp("Eve_startdate"));
+					eventVO.setEve_enddate(rs.getTimestamp("Eve_enddate"));
+					eventVO.setEreg_startdate(rs.getDate("Ereg_startdate"));
+					eventVO.setEreg_enddate(rs.getDate("Ereg_enddate"));
+					eventVO.setEstart_limit(rs.getInt("Estart_limit"));
+					eventVO.setEstart_max(rs.getInt("Estart_max"));
+					eventVO.setEve_status(rs.getString("Eve_status"));
+					eventVO.setEve_location(rs.getString("Eve_location"));
+					eventVO.setEve_long(rs.getDouble("Eve_long"));
+					eventVO.setEve_lat(rs.getDouble("Eve_lat"));
+					eventVO.setCity_id(rs.getString("City_id"));
+					eventVO.setSptype_id(rs.getString("Sptype_id"));
+					eventVO.setEve_view(rs.getInt("Eve_view"));
+					eventVO.setEve_charge(rs.getInt("Eve_charge"));
+					eventVO.setEcontact_info(rs.getString("Econtact_info"));
+					eventVO.setEestablish_date(rs.getTimestamp("Eestablish_date"));
+					
+					eventVO=checkEveStatus(eventVO);
+					if(!eventVO.getEve_status().equals("E5")) {
+						list.add(eventVO); // Store the row in the list
+					}
+//					System.out.println("getALLMap dao:"+eventVO.getEve_status());				
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+		
+		
+		public EventVO checkEveStatus(EventVO eveVO) {
+		
+			String eve_id=eveVO.getEve_id();
+			Date ereg_enddate=eveVO.getEreg_enddate();
+			Timestamp eve_enddate=eveVO.getEve_enddate();
+			String eve_status=eveVO.getEve_status();
+			
+			if(ereg_enddate.getTime()<System.currentTimeMillis()&&eve_enddate.getTime()>System.currentTimeMillis()&&(eve_status.equals("E2")||eve_status.equals("E3"))) {		
+				update_status(eve_id,"E4"); 
+				eveVO.setEve_status("E4");
+//				System.out.println("checkEveStatus"+eveVO.getEve_status());
+			}
+			if(eve_enddate.getTime()<System.currentTimeMillis()&&(eve_status.equals("E2")||eve_status.equals("E3")||eve_status.equals("E4"))) {		
+				update_status(eve_id,"E5"); 
+				eveVO.setEve_status("E5");
+			}
+			
+			return eveVO;
+		}
+		
+		
+		
+		
 
 }
 
