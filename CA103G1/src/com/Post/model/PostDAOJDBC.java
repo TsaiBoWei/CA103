@@ -365,5 +365,11 @@ public class PostDAOJDBC implements PostDAO_interface {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<PostVO> getByMemIDToDisplay(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -16,41 +16,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- PAGE settings -->
 <link rel="icon" href="images/weight-lifting.png">
 <title>WORK it OUT</title>
-<meta name="description"
-	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
-<meta name="keywords"
-	content="Pingendo conference event neon free template bootstrap 4">
 
 <!-- CSS dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/PersonalPageBase.css">
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
-<script src="js/animate-in.js"></script>
-<!-- lightcase settings -->
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
+
+<!-- fafaicon -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	crossorigin="anonymous">
+
 <style>
 /*頁面設定*/
 body {
 	overflow-x: hidden;
 }
-</style>
 
-
-<style>
 /*圖片專區*/
 table {
 	width: 1900px;
@@ -223,7 +221,7 @@ th, td {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<div class="form-control" style="background-color: #000000" >
+	<div class="form-control" style="background-color: #000000">
 		<h5>我的計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">

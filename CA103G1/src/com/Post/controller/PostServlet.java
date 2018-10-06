@@ -85,7 +85,8 @@ public class PostServlet extends HttpServlet {
 				Integer post_view = (Integer)req.getAttribute("post_view");
 				String sptype_id = (String)req.getAttribute("sptype_id");
 				String post_status = (String)req.getAttribute("post_status");
-				
+				String post_title =(String)req.getAttribute("post_title");
+				String post_privacy=(String)req.getAttribute("post_privacy");
 				/***************************2.開始更新資料****************************************/
 				PostService postservice = new PostService();
 				PostVO postVO = new PostVO();
@@ -95,8 +96,10 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_view(post_view);
 				postVO.setSptype_id(sptype_id);
 				postVO.setPost_status(post_status);
+				postVO.setPost_title(post_title);
+				postVO.setPost_privacy(post_privacy);
 				//貼文增加了欄位，待修改   10/04
-				postservice.updatePost(post_id, mem_id, post_con, post_time, post_view, sptype_id, post_status);
+				postservice.updatePost(post_id, mem_id, post_con, post_time, post_view, sptype_id, post_status,post_title,post_privacy);
 				//postservice.getOnePost(post_id);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("postVO", postVO);
@@ -124,6 +127,8 @@ public class PostServlet extends HttpServlet {
 				Integer post_view = (Integer)req.getAttribute("post_view");
 				String sptype_id = (String)req.getAttribute("sptype_id");
 				String post_status = (String)req.getAttribute("post_status");
+				String post_title =(String)req.getAttribute("post_title");
+				String post_privacy=(String)req.getAttribute("post_privacy");
 				
 				/***************************2.開始更新資料****************************************/
 				PostService postservice = new PostService();
@@ -132,10 +137,11 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_con(post_con);
 				postVO.setPost_time(post_time);
 				postVO.setPost_view(post_view);
-				postVO.setSptype_id(sptype_id);
-				postVO.setPost_status(post_status);
-				
-				postservice.addPost(post_id, mem_id, post_con, post_time, post_view, sptype_id, post_status);
+				postVO.setSptype_id(sptype_id);				
+				postVO.setPost_title(post_title);
+				postVO.setPost_privacy(post_privacy);
+								
+				postservice.addPost(post_id, mem_id, post_con, post_time, post_view, sptype_id,post_title,post_privacy);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("postVO", postVO);
 				
