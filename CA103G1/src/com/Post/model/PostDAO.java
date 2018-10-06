@@ -36,7 +36,7 @@ public class PostDAO implements PostDAO_interface{
 	private static final String UPDATE_POST_STATUS = "UPDATE POST SET POST_STATUS = ? WHERE POST_ID = ?";
 
 	private static final String FIND_BY_MEM_ID=	"SELECT * FROM POST WHERE MEM_ID = ?";
-	//顯示會員單一貼文(未被封禁或刪除)
+	//顯示會員貼文(未被封禁或刪除)
 	private static final String FIND_BY_MEM_ID_TO_DISPLAY= "SELECT POST_ID,MEM_ID, POST_CON, POST_TIME,POST_VIEW,SPTYPE_ID,POST_STATUS,POST_TITLE,POST_PRIVACY FROM POST WHERE MEM_ID = ? AND POST_STATUS = 'POS0'";
 	@Override
 	public void add(PostVO postVO) {
