@@ -36,6 +36,8 @@ public class PostDAO implements PostDAO_interface{
 	private static final String UPDATE_POST_STATUS = "UPDATE POST SET POST_STATUS = ? WHERE POST_ID = ?";
 
 	private static final String FIND_BY_MEM_ID=	"SELECT * FROM POST WHERE MEM_ID = ?";
+	//顯示會員貼文(未被封禁或刪除)
+	private static final String FIND_BY_MEM_ID_TO_DISPLAY= "SELECT POST_ID,MEM_ID, POST_CON, POST_TIME,POST_VIEW,SPTYPE_ID,POST_STATUS,POST_TITLE,POST_PRIVACY FROM POST WHERE MEM_ID = ? AND POST_STATUS = 'POS0'";
 	@Override
 	public void add(PostVO postVO) {
 		Connection con = null;
@@ -383,6 +385,64 @@ public class PostDAO implements PostDAO_interface{
 			
 			
 		}
+	
+	
+	public List<PostVO> getByMemIDToDisplay(String mem_id) {
+		List<PostVO> postList = new ArrayList<>();
+		PostVO postVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_MEM_ID_TO_DISPLAY);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				postVO = new PostVO();
+				postVO.setPost_id(rs.getString("POST_ID"));
+				postVO.setMem_id(rs.getString("MEM_ID"));
+				postVO.setPost_con(rs.getString("POST_CON"));
+				postVO.setPost_time(rs.getTimestamp("POST_TIME"));
+				postVO.setPost_view(rs.getInt("POST_VIEW"));
+				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
+				postVO.setPost_status(rs.getString("POST_STATUS"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postVO.setPost_privacy(rs.getString("POST_PRIVACY"));
+				postList.add(postVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postList;
+	}
+	
 	
 	}
 

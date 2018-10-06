@@ -76,4 +76,8 @@ public class PostService {
    public List<PostVO> getByMemID( String mem_id ) {
 		return dao.getByMemID(mem_id);
    } 
+   
+   public List<PostVO> getByMemIDToDisplay( String mem_id ) {
+		return dao.getByMemIDToDisplay(mem_id);
+ } 
 }

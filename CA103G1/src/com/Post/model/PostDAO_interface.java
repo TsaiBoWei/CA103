@@ -12,4 +12,6 @@ public interface PostDAO_interface {
 	
 	void updateStatus(PostVO postVO);
 	public List<PostVO> getByMemID( String mem_id );
+	
+	public List<PostVO> getByMemIDToDisplay(String mem_id);
 }
