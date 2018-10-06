@@ -17,5 +17,8 @@ public interface EventListDAO_interface {
 //  public void delete(String mem_id,String eve_id);
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<EventListVO> getAll(Map<String, String[]> map); 
+    
+    public List<EventListVO> findByMemIdtoCal(String mem_id);
+
 
 }

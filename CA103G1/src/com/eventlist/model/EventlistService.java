@@ -75,5 +75,7 @@ public class EventlistService {
     public int getNumOfMemByEve(String eve_id) {
     	return dao.getNumOfMemByEve(eve_id);
     };
-
+    public List<EventListVO> getEveListsByMemToCal(String mem_id)  {
+		return dao.findByMemIdtoCal(mem_id);
+	}
 }

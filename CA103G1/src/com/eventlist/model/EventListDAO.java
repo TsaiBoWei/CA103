@@ -51,6 +51,10 @@ public class EventListDAO implements EventListDAO_interface{
 	
 	private static final String GET_NUM_OF_MEM_BY_EVE ="SELECT EVE_ID,COUNT(*) FROM EVENTLIST WHERE (EVE_ID =?) AND (EVELIST_STATUS='EL0' OR EVELIST_STATUS='EL3') GROUP BY EVE_ID";
 	
+	//以會員id查詢計畫列表中狀態為不須付款(EL0)、確認已付款(EL3)的eve
+	private static final String GET_MEM_EVELIST_STMT_TO_CAL =
+			"SELECT MEM_ID,EVE_ID,EVE_RATING,EVELIST_STATUS,EVEPAY_AMOUNT,EVEPAY_DEADLINE,EVE_SHARE FROM EVENTLIST  WHERE MEM_ID= ? AND (EVELIST_STATUS ='EL0' OR EVELIST_STATUS='EL3')";	
+	
 //		private static final String DELETE = 
 //		"DELETE FROM EVENTLIST where EVE_ID = ?";
 
@@ -528,6 +532,64 @@ public class EventListDAO implements EventListDAO_interface{
 			}
 		}
 		
+	}
+	
+	public List<EventListVO> findByMemIdtoCal(String mem_id) {
+		List<EventListVO> list = new ArrayList<EventListVO>();
+		EventListVO eventListVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_EVELIST_STMT_TO_CAL);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				eventListVO = new EventListVO();
+				eventListVO.setMem_id(rs.getString("Mem_id"));
+				eventListVO.setEve_id(rs.getString("Eve_id"));			
+				eventListVO.setEve_rating(rs.getInt("EVE_RATING"));
+				eventListVO.setEvelist_status(rs.getString("EVELIST_STATUS"));
+				eventListVO.setEvepay_amount(rs.getInt("EVEPAY_AMOUNT"));
+				eventListVO.setEvepay_deadline(rs.getDate("EVEPAY_DEADLINE"));
+				eventListVO.setEve_share(rs.getString("EVE_SHARE"));
+				list.add(eventListVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }
