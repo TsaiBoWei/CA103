@@ -11,11 +11,11 @@ public class PostService {
 		dao = new PostDAO();
 	}
 	
-   public PostVO addPost(String post_id,String mem_id,String post_con,Timestamp post_time,
+   public PostVO addPost(String mem_id,String post_con,Timestamp post_time,
 		Integer post_view,String sptype_id,String post_title,String post_privacy) {
 		PostVO postVO = new PostVO();
 		
-		postVO.setPost_id(post_id);
+	
 		postVO.setMem_id(mem_id);
 		postVO.setPost_con(post_con);
 		postVO.setPost_time(post_time);
