@@ -15,7 +15,7 @@ public class LoginFilter implements Filter{
 		
 		HttpSession session = req.getSession();
 		
-		Object account = session.getAttribute("MemVO");
+		Object account = session.getAttribute("memVO");
 		if(account ==null){
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath()+"/Mem_Login_Signup.jsp");
