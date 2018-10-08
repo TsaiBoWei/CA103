@@ -70,10 +70,10 @@ public class MemServlet extends HttpServlet {
 					successView.forward(req, res);
 				} else {
 					MemSpLikeService memsplikeSvc = new MemSpLikeService();
-					List<MemSpLikeVO> memSpLikeVO = new ArrayList<MemSpLikeVO>();
-					memSpLikeVO = memsplikeSvc.findByMemId(loggedMember.getMem_id());
+					List<MemSpLikeVO> memSpLikeVOList = new ArrayList<MemSpLikeVO>();
+					memSpLikeVOList = memsplikeSvc.findByMemId(loggedMember.getMem_id());
 					HttpSession session = req.getSession();
-					session.setAttribute("memSpLikeVO",memSpLikeVO);
+					session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 					session.setAttribute("memVO", loggedMember);
 					String url = "/front_end/mem/login/TestView.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
@@ -284,6 +284,7 @@ public class MemServlet extends HttpServlet {
 
 				updatedMem = memSvc.updateMem(updatedMem.getMem_id(), memName, updatedMem.getMem_account(),
 						updatedMem.getMem_password(), membirth, memPhoto, memEmail, memIntro);
+				System.out.println("here");
 
 				MemSpLikeVO memSpLikeVO = new MemSpLikeVO();
 				MemSpLikeService memsplikeSvc = new MemSpLikeService();

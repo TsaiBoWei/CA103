@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="" ></jsp:useBean>
+<%@ page import="java.util.*" %>
+<%@ page import="java.util.*, com.memsplike.model.MemSpLikeVO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +190,24 @@
 
 	<script>
 		$(function() {
-
+			var arr = [];
+			<% 	
+				List<MemSpLikeVO> memSpLikeVOList = (ArrayList<MemSpLikeVO>)session.getAttribute("memSpLikeVOList");
+				ArrayList<String> sports = new ArrayList<String>();
+				for(MemSpLikeVO memSpLikeVO:memSpLikeVOList)
+				sports.add(memSpLikeVO.getSptype_id());
+				
+				for(String sport: sports){
+			%>
+				arr.push("<%=sport %>");
+			<%
+				}
+			%>
+			
+			for(var i = 0; i< arr.length; i++){
+				$('#'+arr[i]).attr('checked', true);
+			}
+			
 			function format_float(num, pos) {
 				var size = Math.pow(10, pos);
 				return Math.round(num * size) / size;
