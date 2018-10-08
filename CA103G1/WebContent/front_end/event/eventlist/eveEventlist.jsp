@@ -52,6 +52,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/event/eventlist/css/eveEventlist.css">	
+<link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/evechat/css/eveChat.css">
 	
 <style>
  
@@ -174,10 +175,15 @@ body {
    </div>
 		
 	</div>
+	
+ <!-- =========================================以下為聊天視窗========================================== -->
+  
+   <jsp:include page="/front_end/event/evechat/eveChat.jsp"/>
+  
+<!-- =========================================以上為聊天視窗========================================== --> 	
 
-<!-- <h4>本網頁的路徑:</h4><b> -->
-<%--    <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br> --%>
-<%--    <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>			 --%>
+
+
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>
