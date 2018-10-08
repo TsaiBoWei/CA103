@@ -31,14 +31,14 @@ public class ScrollTest extends HttpServlet {
 	    	PrintWriter out = res.getWriter();
 	    	String indexStr=req.getParameter("index");
 	    	int index=new Integer(indexStr);
-//	    	System.out.println("index="+index);
+	    	System.out.println("index="+index);
 	    	
 	    	//每請求一次INDEX+1(在JSP內加1)  Controller以INDEX取出LIST內的VO 
         	//每次請求傳3個vo(以json格式)回去
         	//瀏覽活動頁面預設是呈現9個 因此傳送來的INDEX從3開始
 	    
 	        HttpSession session=req.getSession();
-//	        System.out.println(session.getAttribute("listEves_ByCompositeQuery"));	 
+	        System.out.println(session.getAttribute("listEves_ByCompositeQuery"));	 
 	        EveService eveSvc=new EveService();
 	        List<EventVO> list=(List<EventVO>)session.getAttribute("listEves_ByCompositeQuery");
 	        if(list==null) {

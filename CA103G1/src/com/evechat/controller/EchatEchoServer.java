@@ -54,6 +54,8 @@ Gson gson =  new Gson();
 	public void onOpen(@PathParam("eveId") String eve_id, @PathParam("memId") String userName, Session userSession,EndpointConfig config) throws IOException, JSONException {
 		this.config = config;
 		
+		userSession.setMaxTextMessageBufferSize(200000);
+		
 		Set<Session> allSessions =null;
 		if(!rooms.containsKey(eve_id)) {
 			allSessions = Collections.synchronizedSet(new HashSet<Session>());
@@ -87,7 +89,7 @@ Gson gson =  new Gson();
 		List<String> historyData = JedisHandleMessage.getHistoryMsg(eve_id);
 		
 		JSONArray jarray=new JSONArray (historyData);
-		userSession.getAsyncRemote().sendText(jarray.toString());
+		userSession.getBasicRemote().sendText(jarray.toString());
 		
 		
 	
@@ -98,11 +100,11 @@ Gson gson =  new Gson();
 		
 		MemService memSvc=new MemService();
 		String mem_name=memSvc.getOneMem(userName).getMem_name();		
-		String connectStr = "{\"userName\" : \"----------- \", \"message\" :\""+mem_name+"已上線 -----------\"}";
-		
+		String connectStr = "{\"userId\" : \"system\", \"message\" :\"-----------"+mem_name+"已上線 -----------\"}";
+
 		for (Session session : allSessions) {
 			if (session.isOpen())			
-				session.getAsyncRemote().sendText(connectStr);
+				session.getBasicRemote().sendText(connectStr);
 		}
 		
 		
@@ -111,12 +113,14 @@ Gson gson =  new Gson();
 	
 	@OnMessage
 	public void onMessage(@PathParam("eveId") String eve_id,Session userSession, String message) {
-		
-		
-		
+				
 		for (Session session : rooms.get(eve_id)) {
 			if (session.isOpen())
-				session.getAsyncRemote().sendText(message);			
+				try {
+					session.getBasicRemote().sendText(message);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}			
 		}
 		System.out.println("Message received: " + message);
 		

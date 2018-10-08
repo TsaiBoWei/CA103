@@ -51,6 +51,9 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/event/eventlist/css/listEvesByMem.css">	
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/evechat/css/eveChat.css">
+
 <style>
  
 
@@ -297,6 +300,16 @@ body {
     };
            
    </script>
+   
+   
+ <!-- =========================================以下為聊天視窗========================================== -->
+  
+   <jsp:include page="/front_end/event/evechat/eveChat.jsp"/>
+  
+<!-- =========================================以上為聊天視窗========================================== --> 
+   
+   
+   
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>

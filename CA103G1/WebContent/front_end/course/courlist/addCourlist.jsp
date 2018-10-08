@@ -12,14 +12,6 @@
 
 %>
 
-
-<%
-//     CoachService coachService = new CoachService();
-//     CoachVO coachVO2 = coachService.getOneCoach(courlistVO.getCoa_id());
-    
-//     MemService coamemSvc= new MemService();
-//     MemVO coamemVO= coamemSvc.getOneMem("M000001");
-%>
     
 <!DOCTYPE html>
 <html>
@@ -77,7 +69,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
-        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="#">WORK it OUT</a>
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" 
+        	href="<%=request.getContextPath()%>/front_end/course/courlist/select_page.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="#">WorkOutPlan</a>
@@ -235,8 +228,7 @@
               <h4 class="text-md-left">課程公告</h4>
 <!-- 				<input type="TEXT" name="cour_ann" size="45" class="form-control" -->
 <%-- 				value="<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>" /></td> --%>
-				<textarea class="form-control text-light" name="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5">
-				<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>
+				<textarea class="form-control text-light" name="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5"><%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>
 				</textarea>
 			</div>
 			<br>
