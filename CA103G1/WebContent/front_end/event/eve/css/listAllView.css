@@ -74,6 +74,8 @@ li.dropdown {
    font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
 }
 
+
+
 .regbtn{
   background-color:#dc3579 !important;
   color:white;
@@ -95,11 +97,9 @@ li.dropdown {
 }
     
 
-
-
-
-
 /*sponsor設定 */
 .sponsor-div{
   padding-top: 0rem!important;
 }
+
+  

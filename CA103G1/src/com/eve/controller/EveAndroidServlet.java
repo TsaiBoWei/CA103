@@ -52,6 +52,7 @@ public class EveAndroidServlet extends HttpServlet {
 		if ( "get_one_eve".equals(action) ) {
 			String eve_id = jsonObject.get("eve_id").getAsString();
 			EventVO evevo = evedao.findByPrimaryKey(eve_id);
+			evevo.setEve_photo(null);
 			writeText(res, evevo == null? "":gson.toJson(evevo));			
 		}
 		

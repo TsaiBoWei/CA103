@@ -1,0 +1,94 @@
+/*Today Plan Card CSS*/
+.card-custom{
+    background-color: rgba(51, 51, 51, 0);
+}
+.card-header-custom{
+    background-color: rgb(0, 154, 192);
+    opacity:0.5;
+}
+
+.card-body-custom{
+    background-color: rgba(51, 51, 51, 0.8);
+    
+}
+/*Profile Pic fixed size*/
+.colProfile {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+    }
+
+/*bg-dark equals whole page background color*/
+.bg-dark-cutom{
+    background-color:#1f1f1f;
+}
+
+.blogDate{
+    opacity:0.8;
+}
+/*profile nav hr */
+.containerHrT{
+    margin-bottom: -20px;
+}
+
+.containerHrB{
+    margin-top: -20px;
+}
+
+/*profile Navbar Hover*/
+#profile-navbar li>a:hover {
+      color: #12bbad;
+      border-bottom: 1px solid #12bbad;
+    }
+#profile-navbar li>a:focus {
+      color: #12bbad;
+      border-bottom: 1px solid #12bbad;
+    }
+
+
+/*
+.persondropbgCustom{
+    background-color:rgb(48, 48, 48, 0.5);
+background:rgba(x,x,x,0.3);
+}
+*/
+/*Personal NavBar Dropdown arrow cancel*/
+.dropdown-toggle::after {
+      display: none;
+}
+/*dropmenu background*/
+ .bg-dark-dropmenu-cutom {
+      background-color: rgba(48, 48, 48, 0.6) !important;
+}
+/*dropmenuitem background*/
+.bg-dark-dropmenuitem-cutom {
+      background-color: rgba(48, 48, 48, 0) !important;
+}
+
+
+/*dropmenuitem hover background*/
+a.bg-dark:hover {
+    background-color: #303030 !important;
+
+}
+
+
+/*planoverview hover*/
+#planlist li:hover{
+      background-color: rgba(48, 48, 48, 0.3);
+}
+
+.badge-primary{
+    background: rgba(0, 154, 192,0.2);
+    color: rgba(243, 243, 243,0.7);
+}
+
+
+
+
+
+
+
+
+
+

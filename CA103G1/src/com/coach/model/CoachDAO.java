@@ -31,10 +31,10 @@ public class CoachDAO implements CoachDAO_interface {
 			}
 
 	private static final String INSERT_STMT = 
-			"INSERT INTO COACH(COA_ID, MEM_ID, COA_TEXT, COA_STATUS, COA_RECOUNT)"
-			+ "VALUES('C'||LPAD(to_char(COUR_ID_seq.NEXTVAL), 6, '0'), ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = "UPDATE COACH SET MEM_ID = ?, COA_TEXT = ?, COA_STATUS = ?, "
-			+ "COA_RECOUNT = ? WHERE COA_ID = ?";
+			"INSERT INTO COACH(COA_ID, MEM_ID, COA_TEXT, COA_STATUS)"
+			+ "VALUES('C'||LPAD(to_char(COUR_ID_seq.NEXTVAL), 6, '0'), ?, ?, ?)";
+	private static final String UPDATE_STMT = "UPDATE COACH SET MEM_ID = ?, COA_TEXT = ?, COA_STATUS = ? "
+			+ "WHERE COA_ID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM COACH WHERE COA_ID= ?";
 	private static final String GET_ALL = "SELECT * FROM COACH";
 	private static final String HIDE_STMT = "UPDATE COACH SET COA_STATUS = ? WHERE COA_ID = ?";
@@ -56,7 +56,6 @@ public class CoachDAO implements CoachDAO_interface {
 			pstmt.setString(1, coachVO.getMem_id());
 			pstmt.setString(2, coachVO.getCoa_text());
 			pstmt.setString(3, coachVO.getCoa_status());
-			pstmt.setInt(4, coachVO.getCoa_recount());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -99,8 +98,7 @@ public class CoachDAO implements CoachDAO_interface {
 			pstmt.setString(1, coachVO.getMem_id());
 			pstmt.setString(2, coachVO.getCoa_text());
 			pstmt.setString(3, coachVO.getCoa_status());
-			pstmt.setInt(4, coachVO.getCoa_recount());
-			pstmt.setString(5, coachVO.getCoa_id());	
+			pstmt.setString(4, coachVO.getCoa_id());	
 			pstmt.executeUpdate();
 
 			// Handle any driver errors

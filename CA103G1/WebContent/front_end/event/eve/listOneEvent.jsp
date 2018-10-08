@@ -64,6 +64,8 @@ border:0px;
 text-align:center;
 }
 
+#map { height: 400px; }
+
 
 
   
@@ -366,11 +368,11 @@ text-align:center;
         </div>
         <h3 class="">活動地圖</h3>
         <div class="row">
-          <div class="col-md-12">
-            <img class="d-block img-fluid img-thumbnail mx-auto" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDW8nO9JhT_pEjebobq9pgUF2cEp0EUb1I&amp;markers=%E4%B8%AD%E5%A4%AE%E5%A4%A7%E5%AD%B8&amp;center=%E4%B8%AD%E5%A4%AE%E5%A4%A7%E5%AD%B8&amp;zoom=16&amp;size=800x350&amp;sensor=false"> </div>
+          <div class="col-md-10 offset-md-1" id="map"></div>
         </div>
       </div>
     </div>
+    
     <div class="tab-pane fade" id="tabfive" role="tabpanel">
       <div class="container px-5">
         <div class="row d-block text-left">
@@ -706,10 +708,41 @@ text-align:center;
 		  setTimeout("clock()",1000)
 		} 
 </script>
+
+<!-- Google Map -->
+<script type="text/javascript">
+			var map;
+			var position = {
+			  lat: ${eveVO.eve_lat},
+			  lng: ${eveVO.eve_long}
+			};
+			var contentString = '<h2 style="color:black!important;">${eveVO.eve_title}</h2>';
+			
+			function initMap() {
+			  map = new google.maps.Map(document.getElementById('map'), {
+			    zoom: 15,
+			    center: position
+			  });
+			  var marker = new google.maps.Marker({
+			    map: map,
+			    position: position
+			  });
+			  var infowindow = new google.maps.InfoWindow({
+			    content: contentString,
+			    position: position,
+			
+			  });
+			  infowindow.open(map,marker);
+			
+			}
+			
+  </script>    
   
   
-  
-  
+  <!-- Google Map -->
+  <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASI3sgz6P-wisrPe6D4N59Ro0RrodnHJM&callback=initMap">
+  </script>
   
   <!-- JavaScript dependencies -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

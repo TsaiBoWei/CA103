@@ -168,6 +168,26 @@ public class EveServlet extends HttpServlet {
 					errorMsgs.put("eve_location","活動地點請勿空白");
 				}
 				
+				String eve_longStr=req.getParameter("eve_long");
+				String eve_latStr=req.getParameter("eve_lat");
+				Double eve_long=0.0;
+				Double eve_lat=0.0;
+				
+				if(eve_location!=null&&eve_longStr.trim().length() != 0&&eve_latStr.trim().length() != 0) {
+					try{
+						eve_long=new Double(eve_longStr);
+						eve_lat=new Double(eve_latStr);
+					}catch (NumberFormatException e) {
+						System.out.println("No latlong");
+
+					}
+				}
+				System.out.println("EveServlet_insert eve_long : "+eve_long);
+				System.out.println("EveServlet_insert eve_lat : "+eve_lat);
+				
+				
+				
+				
 				Integer eve_charge = null;
 				if("1".equals(req.getParameter("eve_charge_check"))){
 					try {			
@@ -217,8 +237,7 @@ public class EveServlet extends HttpServlet {
 				String sptype_id=req.getParameter("sptype_id").trim();
 				byte[] eve_logo=null;
 				String eve_ptype=null;
-				Double eve_long=0.0;
-				Double eve_lat=0.0;
+				
 				Integer eve_view=0;
 				
 //				
@@ -256,6 +275,8 @@ public class EveServlet extends HttpServlet {
 				eveVO.setSptype_id(sptype_id);
 				eveVO.setCity_id(city_id);
 				eveVO.setEve_location(eve_location);	
+				eveVO.setEve_long(eve_long);
+				eveVO.setEve_lat(eve_lat);
 				eveVO.setEcontact_info(econtact_info);
 				eveVO.setEve_content(eve_content);
 				
