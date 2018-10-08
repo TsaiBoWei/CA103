@@ -305,7 +305,10 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					byte[] photo=rs.getBytes("Eve_photo");
+					if(photo!=null) {
+						photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					}					
 					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
@@ -374,7 +377,10 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					byte[] photo=rs.getBytes("Eve_photo");
+					if(photo!=null) {
+						photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					}					
 					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
@@ -453,7 +459,10 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					byte[] photo=rs.getBytes("Eve_photo");
+					if(photo!=null) {
+						photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					}					
 					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
@@ -623,7 +632,10 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					byte[] photo=rs.getBytes("Eve_photo");
+					if(photo!=null) {
+						photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					}					
 					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
