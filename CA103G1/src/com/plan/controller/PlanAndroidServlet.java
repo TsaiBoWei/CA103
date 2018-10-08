@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.eve.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.plan.model.*;
 
 @WebServlet("/PlanAndroidServlet")
@@ -40,36 +39,27 @@ public class PlanAndroidServlet extends HttpServlet {
 		StringBuilder jsonIn = new StringBuilder();
 		String line = null;
 		
-	
 		while ( (line = br.readLine()) != null)
 			jsonIn.append(line);
 		
 		System.out.println("input: " + jsonIn);
-			
-		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		
+		List<PlanVO> planList = new ArrayList<PlanVO>();
+		List<EventVO> eventList = new ArrayList<EventVO>();
 		
-		String action = jsonObject.get("action").getAsString();
-		String mem_id = jsonObject.get("mem_id").getAsString();
+		String action = req.getParameter("action");
+		String mem_id = req.getParameter("mem_id");
 		
 		if ( "get_plan_by_mem_id".equals(action) ) {
-			List<PlanVO> planList = new ArrayList<PlanVO>();
 			PlanDAO plandao = new PlanDAO();
 			planList = plandao.getPlansByMem(mem_id);
-			for ( PlanVO vo : planList ) {
-				vo.setPlan_cover(null);
-			}
-			writeText(res, planList == null? "" :gson.toJson(planList));
+			writeText(res, gson.toJson(planList));
 		}
 		
 		if ("get_eve_by_mem_id".equals(action)) {
-			List<EventVO> eventList = new ArrayList<EventVO>();
 			EveService eveserv = new EveService();
 			eventList = eveserv.getEvesByMem(mem_id);
-			for ( EventVO vo : eventList ) {
-				vo.setEve_photo(null);
-			}
-			writeText(res, eventList == null? "" :gson.toJson(eventList));
+			writeText(res, gson.toJson(eventList));
 		}
 	}
 		

@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 //JDBCDAO 使用建立連線 連線。
 //plan_view 計畫瀏覽次數需在點擊該計畫時，自行加1，尚未確認。
@@ -29,9 +30,6 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
-
-	// 自訂方法(尚未完成)
-	private static final String GET_ONE_STMT2 = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd'),plan_create_time,plan_status FROM plan where plan_name =?";
 
 	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
 
@@ -230,29 +228,6 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		return planVO;
 	}
 
-	// 子串比對找出關鍵字，未完成。
-	@Override
-	public PlanVO findPlanByKeyWord(String plan_name) {
-
-//		PlanVO planVO = null;
-//		String keyWord = null;
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		try {
-//			con = ds.getConnection();
-//			pstmt = con.prepareStatement(GET_ONE_STMT2);
-//		
-//			
-//		} catch (ClassNotFoundException ce) {
-//			ce.printStackTrace();
-//		}catch(SQLException se) {
-//			throw new RuntimeException("A database error occurred. " + se.getMessage());
-//		}			
-		return null;
-	}
-
 	@Override
 	public List<PlanVO> getAll() {
 
@@ -404,7 +379,8 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		}
 
 	}
-/****************1004增加計畫dao(僅於PlanDAO增加實際方法)******************/
+
+	/**************** 1004增加計畫dao(僅於PlanDAO增加實際方法) ******************/
 	@Override
 	public List<PlanVO> getPlansByMem(String mem_id) {
 		// TODO Auto-generated method stub
@@ -414,14 +390,21 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 	@Override
 	public void updateInCal(PlanVO planVO) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updatePlanStatusCal(String plan_id, String plan_status) {
 		// TODO Auto-generated method stub
-		
+
 	}
-/******************************************************************/
+
+	/******************************************************************/
+
+	@Override
+	public List<PlanVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

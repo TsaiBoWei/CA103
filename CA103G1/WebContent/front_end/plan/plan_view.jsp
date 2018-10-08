@@ -150,7 +150,7 @@ body {
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">Add Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="<%= request.getContextPath()%>/front_end/plan/My_plan_blank.jsp">My Plan</a> <a
+								href="<%= request.getContextPath()%>/front_end/plan/My_Plan.jsp">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">Interetsting Plan</a>
 						</div></li>

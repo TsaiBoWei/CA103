@@ -9,6 +9,8 @@
 	pageContext.setAttribute("list", list);
 %>
 
+<jsp:useBean id="listPlan_ByCompositeQuery" scope="request" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
+
 <jsp:useBean id="sptypeSvc" scope="page"
 	class="com.sptype.model.SptypeService" />
 
@@ -252,7 +254,7 @@ th, td {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="page1.file"%>
+			<%@ include file="page1_ByCompositeQuery.file" %>
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
 					<td>
@@ -302,7 +304,11 @@ th, td {
 				</tr>
 			</c:forEach>
 		</table>
-		<%@ include file="page2.file"%>
+		<%@ include file="page2_ByCompositeQuery.file"%>
+		<br>本網頁的路徑:<br><b>
+   <font color=white>request.getServletPath(): <%=request.getServletPath()%><br></font>
+   <font color=white>request.getRequestURI():  <%=request.getRequestURI()%></font> </b>
+		
 	</div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">

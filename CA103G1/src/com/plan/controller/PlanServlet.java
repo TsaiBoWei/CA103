@@ -5,8 +5,10 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -200,7 +202,7 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
-		if ("delete".equals(action)) { // 來自My_plan_blank.jsp
+		if ("delete".equals(action)) { // 來自My_Plan.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -228,6 +230,44 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
-	}
+		if ("listPlan_ByCompositeQuery".equals(action)) { // 來自test.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
 
+			try {
+
+				/*************************** 1.將輸入資料轉為Map **********************************/
+				// 採用Map<String,String[]> getParameterMap()的方法
+				// 注意:an immutable java.util.Map
+				// Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
+				if (req.getParameter("whichPage") == null) {
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map", map1);
+					map = map1;
+				}
+
+				/*************************** 2.開始複合查詢 ***************************************/
+				PlanService planSvc = new PlanService();
+				List<PlanVO> list = planSvc.getAll(map);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("listPlan_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+				System.out.println("已成功轉交");
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				System.out.println("test20181007");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+	}
 }

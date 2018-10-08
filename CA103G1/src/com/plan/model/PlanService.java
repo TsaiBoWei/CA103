@@ -2,6 +2,7 @@ package com.plan.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 //用計畫關鍵字找到該計畫在DAO中未定義完全。
 
@@ -13,8 +14,8 @@ public class PlanService {
 		dao = new PlanDAO();
 	}
 
-	public PlanVO addPlan(String mem_id,String plan_name, byte[] plan_cover, Timestamp plan_start_date,
-			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_vo ,Integer plan_view) {
+	public PlanVO addPlan(String mem_id, String plan_name, byte[] plan_cover, Timestamp plan_start_date,
+			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_vo, Integer plan_view) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setMem_id(mem_id);
@@ -60,32 +61,39 @@ public class PlanService {
 	public List<PlanVO> getAll() {
 		return dao.getAll();
 	}
-	/*********************1004增加計畫service***************/
-		//以會員id查詢計畫
-	public List<PlanVO> getPlansByMem(String mem_id){
+
+	public List<PlanVO> getAll(Map<String,String[]> map){
+		return dao.getAll(map);
+	}
+	
+	/********************* 1004增加計畫service ***************/
+	// 以會員id查詢計畫
+	public List<PlanVO> getPlansByMem(String mem_id) {
 		return dao.getPlansByMem(mem_id);
 	}
-		//新增計畫(在行事曆)
-	public PlanVO updateInCal(String plan_name, String plan_vo, Timestamp plan_start_date,
-			Timestamp plan_end_date,String plan_id) {
+
+	// 新增計畫(在行事曆)
+	public PlanVO updateInCal(String plan_name, String plan_vo, Timestamp plan_start_date, Timestamp plan_end_date,
+			String plan_id) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setPlan_name(plan_name);
 		planVO.setPlan_vo(plan_vo);
-		
+
 		planVO.setPlan_start_date(plan_start_date);
 		planVO.setPlan_end_date(plan_end_date);
-	
+
 		planVO.setPlan_id(plan_id);
 		dao.updateInCal(planVO);
 
 		return planVO;
 	}
-		//刪除計畫(改狀態碼)於行事曆
-	public PlanVO changePlanStatusCal(String plan_id,String plan_status) {
-		dao.updatePlanStatusCal(plan_id,plan_status);
-		return dao.findByPrimaryKey(plan_id);		
+
+	// 刪除計畫(改狀態碼)於行事曆
+	public PlanVO changePlanStatusCal(String plan_id, String plan_status) {
+		dao.updatePlanStatusCal(plan_id, plan_status);
+		return dao.findByPrimaryKey(plan_id);
 	}
 	/************************************************************/
-	
+
 }

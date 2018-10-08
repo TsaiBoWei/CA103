@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.plan.model.*"%>
+<
 <%
-	PlanService planSvc = new PlanService();
-	List<PlanVO> list = planSvc.getAll();
-	pageContext.setAttribute("list", list);
+	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
+	pageContext.setAttribute("planVO", planVO);
 %>
 
 <jsp:useBean id="sptypeSvc" scope="page"
@@ -51,9 +51,9 @@ body {
 
 /*圖片專區*/
 table {
- 	width: 1800px; 
-/* 	background-color: #E0FFFF; */
- 	color: #FFFFFF; 
+	width: 1800px;
+	/* 	background-color: #E0FFFF; */
+	color: #FFFFFF;
 	font-size: 18px;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -72,6 +72,11 @@ th, td {
 	width: 165px;
 	depth: 165px;
 	border-radius: 100%;
+}
+
+.select {
+	color: white;
+	font-size: 18px;
 }
 </style>
 
@@ -224,7 +229,7 @@ th, td {
 		<hr>
 	</div>
 	<div class="form-control" style="background-color: #000000">
-		<h5>我的計畫清單，可供修改、刪除。</h5>
+		<h5 style="color: white">我的計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -235,74 +240,45 @@ th, td {
 			</ul>
 		</c:if>
 
-		<table>
-			<tr>
-				<th>計畫封面</th>
-				<th>計畫名稱</th>
-				<th>計畫編號</th>
-				<th>計畫創建人</th>
-				<th>計畫內容</th>
-				<th>計畫開始日</th>
-				<th>計畫結束日</th>
-				<th>運動類別</th>
-				<th>瀏覽數</th>
-				<th>創建時間</th>
-				<th>執行狀態</th>
-				<th>隱私權</th>
-				<th>修改</th>
-				<th>刪除</th>
-			</tr>
-			<%@ include file="page1.file"%>
-			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
-					<td>
-						<img class="plan_cover" 
-							 src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
-					</td>
-					<td>${planVO.plan_name}</td>
-					<td>${planVO.plan_id}</td>
-					<td>${planVO.mem_id}</td>
-					<td>${planVO.plan_vo}</td>
-					<td>${planVO.plan_start_date}</td>
-					<td>${planVO.plan_end_date}</td>
-					<td><c:forEach var="sptypeVO" items="${sptypeSvc.all}">
-							<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">
-								${sptypeVO.sport}
-								</c:if>
-						</c:forEach></td>
-					<td>${planVO.plan_view}</td>
-					<td>${planVO.plan_create_time}</td>
-					<td>
-						<c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if> 
-						<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if>
-					</td>
-					<td>
-						<c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if>
-						<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if>
-						<c:if test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if>
-					</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/plan/plan.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/plan/plan.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<%@ include file="page2.file"%>
+		<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
+		<ul class="select">
+			<li>
+				<FORM METHOD="post"
+					ACTION="<%=request.getContextPath()%>/plan/plan.do" name="form1">
+					<b><font color=white>萬用複合查詢:</font></b> <br> 
+					<b>輸入中文字(可查詢計畫內容或計畫名稱):</b>
+					<input type="text" name="plan" value="Any Word"><br> 
+					<b>輸入計畫開始時間:</b>
+					<input type="text" name="plan_start_date" id="f_date1" class="date"/><br> 
+					<b>輸入計畫結束時間:</b>
+					<input type="text" name="plan_end_date" id="f_date2" class="date"/><br> 
+					<b>輸入計畫創建時間:</b>
+					<input type="text" name="plan_create_time" id="f_date3" class="date"/><br> 
+					<b>選擇運動種類:</b>
+					<select size="1" name="sptype_id">
+							<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+								<option value="${sptypeVO.sptype_id}">${sptypeVO.sport}
+							</c:forEach>
+					</select><br>
+					<b>選擇隱私權:</b>
+					<select size="1" >
+						<option value="PLANPR0">公開
+						<option value="PLANPR1">不公開
+						<option value="PLANPR2">只對朋友公開
+					</select><br>
+					<b>選擇執行狀態:</b>
+					<select size="1" >
+						<option value="PLANST0">進行中
+						<option value="PLANST1">已完成
+					</select><br>
+						<input type="submit" value="送出"> 
+						<input type="hidden" name="action" value="listPlan_ByCompositeQuery">
+				</FORM>
+			</li>
+		</ul>
+
+
+
 	</div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">
@@ -380,6 +356,86 @@ th, td {
 	<script src="js/smooth-scroll.js"></script>
 
 </body>
+
+<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+
+<%
+	java.sql.Timestamp plan_start_date = null;
+	try {
+		plan_start_date = planVO.getPlan_start_date();
+	} catch (Exception e) {
+		plan_start_date = new java.sql.Timestamp(System.currentTimeMillis());
+	}
+%>
+
+<%
+	java.sql.Timestamp plan_end_date = null;
+	try {
+		plan_end_date = planVO.getPlan_end_date();
+	} catch (Exception e) {
+		plan_end_date = new java.sql.Timestamp(System.currentTimeMillis());
+	}
+%>
+<%
+	java.sql.Date plan_create_time = null;
+	try {
+		plan_create_time = planVO.getPlan_create_time();
+	} catch (Exception e) {
+		plan_create_time = new java.sql.Date(System.currentTimeMillis());
+	}
+%>
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+
+
+<script>
+	$.datetimepicker.setLocale('zh');
+	$(function() {
+		$('#f_date1').datetimepicker({
+			format : 'Y-m-d H:i',
+			timepicker : true,
+			step : 5,
+			onShow : function() {
+				this.setOptions({
+					maxDate : $('#f_date2').val() ? $('#f_date2').val() : false
+				})
+			}
+		});
+
+		$('#f_date2').datetimepicker({
+			format : 'Y-m-d H:i',
+			timepicker : true,
+			step : 5,
+			onShow : function() {
+				this.setOptions({
+					minDate : $('#f_date1').val() ? $('#f_date1').val() : false
+				})
+			}
+		});
+	});
+	
+	
+    $.datetimepicker.setLocale('zh');
+    $('#f_date3').datetimepicker({
+	   theme: '',              //theme: 'dark',
+       timepicker:false,       //timepicker:true,
+       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+	   value: '',              // value:   new Date(),
+       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+       //startDate:	            '2017/07/10',  // 起始日
+       //minDate:               '-1970-01-01', // 去除今日(不含)之前
+       //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+    });
+	
+</script>
+
 
 
 </html>
