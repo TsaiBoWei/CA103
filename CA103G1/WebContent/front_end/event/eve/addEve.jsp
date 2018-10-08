@@ -33,6 +33,9 @@
   <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
   <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>	
  
+  
+
+   
  
  <!-- summernote-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
@@ -295,7 +298,8 @@
                     <div class="form-group col-md-10 py-2">
                       <label for="eve_loc">活動地點</label> <b class='errorMsg'> ${errorMsgs.eve_location}</b>
                       <input type="text" class="form-control" id="eve_loc" name="eve_location" value="<%= (eveVO==null)? "" : eveVO.getEve_location()%>"> </div>
- 					               
+ 					  <input type="hidden" name="eve_long"  id="eve_long" value="${eveVO.eve_long>0?eveVO.eve_long:''}">          
+ 					  <input type="hidden" name="eve_lat"  id="eve_lat" value="${eveVO.eve_long>0?eveVO.eve_lat:''}">            
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-12 py-2">
@@ -318,6 +322,42 @@
           </div>
         </div>
       </div>
+      
+      
+      <script>
+      function initMap(){
+    	 
+    	  var eve_location= document.getElementById("eve_loc");
+          var addBtnSubmit=document.getElementById("addBtnSubmit");
+          var eve_long= document.getElementById("eve_long");
+		  var eve_lat= document.getElementById("eve_lat");
+		  console.log("11:"+eve_long.value);
+          eve_location.onchange= function(){ 
+        	  console.log(22);
+  		    var longitude;
+  		    var latitude;
+  		   
+  		    
+  		    var geocoder = new google.maps.Geocoder();
+  		
+  		    geocoder.geocode({
+  		      address: eve_location.value
+  		    }, function(results, status) {
+  		      if (status == google.maps.GeocoderStatus.OK) {
+  		         longitude=results[0].geometry.location.lng();
+  		         latitude=results[0].geometry.location.lat();
+  		         eve_long.value=longitude;
+  		         eve_lat.value=latitude;
+  		         console.log(eve_long.value);
+  		         console.log(eve_lat.value);
+  		      }
+  		    }); 		
+  		};
+          console.log(11);
+        
+      }
+    
+      </script>	
       <script>
       
       $(document).ready(function(){
@@ -342,23 +382,6 @@
           });
 
         });
-
-//         $(document).ready(function(){
-//             $('#summernote').summernote({
-//                 height: 200,                 
-//                 minHeight: 400,             
-//                 maxHeight: 400,             
-//                 focus: true ,
-    
-//               });
-    
-//             $("#noteBtn").click(function(){
-//               var markupStr = $('#summernote').summernote('code');
-//               console.log(markupStr);
-    
-//             });
-    
-//           });
       </script> 
       <div class="py-5" id="speakers">
         <div class="container ">
@@ -790,6 +813,12 @@ $(document).ready(function(){
         });
         
        	
+</script>
+
+
+<!-- Google Map -->
+<script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASI3sgz6P-wisrPe6D4N59Ro0RrodnHJM&callback=initMap">
 </script>
     
 </body>
