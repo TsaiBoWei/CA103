@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="" ></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -214,11 +215,6 @@
 
 		});
 		
-		$(document).ready(function({
-			
-			
-			
-		}));
 	</script>
 
 </body>

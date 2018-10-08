@@ -5,10 +5,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.mailservice.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
@@ -28,17 +24,6 @@ public class MemServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-//		PrintWriter out = res.getWriter();
-//		
-//		JSONObject obj = new JSONObject();
-//		try {
-//			obj.accumulate("mem_id", jGPVO.getMem_id());
-//			obj.accumulate("gp_id", jGPVO.getGp_id());
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-//		out.write(obj.toString());
 
 		if ("login".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -74,6 +59,7 @@ public class MemServlet extends HttpServlet {
 				loggedMember.setMem_password(psw);
 				MemService memSvc = new MemService();
 				loggedMember = memSvc.loginMem(loggedMember.getMem_account(), loggedMember.getMem_password());
+				
 
 				/*************************** 3.登入完成,準備轉交(Send the Success view) *************/
 				if ("MS0".equals(loggedMember.getMem_status())) {
@@ -83,7 +69,11 @@ public class MemServlet extends HttpServlet {
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 驗證未通過 轉交 Verify.jsp
 					successView.forward(req, res);
 				} else {
+					MemSpLikeService memsplikeSvc = new MemSpLikeService();
+					List<MemSpLikeVO> memSpLikeVO = new ArrayList<MemSpLikeVO>();
+					memSpLikeVO = memsplikeSvc.findByMemId(loggedMember.getMem_id());
 					HttpSession session = req.getSession();
+					session.setAttribute("memSpLikeVO",memSpLikeVO);
 					session.setAttribute("memVO", loggedMember);
 					String url = "/front_end/mem/login/TestView.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
