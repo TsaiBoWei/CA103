@@ -122,7 +122,8 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
               <br> </a>
           </div>
           <div>
-          <p class="coach_text_short"><%=coachVO2.getCoa_text()%></p>
+<%--           <p class="coach_text_short"><%=coachVO2.getCoa_text()%></p> --%>
+          <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
               <script>
              	 $(document).ready(function() {
             	    var len = 50; // 超過50個字以"..."取代
@@ -211,7 +212,10 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
             </div>
             <div class="col-md-5 align-self-center">
          	  <img class="img-fluid d-block w-100 img-thumbnail" alt="Card image"
-		  src="<%=request.getContextPath()%>/coach/Coach_DBGifReader.do?coa_id=<%=courlistVO.getCoa_id()%>"> </div>
+		  src="<%=request.getContextPath()%>/coach/Coach_DBGifReader.do?coa_id=<%=courlistVO.getCoa_id()%>"> 
+		  </div>
+	    
+			 
           </div>
         </div>
       </div>
