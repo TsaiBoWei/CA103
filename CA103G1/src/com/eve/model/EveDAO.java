@@ -16,6 +16,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.evechat.controller.ImageUtil;
+
 public class EveDAO implements EventDAO_interface{
 	
 	private static DataSource ds = null;
@@ -303,7 +305,8 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
 					eventVO.setEve_title(rs.getString("Eve_title"));
@@ -371,7 +374,8 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
 					eventVO.setEve_title(rs.getString("Eve_title"));
@@ -449,7 +453,8 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
 					eventVO.setEve_title(rs.getString("Eve_title"));
@@ -618,7 +623,8 @@ public class EveDAO implements EventDAO_interface{
 					eventVO = new EventVO();
 					eventVO.setEve_id(rs.getString("Eve_id"));
 					eventVO.setMem_id(rs.getString("Mem_id"));
-					eventVO.setEve_photo(rs.getBytes("Eve_photo"));
+					byte[] photo=ImageUtil.shrink(rs.getBytes("Eve_photo"), 500);
+					eventVO.setEve_photo(photo);
 					eventVO.setEve_logo(rs.getBytes("Eve_logo"));
 					eventVO.setEve_ptype(rs.getString("Eve_ptype"));
 					eventVO.setEve_title(rs.getString("Eve_title"));
