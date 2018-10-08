@@ -152,14 +152,14 @@
 				<div class="form-group" style="padding-top: 10px;">
 					<fieldset >
 						<legend>運動喜好 :</legend>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="trackField" value="SP000001">田徑</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="bicycle" value="SP000001">單車</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="ball" value="SP000001">球類</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="strength" value="SP000001">重訓</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="cardio" value="SP000001">有氧</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="martialArt" value="SP000001">武術</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="waterSport" value="SP000001">水上</label>
-						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="theOthers" value="SP000001">其他</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000001" value="SP000001">田徑</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000002" value="SP000002">單車</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000003" value="SP000003">球類</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000004" value="SP000004">重訓</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000005" value="SP000005">有氧</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000006" value="SP000006">武術</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000007" value="SP000007">水上</label>
+						<label class="checkbox-inline" style ="zoom: 1.5; margin:10px"><input type="checkbox" name="memSpLike" id="SP000008" value="SP000008">其他</label>
 					</fieldset>
 				</div>
 				<div class="form-group">
@@ -171,11 +171,9 @@
 				<div class="form-group">
 					<input type="hidden" name="action" value="mem_update">
 					<!-- 進入servlet -->
-					<button type="submit" class="btn btn-primary" id="regSend">送出</button>
-					<button type="button" class="btn btn-secondary "data-dismiss="modal">取消</button>
-					<a class="btn btn-lg btn-primary" href="../login/TestView.jsp">Register now</a>
+					<button type="submit" class="btn btn-lg btn-primary" id="regSend">送出</button>
+					<a class="btn btn-lg btn-secondary" href="../login/TestView.jsp">取消</a>
 				</div>
-
 			</form>
 		</div>
 	</div>
@@ -215,6 +213,12 @@
 			})
 
 		});
+		
+		$(document).ready(function({
+			
+			
+			
+		}));
 	</script>
 
 </body>

@@ -5,9 +5,16 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.mailservice.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.memsplike.model.MemSpLikeService;
+import com.memsplike.model.MemSpLikeVO;
+
 import redis.clients.jedis.Jedis;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -21,6 +28,17 @@ public class MemServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+//		PrintWriter out = res.getWriter();
+//		
+//		JSONObject obj = new JSONObject();
+//		try {
+//			obj.accumulate("mem_id", jGPVO.getMem_id());
+//			obj.accumulate("gp_id", jGPVO.getGp_id());
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		out.write(obj.toString());
 
 		if ("login".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -249,9 +267,7 @@ public class MemServlet extends HttpServlet {
 //					return;//程式中斷
 //				}
 
-				/******************************
-				 * 2.執行會員資料修改
-				 *****************************************/
+				/******************************* 2-1.執行會員資料修改*****************************************/
 				HttpSession session = req.getSession();
 				MemVO loggedMember = (MemVO) session.getAttribute("memVO");
 				MemService memSvc = new MemService();
@@ -261,7 +277,6 @@ public class MemServlet extends HttpServlet {
 				Part part = req.getPart("memPhoto");
 				InputStream is = part.getInputStream();
 				memPhoto = new byte[is.available()];
-				System.out.println(memPhoto.length);
 				if(memPhoto.length==0) {
 					memPhoto=loggedMember.getMem_photo();
 					is.read(memPhoto);
@@ -280,6 +295,29 @@ public class MemServlet extends HttpServlet {
 				updatedMem = memSvc.updateMem(updatedMem.getMem_id(), memName, updatedMem.getMem_account(),
 						updatedMem.getMem_password(), membirth, memPhoto, memEmail, memIntro);
 
+				MemSpLikeVO memSpLikeVO = new MemSpLikeVO();
+				MemSpLikeService memsplikeSvc = new MemSpLikeService();
+				
+				String[] memSpLike = req.getParameterValues("memSpLike");
+				/*******************************2-2.執行會員運動喜好修改************************************/
+				if(memSpLike != null) {
+					//會員有勾選運動喜好
+					for(int i=1;i<9;i++) {
+						memsplikeSvc.delete(updatedMem.getMem_id(), "SP00000"+i);		
+					}
+					for(int i=0;i<memSpLike.length;i++) {
+						memSpLikeVO.setMem_id(loggedMember.getMem_id());
+						memSpLikeVO.setSptype_id(memSpLike[i]);
+						memSpLikeVO.setLike_status("LS1");
+						memsplikeSvc.insert(memSpLikeVO);
+					}		
+				}else {
+					//會員無勾選運動喜好
+					for(int i=1;i<9;i++) {
+						memsplikeSvc.delete(updatedMem.getMem_id(), "SP00000"+i);		
+					}
+				}
+				
 				session.setAttribute("memVO", updatedMem);
 //				memSvc.getMemberPhoto(updatedMem.getMem_id());
 				String url = "/front_end/mem/login/TestView.jsp";
@@ -287,7 +325,7 @@ public class MemServlet extends HttpServlet {
 				successView.forward(req, res);
 
 			} catch (NullPointerException npe) {
-				errorMsgs.add("帳號密碼有誤" + npe.getMessage());
+				errorMsgs.add("錯誤訊息: " + npe.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/FailPage.jsp");
 				failureView.forward(req, res);
 			} catch (IllegalArgumentException pe) {

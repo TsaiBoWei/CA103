@@ -257,5 +257,4 @@
 		<url-pattern>/coach/Coach_DBGifReader.do</url-pattern>
 	</servlet-mapping>
 
-
 </web-app>
