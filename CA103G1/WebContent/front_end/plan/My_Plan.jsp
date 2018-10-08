@@ -252,9 +252,9 @@ th, td {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="page1.file"%>
+			<%@ include file="file/page1.file"%>
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
+				<tr>
 					<td>
 						<img class="plan_cover" 
 							 src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
@@ -302,7 +302,7 @@ th, td {
 				</tr>
 			</c:forEach>
 		</table>
-		<%@ include file="page2.file"%>
+		<%@ include file="file/page2.file"%>
 	</div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">

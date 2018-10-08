@@ -89,7 +89,7 @@ th, td {
 					<th>修改</th>
 					<th>刪除</th>
 				</tr>
-				<%@ include file="page1.file"%>
+				<%@ include file="file/page1.file"%>
 				<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
 
@@ -136,7 +136,7 @@ th, td {
 					</tr>
 				</c:forEach>
 			</table>
-			<%@ include file="page2.file"%>
+			<%@ include file="file/page2.file"%>
 		</div>
 	</div>
 
