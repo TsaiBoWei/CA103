@@ -309,6 +309,9 @@ public class MemServlet extends HttpServlet {
 					}
 				}
 				
+				List<MemSpLikeVO> memSpLikeVOList = new ArrayList<MemSpLikeVO>();
+				memSpLikeVOList = memsplikeSvc.findByMemId(loggedMember.getMem_id());
+				session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 				session.setAttribute("memVO", updatedMem);
 //				memSvc.getMemberPhoto(updatedMem.getMem_id());
 				String url = "/front_end/mem/login/TestView.jsp";
