@@ -49,7 +49,6 @@ body {
 	overflow-x: hidden;
 }
 
-/*圖片專區*/
 table {
  	width: 1800px; 
 /* 	background-color: #E0FFFF; */
@@ -68,6 +67,12 @@ th, td {
 	text-align: center;
 }
 
+h5{
+	font-size: 30px ;
+	color: red;
+}
+
+/*圖片專區*/
 .plan_cover {
 	width: 165px;
 	depth: 165px;
@@ -223,7 +228,7 @@ th, td {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<div class="form-control" style="background-color: #000000">
+	<div class="form-control" style="background-color: #1f1f1f">
 		<h5>我的計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
