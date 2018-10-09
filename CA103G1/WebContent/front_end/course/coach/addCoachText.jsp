@@ -134,10 +134,7 @@
 			<br>
 			
 			<div class="form-group text-md-left">
-              <h4 class="text-md-left">帳號狀態*</h4>
-				<input type="radio" name="coa_status" value="CS01">待認證 &nbsp;
-				<input type="radio" name="coa_status" value="CS02" checked>取得資格 &nbsp;
-				<input type="radio" name="coa_status" value="CS03">停權 
+				<input type="hidden" name="coa_status" value="CS02">
 			</div>
 			<br>
               				
@@ -151,11 +148,11 @@
           </form>
      
           <!-- 假的教練修改  -->
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/coach/coach.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="coa_id" value="C000002">
-			     <input type="hidden" name="action"	value="getOne_For_Update">
-			</FORM>
+<%-- 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/coach/coach.do" style="margin-bottom: 0px;"> --%>
+<!-- 			     <input type="submit" value="修改"> -->
+<!-- 			     <input type="hidden" name="coa_id" value="C000002"> -->
+<!-- 			     <input type="hidden" name="action"	value="getOne_For_Update"> -->
+<!-- 			</FORM> -->
           
         </div>
       </div>
