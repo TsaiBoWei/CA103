@@ -10,6 +10,7 @@
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 
 <%	
+	session.setAttribute("memVO", memSvc.getOneMem("M000002"));
 	String eve_id=(String)session.getAttribute("eve_id");
 	List<EventListVO> list= (List<EventListVO> )evelistSvc.getEveListsByEve(eve_id);
 	pageContext.setAttribute("list",list);

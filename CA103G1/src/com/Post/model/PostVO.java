@@ -12,7 +12,7 @@ public class PostVO implements java.io.Serializable {
 	private String post_status;
 	private String post_title;
 	private String post_privacy;
-	
+	private String post_img;
 	
 	public String getPost_id() {
 		return post_id;
@@ -69,5 +69,8 @@ public class PostVO implements java.io.Serializable {
 	}
 	public void setPost_privacy(String post_privacy) {
 		this.post_privacy = post_privacy;
+	}
+	public void setPost_img(String post_img) {
+		this.post_img = post_img;
 	}
 }

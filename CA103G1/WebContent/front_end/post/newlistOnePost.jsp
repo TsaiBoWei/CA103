@@ -23,16 +23,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/PersonalPage.css">
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 
 
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/plan/css/buttonfix.css">
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
 
 <!-- fafaicon -->
 <link rel="stylesheet"
@@ -52,7 +52,7 @@ body {
 </head>
 
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
-	                                      <jsp:include page="personlhead.jsp"/>
+	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
 <!-- code寫在這記得加container -->
@@ -61,7 +61,7 @@ body {
 
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
-	                                      <jsp:include page="personlfooter.jsp"/>
+	                                      <jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>
 <!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
 	
 

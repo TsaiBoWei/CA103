@@ -42,7 +42,6 @@ public class PostService {
 		postVO.setPost_status(post_status);
 		postVO.setPost_title(post_title);
 		postVO.setPost_privacy(post_privacy);
-		
 		dao.update(postVO);
 		
 		return postVO;
@@ -79,5 +78,11 @@ public class PostService {
    
    public List<PostVO> getByMemIDToDisplay( String mem_id ) {
 		return dao.getByMemIDToDisplay(mem_id);
- } 
+  } 
+   
+   public PostVO getOnePostToDisplay(String post_id) {
+		return dao.findByPKToDisplay(post_id);
+		
+	}
+  
 }
