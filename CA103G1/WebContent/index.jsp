@@ -31,17 +31,17 @@
   <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
   <!-- CSS dependencies -->
-  <link rel="stylesheet" href="css/neon.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
   
   <!--self definine 若放在上方cover輪播格式會跑掉 -->
- <link rel="stylesheet" href="css/index.css">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
 
-  <script src="js/navbar-ontop.js"></script>
+  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
   <!-- Script: Animated entrance -->
-  <script src="js/animate-in.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+  <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 
 
 
@@ -71,36 +71,42 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
-        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="#">WORK it OUT</a>
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#schedule">WorkOutPlan</a>
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#schedule">Event</a>
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="#speakers">Course</a>
           </li>
-          <li class="nav-item mx-2 btn-lg dropdown" id="navUserBtn">
-            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">User&nbsp
-              <i class="fa fa-caret-down dropbtn"></i>
-            </a>
-            <div class="dropdown-content" id="myDropdown">
-               <a href="#"><i class="fa fa-file">&nbsp&nbsp個人頁面</i></a>
-              <a href="#"><i class="fa fa-calculator">&nbsp&nbsp計畫</i></a>
-              <a href="#"><i class="fa fa-users" aria-hidden="true">&nbsp&nbsp好友</i></a>
-              <a href="#"><i class="fa fa-film" aria-hidden="true">&nbsp&nbsp課程</i></a>
-              <a href="#"> <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp&nbsp活動</i></a>
-              <a href="#"><i class="fa fa-file">&nbsp&nbsp貼文</i></a>
-              <a href="#"><i class="fa fa-check" aria-hidden="true">&nbsp&nbsp行事曆</i></a>
-              <a href="#"><i class="fa fa-sticky-note">&nbsp&nbsp教練申請</i></a>
-              <a href="#"><i class="fa fa-address-card" aria-hidden="true">&nbsp&nbsp會員資料</i></a>
-              <a href="#">登出</a>
-            </div>
-          </li>
+         
+          
+          <c:if test="${memVO!=null}">
+	          <li class="nav-item mx-2 btn-lg dropdown" >
+	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
+	              <i class="fa fa-caret-down dropbtn"></i>
+	            </a>
+	            <div class="dropdown-content" id="myDropdown">
+	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file">&nbsp&nbsp個人頁面</i></a>
+	              <a href=""><i class="fa fa-calculator">&nbsp&nbsp計畫</i></a>
+	              <a href="#"><i class="fa fa-users" aria-hidden="true">&nbsp&nbsp好友</i></a>
+	              <a href="#"><i class="fa fa-film" aria-hidden="true">&nbsp&nbsp課程</i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp&nbsp活動</i></a>
+	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
+	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true">&nbsp&nbsp行事曆</i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true">&nbsp&nbsp會員資料</i></a>
+	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout">登出</a>
+	            </div>
+	          </li>
+          </c:if>
         </ul>
-        <a class="btn btn-lg btn-primary" href="#" id="registerBtn">Register now</a>
+        
+         <c:if test="${memVO==null}">
+        	<a class="btn btn-lg btn-primary" href="<%=request.getContextPath() %>/Mem_Login_Signup.jsp" id="registerBtn">Register now</a>
+		 </c:if>      	
       </div>
     </div>	
   </nav>
@@ -894,12 +900,12 @@
     		 
     	  
     	  }else if(reqtype2=='POST'){
-    		  image1.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[0].post_id;
-    		  image2.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[1].post_id;
-    		  image3.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[2].post_id;
-    		  image4.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[3].post_id;
-    		  image5.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[4].post_id;
-    		  image6.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[5].post_id;
+    		  image1.src=jArray[0].post_img;
+    		  image2.src=jArray[1].post_img;
+    		  image3.src=jArray[2].post_img;
+    		  image4.src=jArray[3].post_img;
+    		  image5.src=jArray[4].post_img;
+    		  image6.src=jArray[5].post_img;
     		 
     	  
     	  }

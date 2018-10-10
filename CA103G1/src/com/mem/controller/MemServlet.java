@@ -75,9 +75,17 @@ public class MemServlet extends HttpServlet {
 					HttpSession session = req.getSession();
 					session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 					session.setAttribute("memVO", loggedMember);
-					String url = "/front_end/mem/login/TestView.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
-					successView.forward(req, res);
+					String location=(String)session.getAttribute("location");
+					
+					String url= req.getContextPath()+"/index.jsp";  //無來源網頁 重導至INDEX.Html
+					if(location!=null) { 							//確認有無來源網頁 有則導向來源網頁
+						url=location;                        
+					}	
+					
+					System.out.println("url : "+url);
+					res.sendRedirect(url);
+					return;
+					
 
 				}
 
@@ -102,9 +110,9 @@ public class MemServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.invalidate();
 
-			String url = "/Mem_Login_Signup.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
-			successView.forward(req, res);
+			String url = req.getContextPath()+"/index.jsp";  //登出重導至INDEX.Html
+			res.sendRedirect(url);
+			return;
 		}
 
 		if ("mem_signUp".equals(action)) {
