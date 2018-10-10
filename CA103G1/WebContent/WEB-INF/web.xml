@@ -39,7 +39,7 @@
 
 	<filter-mapping>
 		<filter-name>Filter1</filter-name>
-		<url-pattern>/front_end/mem/login/*</url-pattern>
+		<url-pattern>/front_end/mem/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
