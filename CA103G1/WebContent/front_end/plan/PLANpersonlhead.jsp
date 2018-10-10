@@ -60,7 +60,7 @@
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/img/index/jogback.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/jogback.jpg&quot;);">
 	</div>
 	<!-- Personal Pic -->
 	<div class="row mb-5 personalarea" id="personalnav">

@@ -25,7 +25,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
 <!-- PAGE settings -->
-<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/title-icon.png">
+<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -215,13 +215,13 @@
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/CreatPlan_picture.jpeg&quot;);">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 col-md-6 mx-auto">
-					<form method="post"
+				<div class="col-10">
+					<form method="post" class="text-left"
 						action="<%=request.getContextPath()%>/plan/plan.do"
 						enctype="multipart/form-data">
 
 
-						<div class="form-group text-primary" style="font-size: 48px">
+						<div class="form-group text-primary" style="font-size: 24px">
 							Create A New Plan
 						</div>
 						<br>
@@ -239,39 +239,25 @@
 
 						<div class="form-group">
 							<h3>Plan Name:</h3>
-							<input type="text" name="plan_name"
+							<input type="text" name="plan_name" 
 								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
 								class="form-control"/>
 						</div>
 						<br>
 
-
-						<div class="form-group">
-							<label><h3>Plan Cover:　</h3></label> 
-							<label class="btn btn-info btn-lg"> 
-								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
-									 onchange="openFile(event)" style="display: none;" 
-									 <%--  value="= (planVO==null) ?"= request.getContextPath()>/front_end/plan/images/photo.png":planVO.getPlan_cover%>"--%>/>
-									<i class="fa fa-photo">　Upload</i>
-							</label>
-						</div>
-						
-						
-						<div class="form-group">
-							　　　　　　　　　<img class="img" id="output"  style="display: none;">
-						</div>
-						
-						
 				 		<div class="form-group">
-							<label><h3>PlanStartDate:　</h3></label> 
+							<label><h3>PlanStartDate:</h3></label> 
 							<input type="text" name="plan_start_date" id="f_date1" class="date"/>
 						</div>
 
 
 					 	<div class="form-group">
-							<label><h3>Plan EndDate:　</h3></label> 
+							<label><h3>Plan EndDate:</h3></label> 
 							<input type="text" name="plan_end_date" id="f_date2" class="date"/>
 						</div>
+
+						
+						
  						<jsp:useBean id="sptypeSvc"  scope="page" class="com.sptype.model.SptypeService"/>
 						
  						<div class="form-group"> 
@@ -293,6 +279,20 @@
 							</select>
 						</div>
 
+						<div class="form-group">
+							<label><h3>Plan Cover:　</h3></label> 
+							<label class="btn btn-info btn-lg"> 
+								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
+									 onchange="openFile(event)" style="display: none;" 
+									 <%--  value="= (planVO==null) ?"= request.getContextPath()>/front_end/plan/images/photo.png":planVO.getPlan_cover%>"--%>/>
+									<i class="fa fa-photo">　Upload</i>
+							</label>
+						</div>
+						
+						
+						<div class="form-group">
+							　　　　　　　　　<img class="img" id="output"  style="display: none;">
+						</div>
 
 						<div class="form-group">
 							<label><h3>Plan Content:</h3></label><br>

@@ -10,7 +10,7 @@
 <html>
 
 <head>
-
+<link rel="icon" href="<%= request.getContextPath() %>/front_end">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 <title>Jennifer Lawernce</title>
@@ -52,17 +52,17 @@ body {
 </head>
 
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
-	                                      <jsp:include page="personlhead.jsp"/>
+	                                      <jsp:include page="PLANpersonlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
 <!-- code寫在這記得加container -->
-1111111111111111111
+<p>1111111111111111111</p>
 
 
 
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
-	                                      <jsp:include page="personlfooter.jsp"/>
+	                                      <jsp:include page="PLANpersonlfooter.jsp"/>
 <!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
 	
 

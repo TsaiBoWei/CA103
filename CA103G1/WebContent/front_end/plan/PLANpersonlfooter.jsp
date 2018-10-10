@@ -12,19 +12,19 @@
 					<div class="col-md-2 col-6"></div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_1.png">
+							src="<%=request.getContextPath()%>/img/index/logo_1.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_4.png">
+							src="<%=request.getContextPath()%>/img/index/logo_4.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_3.png">
+							src="<%=request.getContextPath()%>/img/index/logo_3.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_2.png">
+							src="<%=request.getContextPath()%>/img/index/logo_2.png">
 					</div>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 	
 		<!-- Call to action -->
 		<div class="py-5 section section-fade-in-out" id="register"
-			style="background-image: url('<%=request.getContextPath()%>/front_end/assets/conference/cover_2.jpg');">
+			style="background-image: url('<%=request.getContextPath()%>/img/index/cover_2.jpg');">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-left">
