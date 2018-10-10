@@ -31,7 +31,7 @@ public class PostServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String action = req.getParameter("action");
 		
-		
+		//瀏覽單一貼文
 		if ( "find_by_post_id".equals(action) ) {
 			// 儲存錯誤訊息
 			List<String> errorMsgs = new LinkedList<String>();
@@ -39,6 +39,7 @@ public class PostServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數****************************************/
 				String post_id = req.getParameter("post_id");
+				
 				/***************************2.開始查詢資料****************************************/
 				PostService postSvc = new PostService();
 				PostVO postVO = postSvc.getOnePostToDisplay(post_id);
@@ -49,10 +50,19 @@ public class PostServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
+							.getRequestDispatcher("/front_end/post/listAllPostByMem.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
+				
+				PostVO postVO1=postSvc.updatePostView(postVO.getPost_view(), postVO.getPost_id());
+				postVO1.setMem_id(post_id);
+				
+				postVO1.setPost_view(postVO.getPost_view());
+				
+				//貼文增加了欄位，待修改   10/04已修
+				
+				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/	
 				req.setAttribute("postVO", postVO);
 				
@@ -89,7 +99,7 @@ public class PostServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}	
 //		}
-		
+	//進入修改貼文頁面	
 	if("getOnePostToUpdate".equals(action)) {
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);	
@@ -107,13 +117,12 @@ public class PostServlet extends HttpServlet {
 			errorMsgs.add(e.getMessage() + "無法取得貼文，可能已被刪除");
 			RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 			failureView.forward(req, res);
-			
-			
+						
 		}
 		
 	}
 	
-		
+		//修改貼文
 	 if ( "update_by_post_id".equals(action) ) {
 			// 儲存錯誤訊息
 			List<String> errorMsgs = new LinkedList<String>();			
@@ -131,8 +140,14 @@ public class PostServlet extends HttpServlet {
 				Date date=new Date();				
 				Timestamp post_time = new Timestamp(date.getTime());
 				String post_viewStr = req.getParameter("post_view");
-				
-				Integer post_view=Integer.parseInt(post_viewStr);
+				System.out.println(post_viewStr);
+				Integer post_view=null;
+				try {
+				 post_view=Integer.parseInt(post_viewStr);
+						}catch(Exception e) {
+							
+						post_view=2;	
+						}
 				
 				
 				String sptype_id = req.getParameter("sptype_id");
@@ -143,6 +158,7 @@ public class PostServlet extends HttpServlet {
 				String post_status = "POS0";
 				
 				String post_title =req.getParameter("post_title");
+				System.out.println("Title = " + post_title);
 				if(post_title == null||post_title.trim().length()==0) {					
 					errorMsgs.add("貼文標題不得空白");
 				}
@@ -165,7 +181,7 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_status(post_status);
 				postVO.setPost_title(post_title);
 				postVO.setPost_privacy(post_privacy);
-				//貼文增加了欄位，待修改   10/04
+				//貼文增加了欄位，待修改   10/04已修
 				postservice.updatePost(post_id, mem_id, post_con, post_time, post_view, sptype_id, post_status,post_title,post_privacy);
 				//postservice.getOnePost(post_id);
 				/***************************3.修改完成,準備轉交(Send the Success view)************/
@@ -177,9 +193,10 @@ public class PostServlet extends HttpServlet {
 				// url part 沒寫
 				
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage() + "test");
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
-				failureView.forward(req, res);
+				e.printStackTrace();
+//				errorMsgs.add(e.getMessage() + "test");
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
+//				failureView.forward(req, res);
 			}	
 			
 		}

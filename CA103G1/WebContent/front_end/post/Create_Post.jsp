@@ -25,8 +25,10 @@
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/mem/editblog/css/PersonalPage.css">
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/mem/editblog/css/calender.css">
+<%--   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/mem/editblog/css/PersonalPage.css"> --%>
+
+  <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
   <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
   <!-- Script: Animated entrance -->
@@ -39,11 +41,12 @@
 <!--   <link rel="stylesheet" type="text/css" href="lightcase.css"> -->
 <!--   <script type="text/javascript" src="js/lightcase.js"></script> -->
   <script src="<%=request.getContextPath()%>/front_end/post/js/jquery.events.touch.js"></script>
-  <script src="<%=request.getContextPath()%>/front_end/mem/editblog/js/autotyping.js"></script>
+  <script src="<%=request.getContextPath()%>/front_end/post/js/autotyping.js"></script>
  
 <!--   <link rel="stylesheet" type="text/css" href="lightcasepostedit.css"> -->
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/mem/editblog/css/buttonfix.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/mem/editblog/css/editpostform.css">
+  <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/post/css/editpostform.css">
   <!-- fafaicon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <style>
@@ -165,6 +168,3 @@ height: 400,
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
-</body>
-
-</html>

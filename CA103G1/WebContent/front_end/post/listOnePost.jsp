@@ -25,7 +25,8 @@
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/purchcour/css/PersonalPage.css">
+  <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
   <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
   <!-- Script: Animated entrance -->
@@ -36,9 +37,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <!-- summernote -->
   <script src="<%=request.getContextPath() %>/front_end/post/js/jquery.events.touch.js"></script>
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/purchcour/css/buttonfix.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/course/purchcour/css/buttonfix.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/post/css/editpostform.css">
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/post/blogdetail.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/post/css/blogdetail.css">
   <!-- fafaicon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <style>
@@ -101,22 +102,22 @@
             <li class="list-inline-item px-2 border-right ">            
             <fmt:formatDate value="${postVO.post_time}" pattern="yyyy-MM-dd HH:mm"/>
            </li>
-           <%
-           		PostVO postVO=(PostVO)request.getAttribute("postVO");
-           		String post_id=postVO.getPost_id();
-           		int post_view=0;
-           		if((application.getAttribute(post_id+"View"))==null){
+<%--            <% --%>
+<!-- //            		PostVO postVO=(PostVO)request.getAttribute("postVO"); -->
+<!-- //            		String post_id=postVO.getPost_id(); -->
+<!-- //            		int post_view=0; -->
+<!-- //            		if((application.getAttribute(post_id+"view"))==null){ -->
            			
-           			post_view=0;
-           		}else{
-           			post_view=(int)application.getAttribute(post_id+"View");
+<!-- //            			post_view=0; -->
+<!-- //            		}else{ -->
+<!-- //            			post_view=(int)application.getAttribute(post_id+"view"); -->
            			
-           		}
-           		application.setAttribute(post_id+"View",++post_view);
+<!-- //            		} -->
+<!-- //            		application.setAttribute(post_id+"view",++post_view); -->
            
            
-           %>
-            <li class="list-inline-item px-2 border-right ">ÂsÄý¼Æ:&nbsp;&nbsp;<%=post_view %></li>
+<%--            %> --%>
+            <li class="list-inline-item px-2 border-right ">ÂsÄý¼Æ:&nbsp;&nbsp;${postVO.post_view}</li>
             <li class="list-inline-item  px-2  "> 10k likes </li>
           </ul>
         </div>
@@ -148,6 +149,3 @@
  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
-</body>
-
-</html>

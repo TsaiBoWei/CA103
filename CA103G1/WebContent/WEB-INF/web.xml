@@ -227,7 +227,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PostServlet</servlet-name>
-		<url-pattern>/post/Post.do</url-pattern>
+		<url-pattern>/post/post.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

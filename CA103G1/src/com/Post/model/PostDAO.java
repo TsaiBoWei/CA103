@@ -491,6 +491,17 @@ public class PostDAO implements PostDAO_interface{
 				postVO.setMem_id(rs.getString("MEM_ID"));
 				postVO.setPost_con(rs.getString("POST_CON"));			
 				postVO.setPost_time(rs.getTimestamp("POST_TIME"));
+				Integer a = null;
+				
+				try {					
+					a=rs.getInt("POST_VIEW");					
+					a++;
+				}catch(Exception e) {			
+					a=rs.getInt("POST_VIEW");
+					a=10;	
+				}
+				
+				postVO.setPost_view(a);	
 				postVO.setPost_view(rs.getInt("POST_VIEW"));
 				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				postVO.setPost_status(rs.getString("POST_STATUS"));
