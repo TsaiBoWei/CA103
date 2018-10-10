@@ -41,6 +41,15 @@ public class PostDAO implements PostDAO_interface{
 	//顯示單一貼文(未被封禁或刪除)
 	private static final String FIND_ONE_TO_DISPLAY="SELECT POST_ID,MEM_ID, POST_CON , POST_TIME ,POST_VIEW ,SPTYPE_ID ,POST_STATUS ,POST_TITLE,POST_PRIVACY FROM POST WHERE POST_ID = ? AND POST_STATUS = 'POS0'";
 	
+	/*********************  首頁用 *****************/
+	private static final String GET_NEW_POST="select * from" + 
+			"(select post_id,mem_id,post_title,post_view,sptype_id from post where  POST_STATUS = 'POS0'  order  by post_id desc)" + 
+			"where rownum < 7";
+	private static final String GET_POPULAR_POST="select * from" + 
+			"(select post_id,mem_id,post_title,post_view,sptype_id from post  where  POST_STATUS = 'POS0'  order by post_view desc)" + 
+			"where rownum < 7";
+	/*************************************************/
+	
 	@Override
 	public void add(PostVO postVO) {
 		Connection con = null;
@@ -520,6 +529,90 @@ public class PostDAO implements PostDAO_interface{
 		return postVO;
 		
 	}
+	
+	/*********************  首頁用 *****************/
+	@Override
+    public List<PostVO> getNewPost(){
+		List<PostVO> postList = new ArrayList<>();
+		PostVO postVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_NEW_POST);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				postVO = new PostVO();
+				postVO.setPost_id(rs.getString("POST_ID"));
+				postVO.setMem_id(rs.getString("MEM_ID"));
+				postVO.setPost_view(rs.getInt("POST_VIEW"));
+				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postList.add(postVO);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postList;
+		
+	};
+	@Override
+    public List<PostVO> getPopularPost(){
+		List<PostVO> postList = new ArrayList<>();
+		PostVO postVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_POPULAR_POST);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				postVO = new PostVO();
+				postVO.setPost_id(rs.getString("POST_ID"));
+				postVO.setMem_id(rs.getString("MEM_ID"));
+				postVO.setPost_view(rs.getInt("POST_VIEW"));
+				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
+				postVO.setPost_title(rs.getString("POST_TITLE"));
+				postList.add(postVO);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return postList;
+    
+    }
+	
+	/*********************  首頁用 *****************/
 
 	
 	

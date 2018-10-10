@@ -95,5 +95,16 @@ public class PlanService {
 		return dao.findByPrimaryKey(plan_id);
 	}
 	/************************************************************/
+	
+	
+	/********************* 1010 ­º­¶¥Î ****************************/
+	public List<PlanVO> getNewPlan() {
+		return dao.getNewPlan();
+	}
+	
+	public List<PlanVO> getPopularPlan() {
+		return dao.getPopularPlan();
+	}	
+	/************************************************************/
 
 }

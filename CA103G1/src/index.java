@@ -134,10 +134,10 @@ public class index extends HttpServlet {
 			PlanService planSvc=new PlanService();
 			switch(type1) {
 			case "POPULAR":
-//				list=planSvc.getPopularPlan();
+				list=planSvc.getPopularPlan();
 				break;
 			case "NEW":
-//				list=planSvc.getNewPlan();
+				list=planSvc.getNewPlan();
 				break;			
 			}
 			
@@ -173,10 +173,10 @@ public class index extends HttpServlet {
 			PostService postSvc=new PostService();
 			switch(type1) {
 			case "POPULAR":
-//				list=postSvc.getPopularPost();
+				list=postSvc.getPopularPost();
 				break;
 			case "NEW":
-//				list=postSvc.getNewPost();
+				list=postSvc.getNewPost();
 				break;			
 			}
 			

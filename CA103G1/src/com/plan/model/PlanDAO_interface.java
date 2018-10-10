@@ -25,4 +25,11 @@ public interface PlanDAO_interface {
 		//刪除計畫(行事曆)
 		public void updatePlanStatusCal(String plan_id,String plan_status);
 	/*************************************************/	
+		
+	/********************* 1010 首頁用 *****************/
+		public List<PlanVO> getNewPlan();
+		
+	    public List<PlanVO> getPopularPlan();
+			
+	/*************************************************/	
 }

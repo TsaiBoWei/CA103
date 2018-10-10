@@ -84,5 +84,15 @@ public class PostService {
 		return dao.findByPKToDisplay(post_id);
 		
 	}
+   
+   /*********************  ­º­¶¥Î *****************/
+   public List<PostVO> getNewPost(){
+		return dao.getNewPost();
+   }
+   public List<PostVO> getPopularPost(){
+	   return dao.getPopularPost();
+   }
+   /**************************** *****************/
+
   
 }

@@ -16,4 +16,9 @@ public interface PostDAO_interface {
 	public List<PostVO> getByMemIDToDisplay(String mem_id);
 	
 	public PostVO findByPKToDisplay(String post_id);
+	
+    //首頁用
+    public List<PostVO> getNewPost();
+    //首頁用
+    public List<PostVO> getPopularPost();
 }
