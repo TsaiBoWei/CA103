@@ -30,6 +30,8 @@ import oracle.net.aso.e;
 
 public class PlanServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	public PlanServlet() {
 		super();
 	}
@@ -230,7 +232,7 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
-		if ("listPlan_ByCompositeQuery".equals(action)) { // 來自test.jsp的複合查詢請求
+		if ("listPlans_ByCompositeQuery".equals(action)) { // 來自test.jsp的複合查詢請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
