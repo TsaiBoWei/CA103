@@ -283,4 +283,16 @@ public class EveAndroidDAO implements EventDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<EventVO> getNewEves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getPopularEves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
