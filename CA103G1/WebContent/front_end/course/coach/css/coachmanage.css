@@ -1,0 +1,227 @@
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+/* @keyframes bake-pie { */
+/*   from { */
+/*     transform: rotate(0deg) translate3d(0, 0, 0); */
+/*   } */
+/* } */
+
+/* section { */
+/*   margin-top: 30px; */
+/* } */
+/* .pieID { */
+/*   display: inline-block; */
+/*   vertical-align: top; */
+/* } */
+/* .pie { */
+/*   height: 200px; */
+/*   width: 200px; */
+/*   position: relative; */
+/*   margin: 0 30px 30px 0; */
+/*   margin: 0 10px 20px 0; */
+/* } */
+/* .pie::before { */
+/*   content: ""; */
+/*   display: block; */
+/*   position: absolute; */
+/*   z-index: 1; */
+/*   width: 100px; */
+/*   height: 100px; */
+/*   background: #1f1f1f; */
+/*   border-radius: 50%; */
+/*   top: 50px; */
+/*   left: 50px; */
+/* } */
+/* .pie::after { */
+/*   content: ""; */
+/*   display: block; */
+/*   width: 120px; */
+/*   height: 2px; */
+/*   background: rgba(0, 0, 0, 0.1); */
+/*   border-radius: 50%; */
+/*   box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.1); */
+/*   margin: 220px auto; */
+/* } */
+/* .slice { */
+/*   position: absolute; */
+/*   width: 200px; */
+/*   height: 200px; */
+/*   clip: rect(0px, 200px, 200px, 100px); */
+/*   animation: bake-pie 1s; */
+/* /*   opacity: 0.7; */ 
+/* } */
+/* .slice span { */
+/*   display: block; */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   background-color: black; */
+/*   width: 200px; */
+/*   height: 200px; */
+/*   border-radius: 50%; */
+/*   clip: rect(0px, 200px, 200px, 100px); */
+/* } */
+/* .legend { */
+/*   list-style-type: none; */
+/*   padding: 0; */
+/*   margin: 0; */
+ 
+/*   padding: 15px; */
+/*   font-size: 13px; */
+/*    padding:0px; */
+/*    font-size: 9px; */
+/*    font-size: 7px; */
+ 
+/* } */
+/* .legend li { */
+/*   width: 110px; */
+/*   height: 1.25em; */
+/*   margin-bottom: 0.7em; */
+/*   padding-left: 0.5em; */
+/*   border-left: 1.25em solid black; */
+/* } */
+/* .legend em { */
+/*   font-style: normal; */
+/*   font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important; */
+/* } */
+/* .legend span { */
+/*   float: right; */
+/* } */
+/* footer { */
+/*   position: fixed; */
+/*   bottom: 0; */
+/*   right: 0; */
+/*   font-size: 13px; */
+/*   background: #ddd; */
+/*   padding: 5px 10px; */
+/*   margin: 5px; */
+/* } */
+/*pie chart*/
+
+
+/*coachadd*/
+
+body {
+      overflow-x: hidden;
+    }
+
+    .badge-pill-coachm{
+      background:rgba(247, 6, 85,0.6);
+    }
+    .badge-pill-coachmi{
+      background:rgba(0, 154, 192,0.6);
+    }
+    .badge-pill-coachmp{
+    background:rgba(0, 154, 192,0.5);
+    }
+   p{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+    }
+    .incomeline{
+      border-top: 0.8px dotted rgba(243, 243, 243,0.7); 
+    }
+    
+    .editcoach{
+       border: 2px dotted rgba(243, 243, 243,0.2); 
+       border-radius:6px;
+    }
+    
+    .editcoach:hover{
+        border: 2px dotted rgba(18, 187, 173,0.5); 
+    }
+    .edithovr:hover{
+      color:rgba(18, 187, 173,0.5); 
+      cursor: pointer;
+    }
+    
+   
+    .nav-tabs{
+        border-bottom:0.7px dotted rgba(18, 187, 173,0.7)!important;
+    }
+    
+    .nav-tabs .nav-link.active{
+    
+    background-color:rgba(18, 187, 173,0.8) !important;
+    border-color:none;
+    }
+
+/*coachadd*/
+
+
+/*orignal courboard*/
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanskannada.css); */
+.commentbottomline{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);
+}
+
+.postsubtitle .border-right {
+    border-right: 0.8px solid rgba(239, 239, 239,0.8)!important;
+}
+.courboarlistinnerline{
+  border-bottom: 0.8px solid rgba(239, 239, 239,0.4); 
+}
+
+.h5{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+    
+.replyinreplynametext{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);  
+}
+
+
+   .commenttextarea {
+      height: 120px;
+    }
+
+    .courboarsearchbar {
+      background: none;
+      border: 0.7px solid #303030;
+    }
+
+    .courboarsearchbar:focus {
+      background: none;
+    }
+
+    .courboarformtitle {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarformtitle:focus {
+      background: none;
+    }
+
+    .dicountform {
+      background: rgba(48, 48, 48, 0.8);
+      
+    }
+
+    .courboardqtext {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboardqtext:focus {
+      background: none;
+    }
+
+    .courboarmodalheader {
+      border-bottom: none;
+    }
+
+    .courboarmodal {
+      border-top: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarlistinnerline {
+      border-bottom: 0.5px solid rgba(239, 239, 239, 0.4);
+    }
+
+/*orignal courboard*/
+
+
+

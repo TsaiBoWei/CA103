@@ -5,13 +5,7 @@
 
 /*navbar*/ 
     $(document).ready(function(){
-        /*模擬點擊登入按鈕後 登入按鈕消失 右上顯示會員名稱*/
-        $("#registerBtn").click(function(){
-           $("#registerBtn").hide();
-            $("#navUserBtn").show();
-           $(".dropdown>a").html("David&nbsp&nbsp<i class='fa fa-caret-down dropbtn'></i>").show();
-        });
-
+       
           /* 點擊會員名稱 出現下拉選單 */
         $("#navUserName").click(function(){
              document.getElementById("myDropdown").classList.toggle("show-dropdown-content");

@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp'>List</a> all Courlist.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/front_end/course/courlist/listAllCourlist.jsp'>List</a> all Courlist.  <br><br></li>
   
   
   <li>

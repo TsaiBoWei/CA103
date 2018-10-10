@@ -10,7 +10,7 @@ public class PurchCourVO implements Serializable{
 	private String cour_id;
 	private String mem_id;
 	private String refund;
-	private Integer coursco;
+	private Double coursco;
 	
 	public PurchCourVO() {
 		super();
@@ -57,11 +57,11 @@ public class PurchCourVO implements Serializable{
 		this.refund = refund;
 	}
 
-	public Integer getCoursco() {
+	public Double getCoursco() {
 		return coursco;
 	}
 
-	public void setCoursco(Integer coursco) {
+	public void setCoursco(Double coursco) {
 		this.coursco = coursco;
 	}
 

@@ -9,5 +9,6 @@ public interface CourlistDAO_interface {
     public List<CourlistVO> getAll();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<CourlistVO> getAll(Map<String, String[]> map); 
-
+    //ashley
+    public List<CourlistVO>getCourlistByCoa_id(String coa_id);
 }

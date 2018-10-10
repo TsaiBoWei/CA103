@@ -33,7 +33,7 @@ public class CoachService {
 		coachVO.setMem_id(mem_id);
 		coachVO.setCoa_text(coa_text);
 		coachVO.setCoa_status(coa_status);
-		dao.insert(coachVO);
+		dao.update(coachVO);
 
 		return coachVO;
 	}
@@ -45,21 +45,9 @@ public class CoachService {
 	public List<CoachVO> getAll() {
 		return dao.getAll();
 	}
-	
-	/*************************Âz§g************************/
-	public List<CoachVO> getReview(){
-		
-		return dao.getByReview();
+	//ashley
+	public CoachVO getOneCoachByMemId(String mem_id) {
+		return dao.findByMem_Id(mem_id);
 	}
 
-	public List<CoachVO> getReviewEnd(){
-		
-		return dao.getByReviewEnd();
-	}
-
-	public CoachVO updateStatus(String coa_id,String coa_status) {
-		dao.updateStatus(coa_id,coa_status);
-		return dao.findByPK(coa_id);		
-	}
-/***************************Âz§g****************************/
 }

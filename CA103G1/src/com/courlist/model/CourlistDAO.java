@@ -38,7 +38,11 @@ public class CourlistDAO implements CourlistDAO_interface {
 			+ "COUR_TEXT = ?, COUR_COST = ?, COUR_PHO = ?, COUR_LAU = ?, COUR_ANN = ? WHERE COUR_ID = ?";
 	private static final String DELETE_STMT = "DELETE FROM COURLIST WHERE COUR_ID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM COURLIST WHERE COUR_ID = ?";
-	private static final String GET_ALL = "SELECT * FROM COURLIST";
+	private static final String GET_ALL = "SELECT * FROM COURLIST WHERE COUR_LAU ='CL02'";
+	
+	
+	//ashley
+	private static final String FIND_BY_COACH_ID = "SELECT * FROM COURLIST WHERE COA_ID=?";
 
 	@Override
 	public void insert(CourlistVO courlistVO) {
@@ -324,6 +328,74 @@ public class CourlistDAO implements CourlistDAO_interface {
 			fis.close();
 
 			return baos.toByteArray();
+		}
+
+		//ashley
+		
+		@Override
+		public List<CourlistVO> getCourlistByCoa_id(String coa_id) {
+			
+			List<CourlistVO> list = new ArrayList<>();
+			CourlistVO courlistVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+//				Class.forName(DRIVER);
+//				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(FIND_BY_COACH_ID);
+				pstmt.setString(1, coa_id);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					courlistVO = new CourlistVO();
+					courlistVO.setCour_id(rs.getString("COUR_ID"));
+					courlistVO.setSptype_id(rs.getString("SPTYPE_ID"));
+					courlistVO.setCoa_id(rs.getString("COA_ID"));
+					courlistVO.setCname(rs.getString("CNAME"));
+					courlistVO.setCour_text(rs.getString("COUR_TEXT"));
+					courlistVO.setCour_cost(rs.getInt("COUR_COST"));
+					courlistVO.setCour_pho( rs.getBytes("COUR_PHO"));
+					courlistVO.setCour_lau(rs.getString("COUR_LAU"));
+					courlistVO.setCour_ann(rs.getString("COUR_ANN"));
+					courlistVO.setCour_view(rs.getInt("COUR_VIEW"));
+					list.add(courlistVO);
+				}
+
+//			} catch (ClassNotFoundException ce) {
+//				throw new RuntimeException("Couldn't load database driver. " + ce.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+	System.out.println("list"+list);
+			return list;
 		}
 		
 	// Handle with byte array data

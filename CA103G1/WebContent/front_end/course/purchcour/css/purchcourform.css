@@ -1,0 +1,168 @@
+
+    .user__header {
+      text-align: center;
+      opacity: 0;
+      transform: translate3d(0, 500px, 0);
+      animation: arrive 500ms ease-in-out 0.7s forwards;
+      animation: arrive 1000ms ease-in-out 0.7s forwards;
+    }
+
+    .user__title {
+      font-size: $font-size;
+      margin-bottom: -10px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .formpurchas {
+      /*
+    margin-top: 40px;
+    border-radius: 6px;
+*/
+      overflow: hidden;
+      opacity: 0;
+      transform: translate3d(0, 500px, 0);
+      animation: arrive 500ms ease-in-out 0.9s forwards;
+    }
+
+    .form--no {
+      animation: NO 1s ease-in-out;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    /*shake it off*/
+
+    @keyframes NO {
+      frompurchas,
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+      }
+      20%,
+      40%,
+      60%,
+      80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+      }
+    }
+
+    @keyframes arrive {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .courpay {
+      background: none;
+      border-bottom: solid 0.5px rgba(243, 243, 243, 0.3);
+      border-radius: 0px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .courpay:focus {
+      background: none;
+      border-bottom: solid 0.8px #12bbad;
+      border-radius: 0px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      box-shadow: none;
+    }
+
+    .courpaybtn {
+      border-radius: 10px;
+    }
+
+    .courpaylogotext {
+      background: none;
+      border-bottom: solid 0.5px rgba(243, 243, 243, 0.3);
+      border-radius: 0px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .paymemttitleline {
+      border-bottom: solid 0.5px rgba(243, 243, 243, 0.3);
+    }
+
+    .paymentcard {
+      background: linear-gradient(to right top, rgba(204, 204, 204, 0.1), rgba(48, 48, 48, 0.8))!important;
+    }
+
+    .paymentcard:hover {
+      border: 0.3px solid rgba(243, 243, 243, 0.2);
+      background: linear-gradient(to right top, rgba(204, 204, 204, 0.2), rgba(48, 48, 48, 0.9))!important;
+    }
+
+    .courpurchasselect {
+      background: rgba(48, 48, 48, 1);
+      background: none;
+    }
+
+    .extraarea {
+      background-color: #1f1f1f;
+    }
+
+    body {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    .h3 {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    .h4 {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+    h5 {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    .paymentcour {
+      background: linear-gradient(to left top, rgba(243, 243, 243, 0.1), rgba(0, 154, 192, 0.8))!important;
+      background: rgba(48, 48, 48, 0.2)!important;
+    }
+
+    .badge-courpaycata {
+      border-radius: 2px!important;
+    }
+
+    .paymentcour {
+      color: rgba(243, 243, 243, 0.8);
+    }
+
+    .text-light-payment {
+      color: rgba(243, 243, 243, 0.8);
+    }
+
+    .formpurchas2 {
+      -webkit-transition: transform 300ms;
+      display: inline-block;
+    }
+
+    .formpurchas2:hover .formpurchas2 {
+      transform: translate(0px, 0px);
+      transform: scale(1.03, 1)
+    }
+    
+    input:-webkit-autofill {
+    background:none !important;
+    
+    }
