@@ -10,10 +10,7 @@ public interface CoachDAO_interface {
 //    public void select(CoachVO coachVO);
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<CourlistVO> getAll(Map<String, String[]> map); 
-    /*********************璧君***********************/
-    public List<CoachVO> getByReview();
-    public List<CoachVO> getByReviewEnd();
-    public void updateStatus(String coa_id,String coa_status);
-    /*********************璧君***********************/
-
+    
+    //ashley
+    public CoachVO findByMem_Id(String mem_id);
 }

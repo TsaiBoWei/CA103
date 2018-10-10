@@ -31,7 +31,8 @@
 		</div>
 	
 	<input type="hidden" name="crpost_id" value="${courBoarVO.crpost_id}"></input>
-	
+	<input class="whichPagepasser" type="hidden" name="whichPage" value="<%=request.getParameter("whichPage")%>"></input> 
+<% System.out.println("getOnewhichPage"+request.getParameter("whichPage")); %>
 	<c:if test="${not empty errorMsgs}">
 		
 		<div class="errorMsgs mt-2 text-secondary"><i class="fas fa-exclamation-triangle"></i>&nbsp;Please note&nbsp;:&nbsp;<c:forEach var="message" items="${errorMsgs}">${message}&nbsp;</c:forEach></div>

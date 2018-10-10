@@ -5,7 +5,7 @@ public class CourunitVO implements java.io.Serializable{
 	private String cour_unit_id;
 	private String cour_id;
 	private String cu_name;
-	private Byte[] cour_film_blob;
+	private byte[] cour_film_blob;
 	private String cour_film_vc;
 	private Double cour_length;
 	private String cour_vtype;
@@ -28,10 +28,10 @@ public class CourunitVO implements java.io.Serializable{
 	public void setCu_name(String cu_name) {
 		this.cu_name = cu_name;
 	}
-	public Byte[] getCour_film_blob() {
+	public byte[] getCour_film_blob() {
 		return cour_film_blob;
 	}
-	public void setCour_film_blob(Byte[] cour_film_blob) {
+	public void setCour_film_blob(byte[] cour_film_blob) {
 		this.cour_film_blob = cour_film_blob;
 	}
 	public String getCour_film_vc() {

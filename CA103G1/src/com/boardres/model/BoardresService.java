@@ -13,16 +13,16 @@ public class BoardresService {
 		dao = new BoardresDAO();
 	}
 
-	public BoardresVO addBoardres(Timestamp crres_time, String crpost_id, String mem_id, String crres_text) {
+	public String addBoardres(Timestamp crres_time, String crpost_id, String mem_id, String crres_text) {
 
 		BoardresVO boardresVO = new BoardresVO();
 		boardresVO.setCrres_time(crres_time);
 		boardresVO.setCrpost_id(crpost_id);
 		boardresVO.setMem_id(mem_id);
 		boardresVO.setCrres_text(crres_text);
-		dao.add(boardresVO);
+		String crres_id=dao.add(boardresVO);
 
-		return boardresVO;
+		return crres_id;
 
 	}
 
@@ -48,6 +48,10 @@ public class BoardresService {
 
 	public BoardresVO getOneBoardres(String crres_id) {
 		return dao.findByPK(crres_id);
+	}
+	
+	public Integer getReplyCount(String crpost_id) {
+		return dao.getCountByCrostId(crpost_id);
 	}
 
 }

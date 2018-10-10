@@ -58,5 +58,11 @@ public class CourlistService {
 	public List<CourlistVO> getAll() {
 		return dao.getAll();
 	}
+	
+	//ashley
+	
+	public List<CourlistVO> getCourlistByCoa_id(String coa_id) {
+		return dao.getCourlistByCoa_id(coa_id);
+	}
 
 }

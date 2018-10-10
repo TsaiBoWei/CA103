@@ -5,21 +5,45 @@
 <%@ page import="com.boardres.model.*"%>
 <%@ page import="com.courboar.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.courlist.model.*"%>
+<%@ page import="com.coach.model.*"%>
+<%@ page import="com.purchcour.model.*"%>
 
 <% 
-    session.setAttribute("mem_id", "M000002");
-    session.setAttribute("brows_cour_id", "COUR000001");
     
     
-    request.setCharacterEncoding("utf-8");
-    String cour_id = (String)request.getSession().getAttribute("brows_cour_id");
-    String mem_id = (String)request.getSession().getAttribute("mem_id");
-    CourBoarService courboarSvc = new CourBoarService();
-    List<CourBoarVO> list = courboarSvc.findByCour_id(cour_id);
-    pageContext.setAttribute("list",list);
+    
+    
+
 %>
 
+<%
+///模擬登入與瀏覽
+// MemVO memVO1= new MemService().getOneMem("M000001");
+// session.setAttribute("memVO", memVO1);
+// CourlistService courlistSvc=new CourlistService(); 
+// CourlistVO courlistVO1=courlistSvc.getOneCourlist("COUR000001");
+// session.setAttribute("brows_courlistVO", courlistVO1);
+//end
 
+///取出值
+CourlistVO courlistVO = (CourlistVO)session.getAttribute("brows_courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
+// session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的
+System.out.print("maincourbour"+courlistVO.getCour_id());
+MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
+CoachService coachSvc=new CoachService(); 
+CoachVO ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());//if coach
+
+request.setCharacterEncoding("utf-8");
+
+CourBoarService courboarSvc = new CourBoarService();
+List<CourBoarVO> list = courboarSvc.findByCour_id(courlistVO.getCour_id());
+pageContext.setAttribute("list",list);
+
+String showCrres_id=request.getParameter("showCrres_id");
+//用來修改打開回應用
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -28,52 +52,42 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
-<title>Jennifer Lawernce</title>
+<title>maincourboar</title>
 
-<!-- CSS dependencies -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/neon.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/course/courboar/css/PersonalPage.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/course/courboar/css/calender.css">
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-<!-- summernote -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-	integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-	integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-	crossorigin="anonymous"></script>
-<!-- summernote -->
-<script
-	src="<%=request.getContextPath()%>/front_end/course/courboar/js/jquery.events.touch.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front_end/course/courboar/js/autotyping.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front_end/course/courboar/js/truncateoverride.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/course/courboar/css/buttonfix.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/course/courboar/css/editpostform.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/course/courboar/css/courboar.css">
-<!-- fafaicon -->
-<link rel="stylesheet"
+<!-- PAGE settings -->
+  
+  
+  <title>TRY</title>
+  <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
+  <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
+  <!-- ASHLEY -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <!-- end ASHLEY -->
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/course/courlist/css/Course.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/course/courlist/css/font.css">
+  <!-- ASHLEY -->
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/course/courboar/css/courboar.css">
+  <!-- end ASHLEY -->
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+  
+ 
+ 
+   <!-- ASHLEY fafaicon -->
+   <!-- ASHLEY -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <!-- end ASHLEY -->
+  <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> 
+
+  <!-- ASHLEY --> 
 <style>
 /*頁面設定*/
 body {
@@ -93,202 +107,151 @@ body {
 </head>
 
 <body class="text-center">
-	<!-- Navbar -->
-	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-		<span class="navbar-text"></span>
-		<div class="container">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbar2SupportedContent"
-				aria-controls="navbar2SupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-center"
-				id="navbar2SupportedContent">
-				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
-					href="#">WORK it OUT</a>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link" href="#">activity</a>
-					</li>
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="#speakers">Course</a></li>
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="#schedule">User</a></li>
-				</ul>
-				<a class="btn btn-lg btn-primary" href="#register">Register now</a>
-			</div>
-		</div>
-	</nav>
-	<!-- Cover -->
-	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/jogback.jpg&quot;);">
-	</div>
-	<!-- Personal Pic -->
-	<div class="row mb-5 personalarea">
-		<div class="col-md-3 offset-md-1">
-			<div class="colProfile">
-				<img class="img-fluid rounded-circle" alt="Card image"
-					src="<%=request.getContextPath()%>/front_end/course/courboar/assets/styleguide/people_2.jpg">
-			</div>
-		</div>
-		<div class="col-md-4 align-self-end ml-1">
-			<h1 class="text-left text-primary">Jennifer Lawrence</h1>
-			<p class="text-left">Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.</p>
-		</div>
-		<!-- Personal Pic -->
-		<!--<div class="col-md-4  py-10"></div>-->
-	</div>
-	<!-- NavBar Personal-->
-	<div class="container containerHrT ">
-		<hr>
-	</div>
-	<nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0"
-		id="profile-navbar">
-		<div class="container">
-			<div
-				class="collapse navbar-collapse text-right justify-content-center marignBun"
-				id="navbar3SupportedContent">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#"> <i
-							class="fa fa-file"></i> &nbsp; &nbsp; MyPage &nbsp; &nbsp;&nbsp;
-					</a></li>
-					<!-- Workoutplan-->
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" aria-expanded="false"
-						aria-haspopup="true" data-toggle="dropdown" href="#"
-						id="navbarDropdownMenuLink"> <i class="fa fa-calculator"></i>
-							&nbsp; WorkOutPlan &nbsp;
-					</a>
-						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
-							<a
-								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light dropdown-item-custom"
-								href="#">My Plan</a> <a
-								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Plan</a>
-						</div></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <i
-							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
-							&nbsp;&nbsp;
-					</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" aria-expanded="false"
-						aria-haspopup="true" data-toggle="dropdown"
-						id="navbarDropdownMenuLink"> <i class="fa fa-film"
-							aria-hidden="true"></i>&nbsp; &nbsp; Course &nbsp; &nbsp;
-					</a>
-						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom ">
-							<a
-								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">MyCourse</a> <a
-								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Course</a>
-						</div></li>
-					<li class="nav-item dropdown"><a class="nav-link" href="#">
-							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event
-							&nbsp;&nbsp;
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <i
-							class="fa fa-sticky-note" aria-hidden="true"></i>&nbsp;&nbsp;Post&nbsp;&nbsp;
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"> <i
-							class="fa fa-sticky-note" aria-hidden="true"></i>
-							&nbsp;MyCalender&nbsp;
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container containerHrB ">
-		<hr>
-	</div>
-	<!-- Plan List-->
-	<div class=" m-5">
-		<div class="row">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 my-3">
-						<div class="jzdbox1 jzdbasf jzdcal ">
-							<div class="jzdcalt">
-								<ul class="monyeartitle">
-									<li class="prev"><i class="fas fa-angle-left"></i></li>
-									<li class="montitle">JUNE</li>
-									<sapn class="yeartitle">2018</sapn>
-									<li class="nxt"><i class="fas fa-angle-right"></i></li>
-								</ul>
-							</div>
-							<span>Su</span> <span>Mo</span> <span>Tu</span> <span>We</span> <span>Th</span>
-							<span>Fr</span> <span>Sa</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> </span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span>1</span> <span class="circle"
-								data-title="My 25th birthday!">2</span> <span>3</span> <span>4</span>
-							<span>5</span> <span>6</span> <span>7</span> <span>8</span> <span>9</span>
-							<span>10</span> <span>11</span> <span class="circle"
-								data-title="2 month anniversary!">12</span> <span>13</span> <span>14</span>
-							<span>15</span> <span>16</span> <span>17</span> <span>18</span> <span>19</span>
-							<span>20</span> <span class="circle"
-								data-title="#MusicMonday - share your favorite song!">21</span>
-							<span class="circle"
-								data-title="#MusicMonday - share your favorite song!">22</span>
-							<span>23</span> <span>24</span> <span>25</span> <span>26</span> <span>27</span>
-							<span>28</span> <span>29</span> <span class="circle"
-								data-title="#MusicMonday - share your favorite song!">30</span>
-							<span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span> <span class="jzdb"> <!--BLANK-->
-							</span>
-						</div>
-					</div>
-					<div class=" col-md-6 p-3">
-						<div class="row justify-content-end">
-							<div class="card col-12 card-custom">
-								<div class="card-header card-header-custom text-left text-light">Aug
-									11 , 2018</div>
-								<div class="card-body card-body-custom">
-									<h4 class="text-primary text-left">Plan Today</h4>
-									<h6 class="text-muted  text-left">Subtitle</h6>
-									<p class="text-left text-white">Some quick example text to
-										build on the card title.</p>
-								</div>
-							</div>
-							<div class="col-sm-12 my-3">
-								<div class="card workoutnotecard">
-									<div class="card-body workoutnotecardbody ">
-										<div class="my-2 ">
-											<h4 class="text-left">Hi,&nbsp;&nbsp;Jennifer</h4>
-											<h4>
-												Do You <span class="txt-rotate" data-period="1800"
-													data-rotate="[ &quot;Work Out Today ?&quot; ]"></span>
-											</h4>
-										</div>
-										<div class="mt-3 text-right">
-											<a href="#posteditlight"
-												class="btn btn-primary btnworkoutnote "
-												data-rel="lightcase:myCollection:slideshow"> <i
-												class="fa fa-edit"></i>Make Post
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- Navbar -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <span class="navbar-text"></span>
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" 
+        href="<%=request.getContextPath()%>/front_end/course/courlist/select_page.jsp">WORK it OUT</a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#">WorkOutPlan</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#">Event</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#speakers">Course</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="#schedule">User</a>
+          </li>
+        </ul>
+        <a class="btn btn-lg btn-primary" href="#register">Register now</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Cover -->
+  <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath() %>/front_end/course/courlist/assets/conference/024.jpg);">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:13rem;"> </div>
+      </div>
+    </div>
+  </div>
+ 
+    <!-- 主頁圖(圖片) -->
+  <div class="py-5 text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 text-md-left text-center align-self-center my-5">
+          <h3><%=courlistVO.getCname()%>
+            <br> </h3>
+          <div class="text-md-right">
+            <a href="#" class="btn btn-outline-primary btn-sm m-1">Share
+              <br> </a>
+            <a href="#" class="btn btn-sm btn-outline-secondary m-1">Report
+              <br> </a>
+          </div>
+          <div>
+<%--           <p class="coach_text_short"><%=coachVO2.getCoa_text()%></p> --%>
+          <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
+              <script>
+             	 $(document).ready(function() {
+            	    var len = 50; // 超過50個字以"..."取代
+            	    $(".coach_text_short").each(function(i){
+            	        if($(this).text().length>len){
+            	            $(this).attr("title",$(this).text());
+            	            var text=$(this).text().substring(0,len-1)+".......";
+            	            $(this).text(text);
+            	        }
+            	    });
+            	});   
+  			  </script>
+          </div>
+          <a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp" class="btn btn-lg btn-primary mx-1">Buy It</a>
+        </div>
+        <div class="col-md-5  align-self-center" >
+          <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
+          src="<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>"></div>
+      </div>
+    </div>
+  </div>
+    <!-- 分頁頁籤 -->
+
+  <div class="container containerHrT " >
+    <hr> </div>
+  <nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar">
+    <div class="container">
+      <div class="collapse navbar-collapse text-right justify-content-center marignBun" id="navbar3SupportedContent&localhref=localhref">
+        <!-- 第一個按鈕 -->
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?courpageloc=tabone&localhref=localhref" >
+              <i class="fa fa-user"></i> &nbsp; Coach &nbsp;</a>
+          </li>
+          <!-- 第二個按鈕 -->
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?courpageloc=tabtwo&localhref=localhref">
+              <i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
+          </li>
+          <!-- 第三個按鈕 -->
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?courpageloc=tabthree&localhref=localhref"  >
+              <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; Information&nbsp;</a>
+          </li>
+         <!-- 第四個按鈕 -->
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?courpageloc=tabfour"  id="tabfourlink">
+              <i class="fa fa-film" aria-hidden="true"></i>&nbsp; Course Unit &nbsp; </a>
+          </li>
+          <!-- 第五個按鈕 -->
+          <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp?courpageloc=tabfive" id="tabfivelink" >
+              <i class="fa fa-comments" aria-hidden="true"></i> &nbsp; Forum &nbsp; </a>
+          </li>
+          <!-- 第六個按鈕 -->
+<!--           <li class="nav-item"> -->
+<!--             <a class="nav-link" href="" data-target="#tabsix" data-toggle="tab"> -->
+<!--               <i class="fa fa-star" aria-hidden="true"></i> &nbsp; Mangenment &nbsp; </a> -->
+<!--           </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  
+  <%
+  
+  String courpageloc=request.getParameter("courpageloc");
+  
+	if(courpageloc!=null){
+	String courpagelocId="#"+courpageloc;
+	String courpageloclinkId="#"+courpageloc+"link";
+	
+	%>
+	<script>
+	 $(document).ready(function() {
+      
+        $("<%=courpagelocId%>").addClass('show active');
+        $("<%=courpageloclinkId%>").css({"color": "#12bbad", "border-bottom": " 0.8px solid #12bbad"});
+
+    
+	 });
+    </script>
+ <% }%>
+  
+ 
+  <div class="container containerHrB" id="jys" >
+    <hr> </div>
 	<!--list-->
 	<!--Courboar title-->
-	<div class="py-4">
+	<div class="py-4" >
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -298,22 +261,16 @@ body {
 			</div>
 		</div>
 	</div>
-	<!--fixbutton-->
-	<a class="btn btn-lg btn-primary" id="bli_kontaktad_landing"
-		href="#posteditlight" data-rel="lightcase:myCollection:slideshow">
-		<i class="far fa-calendar-plus"></i>
-	</a>
-	<!--fixbutton-->
 	
-
 	
+  	
 	<!--courboar-->
-	<div class="container mb-3">
+	<div class="container mb-3" >
 		<div class="row align-items-start ">
 			<!--searchbar-->
-			<div class=" col-md-9 mb-0 px-5">
+			<div class=" col-md-9 mb-0 px-5" >
 				<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/front_end/course/courboar/page/searchcourboar.jsp"
+				ACTION="<%=request.getContextPath()%>/front_end/course/courboar/page/searchcourboar.jsp#jys"
 				name="searchbar">
 					<div class="input-group">
 						<div class="input-group-prepend">
@@ -324,7 +281,7 @@ body {
 							class="form-control courboarsearchbar text-white">
 						<div class="input-group-append">
 							<input type="hidden" name="cour_id" value="" class="brows_cour_id"></input>
-							<button type="submit" class="btn btn-primary border-primary border text-dark">
+							<button type="submit" class="btn btn-primary border-primary border text-dark confirmbtn">
 								<i class="fa fa-search text-white"></i>
 							</button>
 						</div>
@@ -333,8 +290,32 @@ body {
 			</div>
 			<div class=" col-12 col-md-3 mb-0 px-3">
 				<button type="button" class="btn btn-outline-primary"
-					data-toggle="modal" data-target="#courboarform">Add Your Comment</button><!-- 										///	 -->
+					data-toggle="modal" data-target="#courboarform" id="addcomment">Add Your Comment</button><!-- 										///	 -->
 			</div>
+			
+			<%PurchcourService purchcourSvc=new PurchcourService();
+			 String orderid=purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id()); 
+			  if(orderid==null){
+			%>
+			<script type="text/javascript">
+			$(document).ready(function() { 
+	       		$("#addcomment").click(function () {
+
+              $('#courboarform').on('show.bs.modal', function (e) {
+            	  if (!data) return e.preventDefault() 
+              });
+              alert("您尚未購買此課程");
+
+
+			        });
+			
+			    });
+			
+			
+			</script>
+			
+			<%} %>	  
+			  
 
 			<!--searchbar-->
 			<!--courboarform-->
@@ -382,7 +363,9 @@ body {
 									<input type="hidden" name="action" value="insert"></input> 
 									<input
 										type="hidden" name="cour_id" value="" class="brows_cour_id"></input>
-									<button type="submit" class="btn btn-primary">Save
+								    <input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
+									<button type="submit" class="btn btn-primary confirmbtn">Save
 										Changes</button>
 								</div>
 							</div>
@@ -426,7 +409,7 @@ body {
 										<button type="button" class="btn btn-secondary cancel"
 											data-dismiss="modal">Cancel</button>
 										<input type="hidden" name="action" value="update"></input> 
-										<button type="submit" class="btn btn-primary" >Save
+										<button type="submit" class="btn btn-primary confirmbtn" >Save
 											Changes</button>
 									</div>
 								</div>
@@ -435,7 +418,9 @@ body {
 					</div>
 				</FORM>
 		     <script>
+		     $(document).ready(function() {
 	    		 $("#updateform").modal({show: true});
+		     });
 	        </script>
 	       </c:if>		
 			
@@ -481,8 +466,10 @@ body {
 									<button type="button" class="btn btn-secondary cancel"
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="crpost_id" id="hiddencrpost_idreplyform" value=""></input> 
+									<input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<input type="hidden" name="action" value="insert"></input>
-									<button type="submit" class="btn btn-primary">Save
+									<button type="submit" class="btn btn-primary confirmbtn">Save
 										Changes</button>
 								</div>
 							</div>
@@ -493,7 +480,9 @@ body {
 			<!--- if erroMsg open lightbox again--->
 			<c:if test="${openreplyform!=null}">
 			<script>
+			$(document).ready(function() {
 	    		 $("#replyform").modal({show: true});
+			});
 	        </script>
 	        </c:if>
 	        <!--- if erroMsg --->
@@ -539,8 +528,9 @@ body {
 									<button type="button" class="btn btn-secondary cancel"
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="crres_id" id="hiddencrres_idupdatereplyform" value=""></input> 
+									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<input type="hidden" name="action" value="update"></input>
-									<button type="submit" class="btn btn-primary">Save
+									<button type="submit" class="btn btn-primary confirmbtn">Save
 										Changes</button>
 								</div>
 							</div>
@@ -589,7 +579,8 @@ body {
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="action" value="hide"></input> 
 									<input type="hidden" name="crpost_id" value="" id="inputhidecrpost_id"></input> 
-									<button type="submit" class="btn btn-primary">Confirm</button>
+									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
+									<button type="submit" class="btn btn-primary confirmbtn">Confirm</button>
 								</div>
 							</div>
 						</div>
@@ -628,7 +619,8 @@ body {
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="action" value="hide"></input> 
 									<input type="hidden" name="crres_id" value="" id="hiddencrres_idupdatereplyformcheck"></input> 
-									<button type="submit" class="btn btn-primary">Confirm</button>
+									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
+									<button type="submit" class="btn btn-primary confirmbtn">Confirm</button>
 								</div>
 							</div>
 						</div>
@@ -643,12 +635,12 @@ body {
 			 $(document).ready(function() {
 			        $(".cancel").click(function() {
 			           
-			             $(location).attr('href', '<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp#jys');
+			             $(location).attr('href', '<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp?localhref=localhref');
 
 			                
 			                 });
 			      });
-			
+				
 			</script>
 			
 			<!--if list null-->
@@ -658,14 +650,29 @@ body {
 	         </h4></div>
 	        </c:if>
             <!--if list null-->
+            <!--for confirmbtn-->
            <c:if test="${localhref!=null}">
+			
 			<script>
-	    		 location.href="#jys";
-	        </script>
+<%-- 	    		 location.href="<%=request.getContextPath()%>${localhref}#jys"; --%>
+           $(document).ready(function(){       
+           $('html,body').animate({scrollTop:$('#jys').offset().top}, 800); 
+           }); 
+           </script>
 	        </c:if>
+	        <c:if test="${param.localhref!=null}">
+			
+			<script>
+	<%-- 	    		 location.href="<%=request.getContextPath()%>${localhref}#jys"; --%>
+	           $(document).ready(function(){       
+	           $('html,body').animate({scrollTop:$('#jys').offset().top}, 800); 
+	           }); 
+	           </script>
+	        </c:if>
+	       
            
 			<!--courboarlist-->
-			<div class="col-12 col-sm-12 mt-5 " id="jys" >
+			<div class="col-12 col-sm-12 mt-5 "  >
 				<div class="col-12 col-sm-10 offset-md-1">
 					<div class="accordion" id="accordionExample">
 					<div class="pagenav mt-3 text-left mb-4"  >					
@@ -687,6 +694,7 @@ body {
 
 			                 String datatarget="#collapse"+ i ;
 			                 String id="collapse"+i ;
+			                 String idj="#collapse"+i ;
 			                 String updateClass=".updatelink"+i;
 			                 String update="updatelink"+i;
 			                 String hideClass=".hide"+i;
@@ -719,7 +727,7 @@ body {
 									<div class="row align-items-start px-1">
 										<div class="col-3 col-md-1 courboarimg px-1">
 											<img class="img-fluid rounded-circle" alt="Card image"
-												src="<%=request.getContextPath()%>/courboar/CourBoar_DBGifReader4.do?mem_id=<%=courboarVO.getMem_id()%>">
+												src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=<%=courboarVO.getMem_id()%>">
 										</div>
 										<div class="col-md-11 commentbottomline ">
 											<div class="replynametext text-left ">
@@ -736,9 +744,9 @@ body {
 													      $(document).ready(function() {
 													        $("<%=updateClass%>").click(function() {
 													           
-													             $(location).attr('href', '<%=request.getContextPath()%>/courboar/courboar.do?action=getOne&crpost_id=<%=courboarVO.getCrpost_id()%>');
-													                
-													                 });
+													             $(location).attr('href', '<%=request.getContextPath()%>/courboar/courboar.do?action=getOne&crpost_id=<%=courboarVO.getCrpost_id()%>&whichPage=<%=whichPage%>');
+													             
+													                 });                                                                                                                           
 													      });
 													    </script>
 														
@@ -757,10 +765,22 @@ body {
 													                 });
 													      });
 													    </script>
-																			
+														<% 
+															BoardresService boardresSvc = new BoardresService();
+															Integer replyCount=boardresSvc.getReplyCount(courboarVO.getCrpost_id());
+									System.out.print(boardresSvc.getReplyCount(courboarVO.getCrpost_id()));
+									System.out.print("///////////////////////");
+// 														    pageContext.setAttribute("count",count);
+// 														    Integer replyCount=(Integer)pageContext.getAttribute("count");
+														    
+														    if(boardresSvc.getReplyCount(courboarVO.getCrpost_id())==null){
+														    	replyCount=0;
+														    }
+									
+														%>					
 													</div>
 													<div class="col-md-1 text-left text-center ">
-														<span class="badge badge-primary badge-pill mt-3">14</span>
+														<span class="badge badge-primary badge-pill mt-3"><%=replyCount%></span>
 													</div>
 												</div>
 											</div>
@@ -771,7 +791,9 @@ body {
 							</div>
 						</div>
 						
-						  <c:if test="<%=mem_id.equals(courboarVO.getMem_id())%>">
+						
+						
+						  <c:if test="<%=memVO.getMem_id().equals(courboarVO.getMem_id())%>">
 						  <script>
 								$(document).ready(function() {
 													           
@@ -793,28 +815,47 @@ body {
 									data-toggle="modal" data-target="#replyform">
 									Reply</button>
 							</div>
-							
+							<%if(orderid!=null){%>	
 							<script>
-           
+						
 								$(document).ready(function() {
+								
 									 $("<%=replybtnClass%>").click(function() {
-													           
+											           
 										$("#hiddencrpost_idreplyform").val("<%=courboarVO.getCrpost_id()%>");
 													  
 										});
+									
+									 
 							        });
 			               </script>
+			               
+			                <%}else{%>
+			                <script>
+			                $(document).ready(function() {
+			                	 $("<%=replybtnClass%>").click(function() {
+										 $('#replyform').on('show.bs.modal', function (e) {
+							            	  if (!data) return e.preventDefault() 
+							              });
+							              alert("您尚未購買此課程");
+							              
+			                });
+			                	 
+			                });
+							</script>
+						    <%}%>
 							
-							
+						    
 							
 
 							<div class="courboarlistinnerline">&nbsp;</div>
 
 							<!--courboarlistcommet-->
 							<%
-							BoardresService boardresSvc = new BoardresService();
+							
 						    List<BoardresVO> replylist = boardresSvc.getCrpostReply(courboarVO.getCrpost_id());
 						    pageContext.setAttribute("replylist",replylist);
+						   
 						    
 						    %>
 							<%	for(int j=0; j<replylist.size(); j++) {
@@ -826,8 +867,8 @@ body {
 							    String replyeditsectionClass=".replyeditsection"+i+j;
 							    String replyeditsection="replyeditsection"+i+j;
 			                %>
-			   <%System.out.println("j="+j); %>
-			   <%System.out.println(replyedit); %>
+<%System.out.println("j="+j); %>
+<%System.out.println(replyedit); %>
 			                <!--CRREPLYformem-->
 	                        <%
 	                            MemService brmemSvc = new MemService();
@@ -841,7 +882,7 @@ body {
 							<div class="row align-items-start mt-2 px-3 mb-2  ">
 								<div class="col-3 col-md-1 ">
 									<img class="img-fluid rounded-circle" alt="Card image"
-										src="<%=request.getContextPath()%>/courboar/CourBoar_DBGifReader4.do?mem_id=<%=boardresVO.getMem_id()%>">
+										src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=<%=boardresVO.getMem_id()%>">
 								</div>
 								<div class="col-md-11  pr-2 ">
 									<div class="replyinreplynametext text-left  ">
@@ -881,7 +922,7 @@ body {
 										
 										</script>
 										
-										 <c:if test="<%=mem_id.equals(boardresVO.getMem_id())%>">
+										<c:if test="<%=memVO.getMem_id().equals(boardresVO.getMem_id())%>">
 										  <script>
 												$(document).ready(function() {
 																	           
@@ -890,11 +931,33 @@ body {
 												});
 										  </script>
 										   
-								          </c:if>	
+								       </c:if>
+
+
+								       <c:if test="<%=showCrres_id!=null %>">
+
+
+								       <c:if test="<%=showCrres_id.equals(boardresVO.getCrres_id())%>">
+
+										  <script>
+												$(document).ready(function() {
+																	           
+													$('<%=idj%>').addClass('show');
+																		   
+												});
+										 </script>
+
+						  
+				          			</c:if>	
+				          			</c:if>	
+				          			
 									</div>
 								</div>
 							</div>
-
+<%System.out.println("id="+id);
+  System.out.println("boardresVO.getCrres_id()="+boardresVO.getCrres_id());
+  System.out.println("showCrres_id"+showCrres_id+"!!!");
+%>
 							<!--courboarlistcommet-->
                          <%}%>
 						</div>
@@ -916,15 +979,26 @@ body {
 	           
 	$(document).ready(function() {
 													           
-		$(".brows_cour_id").val("<%=cour_id%>");
+		$(".brows_cour_id").val("<%=courlistVO.getCour_id()%>");
 	   
 	});
+	</script>
+	
+	<script><!-- for localhref-->
+           
+		$(document).ready(function() {
+			 $(".confirmbtn").click(function() {
+													           
+				$(".whichPagepasser").val("<%=whichPage%>");
+													  
+				});
+			});
 	</script>
 	
 
 	<!--courboar-->
 		<!-- Sponsor logos -->
-		<div class="py-5 section" >
+		<div class="py-5 mt-5 section" >
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
@@ -955,7 +1029,7 @@ body {
 		
 	
 		<!-- Call to action -->
-		<div class="py-5 section section-fade-in-out" id="register"
+		<div class="py-5 mt-3 section section-fade-in-out" id="register"
 			style="background-image: url('<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/cover_2.jpg');">
 			<div class="container">
 				<div class="row">
@@ -989,7 +1063,7 @@ body {
 		</footer>
 		<!-- JavaScript dependencies -->
 		
-		<!--  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>-->
+		
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

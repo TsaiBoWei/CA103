@@ -1,0 +1,327 @@
+
+    /*頁面設定*/
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .badge-courpaycata {
+      border-radius: 2px!important;
+    }
+
+    .btnpurchas {
+      border-radius: 8px!important;
+    }
+
+    #wrapper {
+      margin: 100px auto;
+      width: 405px;
+    }
+
+    .progress {
+      width: 200px;
+      height: 200px;
+      background: none;
+    }
+
+    .track,
+    .fill {
+      fill: rgba(0, 0, 0, 0);
+      fill: none;
+      stroke-width: 3;
+    }
+
+    .track {
+      stroke: rgba(0, 0, 0, 0.5);
+      stroke: rgba(48, 48, 48, 0.3)!important;
+    }
+
+    .fill {
+      stroke: rgb(255, 255, 255);
+      stroke-dasharray: 150.72259521484375;
+      stroke-dashoffset: 150.72259521484375;
+      transition: stroke-dashoffset 1s;
+    }
+
+    .progress.blue>.fill {
+      stroke: rgba(0, 154, 192, 0.2);
+    }
+
+    .progress.pink>.fill {
+      stroke: rgb(157, 51, 143);
+    }
+
+    .display {
+      fill: rgb(255, 255, 255);
+      text-anchor: middle;
+    }
+
+    .percenatext {
+      color: rgba(243, 243, 243, 0.8);
+      fill: rgba(243, 243, 243, 0.5);
+    }
+
+    .purlistrow {
+      box-shadow: 0.5px 0.5px 1px rgba(95.3%, 95.3%, 95.3%, 0.1);
+      box-shadow:none;
+    }
+
+    .purchasbg {
+      background: rgba(48, 48, 48, 0.3)!important;
+    }
+
+    .purchastitle {
+      border-bottom: 0.6px solid rgba(243, 243, 243, 0.6);
+    }
+ 
+    .h4 {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    h3 {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    .replyinreplynametext {
+      border-bottom: 0.5px solid rgba(239, 239, 239, 0.4);
+    }
+
+    .commenttextarea {
+      height: 120px;
+    }
+
+    .courboarsearchbar {
+      background: none;
+      border: 0.7px solid #303030;
+    }
+
+    .courboarsearchbar:focus {
+      background: none;
+    }
+
+    .courboarformtitle {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarformtitle:focus {
+      background: none;
+    }
+
+    .courboarqform {
+      background: rgba(48, 48, 48, 0.8);
+      /*width: 700px;*/
+    }
+
+    .courboarmodalfooter {
+      
+/*       background: rgba(48, 48, 48, 0.8); */
+      /*width: 700px;*/
+    }
+
+    .courboardqtext {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboardqtext:focus {
+      background: none;
+    }
+
+    .courboarmodalheader {
+      border-bottom: none;
+    }
+
+    .courboarmodal {
+      border-top: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarlistinnerline {
+      border-bottom: 0.5px solid rgba(239, 239, 239, 0.4);
+    }
+    /*20180915  courboarform  EVA*/
+
+    .form-group-100 {
+      width: 100%;
+    }
+
+    .modal-dialog.modal-dialog-700 {
+      max-width: 600px;
+    }
+
+    .popModel-close-bt {
+      position: absolute;
+      right: 0;
+      height: 50px;
+      width: 50px;
+    }
+    
+    
+    /*//20180915  courboarform  EVA*/
+ .modal-dialog-view{
+      max-width: 1000px;
+      background:none;
+ 
+    }
+    
+    
+ .courboarmodalheaderview{
+    background:none;
+    border-bottom:none;
+    
+    }
+    
+    .courboarqformview{
+    background:none;
+    
+    }
+    .modal-view:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog-view {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/*listdropdown*/
+
+    .rolldown-list {
+      text-align: left;
+      padding: 0;
+      margin: 0;
+    }
+
+    .rolldown-list li {
+      padding: 1em;
+      margin-bottom: .125em;
+      display: block;
+      list-style: none;
+    }
+
+    .rolldown-list li {
+      visibility: hidden;
+      animation: rolldown 1s 1;
+      transform-origin: 50% 0;
+      animation-fill-mode: forwards;
+    }
+
+    .rolldown-list li:nth-child(2n) {
+      background-color: #444;
+    }
+
+    .rolldown-list li:nth-child(2n+1) {
+      background-color: #333;
+    }
+
+    #btnReload {
+      float: right;
+      color: #333;
+      background: #ccc;
+      border: none;
+      padding: .5em 1em;
+    }
+
+    #btnReload:hover {
+      background: #ddd;
+    }
+
+    @keyframes rolldown {
+      0% {
+        visibility: visible;
+        transform: rotateX(180deg) perspective(500px);
+      }
+      70% {
+        visibility: visible;
+        transform: rotateX(-20deg);
+      }
+      100% {
+        visibility: visible;
+        transform: rotateX(0deg);
+      }
+    }
+
+    .spanunit {
+      background: #12bbad;
+    }
+
+    .courunitli {
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+    .editcourunit {
+      display: inline-block;
+      text-align: right;
+    }
+
+    .unitlist {
+      height: 45px;
+      vertical-align: middle!important;
+    }
+/*listdropdown*/
+/*uploadfile*/
+    .btn-tertiary {
+      color: #555;
+      padding: 0;
+      line-height: 40px;
+      width: 400px;
+      margin: auto;
+      display: block;
+      border: 2px solid #555;
+    }
+
+    .btn-tertiary:hover,
+    .btn-tertiary:focus {
+      color: #888;
+      border-color: #888;
+    }
+    input file style
+
+    .input-file {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .input-file+.js-labelFile {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .input-file+.js-labelFile .icon:before {
+      content: "\f093";
+    }
+
+    .input-file+.js-labelFile.has-file .icon:before {
+      content: "\f00c";
+      color: #12bbad;
+    }
+
+    .js-labelFile {
+      border-radius: 2px;
+      border: solid 0.5px rgba(204, 204, 204, 0.7);
+      font-size: 14px;
+    }
+
+    .hovereditunit:hover {
+      color: #12bbad;
+    }
+/*uploadfile*/
+
+
+    
+
+     
