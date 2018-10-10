@@ -49,7 +49,7 @@ public class PostServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/post/listAllPostByMem.jsp");
+							.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -63,7 +63,7 @@ public class PostServlet extends HttpServlet {
 				
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage() + "test");
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
 				failureView.forward(req, res);
 			}			
 		}
@@ -170,7 +170,7 @@ public class PostServlet extends HttpServlet {
 				//postservice.getOnePost(post_id);
 				/***************************3.修改完成,準備轉交(Send the Success view)************/
 				req.setAttribute("postVO", postVO);
-				String url ="/front_end/post/listAllPostByMem.jsp";
+				String url ="/front_end/post/listAllPostByMem09.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);				
 				
@@ -178,7 +178,7 @@ public class PostServlet extends HttpServlet {
 				
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage() + "test");
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/post/listAllPostByMem09.jsp");
 				failureView.forward(req, res);
 			}	
 			
@@ -252,7 +252,7 @@ public class PostServlet extends HttpServlet {
 				postSvc.addPost(mem_id, post_con, post_time,0, sptype_id,post_title,post_privacy);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("postVO", postVO);
-				String url="/front_end/post/listAllPostByMem.jsp";
+				String url="/front_end/post/listAllPostByMem09.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);		
 				// url part 沒寫
@@ -277,12 +277,12 @@ public class PostServlet extends HttpServlet {
 					PostService postSvc = new PostService();
 					postSvc.updatePostStatus(post_id,"POS2");
 					
-					String url="/front_end/post/listAllPostByMem.jsp";
+					String url="/front_end/post/listAllPostByMem09.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); 
 					successView.forward(req, res);
 				
 				}catch(Exception e) {
-					String url="/front_end/post/listAllPostByMem.jsp";
+					String url="/front_end/post/listAllPostByMem09.jsp";
 					errorMsgs.add("刪除貼文失敗:" +e.getMessage());
 					RequestDispatcher failureView = req
 							.getRequestDispatcher(url);
