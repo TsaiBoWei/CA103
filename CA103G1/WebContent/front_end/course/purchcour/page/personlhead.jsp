@@ -182,16 +182,16 @@
 	
 	<!--header  -->
 	
-	<div class="py-4" id="jys">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<h2 class="text-left">Course Board</h2>
-					<hr>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="py-4" id="jys"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-12"> -->
+<!-- 					<h2 class="text-left">Course Board</h2> -->
+<!-- 					<hr> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!--fixbutton-->
 	<a class="btn btn-lg btn-primary" id="bli_kontaktad_landing"
 		href="#posteditlight" data-rel="lightcase:myCollection:slideshow">

@@ -12,19 +12,19 @@
 					<div class="col-md-2 col-6"></div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_1.png">
+							src="<%=request.getContextPath()%>/img/index/logo_1.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_4.png">
+							src="<%=request.getContextPath()%>/img/index/logo_4.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_3.png">
+							src="<%=request.getContextPath()%>/img/index/logo_3.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_2.png">
+							src="<%=request.getContextPath()%>/img/index/logo_2.png">
 					</div>
 				</div>
 			</div>
