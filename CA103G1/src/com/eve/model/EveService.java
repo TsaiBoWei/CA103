@@ -121,5 +121,12 @@ public class EveService {
 		return dao.getReviewEndEves();
 	}
 	
+	public List<EventVO> getNewEves(){
+		return dao.getNewEves();
+	}
+	public List<EventVO> getPopularEves(){
+		return dao.getPopularEves();
+	}
+	
 	
 }

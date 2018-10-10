@@ -1,0 +1,47 @@
+
+
+/*summernote editor css*/
+
+.note-editor{ 
+            background-color: transparent!important;
+            
+            
+        }
+    
+.note-editable{ 
+            background-color: transparent!important;
+            
+        }
+        
+.note-editor.note-frame .note-editing-area .note-editable {
+        
+       color: #f3f3f3!important;
+/*       border-bottom: rgba(239, 239, 239,0.5)!important;*/
+        }
+        
+.btn-default{
+            background-color:rgba(239, 239, 239,0.9)!important; 
+            border: none;
+        }
+.note-editor.note-frame{
+    border: 0.8px solid rgba(239, 239, 239,0.5)!important; 
+}
+
+.bg-dark-posteditinput{
+    background-color: #1f1f1f!important; 
+    border-radius: 2px;
+    border: 0.8px solid rgba(239, 239, 239,0.5)!important;
+    color: rgba(239, 239, 239,0.9)!important;
+    
+}
+
+.bg-dark-posteditinput>option:hover{
+    background-color:rgba(18, 187, 173,0.5)!important;
+}
+
+
+
+    
+
+
+

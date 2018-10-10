@@ -39,7 +39,7 @@
 
 	<filter-mapping>
 		<filter-name>Filter1</filter-name>
-		<url-pattern>/front_end/mem/login/*</url-pattern>
+		<url-pattern>/front_end/mem/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -266,5 +266,14 @@
 		<servlet-name>Coach_DBGifReader</servlet-name>
 		<url-pattern>/coach/Coach_DBGifReader.do</url-pattern>
 	</servlet-mapping>
+	
+	 <servlet>
+    <servlet-name>CoachReviewServlet</servlet-name>
+    <servlet-class>com.coachReview.controller.CoachReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoachReviewServlet</servlet-name>
+    <url-pattern>/coaRv/coaRv.do</url-pattern>
+  </servlet-mapping>
 
 </web-app>

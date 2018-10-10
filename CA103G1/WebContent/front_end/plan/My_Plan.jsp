@@ -49,7 +49,6 @@ body {
 	overflow-x: hidden;
 }
 
-/*圖片專區*/
 table {
  	width: 1800px; 
 /* 	background-color: #E0FFFF; */
@@ -68,6 +67,12 @@ th, td {
 	text-align: center;
 }
 
+h5{
+	font-size: 30px ;
+	color: red;
+}
+
+/*圖片專區*/
 .plan_cover {
 	width: 165px;
 	depth: 165px;
@@ -223,7 +228,7 @@ th, td {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<div class="form-control" style="background-color: #000000">
+	<div class="form-control" style="background-color: #1f1f1f">
 		<h5>我的計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
@@ -252,9 +257,9 @@ th, td {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="page1.file"%>
+			<%@ include file="file/page1.file"%>
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
+				<tr>
 					<td>
 						<img class="plan_cover" 
 							 src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
@@ -302,7 +307,7 @@ th, td {
 				</tr>
 			</c:forEach>
 		</table>
-		<%@ include file="page2.file"%>
+		<%@ include file="file/page2.file"%>
 	</div>
 	<!-- Sponsor logos -->
 	<div class="py-5 section">

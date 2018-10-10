@@ -32,7 +32,16 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
 
 	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
-
+		
+	/********************* 1010 首頁用 *****************/
+	private static final String GET_NEW_PLAN="select * from" + 
+			"(select plan_id,mem_id,plan_name,plan_view,sptype_id from plan order by plan_id desc)" + 
+			"where rownum < 7";
+	private static final String GET_POPULAR_PLAN="select * from" + 
+			"(select plan_id,mem_id,plan_name,plan_view,sptype_id  from plan order by plan_view desc)" + 
+			"where rownum < 7";
+	/*************************************************/
+	
 	@Override
 	public void insert(PlanVO planVO) {
 		Connection con = null;
@@ -406,5 +415,97 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+/********************* 1010 首頁用 *********************************/
+	
+	@Override
+	public List<PlanVO> getNewPlan(){
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(GET_NEW_PLAN);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				list.add(planVO);
+			}
+		} catch (ClassNotFoundException ce) {
+			ce.printStackTrace();
+		} catch (SQLException se) {
+			se.printStackTrace();
+//			throw new RuntimeException("A database error occurred. " + se.getMessage());
+		} finally {
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+		
+	};
+	@Override
+    public List<PlanVO> getPopularPlan(){
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(GET_POPULAR_PLAN);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				list.add(planVO);
+			}
+		} catch (ClassNotFoundException ce) {
+			ce.printStackTrace();
+		} catch (SQLException se) {
+			se.printStackTrace();
+//			throw new RuntimeException("A database error occurred. " + se.getMessage());
+		} finally {
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+		
+	};
+	
+	/******************************************************************/
 
 }

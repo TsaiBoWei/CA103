@@ -61,17 +61,23 @@ public class EveAndroidServlet extends HttpServlet {
 			writeText(res, list == null? "":gson.toJson(list));			
 		}
 		
-		if ("get_image".equals(action)) {
+		if ("getImage".equals(action)) {
 			OutputStream os = res.getOutputStream();
-			String eve_id = jsonObject.get("eve_id").getAsString();
+			String eve_id = jsonObject.get("id").getAsString();
+			System.out.println(eve_id);
 			int imageSize = jsonObject.get("imageSize").getAsInt();
 			
 			byte[] image = evedao.getEvePhotoByEveId(eve_id);
 			if ( image != null ) {
 				image = ImageUtil.shrink(image, imageSize);
-				res.setContentType("image/jpeg");
+				res.setContentType("image/png");
 				res.setContentLength(image.length);
 			}
+			// 回傳查詢結果
+			os.write(image);
+		}
+		else {
+			writeText(res,"");
 		}
 		
 	}	

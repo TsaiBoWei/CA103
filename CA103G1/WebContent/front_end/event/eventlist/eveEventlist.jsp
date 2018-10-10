@@ -10,6 +10,7 @@
 <jsp:useBean id="eveSvc" scope="page" class="com.eve.model.EveService" />
 
 <%	
+	session.setAttribute("memVO", memSvc.getOneMem("M000002"));
 	String eve_id=(String)session.getAttribute("eve_id");
 	List<EventListVO> list= (List<EventListVO> )evelistSvc.getEveListsByEve(eve_id);
 	pageContext.setAttribute("list",list);
@@ -178,8 +179,8 @@ body {
 	
  <!-- =========================================以下為聊天視窗========================================== -->
   
-   <jsp:include page="/front_end/event/evechat/eveChat.jsp"/>
-  
+   <jsp:include page="/front_end/event/evechat/eveChat.jsp"/> 
+   
 <!-- =========================================以上為聊天視窗========================================== --> 	
 
 

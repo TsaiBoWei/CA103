@@ -45,6 +45,16 @@ public class PlanDAO implements PlanDAO_interface {
 	private static final String UPDATE_PLAN_STATUS_CAL = "UPDATE plan set plan_status=? where plan_id=?";
 
 	/*************************************************/
+	
+	/********************* 1010 首頁用 *****************/
+	private static final String GET_NEW_PLAN="select * from" + 
+			"(select plan_id,mem_id,plan_name,plan_view,sptype_id from plan order by plan_id desc)" + 
+			"where rownum < 7";
+	private static final String GET_POPULAR_PLAN="select * from" + 
+			"(select plan_id,mem_id,plan_name,plan_view,sptype_id  from plan order by plan_view desc)" + 
+			"where rownum < 7";
+	/*************************************************/
+
 
 	@Override
 	public void insert(PlanVO planVO) {
@@ -493,5 +503,93 @@ public class PlanDAO implements PlanDAO_interface {
 	}
 
 	/*********************************************************************/
+	
+	/********************* 1010 首頁用 *********************************/
+	
+	@Override
+	public List<PlanVO> getNewPlan(){
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_NEW_PLAN);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				list.add(planVO);
+			}
+		
+		} catch (SQLException se) {
+			se.printStackTrace();
+//			throw new RuntimeException("A database error occurred. " + se.getMessage());
+		} finally {
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+		
+	};
+	@Override
+    public List<PlanVO> getPopularPlan(){
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_POPULAR_PLAN);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				list.add(planVO);
+			}
+		
+		} catch (SQLException se) {
+			se.printStackTrace();
+//			throw new RuntimeException("A database error occurred. " + se.getMessage());
+		} finally {
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+		
+	};
+	
+	/******************************************************************/
+	
 
 }

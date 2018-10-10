@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="" ></jsp:useBean>
+<%@ page import="java.util.*" %>
+<%@ page import="java.util.*, com.memsplike.model.MemSpLikeVO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +116,7 @@
               <a href="#">
                 <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;行事曆</i>
               </a>
-              <a href="#">登出</a>
+              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout">登出</a>
             </div>
           </li>
         </ul>
@@ -174,6 +176,7 @@
 					<!-- 進入servlet -->
 					<button type="submit" class="btn btn-lg btn-primary" id="regSend">送出</button>
 					<a class="btn btn-lg btn-secondary" href="../login/TestView.jsp">取消</a>
+					<a class="btn btn-lg btn-primary" href="../../course/coach/addCoachText.jsp">申請教練</a>
 				</div>
 			</form>
 		</div>
@@ -188,7 +191,25 @@
 
 	<script>
 		$(function() {
-
+			var arr = [];
+			<% 	
+				List<MemSpLikeVO> memSpLikeVOList = (ArrayList<MemSpLikeVO>)session.getAttribute("memSpLikeVOList");
+				ArrayList<String> sports = new ArrayList<String>();
+				if(memSpLikeVOList!=null){
+				for(MemSpLikeVO memSpLikeVO:memSpLikeVOList){
+				sports.add(memSpLikeVO.getSptype_id());
+				}
+				for(String sport: sports){
+			%>
+				arr.push("<%=sport %>");
+			<%
+				}}
+			%>
+			
+			for(var i = 0; i< arr.length; i++){
+				$('#'+arr[i]).attr('checked', true);
+			}
+			
 			function format_float(num, pos) {
 				var size = Math.pow(10, pos);
 				return Math.round(num * size) / size;

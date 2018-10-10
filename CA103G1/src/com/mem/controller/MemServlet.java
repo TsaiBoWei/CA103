@@ -70,10 +70,10 @@ public class MemServlet extends HttpServlet {
 					successView.forward(req, res);
 				} else {
 					MemSpLikeService memsplikeSvc = new MemSpLikeService();
-					List<MemSpLikeVO> memSpLikeVO = new ArrayList<MemSpLikeVO>();
-					memSpLikeVO = memsplikeSvc.findByMemId(loggedMember.getMem_id());
+					List<MemSpLikeVO> memSpLikeVOList = new ArrayList<MemSpLikeVO>();
+					memSpLikeVOList = memsplikeSvc.findByMemId(loggedMember.getMem_id());
 					HttpSession session = req.getSession();
-					session.setAttribute("memSpLikeVO",memSpLikeVO);
+					session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 					session.setAttribute("memVO", loggedMember);
 					String url = "/front_end/mem/login/TestView.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
@@ -83,7 +83,7 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (NullPointerException npe) {
-				errorMsgs.add("帳號密碼有誤,請重新登入");
+				errorMsgs.add("帳號密碼有誤,請重新輸入");
 				RequestDispatcher failureView = req.getRequestDispatcher("/Mem_Login_Signup.jsp");
 				failureView.forward(req, res);
 			}
@@ -169,10 +169,8 @@ public class MemServlet extends HttpServlet {
 				successView.forward(req, res);
 
 			} catch (Exception e) {
-				boolean openModal = true;
-				req.setAttribute("openModal", openModal);
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/Mem_Login_Signup.jsp");
+				errorMsgs.add("錯誤訊息: " + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/FailPage.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -263,22 +261,24 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				MemVO updatedMem = memSvc.getOneMem(loggedMember.getMem_id());
 				
-				byte[] memPhoto = null;
 				Part part = req.getPart("memPhoto");
-				InputStream is = part.getInputStream();
-				memPhoto = new byte[is.available()];
-				if(memPhoto.length==0) {
-					memPhoto=loggedMember.getMem_photo();
+				byte[] memPhoto=loggedMember.getMem_photo();
+				
+				if(part.getSize() !=0) {
+					InputStream is = part.getInputStream();
+					memPhoto = new byte[is.available()];
 					is.read(memPhoto);
-				}else {
+					is.close();
 					System.out.println("success");
-					is.read(memPhoto);					
 				}
 
 				java.sql.Date membirth = null;
+				if(!(req.getParameter("memBirth").isEmpty())) {
+					System.out.println(req.getParameter("memBirth"));
+					System.out.println("here");
+					membirth = java.sql.Date.valueOf(req.getParameter("memBirth"));					
+				}
 				String memName = req.getParameter("memName");
-				membirth = java.sql.Date.valueOf(req.getParameter("memBirth"));
-
 				String memEmail = req.getParameter("memEmail");
 				String memIntro = req.getParameter("memIntro");
 
@@ -308,6 +308,9 @@ public class MemServlet extends HttpServlet {
 					}
 				}
 				
+				List<MemSpLikeVO> memSpLikeVOList = new ArrayList<MemSpLikeVO>();
+				memSpLikeVOList = memsplikeSvc.findByMemId(loggedMember.getMem_id());
+				session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 				session.setAttribute("memVO", updatedMem);
 //				memSvc.getMemberPhoto(updatedMem.getMem_id());
 				String url = "/front_end/mem/login/TestView.jsp";
@@ -320,6 +323,9 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			} catch (IllegalArgumentException pe) {
 				pe.printStackTrace();
+				errorMsgs.add("錯誤訊息: " + pe.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/FailPage.jsp");
+				failureView.forward(req, res);
 			}
 		}
 

@@ -60,7 +60,17 @@ public class EveDAO implements EventDAO_interface{
 		private static final String GET_REVIEWE_END_EVES =
 						"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT, EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
 								"ESTART_LIMIT,ESTART_MAX,EVE_STATUS,EVE_LOCATION,EVE_LONG,EVE_LAT,CITY_ID,SPTYPE_ID,EVE_VIEW,EVE_CHARGE,ECONTACT_INFO,EESTABLISH_DATE FROM EVENT WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E6'";
+		
+		//首頁用
+		private static final String GET_NEW_EVES="select * from" + 
+				"(select eve_id,mem_id,eve_title,eve_view,sptype_id,city_id from event WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by eve_id desc)" + 
+				"where rownum < 7";
+		//首頁用
+		private static final String GET_POPULAR_EVES="select * from" + 
+				"(select eve_id,mem_id,eve_title,eve_view,sptype_id,city_id  from event WHERE EVE_STATUS='E2' OR EVE_STATUS='E3' OR EVE_STATUS='E4' order by eve_view desc)" + 
+				"where rownum < 7";
 
+		
 
 		@Override
 		public void insert(EventVO eventVO) {
@@ -789,6 +799,95 @@ public class EveDAO implements EventDAO_interface{
 			}
 			return list;
 		}
+		
+		@Override
+		public List<EventVO> getNewEves(){
+			List<EventVO> list = new ArrayList<EventVO>();
+			EventVO eventVO = null;
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_NEW_EVES);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					eventVO = new EventVO();
+					eventVO.setEve_id(rs.getString("Eve_id"));
+					eventVO.setMem_id(rs.getString("Mem_id"));
+					eventVO.setEve_title(rs.getString("Eve_title"));
+					eventVO.setSptype_id(rs.getString("Sptype_id"));
+					eventVO.setEve_view(rs.getInt("Eve_view"));
+					eventVO.setCity_id(rs.getString("city_id"));
+					
+					list.add(eventVO); // Store the row in the list
+				}
+				
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+			
+		};
+		@Override
+	    public List<EventVO> getPopularEves(){
+			List<EventVO> list = new ArrayList<EventVO>();
+			EventVO eventVO = null;
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				
+				con=ds.getConnection();
+				pstmt = con.prepareStatement(GET_POPULAR_EVES);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					eventVO = new EventVO();
+					eventVO.setEve_id(rs.getString("Eve_id"));
+					eventVO.setMem_id(rs.getString("Mem_id"));
+					eventVO.setEve_title(rs.getString("Eve_title"));
+					eventVO.setSptype_id(rs.getString("Sptype_id"));
+					eventVO.setEve_view(rs.getInt("Eve_view"));
+					eventVO.setCity_id(rs.getString("city_id"));
+					
+					list.add(eventVO); // Store the row in the list
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+	    	
+	    };
+
 		
 		
 

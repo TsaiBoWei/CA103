@@ -1,0 +1,207 @@
+/*Today Plan Card CSS*/
+.card-custom{
+    background-color: rgba(51, 51, 51, 0);
+   
+    
+}
+.card-header-custom{
+    background-color: rgba(0, 154, 192,0.3);
+    
+}
+
+.card-body-custom{
+/*    background-color: rgba(51, 51, 51, 0.8);*/
+    background-color:transparent;
+    border: 0.8px solid rgba(239, 239, 239,0.1);
+}
+/*Profile Pic fixed size*/
+.colProfile {
+      width: 250px;
+      height: 250px;
+      margin: 0 auto;
+    }
+
+/*bg-dark equals whole page background color*/
+.bg-dark-cutom{
+    background-color:#1f1f1f;
+}
+
+.blogDate{
+    opacity:0.8;
+}
+
+.personalarea{
+    margin-top: -300px;
+}
+.workoutnotecardbody{
+    
+    border: 0.8px solid rgba(239, 239, 239,0.1);
+    border-radius: 5px;
+}
+
+.workoutnotecard{
+    background-color:transparent;
+}
+
+h4 span {
+  font-weight: 800;
+  color: rgba(0, 154, 192,0.7);
+    
+}
+
+
+/*profile nav hr */
+.containerHrT{
+    margin-bottom: -20px;
+}
+
+.containerHrB{
+    margin-top: -20px;
+}
+
+/*profile Navbar Hover*/
+#profile-navbar li>a:hover {
+      color: #12bbad;
+      border-bottom: 1px solid #12bbad;
+    }
+#profile-navbar li>a:focus {
+      color: #12bbad;
+      border-bottom: 1px solid #12bbad;
+    }
+
+
+/*
+.persondropbgCustom{
+    background-color:rgb(48, 48, 48, 0.5);
+background:rgba(x,x,x,0.3);
+}
+*/
+/*Personal NavBar Dropdown arrow cancel*/
+.dropdown-toggle::after {
+      display: none;
+}
+/*dropmenu background*/
+ .bg-dark-dropmenu-cutom {
+      background-color: rgba(48, 48, 48, 0.6) !important;
+}
+/*dropmenuitem background*/
+.bg-dark-dropmenuitem-cutom {
+      background-color: rgba(48, 48, 48, 0) !important;
+}
+
+
+/*dropmenuitem hover background*/
+a.bg-dark-dropmenuitem-cutom:hover {
+    background-color: #303030 !important;
+
+}
+
+
+/*planoverview hover*/
+#planlist li:hover{
+      background-color: rgba(48, 48, 48, 0.3);
+}
+
+.badge-primary{
+    background: rgba(0, 154, 192,0.2);
+    color: rgba(243, 243, 243,0.7);
+}
+
+
+ /*blog brief*/
+
+    .post-img-custom {
+      overflow: hidden;
+      width: 605px;
+      height: 400px;
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .postsection {
+      border-bottom: 0.8px solid rgba(242, 242, 242, 0.3);
+    }
+
+    .postsectiontext {
+      border-bottom: 0.8px solid rgba(242, 242, 242, 0.3);
+    }
+
+    .posttitle {
+      width: 420px;
+      height: 64px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .postbriefcontent {
+      width: 420px;
+      height: 195px;
+        margin-top: 42px;
+    }
+
+    .postclass {
+      border-radius: 1px;
+      opacity: 0.8;
+    }
+
+    .postdate {
+      font-size: 40px;
+      font-weight: bold;
+      color: rgba(242, 242, 242, 0.6);
+    }
+
+    .postmonth {
+      color: rgba(242, 242, 242, 0.6);
+    }
+
+    .postrectbar {
+      color: rgba(242, 242, 242, 0.8);
+    }
+    /*================*/
+
+
+/*postpictureupload 目前無用*/
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+    
+}
+
+.js-labelFile{
+    font-size: 18px;
+/*    margin-bottom: 10px;*/
+    color: rgba(243, 243, 243,0.7);
+   
+}
+ .js-labelFile:hover{
+        color:#12bbad;
+    }
+
+.makepost{
+    font-size: 18px; 
+    margin-left: 30px;
+/*    margin-bottom: 10px;*/
+    color:rgba(243, 243, 243,0.7);
+    
+}
+.makepost:hover{
+        color:#12bbad;
+    }
+
+
+
+/*====================*/
+
+
+
+
+
+
+
+
+
+

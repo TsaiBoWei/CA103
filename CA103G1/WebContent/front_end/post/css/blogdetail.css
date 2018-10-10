@@ -1,0 +1,7 @@
+.commentbottomline{
+  border-bottom: 0.8px solid rgba(239, 239, 239,0.4);
+}
+
+.postsubtitle .border-right {
+    border-right: 0.8px solid rgba(239, 239, 239,0.8)!important;
+}

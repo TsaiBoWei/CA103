@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class EveAndroidDAO implements EventDAO_interface {
+public class EveAndroidDAO extends EveDAO {
 
 	private static final String GET_ONE_STMT = 
 			"SELECT EVE_ID,MEM_ID,EVE_PHOTO,EVE_LOGO,EVE_PTYPE,EVE_TITLE,EVE_CONTENT,EVE_STARTDATE, EVE_ENDDATE,to_char( EREG_STARTDATE,'yyyy-mm-dd') EREG_STARTDATE,to_char( EREG_ENDDATE,'yyyy-mm-dd') EREG_ENDDATE," + 
@@ -26,6 +26,7 @@ public class EveAndroidDAO implements EventDAO_interface {
 	private static final String GET_EVENT_PHOTO = "SELECT EVE_PHOTO FROM EVENT WHERE EVE_ID = ?";
 	
 	private static DataSource ds = null;
+	
 	static {
 		try {
 			Context ctx = new InitialContext();
@@ -44,6 +45,7 @@ public class EveAndroidDAO implements EventDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_EVENT_PHOTO);
+			pstmt.setString(1, eve_id);
 			rs = pstmt.executeQuery();
 			
 			if ( rs.next() ) {
@@ -154,31 +156,7 @@ public class EveAndroidDAO implements EventDAO_interface {
 		}
 		return list;
 	}
-
-	@Override
-	public void insert(EventVO eventVO) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(EventVO eventVO) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updatePhoto(byte[] eve_photo, String eve_id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update_status(String eve_id, String eve_status) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public EventVO findByPrimaryKey(String eve_id) {
 
@@ -253,7 +231,6 @@ public class EveAndroidDAO implements EventDAO_interface {
 		}
 		return eventVO;
 	}
-
 	@Override
 	public List<EventVO> getEvesByMem(String mem_id) {
 		// TODO Auto-generated method stub
@@ -280,6 +257,18 @@ public class EveAndroidDAO implements EventDAO_interface {
 
 	@Override
 	public List<EventVO> getReviewEndEves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getNewEves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getPopularEves() {
 		// TODO Auto-generated method stub
 		return null;
 	}
