@@ -18,16 +18,16 @@
 <jsp:useBean id="planSvc" scope="page" class="com.plan.model.PlanService" />
 <%-- <jsp:useBean id="purSvc" scope="page" class="com.purchcour.model.PurchcourService" /> --%>
 <jsp:useBean id="courlistSvc" scope="page" class="com.courlist.model.CourlistService" />
-<%--	//取出會員的SESSION
+<%	//取出會員的SESSION
 	MemVO memVO = (MemVO) session.getAttribute("memVO");  
---%>
-<%-- /*以會員id取出對應的evelist*/
+ %>
+<% /*以會員id取出對應的evelist*/
 	List<EventListVO> list =evelistSvc.getEveListsByMem(memVO.getMem_id());
---%>
-<% /*以會員id(先用假資料)取出對應的evelist*/
-	List<EventListVO> list =evelistSvc.getEveListsByMemToCal("M000001");
-	
 %>
+<%-- <% /*以會員id(先用假資料)取出對應的evelist*/ --%>
+<!-- // 	List<EventListVO> list =evelistSvc.getEveListsByMemToCal("M000001"); -->
+	
+<%-- %> --%>
 
 <%
 	List<EventVO> listEve = new ArrayList<EventVO>();
@@ -39,8 +39,13 @@
 %>
 
 
+<%-- <%-- <% /***假資料會員*****/ --%>
+<!-- // 	List<PlanVO> listPlan = planSvc.getPlansByMem("M000001"); -->
+
+<%-- %> --%>
+
 <%
-	List<PlanVO> listPlan = planSvc.getPlansByMem("M000001");
+List<PlanVO> listPlan = planSvc.getPlansByMem(memVO.getMem_id());
 
 %>
 
@@ -246,37 +251,37 @@
     
      <!-- 課程列表開始-->
      
-     <div class="dialog_inpu" id="courdialog" title="My dialog" style="display:none">
-     <div class="container">
-      <div class="row">
-        <div>課程名稱:</div>
-        <div id="cname"></div>
-      </div>
-      <div class="row">
-        <div>課程介紹:</div>
-        <div id="cour_text" ></div>
-      </div>
-      <div class="row">
-        <div>課程公告:</div>
-        <div id="cour_ann"></div>
-      </div>
+<!--      <div class="dialog_inpu" id="courdialog" title="My dialog" style="display:none"> -->
+<!--      <div class="container"> -->
+<!--       <div class="row"> -->
+<!--         <div>課程名稱:</div> -->
+<!--         <div id="cname"></div> -->
+<!--       </div> -->
+<!--       <div class="row"> -->
+<!--         <div>課程介紹:</div> -->
+<!--         <div id="cour_text" ></div> -->
+<!--       </div> -->
+<!--       <div class="row"> -->
+<!--         <div>課程公告:</div> -->
+<!--         <div id="cour_ann"></div> -->
+<!--       </div> -->
       
-      <!-- c:for -->
-      <div class="row">
-        <div>課程單元:</div>
-        <div id="cu_name"></div>
-        <a class="btn btn-link m-2" href="#" >前往觀看</a>
-      </div>
+<!--       c:for -->
+<!--       <div class="row"> -->
+<!--         <div>課程單元:</div> -->
+<!--         <div id="cu_name"></div> -->
+<!--         <a class="btn btn-link m-2" href="#" >前往觀看</a> -->
+<!--       </div> -->
       
-      <form method="post" action="<%=request.getContextPath() %>/calendar/calendar.do">
-        <div>
-          <input type="hidden" name="eve_idTochange" id="eve_idTochange">
-          <input type="hidden" name="eve_chargeToback" id="eve_chargeToback">
-          <input type="hidden" name="CaloutEvent" value="Cal_out_event">
-          <input type="submit" name="deleteEve" value="退訂" class="m-1 btn btn-info"> </div>
-      </form>
-    </div>
-  </div>
+<%--       <form method="post" action="<%=request.getContextPath() %>/calendar/calendar.do"> --%>
+<!--         <div> -->
+<!--           <input type="hidden" name="eve_idTochange" id="eve_idTochange"> -->
+<!--           <input type="hidden" name="eve_chargeToback" id="eve_chargeToback"> -->
+<!--           <input type="hidden" name="CaloutEvent" value="Cal_out_event"> -->
+<!--           <input type="submit" name="deleteEve" value="退訂" class="m-1 btn btn-info"> </div> -->
+<!--       </form> -->
+<!--     </div> -->
+<!--   </div> -->
      
      
      

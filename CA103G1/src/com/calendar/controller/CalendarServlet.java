@@ -43,15 +43,15 @@ public class CalendarServlet extends HttpServlet{
 			
 			try {
 				String eve_id = req.getParameter("eve_idTochange"); //從行事曆接過來的eve_id
-				String eve_charge = req.getParameter("eve_chargeToback"); //從行事曆接過來的eve_charge 用來分辨狀態，大於0就是EL3其他是EL0
+				String eve_chargeStr = req.getParameter("eve_chargeToback"); //從行事曆接過來的eve_charge 用來分辨狀態，大於0就是EL3其他是EL0
 //				String mem_id = memVO.getMem_id();
 				String mem_id = "M000001"; //先用假資料
 				String evelist_status=null;
 				
 				
 //				EventListVO eventListVO =(EventListVO) eveListSvc.getOneEveList(mem_id, eve_id);
-				
-				if(Integer.parseInt(eve_charge)>0){
+				Integer eve_charge=Integer.parseInt(eve_chargeStr);
+				if(eve_charge>0){
 					evelist_status = "EL4";
 					
 				}else {

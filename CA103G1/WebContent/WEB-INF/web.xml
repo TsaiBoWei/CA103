@@ -340,5 +340,14 @@
     <url-pattern>/coach/DiscountSave.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>CalendarServlet</servlet-name>
+  	<servlet-class>com.calendar.controller.CalendarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>CalendarServlet</servlet-name>
+  <url-pattern>/calendar/calendar.do</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>
