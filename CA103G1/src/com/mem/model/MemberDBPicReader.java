@@ -55,7 +55,7 @@ public class MemberDBPicReader extends HttpServlet {
 			stmt.close();
 		} catch (Exception e) {
 //			System.out.println(e);
-			InputStream in=getServletContext().getResourceAsStream("/img/NoData/null2.jpg");
+			InputStream in=getServletContext().getResourceAsStream("/img/index/user.png");
 			byte[] b=new byte[in.available()];
 			in.read(b);
 			out.write(b);

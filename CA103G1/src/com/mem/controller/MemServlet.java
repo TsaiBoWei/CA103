@@ -263,22 +263,23 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				MemVO updatedMem = memSvc.getOneMem(loggedMember.getMem_id());
 				
-				byte[] memPhoto = null;
 				Part part = req.getPart("memPhoto");
-				InputStream is = part.getInputStream();
-				memPhoto = new byte[is.available()];
-				if(memPhoto.length==0) {
-					memPhoto=loggedMember.getMem_photo();
+				byte[] memPhoto=loggedMember.getMem_photo();
+				System.out.println(memPhoto);
+				if(part.getSize() !=0) {
+					InputStream is = part.getInputStream();
+					memPhoto = new byte[is.available()];
 					is.read(memPhoto);
-				}else {
+					is.close();
 					System.out.println("success");
-					is.read(memPhoto);					
 				}
 
 				java.sql.Date membirth = null;
+				if(req.getParameter("memBirth")!=null) {
+					membirth = java.sql.Date.valueOf(req.getParameter("memBirth"));					
+				}
+				System.out.println(membirth);
 				String memName = req.getParameter("memName");
-				membirth = java.sql.Date.valueOf(req.getParameter("memBirth"));
-
 				String memEmail = req.getParameter("memEmail");
 				String memIntro = req.getParameter("memIntro");
 
