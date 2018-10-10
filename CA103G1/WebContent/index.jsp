@@ -80,10 +80,10 @@
             <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#speakers">Course</a>
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
           </li>
          
-          
+          <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >
           <c:if test="${memVO!=null}">
 	          <li class="nav-item mx-2 btn-lg dropdown" >
 	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
@@ -93,10 +93,14 @@
 	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file">&nbsp&nbsp個人頁面</i></a>
 	              <a href=""><i class="fa fa-calculator">&nbsp&nbsp計畫</i></a>
 	              <a href="#"><i class="fa fa-users" aria-hidden="true">&nbsp&nbsp好友</i></a>
-	              <a href="#"><i class="fa fa-film" aria-hidden="true">&nbsp&nbsp課程</i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true">&nbsp&nbsp課程</i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp&nbsp活動</i></a>
 	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
 	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true">&nbsp&nbsp行事曆</i></a>
+	               
+	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
+	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note">&nbsp&nbsp教練管理</i></a>
+	               </c:if>
 	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true">&nbsp&nbsp會員資料</i></a>
 	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout">登出</a>
 	            </div>

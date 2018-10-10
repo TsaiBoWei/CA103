@@ -138,7 +138,7 @@
 
 
   <div class="container-fluid  pb-2 row   m-3">
-    <div class="col-md-10 bg-info  pt-3">
+    <div class="col-md-8 offset-md-2 bg-info  pt-3">
       <form  METHOD="post" class="form-inline eveComQuery" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1">
           <div class="col-md-3 mb-3 d-flex">
             <label for="keyword" class="orderBy ">√ˆ¡‰¶r&nbsp</label>

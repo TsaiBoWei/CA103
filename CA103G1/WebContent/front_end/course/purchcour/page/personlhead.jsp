@@ -126,7 +126,7 @@
 				id="navbar3SupportedContent">
 				<ul class="navbar-nav">
 				<!-- mypage-->
-					<li class="nav-item" ><a class="nav-link personalnavlink" rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mypage#personalnav" id="mypage" style="cursor: pointer;"> <i
+					<li class="nav-item" ><a class="nav-link personalnavlink" rel="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp?perpageloc=mypage#personalnav" id="mypage" style="cursor: pointer;"> <i
 							class="fa fa-file"></i> &nbsp; &nbsp; MyPage &nbsp; &nbsp;&nbsp;
 					</a></li>
 				<!-- Workoutplan-->
@@ -165,10 +165,10 @@
 							<i class="fa fa-hand-spock-o" aria-hidden="true" ></i>&nbsp;Event
 							&nbsp;&nbsp;
 					</a></li>
-					<li class="nav-item"><a class="nav-link personalnavlink" id="post"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=post#personalnav" style="cursor: pointer;"> <i
-							class="fa fa-sticky-note" aria-hidden="true" ></i>&nbsp;&nbsp;Post&nbsp;&nbsp;
-					</a></li>
-					<li class="nav-item"><a class="nav-link personalnavlink "  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mycalender#personalnav" id="mycalender" style="cursor: pointer;"> <i
+<%-- 					<li class="nav-item"><a class="nav-link personalnavlink" id="post"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=post#personalnav" style="cursor: pointer;"> <i --%>
+<!-- 							class="fa fa-sticky-note" aria-hidden="true" ></i>&nbsp;&nbsp;Post&nbsp;&nbsp; -->
+<!-- 					</a></li> -->
+					<li class="nav-item"><a class="nav-link personalnavlink "  rel="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp?perpageloc=mycalender#personalnav" id="mycalender" style="cursor: pointer;"> <i
 							class="fa fa-sticky-note" aria-hidden="true" ></i>
 							&nbsp;MyCalender&nbsp;
 					</a></li>

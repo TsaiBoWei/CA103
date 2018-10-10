@@ -82,7 +82,6 @@ public class MemServlet extends HttpServlet {
 						url=location;                        
 					}	
 					
-					System.out.println("url : "+url);
 					res.sendRedirect(url);
 					return;
 					
@@ -98,14 +97,14 @@ public class MemServlet extends HttpServlet {
 		}
 
 		if ("loggedout".equals(action)) {
-			System.out.println("I am here");
-			System.out.println(req.getContextPath());
-			System.out.println(req.getAttribute(action));
-			System.out.println(req.getServletPath());
-			System.out.println(req.getPathTranslated());
-			System.out.println(req.getRequestURL());
-			System.out.println(req.getRequestURI());
-			System.out.println(req.getQueryString());
+//			System.out.println("I am here");
+//			System.out.println(req.getContextPath());
+//			System.out.println(req.getAttribute(action));
+//			System.out.println(req.getServletPath());
+//			System.out.println(req.getPathTranslated());
+//			System.out.println(req.getRequestURL());
+//			System.out.println(req.getRequestURI());
+//			System.out.println(req.getQueryString());
 
 			HttpSession session = req.getSession();
 			session.invalidate();

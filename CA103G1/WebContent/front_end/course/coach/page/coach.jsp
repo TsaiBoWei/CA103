@@ -164,7 +164,7 @@ h1 {
 
 		            %>
 		            
-		          ['<%=courlistpieVO.getCname()%>',   <%=courlistpieVO.getCour_cost()%>],
+		          ['<%=courlistpieVO.getCname()%>',   <%=incomeprecour%>],
 		          <%}%>
 		        ]);
 		        

@@ -64,5 +64,14 @@ public class CourlistService {
 	public List<CourlistVO> getCourlistByCoa_id(String coa_id) {
 		return dao.getCourlistByCoa_id(coa_id);
 	}
+	
+	//首頁用
+	public List<CourlistVO> getPopularCour() {
+		return dao.getPopularCour();
+	}
+	//首頁用
+	public List<CourlistVO> getNewCour() {
+		return dao.getNewCour();
+	}
 
 }

@@ -7,7 +7,7 @@
 
 <%
    
-  MemVO memVO= new MemService().getOneMem("M000001");
+  MemVO memVO= new MemService().getOneMem("M000003");
   session.setAttribute("memVO", memVO);
   
 

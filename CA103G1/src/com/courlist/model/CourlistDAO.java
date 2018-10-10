@@ -40,6 +40,12 @@ public class CourlistDAO implements CourlistDAO_interface {
 	private static final String FIND_BY_PK = "SELECT * FROM COURLIST WHERE COUR_ID = ?";
 	private static final String GET_ALL = "SELECT * FROM COURLIST WHERE COUR_LAU ='CL02'";
 	
+	//首頁用
+	private static final String GET_POPULAR_COUR="select * from (select cour_id,coa_id,cname,cour_view,sptype_id " + 
+										"from courlist  order by cour_view desc) where rownum < 7";
+	private static final String GET_NEW_COUR="select * from (select cour_id,coa_id,cname,cour_view,sptype_id " + 
+			 							"from courlist  order by cour_id desc) where rownum < 7";
+
 	
 	//ashley
 	private static final String FIND_BY_COACH_ID = "SELECT * FROM COURLIST WHERE COA_ID=?";
@@ -397,6 +403,122 @@ public class CourlistDAO implements CourlistDAO_interface {
 	System.out.println("list"+list);
 			return list;
 		}
+		
+		
+		//首頁用
+			@Override
+		    public List<CourlistVO> getNewCour(){
+				List<CourlistVO> list = new ArrayList<>();
+				CourlistVO courlistVO = null;
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+
+				try {
+
+					con=ds.getConnection();
+					pstmt = con.prepareStatement(GET_NEW_COUR);
+					rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+						courlistVO = new CourlistVO();
+						courlistVO.setCour_id(rs.getString("COUR_ID"));
+						courlistVO.setSptype_id(rs.getString("SPTYPE_ID"));
+						courlistVO.setCoa_id(rs.getString("COA_ID"));
+						courlistVO.setCname(rs.getString("CNAME"));
+						courlistVO.setCour_view(rs.getInt("COUR_VIEW"));
+						list.add(courlistVO);
+					}
+
+					// Handle any SQL errors
+				} catch (SQLException se) {
+					se.printStackTrace();
+					throw new RuntimeException("A database error occured. " + se.getMessage());
+					// Clean up JDBC resources
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				return list;
+		    	
+		    };
+		    
+		    
+		    
+		    //首頁用
+		    @Override
+		    public List<CourlistVO> getPopularCour(){
+		    	List<CourlistVO> list = new ArrayList<>();
+				CourlistVO courlistVO = null;
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+
+				try {
+
+					con=ds.getConnection();
+					pstmt = con.prepareStatement(GET_POPULAR_COUR);
+					rs = pstmt.executeQuery();
+
+					while (rs.next()) {
+						courlistVO = new CourlistVO();
+						courlistVO.setCour_id(rs.getString("COUR_ID"));
+						courlistVO.setSptype_id(rs.getString("SPTYPE_ID"));
+						courlistVO.setCoa_id(rs.getString("COA_ID"));
+						courlistVO.setCname(rs.getString("CNAME"));
+						courlistVO.setCour_view(rs.getInt("COUR_VIEW"));
+						list.add(courlistVO);
+					}
+
+			
+				} catch (SQLException se) {
+					throw new RuntimeException("A database error occured. " + se.getMessage());
+					// Clean up JDBC resources
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				return list;
+		    	
+		    };
 		
 	// Handle with byte array data
 //		public static void readPicture(byte[] bytes){
