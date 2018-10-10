@@ -17,6 +17,11 @@ public interface EventDAO_interface {
     public List<EventVO> getReviewEndEves();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
     public List<EventVO> getAll(Map<String, String[]> map); 
+    
+    //首頁用
+    public List<EventVO> getNewEves();
+    //首頁用
+    public List<EventVO> getPopularEves();
   
     
 //    public void delete(String eve_id);

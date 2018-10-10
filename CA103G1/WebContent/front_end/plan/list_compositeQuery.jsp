@@ -254,7 +254,7 @@ th, td {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="page1_ByCompositeQuery.file" %>
+			<%@ include file="file/page1_ByCompositeQuery.file" %>
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
 					<td>
@@ -304,7 +304,7 @@ th, td {
 				</tr>
 			</c:forEach>
 		</table>
-		<%@ include file="page2_ByCompositeQuery.file"%>
+		<%@ include file="file/page2_ByCompositeQuery.file"%>
 		<br>本網頁的路徑:<br><b>
    <font color=white>request.getServletPath(): <%=request.getServletPath()%><br></font>
    <font color=white>request.getRequestURI():  <%=request.getRequestURI()%></font> </b>

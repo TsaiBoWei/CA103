@@ -116,7 +116,7 @@
               <a href="#">
                 <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;行事曆</i>
               </a>
-              <a href="#">登出</a>
+              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout">登出</a>
             </div>
           </li>
         </ul>
@@ -194,14 +194,15 @@
 			<% 	
 				List<MemSpLikeVO> memSpLikeVOList = (ArrayList<MemSpLikeVO>)session.getAttribute("memSpLikeVOList");
 				ArrayList<String> sports = new ArrayList<String>();
-				for(MemSpLikeVO memSpLikeVO:memSpLikeVOList)
+				if(memSpLikeVOList!=null){
+				for(MemSpLikeVO memSpLikeVO:memSpLikeVOList){
 				sports.add(memSpLikeVO.getSptype_id());
-				
+				}
 				for(String sport: sports){
 			%>
 				arr.push("<%=sport %>");
 			<%
-				}
+				}}
 			%>
 			
 			for(var i = 0; i< arr.length; i++){

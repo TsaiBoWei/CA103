@@ -10,6 +10,7 @@ public class PostService {
 	public PostService() {
 		dao = new PostDAO();
 	}
+	
    public PostVO addPost(String mem_id,String post_con,Timestamp post_time,
 		Integer post_view,String sptype_id,String post_title,String post_privacy) {
 		PostVO postVO = new PostVO();
@@ -41,7 +42,6 @@ public class PostService {
 		postVO.setPost_status(post_status);
 		postVO.setPost_title(post_title);
 		postVO.setPost_privacy(post_privacy);
-		
 		dao.update(postVO);
 		
 		return postVO;
@@ -78,5 +78,11 @@ public class PostService {
    
    public List<PostVO> getByMemIDToDisplay( String mem_id ) {
 		return dao.getByMemIDToDisplay(mem_id);
- } 
+  } 
+   
+   public PostVO getOnePostToDisplay(String post_id) {
+		return dao.findByPKToDisplay(post_id);
+		
+	}
+  
 }
