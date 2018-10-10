@@ -68,23 +68,6 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/plan/css/img.css">
 
-<%-- 計畫內容 --%>
-<script src="https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js"></script>
-<script>
-CKEDITOR.plugins.addExternal("codesnippet", "https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.7.3/plugins/codesnippet/plugin.js", "");
-CKEDITOR.replace("editor1", {
-extraPlugins: "codesnippet",
-codeSnippet_theme: "solarized_dark"
-});
-</script>
-
-<%-- 時間 --%>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.common-material.min.css" />
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.material.min.css" />
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.material.mobile.min.css" />
-<script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>
-
 
 </head>
 
@@ -316,24 +299,10 @@ codeSnippet_theme: "solarized_dark"
 							<textarea name="plan_vo" rows="10" class="form-control" style="font-size: 22px"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
-						
-						
-						<div class="from-group">
-							<script src="https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js"></script>
-<textarea name="editor1"></textarea>
-<script>
-CKEDITOR.plugins.addExternal("codesnippet", "https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.7.3/plugins/codesnippet/plugin.js", "");
-CKEDITOR.replace("editor1", {
-extraPlugins: "codesnippet",
-codeSnippet_theme: "solarized_dark"
-});
-</script>
-						</div>
-		
+	
 		
 						<div class="from-group">
 							<h5>
-								
     							瀏覽數：${planVO.plan_view} 
 							<input type="hidden" name="plan_view" value="50">
 							</h5>
