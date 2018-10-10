@@ -49,7 +49,8 @@ public class PostDAO implements PostDAO_interface{
 			"(select post_id,mem_id,post_title,post_view,sptype_id,post_con from post  where  POST_STATUS = 'POS0'  order by post_view desc)" + 
 			"where rownum < 7";
 	/*************************************************/
-	
+	//update view
+		private static final String UPDATE_VIEW="UPDATE POST SET POST_VIEW=? WHERE POST_ID=?";
 	@Override
 	public void add(PostVO postVO) {
 		Connection con = null;
@@ -635,7 +636,51 @@ public class PostDAO implements PostDAO_interface{
 	
 	/*********************  ­º­¶¥Î *****************/
 
-	
+	/******************update view*************/
+	@Override
+	public void updateView(PostVO postVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_VIEW);
+			
+
+			
+			pstmt.setInt(1,postVO.getPost_view());
+			
+			pstmt.setString(2,postVO.getPost_id());
+			
+			pstmt.executeUpdate();
+			
+		
+		}
+//		catch (IOException ie) {
+//			System.out.println(ie);} 
+		
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		
+	}finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	}
+	/*****************************update view********************/
 	
 }
 

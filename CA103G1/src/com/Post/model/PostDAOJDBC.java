@@ -467,9 +467,19 @@ public class PostDAOJDBC implements PostDAO_interface {
 		return postList;
     
     }
+
+	
 	
 	/*********************  ­º­¶¥Î *****************/
 	
+	
+	
+	/**********************update view****************/
+	@Override
+	public void updateView(PostVO postVO) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 	

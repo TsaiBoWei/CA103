@@ -94,5 +94,16 @@ public class PostService {
    }
    /**************************** *****************/
 
-  
+  //update view
+   public PostVO updatePostView(Integer post_view,String post_id) 	
+	{
+	PostVO postVO = new PostVO();
+	postVO.setPost_view(post_view);
+	postVO.setPost_id(post_id);
+	
+	dao.updateView(postVO);
+	
+	
+	return postVO;
+	}
 }

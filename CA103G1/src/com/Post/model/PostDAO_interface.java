@@ -21,4 +21,7 @@ public interface PostDAO_interface {
     public List<PostVO> getNewPost();
     //­º­¶¥Î
     public List<PostVO> getPopularPost();
+    
+    //update view
+    public void updateView(PostVO postVO);
 }
