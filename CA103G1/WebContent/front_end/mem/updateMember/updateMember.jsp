@@ -176,6 +176,7 @@
 					<!-- 進入servlet -->
 					<button type="submit" class="btn btn-lg btn-primary" id="regSend">送出</button>
 					<a class="btn btn-lg btn-secondary" href="../login/TestView.jsp">取消</a>
+					<a class="btn btn-lg btn-primary" href="../../course/coach/addCoachText.jsp">申請教練</a>
 				</div>
 			</form>
 		</div>

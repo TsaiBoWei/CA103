@@ -263,7 +263,7 @@ public class MemServlet extends HttpServlet {
 				
 				Part part = req.getPart("memPhoto");
 				byte[] memPhoto=loggedMember.getMem_photo();
-				System.out.println(memPhoto);
+				
 				if(part.getSize() !=0) {
 					InputStream is = part.getInputStream();
 					memPhoto = new byte[is.available()];
@@ -273,17 +273,17 @@ public class MemServlet extends HttpServlet {
 				}
 
 				java.sql.Date membirth = null;
-				if(req.getParameter("memBirth")!=null) {
+				if(!(req.getParameter("memBirth").isEmpty())) {
+					System.out.println(req.getParameter("memBirth"));
+					System.out.println("here");
 					membirth = java.sql.Date.valueOf(req.getParameter("memBirth"));					
 				}
-				System.out.println(membirth);
 				String memName = req.getParameter("memName");
 				String memEmail = req.getParameter("memEmail");
 				String memIntro = req.getParameter("memIntro");
 
 				updatedMem = memSvc.updateMem(updatedMem.getMem_id(), memName, updatedMem.getMem_account(),
 						updatedMem.getMem_password(), membirth, memPhoto, memEmail, memIntro);
-				System.out.println("here");
 
 				MemSpLikeVO memSpLikeVO = new MemSpLikeVO();
 				MemSpLikeService memsplikeSvc = new MemSpLikeService();
