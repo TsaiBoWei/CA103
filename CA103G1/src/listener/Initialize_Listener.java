@@ -41,6 +41,18 @@ public class Initialize_Listener implements ServletContextListener{
 		sportTypeMap.put("SP000007", "水上");
 		sportTypeMap.put("SP000008", "其他");
 		context.setAttribute("sportTypeMap", sportTypeMap);
+		
+		Map<String,String> sportTypeColor=null;				
+		sportTypeMap=new LinkedHashMap<>();
+		sportTypeMap.put("SP000001", "#f70655");
+		sportTypeMap.put("SP000002", "#1a4876");
+		sportTypeMap.put("SP000003", "#16a085");
+		sportTypeMap.put("SP000004", "#009ac0");
+		sportTypeMap.put("SP000005", "#8A2BE2");
+		sportTypeMap.put("SP000006", "#F1C40F");
+		sportTypeMap.put("SP000007", "#9B59B6");
+		sportTypeMap.put("SP000008", "#AAB7B8");
+		context.setAttribute("sportTypeColor", sportTypeColor);
 
 		
 		Map<String,String> eveListStatusMap=null;
