@@ -45,5 +45,21 @@ public class CoachService {
 	public List<CoachVO> getAll() {
 		return dao.getAll();
 	}
+	
+	/*************************Âz§g************************/
+	public List<CoachVO> getReview(){
+		
+		return dao.getByReview();
+	}
 
+	public List<CoachVO> getReviewEnd(){
+		
+		return dao.getByReviewEnd();
+	}
+
+	public CoachVO updateStatus(String coa_id,String coa_status) {
+		dao.updateStatus(coa_id,coa_status);
+		return dao.findByPK(coa_id);		
+	}
+/***************************Âz§g****************************/
 }

@@ -224,7 +224,25 @@ public class CoachJDBCDAO implements CoachDAO_interface {
 		}
 		return list;
 	}
+/*****************************Âz§g*******************/
+	@Override
+	public List<CoachVO> getByReview() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public List<CoachVO> getByReviewEnd() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateStatus(String coa_id, String coa_status) {
+		// TODO Auto-generated method stub
+		
+	}
+	/*****************************Âz§g*******************/
 //	@Override
 //	public void hide(String cour_id) {
 //		Connection con = null;

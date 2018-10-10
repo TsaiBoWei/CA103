@@ -40,7 +40,13 @@ public class CoachDAO implements CoachDAO_interface {
 	private static final String HIDE_STMT = "UPDATE COACH SET COA_STATUS = ? WHERE COA_ID = ?";
 	private static final String SELECT_STMT = "SELECT * FROM COACH WHERE COA_ID= ? "
 			+ "AND COA_STATUS='CS02' AND (regexp_like (±Ð½m¦W¦r , ? )) ORDER BY COA_ID";
+	
+	//±Ð½m¼f®Ö Âz§g
+	private static final String FIND_COACH_TO_REVIEW ="SELECT COA_ID,MEM_ID,COA_TEXT FROM COACH WHERE COA_STATUS='CS01'";
+	//±Ð½m¼f®Öµ²ªG Âz§g
+	private static final String FIND_COACH_TO_REVIEW_END="SELECT COA_ID,MEM_ID,COA_TEXT,COA_STATUS FROM COACH WHERE COA_STATUS='CS02' OR COA_STATUS='CS04'";
 
+	
 	@Override
 	public void insert(CoachVO coachVO) {
 		Connection con = null;
@@ -243,6 +249,123 @@ public class CoachDAO implements CoachDAO_interface {
 		}
 		return list;
 	}
+	
+	/************************************Âz§g******************************/	
+	public List<CoachVO> getByReview() {
+		List<CoachVO> list = new ArrayList<CoachVO>();
+		CoachVO coachVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(FIND_COACH_TO_REVIEW);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				coachVO = new CoachVO();
+				coachVO.setCoa_id(rs.getString("COA_ID"));
+				coachVO.setMem_id(rs.getString("MEM_ID"));
+				coachVO.setCoa_text(rs.getString("COA_TEXT"));				
+				list.add(coachVO); // Store the row in the list
+			}
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<CoachVO> getByReviewEnd() {
+		List<CoachVO> list = new ArrayList<CoachVO>();
+		CoachVO coachVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(FIND_COACH_TO_REVIEW_END);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				coachVO = new CoachVO();
+				coachVO.setCoa_id(rs.getString("COA_ID"));
+				coachVO.setMem_id(rs.getString("MEM_ID"));
+				coachVO.setCoa_text(rs.getString("COA_TEXT"));	
+				coachVO.setCoa_status(rs.getString("COA_STATUS"));	
+				list.add(coachVO); // Store the row in the list
+			}
+			
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public void updateStatus(String coa_id,String coa_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(HIDE_STMT);		
+			pstmt.setString(1, coa_status);		
+			pstmt.setString(2, coa_id);
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+/************************************Âz§g******************************/	
 
 //	@Override
 //	public void hide(String cour_id) {

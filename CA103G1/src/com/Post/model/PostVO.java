@@ -70,6 +70,10 @@ public class PostVO implements java.io.Serializable {
 	public void setPost_privacy(String post_privacy) {
 		this.post_privacy = post_privacy;
 	}
+	public String getPost_img() {
+		return post_img;
+	}
+	
 	public void setPost_img(String post_img) {
 		this.post_img = post_img;
 	}
