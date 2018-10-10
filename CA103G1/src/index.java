@@ -93,10 +93,10 @@ public class index extends HttpServlet {
 			CoachService coachSvc=new CoachService(); 
 			switch(type1) {
 			case "POPULAR":
-//				list=courSvc.getPopularCour();
+				list=courSvc.getPopularCour();
 				break;
 			case "NEW":
-//				list=courSvc.getNewCour();
+				list=courSvc.getNewCour();
 				break;			
 			}
 			
