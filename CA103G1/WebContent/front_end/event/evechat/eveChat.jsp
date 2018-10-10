@@ -34,7 +34,7 @@
   opacity: 0.8;
   position: fixed;
   bottom: 23px;
-  right: 340px;
+  right: 330px;
   width: 280px;
 }
 
@@ -43,9 +43,45 @@
   display: none;
   position: fixed;
   bottom: 0;
-  right: 300px;
+  right: 310px;
   border: 3px solid #f1f1f1;
   z-index: 9;
+}
+
+.chat_img {
+  float: left;
+  width: 20%;
+}
+
+.chat_img img{
+  width:30px ;
+  overflow:hidden;
+}
+
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  background-color:#05728f;
+}
+
+ .received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+  font-weight:900 !important;
 }
 
 </style>
@@ -72,8 +108,8 @@
 	
   <div class="inbox_people col-md-2 " id="inbox_chatGroup">
     <div class="headind_srch">
-      <div class="recent_heading">
-        <h4>Chat</h4>
+      <div class="recent_heading" >
+        <h4 style="font-weight:900!important;">Chat</h4>
       </div>
       <div class="srch_bar">
         <div class="stylish-input-group">
@@ -95,9 +131,9 @@
 	<c:forEach var="evelsVO" items="${evelistSvc.getEveListsByMem(memVO.mem_id)}">	
 		
 		<div class="chat_people chat_list">
-          <div class="chat_img"> <img src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${evelsVO.eve_id}"> </div>
+          <div class="chat_img"> <img src="<%=request.getContextPath() %>/DBChatEveReader?eve_id=${evelsVO.eve_id}"> </div>
           <div class="chat_ib">
-            <h5>${eveSvc.getOneEve(evelsVO.eve_id).eve_title} </h5>
+            <h5 style="font-weight:900!important;">${eveSvc.getOneEve(evelsVO.eve_id).eve_title} </h5>
             <input type="hidden"  value='${evelsVO.eve_id}'>
           
           </div>
@@ -115,7 +151,7 @@
       <div class="chat-popup" id="popUpContent">
         <div class="form-container ">
           <div class="row">
-            <div class="col-md-8"><h3 class="text-dark" id="popUpHeader">Chat</h3></div>
+            <div class="col-md-8"><h3 class="text-dark" id="popUpHeader" style="font-weight:900!important;">Chat</h3></div>
              <input type="hidden" id="popUpChatName" value=''>
             <div class="col-md-1  offset-md-1 pr-1 "><button type="button" class="btn cancel  btn-sm" onclick="closeForm()">-</button></div>
             <div class="col-md-1 "><button type="button" class="btn cancel  btn-sm" onclick="closeChatPopUp()">x</button></div>
@@ -200,7 +236,7 @@
 	      chat_people[i].style.backgroundColor="#f8f8f8";
 	    } 
 	   var curTargetObj=e.currentTarget;      
-	   curTargetObj.style.backgroundColor="#ebebeb";
+	   curTargetObj.style.backgroundColor="#a9ceef";
 	   
 	   var name=curTargetObj.children[1].children[0].innerText;
 	   popUpHeader.innerText=name;

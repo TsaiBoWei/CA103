@@ -886,6 +886,8 @@
     		  href5.href="<%=request.getContextPath()%>/eve/event.do?action=getOne_For_Display&eve_id="+jArray[4].eve_id;
     		  href6.href="<%=request.getContextPath()%>/eve/event.do?action=getOne_For_Display&eve_id="+jArray[5].eve_id;
     		  
+    		  
+    		 
     	  }else if(reqtype2=='COURSE'){
     		  image1.src="<%=request.getContextPath() %>/courlist/Courlist_DBGifReader.do?cour_id="+jArray[0].cour_id;
     		  image2.src="<%=request.getContextPath() %>/courlist/Courlist_DBGifReader.do?cour_id="+jArray[1].cour_id;
@@ -893,6 +895,13 @@
     		  image4.src="<%=request.getContextPath() %>/courlist/Courlist_DBGifReader.do?cour_id="+jArray[3].cour_id;
     		  image5.src="<%=request.getContextPath() %>/courlist/Courlist_DBGifReader.do?cour_id="+jArray[4].cour_id;
     		  image6.src="<%=request.getContextPath() %>/courlist/Courlist_DBGifReader.do?cour_id="+jArray[5].cour_id;
+    		  
+    		  href1.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[0].cour_id+"&courpageloc=tabone";
+    		  href2.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[1].cour_id+"&courpageloc=tabone";
+    		  href3.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[2].cour_id+"&courpageloc=tabone";
+    		  href4.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[3].cour_id+"&courpageloc=tabone";
+    		  href5.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[4].cour_id+"&courpageloc=tabone";
+    		  href6.href=" <%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+jArray[5].cour_id+"&courpageloc=tabone";
     		  
     	  }else if(reqtype2=='PLAN'){
     		  image1.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[0].plan_id;
@@ -910,7 +919,13 @@
     		  image4.src=jArray[3].post_img;
     		  image5.src=jArray[4].post_img;
     		  image6.src=jArray[5].post_img;
-    		 
+    		  
+    		  href1.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[0].post_id;
+    		  href2.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[1].post_id;
+    		  href3.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[2].post_id;
+    		  href4.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[3].post_id;
+    		  href5.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[4].post_id;
+    		  href6.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[5].post_id;
     	  
     	  }
     	  
