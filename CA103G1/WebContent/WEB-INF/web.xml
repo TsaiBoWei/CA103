@@ -275,5 +275,70 @@
     <servlet-name>CoachReviewServlet</servlet-name>
     <url-pattern>/coaRv/coaRv.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Mem_DBGifReader4</servlet-name>
+    <servlet-class>com.courboar.controller.Mem_DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Mem_DBGifReader4</servlet-name>
+    <url-pattern>/courboar/Mem_DBGifReader4.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>PurchcourServlet</servlet-name>
+    <servlet-class>com.purchcour.controller.PurchcourServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchcourServlet</servlet-name>
+    <url-pattern>/purchcour/purchcour.do</url-pattern>
+  </servlet-mapping>
+ 
+ <servlet>
+    <servlet-name>CourPho_DBGifReader4</servlet-name>
+    <servlet-class>com.purchcour.controller.CourPho_DBGifReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourPho_DBGifReader4</servlet-name>
+    <url-pattern>/purchcour/CourPho_DBGifReader4.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CourunitServlet</servlet-name>
+    <servlet-class>com.courunit.controller.CourunitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourunitServlet</servlet-name>
+    <url-pattern>/courunit/courunit.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>Cour_filmReader4</servlet-name>
+    <servlet-class>com.courunit.controller.Cour_filmReader4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cour_filmReader4</servlet-name>
+    <url-pattern>/courunit/Cour_filmReader4.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GiveMeRecord</servlet-name>
+    <servlet-class>com.courunit.controller.GiveMeRecord</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GiveMeRecord</servlet-name>
+    <url-pattern>/courunit/GiveMeRecord.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DiscountSave</servlet-name>
+    <servlet-class>com.coach.controller.DiscountSave</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DiscountSave</servlet-name>
+    <url-pattern>/coach/DiscountSave.do</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>

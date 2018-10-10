@@ -9,6 +9,12 @@ public interface CourunitDAO_interface {
     public List<CourunitVO> getAll();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<CourlistVO> getAll(Map<String, String[]> map); 
+    
+    
+    
+    //ashley
+    public List<CourunitVO> getCourUnitwithoutVideo(String cour_id);
+    public Double getUnitSum(String cour_id);
 
 
 }

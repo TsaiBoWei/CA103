@@ -249,7 +249,9 @@ System.out.println(courlistSvc);
 System.out.println(courlistVO);							
 					/***************************3.修改完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("courlistVO", courlistVO); // 資料庫update成功後,正確的的courlistVO物件,存入req
-					String url = "/front_end/course/courlist/oneCourlist.jsp";
+					String url = "/front_end/course/courlist/oneCourlist.jsp?cour_id="+cour_id+"&courpageloc=tabone";
+					
+		
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneCourlist.jsp
 					successView.forward(req, res);
 
@@ -344,8 +346,9 @@ System.out.println(courlistVO);
 							cour_pho, cour_lau, cour_ann);
 					
 					/***************************3.新增完成,準備轉交(Send the Success view)***********/
-					String url = "/front_end/course/courlist/listAllCourlist.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllCourlist.jsp
+					String url = "/front_end/course/coach/page/coach.jsp";//
+					req.setAttribute("localhref", "localhref");//ashley
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交coach
 					successView.forward(req, res);				
 					
 					/***************************其他可能的錯誤處理**********************************/

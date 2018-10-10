@@ -207,7 +207,7 @@ img{ max-width:100%;}
   display: none;
   position: fixed;
   bottom: 0;
-  right: 360px;
+  right: 500px;
   border: 3px solid #f1f1f1;
   z-index: 9;
 }

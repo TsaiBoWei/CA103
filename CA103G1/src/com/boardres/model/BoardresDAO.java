@@ -23,7 +23,7 @@ public class BoardresDAO implements BoardresDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB1");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -36,22 +36,24 @@ public class BoardresDAO implements BoardresDAO_interface {
 	private static final String UPDATE_HIDE_STMT = "UPDATE BOARDRES SET CRRES_STA = ? WHERE CRRES_ID= ? ";
 	private static final String UPDATE_HIDE_BY_CROSTID_STMT = "UPDATE BOARDRES SET CRRES_STA ='CPR2' WHERE CRPOST_ID=? ";
 	private static final String FIND_BY_PK = "SELECT * FROM BOARDRES WHERE CRRES_ID= ? "; 
-	private static final String FIND_BY_CRPOST_ID = "SELECT * FROM BOARDRES WHERE CRPOST_ID=? AND CRRES_STA='CPR1'ORDER BY CRRES_ID DESC ";// 展示清單用
-
+	private static final String FIND_BY_CRPOST_ID = "SELECT * FROM BOARDRES WHERE CRPOST_ID=? AND CRRES_STA='CPR1'ORDER BY CRRES_ID ";// 展示清單用
+	private static final String REPLY_COUNT_BY_CRPOST_ID="SELECT CRPOST_ID, COUNT(*) AS COUNT FROM BOARDRES WHERE CRPOST_ID=? GROUP BY CRPOST_ID";
 	//
 
 	@Override
-	public void add(BoardresVO boardresVO) {
+	public String add(BoardresVO boardresVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		String crres_id = null;
 		try {
 
 //			Class.forName(DRIVER);
 //
 //			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			String cols[] = { "crres_id" };
+			
+			pstmt = con.prepareStatement(INSERT_STMT,cols);
 
 			pstmt.setTimestamp(1, boardresVO.getCrres_time());
 			pstmt.setString(2, boardresVO.getCrpost_id());
@@ -59,7 +61,15 @@ public class BoardresDAO implements BoardresDAO_interface {
 			pstmt.setString(4, boardresVO.getCrres_text());
 
 			pstmt.executeUpdate();
-
+			ResultSet rs = pstmt.getGeneratedKeys();//用rs去取到主鍵值
+			
+			if (rs.next()) {
+				crres_id = rs.getString(1);
+				System.out.println("自增主鍵值 = " + crres_id );
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -79,7 +89,9 @@ public class BoardresDAO implements BoardresDAO_interface {
 					e.printStackTrace(System.err);
 				}
 			}
+			
 		}
+		return crres_id;
 	}
 
 	@Override
@@ -300,6 +312,48 @@ public class BoardresDAO implements BoardresDAO_interface {
 
 		return boardresVO;
 
+	}
+
+	@Override
+	public Integer getCountByCrostId(String crpost_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Integer count=0;
+
+		try {
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(REPLY_COUNT_BY_CRPOST_ID);
+			pstmt.setString(1, crpost_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				count=rs.getInt("COUNT");
+				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return count;
 	}
 
 }

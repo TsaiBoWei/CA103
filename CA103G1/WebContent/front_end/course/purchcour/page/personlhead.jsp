@@ -126,14 +126,14 @@
 				id="navbar3SupportedContent">
 				<ul class="navbar-nav">
 				<!-- mypage-->
-					<li class="nav-item"><a class="nav-link personalnavlink" rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mypage#personalnav" id="mypage"> <i
+					<li class="nav-item" ><a class="nav-link personalnavlink" rel="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp?perpageloc=mypage#personalnav" id="mypage" style="cursor: pointer;"> <i
 							class="fa fa-file"></i> &nbsp; &nbsp; MyPage &nbsp; &nbsp;&nbsp;
 					</a></li>
 				<!-- Workoutplan-->
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown" ><a
 						class="nav-link dropdown-toggle personalnavlink" aria-expanded="false"
 						aria-haspopup="true" data-toggle="dropdown" rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=workoutplan#personalnav"
-						id="workoutplan"> <i class="fa fa-calculator"></i>
+						id="workoutplan" style="cursor: pointer;"> <i class="fa fa-calculator"></i>
 							&nbsp; WorkOutPlan &nbsp;
 					</a>
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
@@ -146,14 +146,14 @@
 								href="<%=request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interetsting Plan</a>
 						</div></li>
 					<!-- Friend-->
-					<li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=friend#personalnav" id="friend"> <i
+					<li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=friend#personalnav" id="friend" style="cursor: pointer;"> <i
 							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
 							&nbsp;&nbsp;
 					</a></li>
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=course#personalnav" aria-expanded="false"
+						class="nav-link dropdown-toggle personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcour.jsp?perpageloc=course#personalnav" aria-expanded="false"
 						aria-haspopup="true" data-toggle="dropdown"
-						id="course"> <i class="fa fa-film"
+						id="course" style="cursor: pointer;"> <i class="fa fa-film"
 							aria-hidden="true"></i>&nbsp; &nbsp; Course &nbsp; &nbsp;
 					</a>
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom ">
@@ -163,15 +163,15 @@
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="#">Interetsting Course</a>
 						</div></li>
-					<li class="nav-item dropdown"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" id="event">
-							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event
+					<li class="nav-item dropdown"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" id="event" style="cursor: pointer;">
+							<i class="fa fa-hand-spock-o" aria-hidden="true" ></i>&nbsp;Event
 							&nbsp;&nbsp;
 					</a></li>
-					<li class="nav-item"><a class="nav-link personalnavlink" id="post"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=post#personalnav"> <i
-							class="fa fa-sticky-note" aria-hidden="true"></i>&nbsp;&nbsp;Post&nbsp;&nbsp;
-					</a></li>
-					<li class="nav-item"><a class="nav-link personalnavlink "  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=mycalender#personalnav" id="mycalender"> <i
-							class="fa fa-sticky-note" aria-hidden="true"></i>
+<%-- 					<li class="nav-item"><a class="nav-link personalnavlink" id="post"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=post#personalnav" style="cursor: pointer;"> <i --%>
+<!-- 							class="fa fa-sticky-note" aria-hidden="true" ></i>&nbsp;&nbsp;Post&nbsp;&nbsp; -->
+<!-- 					</a></li> -->
+					<li class="nav-item"><a class="nav-link personalnavlink "  rel="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp?perpageloc=mycalender#personalnav" id="mycalender" style="cursor: pointer;"> <i
+							class="fa fa-sticky-note" aria-hidden="true" ></i>
 							&nbsp;MyCalender&nbsp;
 					</a></li>
 				</ul>

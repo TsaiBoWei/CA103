@@ -5,11 +5,14 @@
 <%@ page import="com.courlist.model.*"%>
 <%@ page import="com.coach.model.*"%>
 <%@ page import="com.mem.model.*"%> 
+<%@ page import="com.coach.model.*"%>
 <%
-  CourlistVO courlistVO = (CourlistVO) request.getAttribute("courlistVO");
-  CoachVO coachVO = (CoachVO) request.getAttribute("coachtVO");
-  MemVO memVO = new MemService().getOneMem("M000001");
-
+  CourlistVO courlistVO = (CourlistVO) request.getAttribute("courlistVO");//錯誤處理
+//   CoachVO coachVO = (CoachVO) request.getAttribute("coachtVO");
+//   MemVO memVO = new MemService().getOneMem("M000001");
+  MemVO memVO=(MemVO)session.getAttribute("memVO");
+  CoachService coachSvc=new CoachService();
+  CoachVO coachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());
 %>
 
     
@@ -167,10 +170,10 @@
 			
 			<!-- 			教練編號  -->
             <div class="form-group">
-				<input type="hidden" name="coa_id" value="C000001" />
+				<input type="hidden" name="coa_id" value="<%=coachVO.getCoa_id()%>" />
 			</div>
 			<br>
-			
+<%System.out.println("XXXXXXXXXXXXX"+coachVO.getCoa_id());%>			
 						
 			<div class="form-group">
               <h4 class="text-md-left">課程介紹*</h4>
@@ -228,7 +231,8 @@
               <h4 class="text-md-left">課程公告</h4>
 <!-- 				<input type="TEXT" name="cour_ann" size="45" class="form-control" -->
 <%-- 				value="<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>" /></td> --%>
-				<textarea class="form-control text-light" name="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5"><%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>
+				<textarea class="form-control text-light" name="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5">
+				<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>
 				</textarea>
 			</div>
 			<br>

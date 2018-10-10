@@ -194,8 +194,8 @@ public class SptypeDAO implements SptypeDAO_interface {
 				sptypeVO = new SptypeVO();
 				sptypeVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				sptypeVO.setSport(rs.getString("SPORT"));
-				byte[] pic = rs.getBytes("SPORT_LOGO");
-				readPicture(pic);
+//				byte[] pic = rs.getBytes("SPORT_LOGO");
+//				readPicture(pic);
 			}
 
 //		} catch (ClassNotFoundException ce) {
@@ -204,8 +204,8 @@ public class SptypeDAO implements SptypeDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
-		} catch (IOException ie) {
-			throw new RuntimeException("A IOException. " + ie.getMessage());
+//		} catch (IOException ie) {
+//			throw new RuntimeException("A IOException. " + ie.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

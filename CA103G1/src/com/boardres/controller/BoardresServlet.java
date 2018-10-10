@@ -52,7 +52,7 @@ public class BoardresServlet extends HttpServlet {
 
 				Timestamp crres_time = new Timestamp(System.currentTimeMillis());
 				String crpost_id = req.getParameter("crpost_id");
-				String mem_id = (String)req.getSession().getAttribute("mem_id");
+				String mem_id = req.getParameter("mem_id");
 
 System.out.println(crres_text);
 System.out.println(crpost_id);
@@ -69,10 +69,14 @@ System.out.println(mem_id);
 
 				/*************************** 2.開始新增資料 ***************************************/
 				BoardresService boardresSVC = new BoardresService();
-				boardresSVC.addBoardres(crres_time, crpost_id, mem_id, crres_text);
-
+				String crres_id=boardresSVC.addBoardres(crres_time, crpost_id, mem_id, crres_text);
+               
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";
+				String whichPage=req.getParameter("whichPage");
+				
+				String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage+"&showCrres_id="+crres_id;
+System.out.println("insertUrl"+url);
+				req.setAttribute("localhref",url );
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交maincourbaor.jsp
 				successView.forward(req, res);
 
@@ -126,7 +130,11 @@ System.out.println(crres_id);
 				boardresSVC.updateBoardres(crres_id, crres_text);
 
 				/*************************** 3.更新完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";
+				String whichPage=req.getParameter("whichPage");
+				String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage+"&showCrres_id="+crres_id;
+System.out.println("insertUrl"+url);
+				req.setAttribute("localhref",url );
+
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
@@ -158,7 +166,10 @@ System.out.println(crres_id);
 				boardresSVC.hideBoardres("CPR2",crres_id);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";
+				String whichPage=req.getParameter("whichPage");
+				String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage;
+System.out.println("insertUrl"+url);
+				req.setAttribute("localhref",url );
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交maincourboar.jsp
 				successView.forward(req, res);
 
@@ -189,8 +200,8 @@ System.out.println(crres_id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ***********/
 				req.setAttribute("boardresVO", boardresVO); 
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";// 修改JSP
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				String url = "/front_end/course/courboar/page/maincourboar.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/

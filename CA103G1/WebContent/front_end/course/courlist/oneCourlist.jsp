@@ -5,21 +5,38 @@
 <%@ page import="com.courlist.model.*"%>
 <%@ page import="com.coach.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.courunit.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-CourlistVO courlistVO = (CourlistVO) request.getAttribute("courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
-CoachVO coachVO = (CoachVO) request.getAttribute("coachVO"); 
-MemVO memVO = (MemVO) request.getAttribute("memVO"); 
+///模擬登入與瀏覽
+// MemVO memVO1= new MemService().getOneMem("M000001");
+// session.setAttribute("memVO", memVO1);
+String brows_courid= request.getParameter("cour_id");
+if (brows_courid==null){
+	brows_courid=((CourlistVO)session.getAttribute("brows_courlistVO")).getCour_id();
+}
+System.out.print("oneCourlist"+brows_courid);
+CourlistService courlistSvc=new CourlistService(); 
+// CourlistVO courlistVO1=courlistSvc.getOneCourlist(brows_courid);
+// request.setAttribute("courlistVO", courlistVO1);
+///end
+
+///取出值
+// CourlistVO courlistVO = (CourlistVO) request.getAttribute("courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
+CourlistVO courlistVO=courlistSvc.getOneCourlist(brows_courid);
+session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的, 之後改get parameter
+MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
+
 %>
 
 
 <%
     CoachService coachService = new CoachService();
-    CoachVO coachVO2 = coachService.getOneCoach(courlistVO.getCoa_id());
+    CoachVO coachVO = coachService.getOneCoach(courlistVO.getCoa_id());
     
     MemService coamemSvc= new MemService();
-    MemVO coamemVO= coamemSvc.getOneMem(coachVO2.getMem_id());
+    MemVO coamemVO= coamemSvc.getOneMem(coachVO.getMem_id());
 %>
 
 <!DOCTYPE html>
@@ -83,7 +100,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
         href="<%=request.getContextPath()%>/front_end/course/courlist/select_page.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#">WorkOutPlan</a>
+            <a class="nav-link" href="#">oneCourlist</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="#">Event</a>
@@ -137,7 +154,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
             	});   
   			  </script>
           </div>
-          <a href="#" class="btn btn-lg btn-primary mx-1">Buy It</a>
+          <a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
         </div>
         <div class="col-md-5  align-self-center">
           <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
@@ -146,7 +163,7 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
     </div>
   </div>
     <!-- 分頁頁籤 -->
-  <div class="container containerHrT ">
+  <div class="container containerHrT " id="jys">
     <hr> </div>
   <nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar">
     <div class="container">
@@ -169,12 +186,12 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
           </li>
          <!-- 第四個按鈕 -->
           <li class="nav-item">
-            <a class="nav-link" href="" data-target="#tabfour" data-toggle="tab">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?courpageloc=tabfour&localhref=localhref" >
               <i class="fa fa-film" aria-hidden="true"></i>&nbsp; Course Unit &nbsp; </a>
           </li>
           <!-- 第五個按鈕 -->
           <li class="nav-item">
-            <a class="nav-link" href="" data-target="#tabfive" data-toggle="tab">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp?courpageloc=tabfive&localhref=localhref" >
               <i class="fa fa-comments" aria-hidden="true"></i> &nbsp; Forum &nbsp; </a>
           </li>
           <!-- 第六個按鈕 -->
@@ -187,35 +204,72 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
     </div>
   </nav>
   
-  <%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
+  
+  <%
+  
+  String courpageloc=request.getParameter("courpageloc");
+	if(courpageloc!=null){
+	String courpagelocId="#"+courpageloc;
+	
+	%>
+	<script>
+	 $(document).ready(function() {
+      
+        $("<%=courpagelocId%>").addClass('show active');
+    
+	 });
+    </script>
+ <% }%>
+ 
+ <c:if test="${localhref!=null}">
+			
+        <script>
+
+           $(document).ready(function(){       
+           $('html,body').animate({scrollTop:$('#jys').offset().top}, 800); 
+           }); 
+        </script>
 </c:if>
+
+<c:if test="${param.localhref!=null}">
+			
+	<script>
+    window.onload=function(){
+    	location.hash="#jys";
+    	console.log(location.href);
+    };
+           
+ </script>
+</c:if>
+ 
+ 
+  
+  <%-- 錯誤表列 --%>
+<%-- <c:if test="${not empty errorMsgs}"> --%>
+<!-- 	<font style="color:red">請修正以下錯誤:</font> -->
+<!-- 	<ul> -->
+<%-- 		<c:forEach var="message" items="${errorMsgs}"> --%>
+<%-- 			<li style="color:red">${message}</li> --%>
+<%-- 		</c:forEach> --%>
+<!-- 	</ul> -->
+<%-- </c:if> --%>
 
 
   <div class="container containerHrB ">
     <hr> </div>
     <!-- 分頁 -->
    <div class="tab-content mt-2">
-    <div class="tab-pane fade show active" id="tabone" role="tabpanel">
+    <div class="tab-pane fade show" id="tabone" role="tabpanel">
       <div class="py-5">
         <div class="container">
           <div class="row mb-5">
             <div class="col-md-7">
               <h2 class="text-primary text-md-left"> <i class="fa fa-user"></i> &nbsp; <%=coamemVO.getMem_name()%>  &nbsp;  <br> </h2>
-              <p class="text-md-left"><%=coachVO2.getCoa_text()%></p>
+              <p class="text-md-left"><%=coachVO.getCoa_text()%></p>
             </div>
             <div class="col-md-5 align-self-center">
          	  <img class="img-fluid d-block w-100 img-thumbnail" alt="Card image"
-		  src="<%=request.getContextPath()%>/coach/Coach_DBGifReader.do?coa_id=<%=courlistVO.getCoa_id()%>"> 
-		  </div>
-	    
-			 
+		  src="<%=request.getContextPath()%>/coach/Coach_DBGifReader.do?coa_id=<%=courlistVO.getCoa_id()%>"> </div>
           </div>
         </div>
       </div>
@@ -255,98 +309,9 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
         </div>
       </div>
     </div>
-     <div class="tab-pane fade" id="tabfour" role="tabpanel">
-      <div class="py-5 text-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7 text-md-left text-center align-self-center my-5">
-              <h3 class="text-primary"><i class="fa fa-film" aria-hidden="true"></i>&nbsp; 恬心空中瑜珈教室 單元一 &nbsp;</h3>
-              
-<!--               <p class="">空中瑜珈簡介&nbsp; -->
-<!--                 <br>＊空中瑜珈設備。&nbsp; -->
-<!--                 <br>＊如何進入與離開布掛。&nbsp; -->
-<!--                 <br>＊進入動作前，布掛的預備位置。&nbsp; -->
-<!--                 <br>練習提醒： 影片之示範動作練習須於課程上有專業老師於一旁指導。 空中瑜珈不建議患有高低血壓、心臟病、骨質疏鬆和孕婦參與大眾課程，適逢生理期者應避免倒掛的動作練習。</p> -->
-			  <div class="accordion" id="courunit_update_1">
-			   	<div class="text-md-right" id="courunit_update_hide_1">
-			       	<button class="btn btn-outline-primary btn-sm m-1 " type="button" data-toggle="collapse" 
-			       			data-target="#courunit_update_text_1" aria-expanded="false" aria-controls="courunit_update_text_1"> 
-			       	<i class="fa fa-edit" aria-hidden="true"></i> &nbsp; Edit &nbsp;
-			        </button>
-			    </div>
-			    <div id="courunit_update_text_1" class="col-md-12 collapse" aria-labelledby="courunit_update_hide_1" data-parent="#courunit_update_1">
-			     	<div class="card-body">
-			        	<br>
-			       		<h5 class="text-md-left"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; 修改單元名稱</h5>
-			         	<form class="" method="post" action="https://formspree.io/">
-			            	<div class="form-group">
-				  				<textarea class="form-control text-light" style="background-color:#1f1f1f; border-color:#505050;" rows="1"></textarea>
-				  			</div>
-				  			<br>
-				  			<div class="text-md-right">
-			            		<button type="submit" class="btn btn-outline-primary btn-sm m-1">Send</button>
-			            	</div>
-						</form>
-					</div>
-				</div>
-			</div>
-              <h5 class="text-md-left">觀看進度</h5>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-primary progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-              </div>
-              <br>              
-            </div>
-            <div class="col-md-5">
-              <div class="embed-responsive embed-responsive-4by3  rounded">
-                <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/8GRCuzUmkpY?autoplay=0"> </iframe>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-7 text-md-left text-center align-self-center my-5" >
-              <h3 class="text-primary"><i class="fa fa-film" aria-hidden="true"></i>&nbsp; 恬心空中瑜珈教室 單元二</h3>
-              <div class="accordion" id="courunit_update_2">
-				<div class="text-md-right" id="courunit_update_hide_2">
-					<button class="btn btn-outline-primary btn-sm m-1 " type="button" data-toggle="collapse" 
-						    data-target="#courunit_update_text_2" aria-expanded="false" aria-controls="courunit_update_text_2"> 
-					<i class="fa fa-edit" aria-hidden="true"></i> &nbsp; Edit &nbsp;
-					</button>
-				</div>
-				<div id="courunit_update_text_2" class="col-md-12 collapse" aria-labelledby="courunit_update_hide_2" data-parent="#courunit_update_2">
-					<div class="card-body">
-						<br>
-						<h5 class="text-md-left"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; 修改單元名稱</h5>
-						<form class="" method="post" action="https://formspree.io/">
-						    <div class="form-group">
-							  	<textarea class="form-control text-light" style="background-color:#1f1f1f; border-color:#505050;" rows="1"></textarea>
-							</div>
-							<br>
-							<div class="text-md-right">
-						        <button type="submit" class="btn btn-outline-primary btn-sm m-1">Send</button>
-						    </div>
-						</form>
-					</div>
-				</div>
-			</div>
-<!--               <p class="">空中瑜珈課程中進入前彎、下犬式、倒立動作等動作，布掛的預備位置。 -->
-<!--                 <br>＊如何進入布掛 -->
-<!--                 <br>＊離開布掛的方式 -->
-<!--                 <br>＊空中瑜珈大休息式介紹&nbsp;</p> -->
-              <h5 class="text-md-left">觀看進度</h5>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-primary progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="embed-responsive embed-responsive-4by3  rounded">
-                <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/8GRCuzUmkpY?autoplay=0"> </iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ <!--  單元--> <!--  單元--> <!--  單元--> <!--  單元--> <!--  單元--><!--  單元--><!--  單元--><!--  單元--><!--  單元-->
+ 
+<!--  單元--> <!--  單元--> <!--  單元--> <!--  單元--> <!--  單元--><!--  單元--><!--  單元--><!--  單元--><!--  單元-->
     <div class="tab-pane fade" id="tabfive" role="tabpanel">
       <div class="py-5">
         <div class="container">
@@ -366,46 +331,71 @@ MemVO memVO = (MemVO) request.getAttribute("memVO");
       </div>
     </div>
   </div>
-  <div class="py-5 section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12"></div>
-      </div>
-      <div class="row">
-        <div class="col-md-2 col-6"></div>
-        <div class="col-md-2 col-6"></div>
-        <div class="col-md-2 col-6"></div>
-        <div class="col-md-2 col-6"></div>
-        <div class="col-md-2 col-6"></div>
-      </div>
-    </div>
-  </div>
-  <!-- Call to action -->
-  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('assets/conference/gymback.jpg');">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-left">
-          <h1 class="mb-3"></h1>
-          <p></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="text-md-left text-center p-4">
-    <div class="container">
-      <div class="row">
-		<div class="col-lg-12"></div>
-	  </div>
-	  <div class="row">
-		<div class="col-md-12">
-		  <p class="text-muted">
-		  <br> <br> <br>
-		  </p>
+  
+  
+  
+  <!-- Sponsor logos -->
+		<div class="py-5 mt-5 section" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-4">Sponsors</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 col-6"></div>
+					<div class="col-md-2 col-6">
+						<img class="center-block img-fluid d-block"
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_1.png">
+					</div>
+					<div class="col-md-2 col-6">
+						<img class="center-block img-fluid d-block"
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_4.png">
+					</div>
+					<div class="col-md-2 col-6">
+						<img class="center-block img-fluid d-block"
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_3.png">
+					</div>
+					<div class="col-md-2 col-6">
+						<img class="center-block img-fluid d-block"
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_2.png">
+					</div>
+				</div>
+			</div>
 		</div>
-	  </div>
-	</div>
-  </footer>
+		
+	
+		<!-- Call to action -->
+		<div class="py-5 section mt-3 section-fade-in-out" id="register"
+			style="background-image: url('<%=request.getContextPath()%>/front_end/assets/conference/cover_2.jpg');">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-left">
+						<h1 class="mb-3">Set and Achieve Goals</h1>
+						<p>
+							By discovering the power of goal setting by committing to reaching an exercise milestone and then working out just how you’ll achieve it, you can enjoy the 
+							benefits of exercise and the confidence that comes along with it.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<footer class="text-md-left text-center p-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p class="text-muted">
+							<br> <br> <br>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
 
   
   

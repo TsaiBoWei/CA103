@@ -93,10 +93,10 @@ public class index extends HttpServlet {
 			CoachService coachSvc=new CoachService(); 
 			switch(type1) {
 			case "POPULAR":
-//				list=courSvc.getPopularCour();
+				list=courSvc.getPopularCour();
 				break;
 			case "NEW":
-//				list=courSvc.getNewCour();
+				list=courSvc.getNewCour();
 				break;			
 			}
 			
@@ -190,6 +190,7 @@ public class index extends HttpServlet {
 					String sptype_id=postVO.getSptype_id();
 	 	        	
 	 	        	jobj.put("post_id", postVO.getPost_id());
+	 	        	jobj.put("post_img",postVO.getPost_img());
 					jobj.put("title", postVO.getPost_title());	
 					jobj.put("mem_name", mem_name);
 					jobj.put("view", postVO.getPost_view());

@@ -17,7 +17,7 @@ public class UpdateDBPic {
 	static String userid = "CA103";
 	static String passwd = "123456";
 	
-	private static final String UPDATE_PIC="UPDATE EVENT SET EVE_PHOTO=? WHERE EVE_ID=?";
+	private static final String UPDATE_PIC="UPDATE EVENT SET EVE_LOGO=? WHERE EVE_ID=?";
 	
 	public static void main(String args[]) {
 		updatePic();
@@ -25,7 +25,7 @@ public class UpdateDBPic {
 	
 	//假資料圖片用
 	public  static void updatePic(){
-		int row=7;	//要更新的table的總筆數
+		int row=5;	//要更新的table的總筆數
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		FileInputStream fi=null;
@@ -36,7 +36,7 @@ public class UpdateDBPic {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_PIC);
 			//存放圖片的資料夾路徑
-			File[] files=new File("C:\\Users\\Java\\Desktop\\images").listFiles();
+			File[] files=new File("C:\\Users\\Java\\Desktop\\images\\chat").listFiles();
 			for(int i=1;i<=row;i++) {
 				File file=files[i];
 				System.out.println(file.getName());
@@ -50,7 +50,7 @@ public class UpdateDBPic {
 				pic=baos.toByteArray();	
 				
 				pstmt.setBytes(1,pic);
-				pstmt.setString(2,"E00000"+i);				
+				pstmt.setString(2,"E00000"+7);				
 				pstmt.executeUpdate();				
 			}
 			// Handle any driver errors

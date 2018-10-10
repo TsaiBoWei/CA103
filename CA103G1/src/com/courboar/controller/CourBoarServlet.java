@@ -53,7 +53,7 @@ public class CourBoarServlet extends HttpServlet {
 //				String cour_id = req.getParameter("cour_id");
 //				String mem_id = req.getParameter("mem_id");
 				String cour_id = req.getParameter("cour_id");
-				String mem_id = (String)req.getSession().getAttribute("mem_id");
+				String mem_id = req.getParameter("mem_id");
                 
 				System.out.println(cour_id);
                 System.out.println(mem_id);
@@ -73,7 +73,11 @@ public class CourBoarServlet extends HttpServlet {
 				courBoarSVC.addCourboar(crpos_tit, crpos_time, cour_id, mem_id, crpos_text);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";
+				
+				String whichPage=req.getParameter("whichPage");
+				String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage;
+System.out.println("insertUrl"+url);
+				req.setAttribute("localhref",url );
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 				successView.forward(req, res);
 				
@@ -131,9 +135,10 @@ public class CourBoarServlet extends HttpServlet {
 				courBoarSVC.updateCourboar(crpost_id, crpos_tit, crpos_text);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/course/courboar/page/maincourboar.jsp";
-				boolean localhref=true;
-				req.setAttribute("localhref",localhref );
+				String whichPage=req.getParameter("whichPage");
+				String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage;
+System.out.println("updateUrl"+url);
+				req.setAttribute("localhref",url);
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交maincourboar.jsp
 				successView.forward(req, res);
 				
@@ -168,8 +173,10 @@ public class CourBoarServlet extends HttpServlet {
 System.out.println(crpost_id);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
-				
-                String url = "/front_end/course/courboar/page/maincourboar.jsp";
+                String whichPage=req.getParameter("whichPage");
+                String url = "/front_end/course/courboar/page/maincourboar.jsp?whichPage="+whichPage;
+System.out.println("hide"+url);
+                req.setAttribute("localhref",url );
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 
 				successView.forward(req, res);
                 

@@ -83,7 +83,7 @@
             <a class="nav-link" href="#schedule">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#schedule">Event</a>
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="#speakers">Course</a>
@@ -138,7 +138,7 @@
 
 
   <div class="container-fluid  pb-2 row   m-3">
-    <div class="col-md-10 bg-info  pt-3">
+    <div class="col-md-8 offset-md-2 bg-info  pt-3">
       <form  METHOD="post" class="form-inline eveComQuery" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1">
           <div class="col-md-3 mb-3 d-flex">
             <label for="keyword" class="orderBy ">√ˆ¡‰¶r&nbsp</label>
