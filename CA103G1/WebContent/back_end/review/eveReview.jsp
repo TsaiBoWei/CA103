@@ -6,8 +6,8 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.Mgr.model.*"%>
 <%@ page import="com.eve.model.*"%>
-<%--  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");--%>
 
+  <%  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");%>
 <%
 	EveService eveSvc = new EveService();
 	List<EventVO> list = eveSvc.getReviewEves();
@@ -81,7 +81,7 @@
           <div class="row">
             <div class="mt-4 text-right col-12">
               <h1 class="display-6 text-center">Welcome Manager!</h1>
-              <p class="lead text-center">Login successed</p>
+              <p class="lead text-center"><%=mgrVO.getMgr_name()%></p>
             </div>
           </div>
         </div>

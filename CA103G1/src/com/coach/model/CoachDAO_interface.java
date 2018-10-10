@@ -13,4 +13,10 @@ public interface CoachDAO_interface {
     
     //ashley
     public CoachVO findByMem_Id(String mem_id);
+    //教練審核用
+    public List<CoachVO> getByReview();
+    public List<CoachVO> getByReviewEnd();
+    public void updateStatus(String coa_id,String coa_status);
+    //教練審核用
+
 }

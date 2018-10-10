@@ -49,5 +49,21 @@ public class CoachService {
 	public CoachVO getOneCoachByMemId(String mem_id) {
 		return dao.findByMem_Id(mem_id);
 	}
+	//教練審核用
+	public List<CoachVO> getReview(){
+		
+		return dao.getByReview();
+	}
+
+	public List<CoachVO> getReviewEnd(){
+		
+		return dao.getByReviewEnd();
+	}
+
+	public CoachVO updateStatus(String coa_id,String coa_status) {
+		dao.updateStatus(coa_id,coa_status);
+	return dao.findByPK(coa_id);		
+	}
+	//教練審核用
 
 }

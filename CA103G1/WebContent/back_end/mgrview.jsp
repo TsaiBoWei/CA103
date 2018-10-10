@@ -81,7 +81,7 @@
                 <h1 class="card-title text-dark d-flex justify-content-start m-0">教練審核</h1>
               </div>
               <div>
-                <a href="#" class="d-flex justify-content-start m-2 mgrwork">前往審核</a>
+                <a href="<%=request.getContextPath() %>/back_end/review/coachReview.jsp" class="d-flex justify-content-start m-2 mgrwork">前往審核</a>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
                 <h1 class="card-title text-dark d-flex justify-content-start m-0">活動審核</h1>
               </div>
               <div>
-                <a href="#" class="d-flex justify-content-start m-2 mgrwork">前往審核</a>
+                <a href="<%=request.getContextPath() %>/back_end/review/eveReview.jsp" class="d-flex justify-content-start m-2 mgrwork">前往審核</a>
               </div>
             </div>
           </div>

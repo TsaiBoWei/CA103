@@ -10,7 +10,8 @@
 		
 	pageContext.setAttribute("list",list);
 	%>
-
+	<%@ page import="com.Mgr.model.*"%>
+    <%  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");%>
 	<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <!DOCTYPE html>
 <html>
@@ -72,7 +73,7 @@
           <div class="row">
             <div class="mt-4 text-right col-12">
               <h1 class="display-6 text-center">Welcome Manager!</h1>
-              <p class="lead text-center">Login successed</p>
+              <p class="lead text-center"><%=mgrVO.getMgr_name()%></p>
             </div>
           </div>
         </div>
