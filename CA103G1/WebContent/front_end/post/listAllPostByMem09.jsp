@@ -5,6 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
 <%@ page import="com.Post.model.*"%>
+<%@ page import="com.plan.model.*"%>
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
@@ -12,8 +13,12 @@
 	List<PostVO> list = postSvc.getByMemIDToDisplay("M000001");
 	pageContext.setAttribute("list",list);
 %>
-
-
+<%
+	PlanService planSvc =new PlanService();
+	List<PlanVO> planlist = planSvc.getPlansByMem("M000001");
+	pageContext.setAttribute("planlist",planlist);
+%>
+<jsp:useBean id="now" class="java.util.Date" />
 
 <!DOCTYPE html>
 <html>
@@ -28,11 +33,10 @@
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
-  <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/post/css/PersonalPage_list.css">
+   <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/post/css/PersonalPage_list.css">
 <!--   <link rel="stylesheet" href="calender.css"> -->
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
   <!-- Script: Animated entrance -->
   <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
@@ -42,10 +46,11 @@
  
   <script src="<%=request.getContextPath() %>/front_end/post/js/jquery.events.touch.js"></script>
   <script src="<%=request.getContextPath() %>/front_end/course/courboar/js/autotyping.js"></script>
-  <script src="<%=request.getContextPath() %>/front_end/course/js/truncateoverride.js"></script>
+  <script src="<%=request.getContextPath() %>/front_end/post/js/truncateoverride.js"></script>
 
-  
-  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/purchcour/css/buttonfix.css">
+   <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
+
   <!-- fafaicon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <style> /*頁面設定*/
@@ -62,8 +67,7 @@
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
-
-  <!-- Plan List-->
+<!-- Plan List-->
   <div class=" m-4">
     <div class="row">
       <div class="container">
@@ -77,8 +81,22 @@
               <div class="card-header card-header-custom text-left text-light"><%=formatter.format(date) %></div>
               <div class="card-body card-body-custom">
                 <h4 class="text-primary text-left">Plan Today</h4>
-                <h6 class="text-muted  text-left">Subtitle</h6>
-                <p class="text-left text-white">Some quick example text to build on the card title.</p>
+                <c:forEach var="planVO" items="${planlist}" >
+<%--                 	<c:set var="today" value="<%=new Date().getTime() %>"/> --%>
+<%--                 	<c:set var="startday" value="${planVO.plan_start_date}"/> --%>
+<%--                 	<c:set var="endday" value="${planVO.plan_end_date}"/> --%>
+               
+<%--                 	<c:choose> --%>
+<%--                 		<c:when test="${today>=endday||today<=startday}"> --%>
+                <h6 class="text-muted  text-left">${planVO.plan_name }</h6>
+                <p class="text-left text-white plan_vo">${planVO.plan_vo}</p>
+<%--                 		</c:when> --%>
+<%--                 	<c:otherwise> --%>
+<!--                 		<h6 class="text-muted  text-left">Today has't plan.</h6> -->
+<!--                 		<p class="text-left text-white plan_vo"></p> -->
+<%--                 	</c:otherwise> --%>
+<%--                 	</c:choose> --%>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -143,33 +161,43 @@
               <ul class="list-inline postrectbar">
                 <li class="list-inline-item">
                   <p class="h4">
-                    <i class="fa fa-eye"></i>&nbsp; &nbsp;</p>
+                  ${postVO.post_view} &nbsp;
+                    <i class="fa fa-eye"></i>
+                    
+                   </p>
                 </li>
 <!--                 <li class="list-inline-item"> -->
 <!--                   <p class="h4"> -->
 <!--                     <i class="far fa-heart"></i>&nbsp; &nbsp; </p> -->
 <!--                 </li> -->
-                <li class="list-inline-item">
-                  <p class="h4">
-<!--                     <i class="far fa-trash-alt"></i>&nbsp; &nbsp; </p> -->
-                    
+                <li class="list-inline-item">                  
+<!--                     <i class="far fa-trash-alt"></i>&nbsp; &nbsp; </p> -->                   
                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/post/post.do" style="margin-bottom: 0px;">
-<!-- 			     <input type="submit" class="far fa-trash-alt" value=null> -->
-				<button type="submit" class="btn  py-1 mb-2 mt-1"> 
-					<i class="far fa-trash-alt"></i>
-				</button>
-  				
-				</span>
+<!-- 			     <input type="submit" class="far fa-trash-alt" value=null> -->				 
+					<p class="h4">					
+					<button type="submit" class="btn  py-1 mb-2 mt-1">
+					<i class="far fa-trash-alt"></i>					
+					</button>
+					</p>								
 			     <input type="hidden" name="post_id"      value="${postVO.post_id}">			  
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-			     <input type="hidden" name="action"     value="delete_post">
-			     
+			     <input type="hidden" name="action"     value="delete_post">			     
 			     </FORM>
                 </li>
+                
+<!--                 修改貼文 -->
                 <li class="list-inline-item">
-                  <p class="h4">
-                    <i class="far fa-edit"></i>
+                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/post/post.do" style="margin-bottom: 0px;">
+                  <p class="h4">              
+                  <button type="submit" class="btn  py-1 mb-2 mt-1">
+                    <i class="far fa-edit"></i>                  
+                  </button>            
                   </p>
+                  
+                 <input type="hidden" name="post_id"      value="${postVO.post_id}">			     
+			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			     <input type="hidden" name="action"     value="getOnePostToUpdate">
+			     </FORM>                
                 </li>
               </ul>
             </div>
@@ -189,7 +217,7 @@
           <div class=" postbriefcontent ">
       
           
-            <p class="postbrieftruncate">${ postVO.getPost_con().replaceAll("</?[^>]+>", "") }&nbsp; &nbsp; </p>
+            <p class="postbrieftruncate">${postVO.getPost_con().replaceAll("</?[^>]+>", "") }&nbsp; &nbsp; </p>
           </div>
           <div class="col-md-12 mt-5 align-self-end text-right p-0">
           <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/post/post.do" style="margin-bottom: 0px;">
@@ -219,7 +247,7 @@
 <!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
 	
 
-  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  
   <!-- Script: Smooth scrolling between anchors in a same page -->
  
   <!--
@@ -228,6 +256,3 @@
 
 </html>-->
  
-</body>
-
-</html>
