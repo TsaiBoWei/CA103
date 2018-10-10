@@ -45,7 +45,7 @@ public class Initialize_Listener implements ServletContextListener{
 		
 		
 		Map<String,String> sportTypeMap=null;				
-<<<<<<< HEAD
+
 		sportTypeMap=new LinkedHashMap<>();
 		sportTypeMap.put("SP000001", "田徑");
 		sportTypeMap.put("SP000002", "單車");
@@ -57,29 +57,8 @@ public class Initialize_Listener implements ServletContextListener{
 		sportTypeMap.put("SP000008", "其他");
 		context.setAttribute("sportTypeMap", sportTypeMap);
 		
-		Map<String,String> sportTypeColor=null;				
-		sportTypeMap=new LinkedHashMap<>();
-		sportTypeMap.put("SP000001", "#f70655");
-		sportTypeMap.put("SP000002", "#1a4876");
-		sportTypeMap.put("SP000003", "#16a085");
-		sportTypeMap.put("SP000004", "#009ac0");
-		sportTypeMap.put("SP000005", "#8A2BE2");
-		sportTypeMap.put("SP000006", "#F1C40F");
-		sportTypeMap.put("SP000007", "#9B59B6");
-		sportTypeMap.put("SP000008", "#AAB7B8");
-		context.setAttribute("sportTypeColor", sportTypeColor);
-=======
-			sportTypeMap=new LinkedHashMap<>();
-			sportTypeMap.put("SP000001", "田徑");
-			sportTypeMap.put("SP000002", "單車");
-			sportTypeMap.put("SP000003", "球類");
-			sportTypeMap.put("SP000004", "重訓");
-			sportTypeMap.put("SP000005", "有氧");
-			sportTypeMap.put("SP000006", "武術");
-			sportTypeMap.put("SP000007", "水上");
-			sportTypeMap.put("SP000008", "其他");
-			context.setAttribute("sportTypeMap", sportTypeMap);
->>>>>>> 3e61623f3a650f11d7d8ae17efa918aeef15c120
+		
+			
 
 		
 		Map<String,String> eveListStatusMap=null;
