@@ -141,7 +141,7 @@ public class PostServlet extends HttpServlet {
 				postVO.setPost_title(post_title);
 				postVO.setPost_privacy(post_privacy);
 								
-				postservice.addPost(post_id, mem_id, post_con, post_time, post_view, sptype_id,post_title,post_privacy);
+				postservice.addPost(mem_id, post_con, post_time, post_view, sptype_id,post_title,post_privacy);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("postVO", postVO);
 				

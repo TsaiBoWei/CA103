@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eve.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.plan.model.*;
 
 @WebServlet("/PlanAndroidServlet")
@@ -42,13 +43,19 @@ public class PlanAndroidServlet extends HttpServlet {
 		while ( (line = br.readLine()) != null)
 			jsonIn.append(line);
 		
+		System.out.println("task" + TAG +"input: " + jsonIn);
 		System.out.println("input: " + jsonIn);
-		
+						
 		List<PlanVO> planList = new ArrayList<PlanVO>();
 		List<EventVO> eventList = new ArrayList<EventVO>();
 		
-		String action = req.getParameter("action");
-		String mem_id = req.getParameter("mem_id");
+		
+		// 將得到的JSON input從 string 轉為JAVA 類別的JSON OBJECT
+		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
+		
+		String action = jsonObject.get("action").getAsString();
+		String mem_id = jsonObject.get("mem_id").getAsString();
+
 		
 		if ( "get_plan_by_mem_id".equals(action) ) {
 			PlanDAO plandao = new PlanDAO();

@@ -10,7 +10,6 @@ public class PostService {
 	public PostService() {
 		dao = new PostDAO();
 	}
-	
    public PostVO addPost(String mem_id,String post_con,Timestamp post_time,
 		Integer post_view,String sptype_id,String post_title,String post_privacy) {
 		PostVO postVO = new PostVO();
