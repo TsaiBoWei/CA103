@@ -25,7 +25,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
 <!-- PAGE settings -->
-<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/images/weight-lifting.png">
+<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/title-icon.png">
 <title>WORK it OUT</title>
 <meta name="description"
 	content="Free Bootstrap 4 Pingendo Neon template for unique events.">
@@ -38,7 +38,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/PersonalPageBase.css">
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
 <!-- Script: Make my navbar transparent when the document is scrolled to top -->
 <script src="js/navbar-ontop.js"></script>
 <!-- Script: Animated entrance -->
@@ -99,13 +99,13 @@
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="personalPage.jsp">User</a></li>
 				</ul>									
-				<a class="btn btn-lg btn-primary" href="/CA103G10908/front_end/mem/login/Mem_Login_Signup.jsp">Register now</a>
+				<a class="btn btn-lg btn-primary" href="<%= request.getContextPath() %>/Mem_Login_Signup.jsp">Register now</a>
 			</div>
 		</div>
 	</nav>
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/images/assets/conference/jogback.jpg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/jogback.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="mt-5 text-right col-12">
@@ -135,7 +135,7 @@
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
-					src="<%=request.getContextPath()%>/front_end/plan/images/assets/styleguide/people_2.jpg">
+					src="<%=request.getContextPath()%>/front_end/plan/img/people_2.jpg">
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-3">
@@ -173,7 +173,7 @@
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%= request.getContextPath()%>/front_end/plan/Create_Plan.jsp">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="<%= request.getContextPath()%>/front_end/plan/My_plan_blank.jsp">My Plan</a> <a
+								href="<%= request.getContextPath()%>/front_end/plan/My_plan.jsp">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interesting Plan</a>
 						</div></li>
@@ -340,26 +340,26 @@
 				<div class="col-md-2 col-6"></div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_1.png">
+						src="<%=request.getContextPath()%>/img/index/logo_1.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_4.png">
+						src="<%=request.getContextPath()%>/img/index/logo_4.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_3.png">
+						src="<%=request.getContextPath()%>/img/index/logo_3.png">
 				</div>
 				<div class="col-md-2 col-6">
 					<img class="center-block img-fluid d-block"
-						src="<%=request.getContextPath()%>/front_end/plan/images/assets/conference/logo_2.png">
+						src="<%=request.getContextPath()%>/img/index/logo_2.png">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Call to action -->
 	<div class="py-5 section section-fade-in-out" id="register"
-		style="background-image: url('<%=request.getContextPath()%>/front_end/plan/images/assets/conference/cover_2.jpg');">
+		style="background-image: url('<%=request.getContextPath()%>/img/index/cover_2.jpg');">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-left">
