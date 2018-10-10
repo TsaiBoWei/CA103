@@ -28,6 +28,8 @@
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/post/css/PersonalPage_list.css">
 <!--   <link rel="stylesheet" href="calender.css"> -->
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
@@ -116,7 +118,7 @@
     </div>
   </div>
   <a class="btn btn-lg btn-primary" id="bli_kontaktad_landing" href="#posteditlight" data-rel="lightcase:myCollection:slideshow">
-    <i class="far fa-calendar-plus"></i>
+    <i class="fab fa-rocketchat"></i>
   </a>
   <!--fixbutton-->
   <!--lightbox script-->
