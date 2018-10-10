@@ -43,7 +43,7 @@
 				id="navbar2SupportedContent">
 				<a
 					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
-					href="#" >WORK it OUT</a>
+					href="<%= request.getContextPath() %>/index.jsp" >WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg" ><a class="nav-link" href="#">WorkOutPlan</a>
 					</li>
@@ -138,10 +138,12 @@
 					</a>
 						<div class="dropdown-menu bg-dark bg-dark-dropmenu-cutom">
 							<a
-								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light dropdown-item-custom"
-								href="#">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
-								href="#">Interetsting Plan</a>
+								href="<%= request.getContextPath() %>/front_end/plan/plan_wrong.jsp">Create Plan</a> <a
+								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light dropdown-item-custom"
+								href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">My Plan</a> <a
+								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
+								href="<%=request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Interetsting Plan</a>
 						</div></li>
 					<!-- Friend-->
 					<li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=friend#personalnav" id="friend" style="cursor: pointer;"> <i
