@@ -34,9 +34,10 @@
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
 	
 <!-- navbar setting -->
- <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
- <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
- <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 
 
 
@@ -84,6 +85,14 @@ th, td {
 	color: #FFFF00;
 	font-size: 18px;
 	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+}
+</style>
+
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
 </style>
 

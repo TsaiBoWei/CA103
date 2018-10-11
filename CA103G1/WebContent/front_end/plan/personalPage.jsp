@@ -42,14 +42,23 @@
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
-<!-- lightcase settings -->
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- navbar setting -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 <style>
 /*頁面設定*/
 body {
 	overflow-x: hidden;
+}
+</style>
+
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
 </style>
 
