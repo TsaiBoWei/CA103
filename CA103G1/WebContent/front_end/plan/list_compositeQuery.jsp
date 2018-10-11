@@ -5,7 +5,7 @@
 <%
 	PlanService planSvc = new PlanService();
 	List<PlanVO> list = (List<PlanVO>)(request.getAttribute("listPlans_ByCompositeQuery"));
-	pageContext.setAttribute("list", list);
+	request.setAttribute("list", list);
 %>
 
 <jsp:useBean id="listPlans_ByCompositeQuery" scope="request" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
@@ -107,7 +107,7 @@ a,.fontstyle  {
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
 	<div class="form-control" style="background-color: #1f1f1f">
-		<h5>我的計畫清單，可供修改、刪除。</h5>
+		<h5>我的計畫清單，可供修改、刪除。5</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -136,15 +136,14 @@ a,.fontstyle  {
 				<th>刪除</th>
 			</tr>
 			<%@ include file="file/page1_ByCompositeQuery.file" %>
-			<c:forEach var="planVO" items="${listPlans_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#000000':''}>
+			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#0066FF':''}>
 					<td>
 						<img class="plan_cover" 
 							 src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
 					</td>
 					<td>${planVO.plan_name}</td>
-					<td>
-					${planVO.plan_id}</td>
+					<td>${planVO.plan_id}</td>
 					<td>${planVO.mem_id}</td>
 					<td>${planVO.plan_vo}</td>
 					<td>${planVO.plan_start_date}</td>
@@ -158,7 +157,9 @@ a,.fontstyle  {
 					<td>${planVO.plan_create_time}</td>
 					<td>
 						<c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if> 
+						<input type="hidden" value="PLANST0">
 						<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if>
+						<input type="hidden" value="PLANST1">
 					</td>
 					<td>
 						<c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if>
@@ -169,9 +170,10 @@ a,.fontstyle  {
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/plan/plan.do"
 							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="getOne_For_Update">
+							<input type="submit" value="修改"> 
+							<input type="hidden" name="plan_id" value="${planVO.plan_id}"> 
+							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> 
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
 					<td>

@@ -205,17 +205,19 @@ public class PlanServlet extends HttpServlet {
 		}
 		
 		if ("update".equals(action)) { // 來自plan_update.jsp的請求
-			
+			System.out.println("有進來Servlet-update");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】 或 【 /emp/listEmps_ByCompositeQuery.jsp】
-		
+			System.out.println(requestURL);
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				
 				String plan_id = new String(req.getParameter("plan_id").trim());
+
 				
 				// plan_cover
 				
@@ -227,15 +229,14 @@ public class PlanServlet extends HttpServlet {
 //				byte[] plan_cover = new byte[is.available()];
 //				is.read(plan_cover);
 //
-				Part part = req.getPart("plan_cover");
+//				Part part = req.getPart("plan_cover");
 				byte[] plan_cover = null;
-				if (part.getSubmittedFileName() != null && part.getContentType() != null) {
-					InputStream in = part.getInputStream();
-					plan_cover = new byte[in.available()];
-					in.read(plan_cover);
-					in.close();
-				}
-
+//				if (part.getSubmittedFileName() != null && part.getContentType() != null) {
+//					InputStream in = part.getInputStream();
+//					plan_cover = new byte[in.available()];
+//					in.read(plan_cover);
+//					in.close();
+//				}
 				//plan_name
 				String plan_name = req.getParameter("plan_name");
 				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
@@ -262,7 +263,6 @@ public class PlanServlet extends HttpServlet {
 					errorMsgs.add("Enter The Start Date");
 //					e.printStackTrace();
 				}
-
 				// plan_end_date
 				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du2 = null;
@@ -298,7 +298,7 @@ public class PlanServlet extends HttpServlet {
 				planVO.setSptype_id(sptype_id);
 				planVO.setPlan_status(plan_status);
 				planVO.setPlan_privacy(plan_privacy);
-
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("planVO", planVO); // 含有輸入格式錯誤的planVO物件,也存入req
@@ -310,21 +310,22 @@ public class PlanServlet extends HttpServlet {
 				 
 				/***************************2.開始修改資料*****************************************/
 				PlanService planSvc = new PlanService();
-				planVO = planSvc.updatePlan(plan_name, plan_vo, plan_cover, plan_start_date, plan_end_date,sptype_id, plan_privacy,plan_status);
+				planVO = planSvc.updatePlan(plan_name, plan_vo, plan_cover, plan_start_date, plan_end_date,sptype_id, plan_privacy,plan_status ,plan_id);
+				System.out.println("看planVO:"+planVO.getPlan_vo());
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
 //				DeptService deptSvc = new DeptService();
 //				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
 //					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(deptno)); // 資料庫取出的list物件,存入request
-				
+				System.out.println(requestURL);
 				if(requestURL.equals("/front_end/plan/list_compositeQuery.jsp")){
 					HttpSession session = req.getSession();
 					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
 					List<PlanVO> list  = planSvc.getAll(map);
 					req.setAttribute("listPlans_ByCompositeQuery",list); //  複合查詢, 資料庫取出的list物件,存入request
 				}
-                
 				String url = requestURL;
+				System.out.println(url);
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(req, res);
 

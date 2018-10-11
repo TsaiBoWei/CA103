@@ -20,6 +20,7 @@
 %>
 
 
+
 <%/*
 	1.更換圖片未做
 
@@ -130,7 +131,7 @@ a,.fontstyle  {
 					</c:forEach>
 				</ul>
 			</c:if>
-			<form method="post" action="plan.do" name="form1">
+			<form method="post" action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
 				<table>
 	
 					<tr>
@@ -142,10 +143,10 @@ a,.fontstyle  {
 						<td>計畫創建人</td>
 						<td>
 							<%= planVO.getMem_id() %>
-							<%= memVO %>
-							${ memVO }...
-							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/>
-							${name}
+<%-- 							<%= memVO %> --%>
+<%-- 							${ memVO }... --%>
+<%-- 							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/> --%>
+<%-- 							${name} --%>
 <%-- 							<%= memVO.getMem_name() %> --%>
 						</td>
 					</tr>
@@ -158,6 +159,7 @@ a,.fontstyle  {
 					<tr>
 						<td>計畫封面</td>
 						<td>
+							<input type="hidden" name="plan_cover">
 							<img class="plan_cover" src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}"><br>
 <!-- 	 						<label class="btn btn-info btn-lg">  -->
 <!-- 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" -->
@@ -206,22 +208,19 @@ a,.fontstyle  {
 						<td>執行狀態</td>
 						<td align="center">
 							<select size="1" name="plan_status">
-								<c:if test="${planVO.plan_status =='PLANST0'}"><option>進行中</option><option>已完成</option></c:if>
-								<c:if test="${planVO.plan_status =='PLANST1'}"><option>已完成</option></c:if>
+								<c:if test="${planVO.plan_status =='PLANST0'}"><option value="PLANST0">進行中</option><option value="PLANST1">已完成</option></c:if>
+								<c:if test="${planVO.plan_status =='PLANST1'}"><option value="PLANST1" readonly>已完成</option></c:if>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>隱私權</td>
 						<td align="center">
-							<select size="1" name="plan_status">
-							
-								<option value="planVO.plan_privacy">公開</option>
-								<option value="planVO.plan_privacy">不公開</option>
-								<option value="planVO.plan_privacy">只對朋友公開</option>
-<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if> --%>
-<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> --%>
-<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if> --%>
+							<select size="1" name="plan_privacy">
+<%-- 								<c:forEach var="planVO" items="" --%>
+								<c:if test="${planVO.plan_privacy =='PLANPR0'}"><option value="PLANPR0">公開</option><option value="PLANPR1">不公開</option><option value="PLANPR2">只對朋友公開</option></c:if>
+								<c:if test="${planVO.plan_privacy =='PLANPR1'}"><option value="PLANPR1">不公開</option><option value="PLANPR0">公開</option><option value="PLANPR2">只對朋友公開</option></c:if>
+								<c:if test="${planVO.plan_privacy =='PLANPR2'}"><option value="PLANPR2">只對朋友公開</option><option value="PLANPR0">公開</option><option value="PLANPR1">不公開</option></c:if>
 							</select>
 						</td>
 					</tr>
@@ -231,10 +230,11 @@ a,.fontstyle  {
 					</tr>
 					<tr>
 						<td colspan="2"  align="center">
-							<label class="btn btn-info btn-lg">
-								<i class="fa fa-upload">　Update</i>
-								<input type="hidden" name="action" value="update"/>
-							</label>
+							<input  class="btn btn-info btn-lg" value="Update" type="submit" >
+							<input type="hidden" name="plan_id" value="${planVO.plan_id }">
+							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>">  <!--只用於:istAllEmp.jsp-->
+							<input type="hidden" name="action" value="update"/>
 						</td>
 					</tr>
 				</table>
