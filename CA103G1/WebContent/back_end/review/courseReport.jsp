@@ -110,14 +110,14 @@
           <thead class="thead-inverse">
           
             <tr>
-              <th style="width:9.3%">活動標題</th>
-              <th style="width:6.4%">主辦人姓名</th>
-              <th style="width:29.8%">活動敘述</th>
-              <th style="width:12.2%">活動時間</th>
-              <th style="width:14.2%">活動地點</th>
-              <th style="width:7.3%">參加人數</th>
-              <th style="width:5.8%">報名費用</th>
-              <th style="width:15%">進行審核</th>
+			  <th style="width:8.3%;">課程檢舉編號</th>
+              <th style="width:7.4%">課程編號</th>
+              <th style="width:10.8%">檢舉人之會員編號</th>
+              <th style="width:12.2%">檢舉項目</th>
+              <th style="width:14.2%">檢舉內容</th>
+              <th style="width:7.3%">檢舉時間</th>
+              <th style="width:8.8%">檢舉處理狀態</th>
+              <th style="width:15%">回覆管理員ID</th>
             </tr>
           </thead>
         
