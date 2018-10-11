@@ -78,7 +78,8 @@ public class MemServlet extends HttpServlet {
 					String location=(String)session.getAttribute("location");
 					
 					String url= req.getContextPath()+"/index.jsp";  //無來源網頁 重導至INDEX.Html
-					if(location!=null&&!location.equals(req.getContextPath()+"/front_end/mem/login/js/animate-in.js")) { 							//確認有無來源網頁 有則導向來源網頁
+					if(location!=null&&!location.equals(req.getContextPath()+"/front_end/mem/login/js/animate-in.js")&&
+							!location.equals(req.getContextPath()+"/js/navbar_ontop.js")) { 							//確認有無來源網頁 有則導向來源網頁
 						url=location;                        
 					}	
 					System.out.println(url);

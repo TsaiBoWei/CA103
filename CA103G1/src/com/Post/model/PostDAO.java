@@ -625,7 +625,6 @@ public class PostDAO implements PostDAO_interface{
 					postVO.setPost_img(sty);
 				}
 				postList.add(postVO);
-				postList.add(postVO);
 			}
 
 			// Handle any SQL errors

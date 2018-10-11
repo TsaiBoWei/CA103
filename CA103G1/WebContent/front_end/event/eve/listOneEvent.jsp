@@ -7,6 +7,8 @@
 
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
+<!-- 20181009 建廷 -->
+<jsp:useBean id="eventsaveSvc" scope="page" class="com.eventsave.model.EventSaveService" />
    
 <!DOCTYPE html>
 <html>
@@ -214,7 +216,25 @@ text-align:center;
                 
 <!--           <a class="btn btn-lg btn-block btn-danger my-3 p-1" href="#">立即報名</a> -->
           <div class="d-flex align-self-center align-items-center justify-content-center">
-            <a href="#" class="btn btn-sm m-1 btn-outline-success">收藏 </a>
+          
+          <!-- 活動收藏的按鈕    20181009完成  建廷 -->
+          <c:if test="${memVO.mem_id!=eveVO.mem_id}">
+				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)==null}">
+			        <form method="post" action="<%=request.getContextPath()%>/eventsave/eventsave.do">
+					    <input type="submit" class="btn btn-sm m-1 btn-outline-success" value="收藏">
+					    <input type="hidden" name="mem_id" value="${memVO.mem_id}">
+					    <input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+						<input type="hidden" name="es_status" value="ESS1">
+						<input type="hidden" name="action" value="insert">
+					</form>
+				</c:if>
+				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)!=null}">
+				        <input type="submit" class="btn-sm  btn-success" value="已收藏">
+				</c:if>
+		</c:if>			
+				
+				
+<!--             <a href="#" class="btn btn-sm m-1 btn-outline-success">收藏 </a> -->
             <a href="#" class="btn btn-outline-primary btn-sm m-1">分享 </a>
             <a href="#" class="btn btn-sm btn-outline-secondary m-1">檢舉 </a>
           </div>
