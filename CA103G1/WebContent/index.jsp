@@ -71,8 +71,8 @@ a,.fontstyle  {
 
 
 <body class="text-center">
-  <!-- Navbar -->
-  
+
+  <!-- Navbar --> 
  <nav   class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <span class="navbar-text"></span>
     <div class="container">

@@ -29,10 +29,6 @@
 
   <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-  <!-- Script: Animated entrance -->
-  <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
   <!-- summernote -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -49,12 +45,29 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/post/css/editpostform.css">
   <!-- fafaicon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+ 
+    <!-- navbar setting -->
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+  <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	 
+ 
+ 
+ 
   <style>
   
 
     body {
       overflow-x: hidden;
     }
+  </style>
+  
+  <!-- navbar setting -->
+  <style type="text/css">
+
+	a,.fontstyle  {
+		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
+	}
   </style>
 </head>
 
