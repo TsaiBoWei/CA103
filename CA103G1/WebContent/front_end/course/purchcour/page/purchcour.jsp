@@ -156,7 +156,7 @@ a,.fontstyle  {
         <div class="col-md-6 text-left pl-4 pb-2 purchasbg ">
           <div class="mb-4 pb-1 pt-1 purchastitle">
             <span class="badge mb-1 badge-courpaycata"  style="background-color:<%=sportTypeColor.get(courlistVO.getSptype_id())%>;opacity:0.8;"><%=sptypeVO.getSport()%></span>
-            <h3 class="text-primary pt-1"><%=courlistVO.getCname()%></h3>
+            <h3 class="text-primary pt-1"><a href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?cour_id=<%=purchCourVO.getCour_id()%>&courpageloc=tabfour&localhref=localhref"><%=courlistVO.getCname()%></a></h3>
           </div>
           <div class="row mb-2 pl-1 ">
             <div class="col-3 col-md-1 courboarimg px-2 ">

@@ -21,7 +21,14 @@
 ///取出值
 CourlistVO courlistVO = (CourlistVO)session.getAttribute("brows_courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
 // session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的
+String brows_cour_id=null;
 
+if(courlistVO==null){
+	brows_cour_id= request.getParameter("cour_id");
+	CourlistService courlistSvc=new CourlistService(); 
+	CourlistVO courlistVO1=courlistSvc.getOneCourlist(brows_cour_id);
+	session.setAttribute("brows_courlistVO", courlistVO1);
+};
 CoachService coachSvc=new CoachService(); 
 CoachVO ifmemcoachVO=null;
 MemVO memVO=null;
@@ -31,7 +38,7 @@ if((MemVO) session.getAttribute("memVO")!=null){
 	ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());//if coach
 	};
 };
-System.out.print("courunit"+courlistVO.getCour_id());
+// System.out.print("courunit"+courlistVO.getCour_id());
 
 %>
 
