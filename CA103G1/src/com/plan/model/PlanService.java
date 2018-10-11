@@ -33,7 +33,7 @@ public class PlanService {
 	}
 
 	public PlanVO updatePlan(String plan_name, String plan_vo, byte[] plan_cover, Timestamp plan_start_date,
-			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_status, String plan_id) {
+			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_status) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setPlan_name(plan_name);
@@ -44,7 +44,6 @@ public class PlanService {
 		planVO.setSptype_id(sptype_id);
 		planVO.setPlan_privacy(plan_privacy);
 		planVO.setPlan_status(plan_status);
-		planVO.setPlan_id(plan_id);
 		dao.update(planVO);
 
 		return planVO;

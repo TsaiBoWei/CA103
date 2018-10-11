@@ -187,10 +187,15 @@ a,.fontstyle  {
 			</div>
 		</div>
 	</div>
+<br>本網頁的路徑:<br><b>
+   <font color=white size=5px>request.getServletPath():→ <%=request.getServletPath()%></font><br>
+   <font color=white size=5px>request.getRequestURI():→ <%=request.getRequestURI()%></font> </b>
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
+
+
 </body>
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
