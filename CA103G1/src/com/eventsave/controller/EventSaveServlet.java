@@ -23,7 +23,6 @@ public class EventSaveServlet extends HttpServlet{
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		System.out.println("1111111111");
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -184,7 +183,6 @@ public class EventSaveServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				//會員編號驗證
 				String mem_id = req.getParameter("mem_id");
@@ -201,7 +199,6 @@ public class EventSaveServlet extends HttpServlet{
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
-				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				//活動編號驗證
 				String eve_id = req.getParameter("eve_id");
 				String eve_idReg ="^E\\d{6}$";
@@ -222,7 +219,6 @@ public class EventSaveServlet extends HttpServlet{
 				eventsaveVO.setMem_id(mem_id);
 				eventsaveVO.setEve_id(eve_id);
 				eventsaveVO.setEs_status(es_status);
-				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("eventsaveVO", eventsaveVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
