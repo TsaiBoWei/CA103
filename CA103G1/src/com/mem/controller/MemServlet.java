@@ -78,7 +78,7 @@ public class MemServlet extends HttpServlet {
 					String location=(String)session.getAttribute("location");
 					
 					String url= req.getContextPath()+"/index.jsp";  //無來源網頁 重導至INDEX.Html
-					if(location!=null&&!location.equals(req.getContextPath()+"/front_end/mem/login/js/animate-in.js")&&
+					if(location!=null&&!location.equals(req.getContextPath()+"/js/animate-in.js")&&
 							!location.equals(req.getContextPath()+"/js/navbar_ontop.js")) { 							//確認有無來源網頁 有則導向來源網頁
 						url=location;                        
 					}	
@@ -125,10 +125,33 @@ public class MemServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				String str = req.getParameter("regPassword");
-				if (str == null || (str.trim()).length() == 0) {
+				String regEmail = req.getParameter("regEmail");
+				String regPassword = req.getParameter("regPassword");
+				String confirmedPsw = req.getParameter("confirmedPsw");
+				String regName = req.getParameter("regName");
+				
+				
+				if (regEmail == null || (regEmail.trim()).length() == 0) {
+					errorMsgs.add("請輸入帳號");
+				}
+				
+				if (regName == null || (regName.trim()).length() == 0) {
+					errorMsgs.add("請輸入暱稱");
+				}
+				
+				if (regPassword == null || (regPassword.trim()).length() == 0) {
 					errorMsgs.add("請輸入密碼");
 				}
+				
+				if (confirmedPsw == null || (confirmedPsw.trim()).length() == 0) {
+					errorMsgs.add("請輸入確認密碼");
+				}
+				
+				if (!(confirmedPsw.equals(regPassword))) {
+					System.out.println("here");
+					errorMsgs.add("密碼不一致");
+				}
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					boolean openModal = true;
@@ -143,7 +166,7 @@ public class MemServlet extends HttpServlet {
 
 				MemVO memVO = new MemVO();
 				String regaccount = req.getParameter("regEmail");
-				String regName = req.getParameter("regName");
+				regName = req.getParameter("regName");
 				String regPsw = req.getParameter("regPassword");
 				MemService memSvc = new MemService();
 				memVO = memSvc.addMem(regaccount, regName, regPsw);
