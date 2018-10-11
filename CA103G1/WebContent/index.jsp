@@ -824,7 +824,7 @@ a,.fontstyle  {
       xhr.onload = function (){
           if( xhr.status == 200){        
         	  
-//         	  console.log(xhr.responseText);
+        	  console.log(xhr.responseText);
          	 showresult(xhr.responseText);
  
           }else{

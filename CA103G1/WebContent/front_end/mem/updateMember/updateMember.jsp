@@ -123,7 +123,7 @@ a,.fontstyle  {
 	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
 	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp行事曆</font></i></a>
 	               
-	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
+	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id).coa_status=='CS02'}">
 	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbsp教練管理</font></i></a>
 	               </c:if>
 	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp會員資料</font></i></a>

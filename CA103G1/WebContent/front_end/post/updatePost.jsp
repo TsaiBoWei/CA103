@@ -128,8 +128,9 @@
             <div class="mt-4">
           	 
               <input type="hidden" name="action" value="update_by_post_id">
-   			 	
-              <button id="sendPost" type="submit" class="btn btn-primary my-2">°e¥X</button>
+              <input type="hidden" name="post_id" value="${postVO.post_id}">
+              <input type="hidden" name="mem_id" value="${postVO.mem_id}">  			 	
+              <button id="sendPost" type="submit" class="btn btn-primary my-2">Send post</button>
                
             </div>
           </div>
