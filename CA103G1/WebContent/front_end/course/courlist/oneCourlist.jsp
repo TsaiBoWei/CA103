@@ -132,6 +132,12 @@ li span {
 /*   font-size: 4.5rem; */
 }
 
+.imgcourlist {
+	-webkit-filter: grayscale(30%); /* Safari */
+	filter: grayscale(30%);
+	opacity:0.9;
+}
+
 </style>
   
   
@@ -193,28 +199,22 @@ li span {
   </nav>
 
   <!-- Cover -->
-  <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath() %>/front_end/course/courlist/assets/conference/024.jpg);">
+  <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>);">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:13rem;"> </div>
+        <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:20rem;"> </div>
       </div>
     </div>
   </div>
   
     <!-- 主頁圖(圖片) -->
-  <div class="py-5 text-white">
+  <div class="pb-3 text-white">
     <div class="container">
       <div class="row">
-        <div class="col-md-7 text-md-left text-center align-self-center my-5">
+        <div class="col-md-7 pr-5 text-md-left text-center align-self-center my-5">
         
-          <h3><%=courlistVO.getCname()%>
-            <br> </h3>
-          <div class="text-md-right">
-            <a href="#" class="btn btn-outline-primary btn-sm m-1">Share
-              <br> </a>
-            <a href="#" class="btn btn-sm btn-outline-secondary m-1">Report
-              <br> </a>
-          </div>
+          <h3><%=courlistVO.getCname()%><br> </h3>
+          <div class="text-md-right pr-2"><p><i class="fas fa-star"></i> &nbsp; 4.5</p></div>
           <div>
 <%--           <p class="coach_text_short"><%=coachVO2.getCoa_text()%></p> --%>
           <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
@@ -232,7 +232,8 @@ li span {
   			  </script>
           </div>
          
-          <a class="btn btn-primary " href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
+          <a class="btn btn-sm btn-outline-primary" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
+          <a href="#" class="btn btn-sm btn-outline-secondary m-1">Report<br></a>
       
       
       <!--  discount -->
@@ -304,11 +305,12 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
         
         </div>
         <div class="col-md-5  align-self-center">
-          <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
+          <img class="img-fluid d-block mx-auto align-baseline imgcourlist" style="border-radius:10px" alt="Card image"
           src="<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>"></div>
       </div>
     </div>
   </div>
+  
     <!-- 分頁頁籤 -->
   <div class="container containerHrT " id="jys">
     <hr> </div>
@@ -411,12 +413,14 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
         <div class="container">
           <div class="row mb-5">
             <div class="col-md-7">
-              <h2 class="text-primary text-md-left"> <i class="fa fa-user"></i> &nbsp; <%=coamemVO.getMem_name()%>  &nbsp;  <br> </h2>
-              <p class="text-md-left"><%=coachVO.getCoa_text()%></p>
+              <h2 class="text-primary text-md-left">  &nbsp; <%=coamemVO.getMem_name()%>  &nbsp;  <br> </h2>
+              <p class="text-md-left pr-5"><%=coachVO.getCoa_text()%></p>
             </div>
-            <div class="col-md-5 align-self-center">
-         	  <img class="img-fluid d-block w-100 img-thumbnail" alt="Card image"
+            <div class="col-md-5">
+            <div class="col-md-10 offset-md-1 ">
+         	  <img class="img-fluid d-block w-100" style="border-radius:10px" alt="Card image"
 		  src="<%=request.getContextPath()%>/coach/Coach_DBGifReader.do?coa_id=<%=courlistVO.getCoa_id()%>"> </div>
+          </div>
           </div>
         </div>
       </div>

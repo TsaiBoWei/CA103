@@ -11,6 +11,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import redis.clients.jedis.Jedis;
+
 public class MailService {
 	
 	// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
@@ -51,6 +53,13 @@ public class MailService {
 		     e.printStackTrace();
 	     }
 	   }
+	 public void jedisVeriCode(String regaccount,String verifyCode) {
+		 	Jedis jedis = new Jedis("localhost", 6379);
+			jedis.auth("123456");
+			jedis.set(regaccount, verifyCode);
+			jedis.expire(regaccount, 100);
+			jedis.close();	 
+	 }
 	
 
 

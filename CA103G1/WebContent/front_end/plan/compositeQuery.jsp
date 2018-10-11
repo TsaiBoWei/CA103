@@ -165,23 +165,23 @@ a,.fontstyle  {
 								</select>
 							</div>
 						</div><br>
+							<input type="submit" value="送出"> 
+							<input type="hidden" name="action" value="listPlans_ByCompositeQuery">
 						
 					<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="inputPassword4">計畫開始時間</label> 
-								<input type="text" name="plan_start_date" id="f_date1" class="form-control" /><br>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="inputPassword4">計畫結束時間</label> 
-								<input type="text" name="plan_end_date" id="f_date2" class="form-control" /><br>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="inputPassword4">計畫創建時間</label> 
-								<input type="text" name="plan_create_time" id="f_date3" class="form-control" /><br>
-							</div>
-						</div>
-						<input type="submit" value="送出"> 
-						<input type="hidden" name="action" value="listPlans_ByCompositeQuery">
+<!-- 							<div class="form-group col-md-4"> -->
+<!-- 								<label for="inputPassword4">計畫開始時間</label>  -->
+<!-- 								<input type="text" name="plan_start_date" id="f_date1" class="form-control" /><br> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group col-md-4"> -->
+<!-- 								<label for="inputPassword4">計畫結束時間</label>  -->
+<!-- 								<input type="text" name="plan_end_date" id="f_date2" class="form-control" /><br> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group col-md-4"> -->
+<!-- 								<label for="inputPassword4">計畫創建時間</label>  -->
+<!-- 								<input type="text" name="plan_create_time" id="f_date3" class="form-control" /><br> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</form>
 				</div>
 			</div>
