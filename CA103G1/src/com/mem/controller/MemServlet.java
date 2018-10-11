@@ -232,9 +232,10 @@ public class MemServlet extends HttpServlet {
 				}
 				jedis.close();
 
-				String url = "/front_end/mem/login/TestView.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				String url = req.getContextPath()+"/index.jsp";
+				res.sendRedirect(url);
+				return;
+
 
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
@@ -322,9 +323,9 @@ public class MemServlet extends HttpServlet {
 				session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 				session.setAttribute("memVO", updatedMem);
 //				memSvc.getMemberPhoto(updatedMem.getMem_id());
-				String url = "/front_end/mem/login/TestView.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
-				successView.forward(req, res);
+				String url= req.getContextPath()+"/index.jsp"; 
+				res.sendRedirect(url);
+				return;
 
 			} catch (NullPointerException npe) {
 				errorMsgs.add("錯誤訊息: " + npe.getMessage());
