@@ -78,20 +78,19 @@
   <!-- section -->
 
   <div class="py-5 section" >
-    <div class="container" style="padding-top: 180px;">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="text-light mb-4">請輸入驗證碼</h1>
-          <c:if test="${not empty errorMsgs}">
-				<font style="color:red">請修正以下錯誤:</font>
-					<ul >
-						<c:forEach var="message" items="${errorMsgs}">
-						<li style="color:red">${message}</li>
-						</c:forEach>
-					</ul>
-		   </c:if> 
-        </div>
-      </div>
+    <div class="container" style="padding-top: 240px;">
+					<div class="row">
+						<div class="from-group mx-auto">
+							<c:if test="${not empty errorMsgs}">
+
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</div>
+					</div>
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
