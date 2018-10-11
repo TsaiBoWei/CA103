@@ -9,14 +9,15 @@
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 	
-	MemVO memVO = (MemVO) request.getAttribute("memVO");
+//	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	MemVO memVO = new MemVO();
+	memVO.setMem_id("M000002");
 	pageContext.setAttribute("memVO",memVO); 
 	
 	PlanService planSvc = new PlanService();
 	List<PlanVO> list = planSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-
 
 
 <!DOCTYPE html>
@@ -93,7 +94,7 @@ h5, label {
 	<!-- =========================================以下為原personlhead.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlhead.jsp" />
 	<!-- =========================================以上為原personlhead.jsp的內容========================================== -->
-	<% session.setAttribute("mem_id" , "M000002"); %>
+
 
 	<div class="container" >
 		<div class="row">
@@ -118,7 +119,8 @@ h5, label {
 						<td>計畫創建人</td>
 						<td>
 							<%= planVO.getMem_id() %>
-<%-- 							<%= memVO.getMem_email() %> --%>
+							<%= memVO %>
+							${ memVO }...
 							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/>
 							${name}
 <%-- 							<%= memVO.getMem_name() %> --%>
@@ -179,8 +181,8 @@ h5, label {
 						<td>執行狀態</td>
 						<td>
 							<select size="1" name="plan_status">
-								<c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if>
-								<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if>
+								<c:if test="${planVO.plan_status =='PLANST0'}"><option>進行中</option><option>已完成</option></c:if>
+								<c:if test="${planVO.plan_status =='PLANST1'}"><option>已完成</option></c:if>
 							</select>
 						</td>
 					</tr>
@@ -188,9 +190,10 @@ h5, label {
 						<td>隱私權</td>
 						<td>
 							<select size="1" name="plan_status">
-								<option value="planVO.plan_privacy">公開
-								<option value="planVO.plan_privacy">不公開
-								<option value="planVO.plan_privacy">只對朋友公開
+							
+								<option value="planVO.plan_privacy">公開</option>
+								<option value="planVO.plan_privacy">不公開</option>
+								<option value="planVO.plan_privacy">只對朋友公開</option>
 <%-- 								<c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if> --%>
 <%-- 								<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> --%>
 <%-- 								<c:if test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if> --%>
