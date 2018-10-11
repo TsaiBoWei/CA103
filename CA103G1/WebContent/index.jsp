@@ -41,6 +41,7 @@
   <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
   <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath()%>/js/index_content.js"></script>
 
 
 
