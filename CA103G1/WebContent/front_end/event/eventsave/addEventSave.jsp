@@ -56,7 +56,7 @@ th, td {
 				<h3>活動收藏新增 - addFriendList.jsp</h3>
 			</td>
 			<td>
-				<h4><a href="<%=request.getContextPath() %>/front_end/event/eventsave/selec_eventsave_page.jsp">
+				<h4><a href="<%=request.getContextPath() %>/front_end/event/eventsave/select_eventsave_page.jsp">
 				<img src="<%=request.getContextPath() %>/front_end/event/eventsave/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>	
 			</td>
 		</tr>

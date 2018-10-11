@@ -56,7 +56,7 @@ th, td {
 				<h3>活動收藏修改 - update_eventsave_input.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/front_end/friendlist/selec_eventsave_page.jsp">
+						href="<%=request.getContextPath()%>/front_end/friendlist/select_eventsave_page.jsp">
 						<img
 						src="<%=request.getContextPath()%>/front_end/friendlist/images/back1.gif"
 						width="100" height="32" border="0">回首頁
