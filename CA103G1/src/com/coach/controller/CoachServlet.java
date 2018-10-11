@@ -261,14 +261,14 @@ System.out.println("轉交");
 
 	            String coa_text = req.getParameter("coa_text");
 				
-				String coa_status = req.getParameter("coa_status").trim();
+//				String coa_status = req.getParameter("coa_status").trim();
 
 
 
 				CoachVO coachVO = new CoachVO();
 				coachVO.setMem_id(mem_id);
 				coachVO.setCoa_text(coa_text);
-				coachVO.setCoa_status(coa_status);
+				coachVO.setCoa_status("CS01");
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -281,10 +281,10 @@ System.out.println("轉交");
 				
 				/***************************2.開始新增資料***************************************/
 				CoachService coachSvc = new CoachService();
-				coachVO = coachSvc.addCoach(mem_id, coa_text, coa_status);
+				coachVO = coachSvc.addCoach(mem_id, coa_text, "CS01");
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/front_end/course/coach/addCoachText.jsp";
+				String url = "/front_end/mem/updateMember/updateMember.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllCourlist.jsp
 				successView.forward(req, res);				
 				

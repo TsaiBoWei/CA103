@@ -71,7 +71,8 @@ public class index extends HttpServlet {
 					String sptype_id=eveVO.getSptype_id();
 	 	        	
 	 	        	jobj.put("eve_id", eveVO.getEve_id());
-					jobj.put("title", eveVO.getEve_title());				
+					jobj.put("title", eveVO.getEve_title());	
+					System.out.println(eveVO.getEve_title());
 					jobj.put("mem_name", mem_name);
 					jobj.put("view", eveVO.getEve_view());
 					jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
