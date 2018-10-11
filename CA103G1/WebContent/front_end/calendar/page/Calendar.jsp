@@ -163,11 +163,11 @@
 
 
       <div id="eve_id" style="display:none"></div>
-      <div class="row m-1">
+      <div class="row">
         <div class="" >活動標題:</div>
         <div id="eve_title"></div>
       </div>
-      <div class="row m-1">
+      <div class="row">
         <div>活動內容:</div>
         <div id="eve_content"></div>
         
