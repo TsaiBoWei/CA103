@@ -2,6 +2,8 @@ package com.eventsave.model;
 
 import java.util.List;
 
+import com.eventlist.model.EventListVO;
+
 
 public class EventSaveService {
 
@@ -39,6 +41,11 @@ public class EventSaveService {
 	public EventSaveVO getOneEventSave(String mem_id, String eve_id) {
 		return dao.findByPrimaryKey(mem_id, eve_id);
 	}
+	
+	public List<EventSaveVO> getEventSavesByMem(String mem_id)  {
+		return dao.findByMemId(mem_id);
+	}
+    
 	
 	public List<EventSaveVO> getAll(){
 		return dao.getAll();

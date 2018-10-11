@@ -23,11 +23,12 @@ public class EventSaveServlet extends HttpServlet{
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		System.out.println("1111111111");
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		if ("getOne_For_Display".equals(action)) { // 來自selec_eventsave_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { // 來自select_eventsave_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -48,7 +49,7 @@ public class EventSaveServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
+							.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -64,7 +65,7 @@ public class EventSaveServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
+							.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -78,7 +79,7 @@ public class EventSaveServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
+							.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -93,7 +94,7 @@ public class EventSaveServlet extends HttpServlet{
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
+						.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -104,7 +105,6 @@ public class EventSaveServlet extends HttpServlet{
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			try {		
 				/***************************1.接收請求參數****************************************/
 				String mem_id = new String(req.getParameter("mem_id"));
@@ -128,7 +128,7 @@ public class EventSaveServlet extends HttpServlet{
 			}
 		}
 
-		//第三步驟 修改
+		//修改
 		if ("update".equals(action)) { // 來自update_eventsave_input.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -176,7 +176,7 @@ public class EventSaveServlet extends HttpServlet{
 			}
 		}
 
-		//第四步驟 新增
+		//新增
 		if ("insert".equals(action)) { // 來自addFriendList.jsp的請求  
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -184,6 +184,7 @@ public class EventSaveServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
+				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				//會員編號驗證
 				String mem_id = req.getParameter("mem_id");
@@ -196,11 +197,11 @@ public class EventSaveServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
+							.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
-
+				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				//活動編號驗證
 				String eve_id = req.getParameter("eve_id");
 				String eve_idReg ="^E\\d{6}$";
@@ -209,35 +210,23 @@ public class EventSaveServlet extends HttpServlet{
 				}else if(!eve_id.trim().matches(eve_idReg)) {
 					errorMsgs.add("格式輸入錯誤，活動編號只能是英文 E 開頭加六位 0-9 數字");
 				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
 
 				//活動收藏狀態驗證
 				String es_status = req.getParameter("es_status").trim();
 				if (es_status == null || es_status.trim().length() == 0) {
 					errorMsgs.add("活動收藏狀態，請勿空白");
 				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/selec_eventsave_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
+
 
 				EventSaveVO eventsaveVO = new EventSaveVO();
 				eventsaveVO.setMem_id(mem_id);
 				eventsaveVO.setEve_id(eve_id);
 				eventsaveVO.setEs_status(es_status);
-
+				System.out.println("skdjlfldsfjldsjfsdfjlsfjsldfhdshfi");
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("eventsaveVO", eventsaveVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front_end/event/eventsave/addEventSave.jsp");
+							.getRequestDispatcher("/front_end/event/eventsave/select_eventsave_page.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -245,9 +234,13 @@ public class EventSaveServlet extends HttpServlet{
 				EventSaveService eventSaveSvc = new EventSaveService();
 				eventsaveVO = eventSaveSvc.addEventSave(mem_id, eve_id, es_status);			
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url ="/front_end/event/eventsave/listAllEventSave.jsp";
+				
+				String url ="/front_end/event/eventsave/eveSave.jsp";
+				System.out.println(url);
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				
 				successView.forward(req, res);	
+				
 				/***************************其他可能的錯誤處理***********************************/
 
 			} catch(Exception e){
@@ -258,8 +251,8 @@ public class EventSaveServlet extends HttpServlet{
 			}
 		}
 
-		//第五步驟刪除
-		if ("delete".equals(action)) { // 來自listAllFriendList.jsp
+		//刪除
+		if ("delete".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -277,7 +270,7 @@ public class EventSaveServlet extends HttpServlet{
 
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 
-				String url ="/front_end/event/eventsave/listAllEventSave.jsp";
+				String url ="/front_end/event/eventsave/eveSave.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
