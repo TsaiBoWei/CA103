@@ -171,8 +171,8 @@ h5{
 		<%@ include file="file/page2.file"%>
 	</div>
 
-<!-- =========================================以下為原personlfoorter.jsp的內容========================================== -->
-	<jsp:include page="/front_end/course/purchcour/page/personlfoorter.jsp" />
+<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
+	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
 </body>

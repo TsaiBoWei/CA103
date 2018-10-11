@@ -111,13 +111,13 @@ th, td {
 				<div class="col-12 col-md-6 mx-auto">
 
 					<form method="post" class="select" action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
-						<font>萬用複合查詢31</font><br>            
-						<label for="inputPassword4">輸入關鍵字(可查詢計畫名稱或內容):</label>
+						<font>萬用複合查詢40</font><br>            
+						<label for="inputPassword4">輸入關鍵字(只可查計畫名稱，計畫內容未加入):</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text">Search</span>
 								</div>
-								<input type="text" name="" id="" class="form-control" placeholder="Key Word"  style="font-size: 17px">
+								<input type="text" name="plan_name" id="" class="form-control" placeholder="Key Word"  style="font-size: 17px">
 								<div class="input-group-append">
 									<button class="btn btn-info">
 										<i class="fa fa-search"></i>
@@ -129,6 +129,7 @@ th, td {
 							<div class="form-group col-md-4">
 								<label for="inputPassword4">運動種類</label> 
 								<select	class="form-control" id="inputPassword4" name="sptype_id" style="font-size: 17px">
+									<option value="">請選擇
 									<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 										<option value="${sptypeVO.sptype_id}">${sptypeVO.sport}
 									</c:forEach>
@@ -137,7 +138,8 @@ th, td {
 							
 							<div class="form-group col-md-4">
 								<label for="inputPassword4">隱私權</label> 
-								<select	class="form-control" id="inputPassword4" style="font-size: 17px">
+								<select	class="form-control" name="plan_privacy" id="inputPassword4" style="font-size: 17px">
+									<option value="">請選擇
 									<option value="PLANPR0">公開
 									<option value="PLANPR1">不公開
 									<option value="PLANPR2">只對朋友公開
@@ -145,8 +147,9 @@ th, td {
 							</div>
 							
 							<div class="form-group col-md-4">
-								<label for="inputPassword4">執行狀態</label> 
-								<select	class="form-control" id="inputPassword4" style="font-size: 17px">
+								<label for="inputPassword4">執行狀態</label>
+								<select	class="form-control" name="plan_status" id="inputPassword4" style="font-size: 17px">
+									<option value="">請選擇
 									<option value="PLANST0">進行中
 									<option value="PLANST1">已完成
 								</select>

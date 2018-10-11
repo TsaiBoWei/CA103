@@ -80,7 +80,7 @@
 	<% session.setAttribute("mem_id" , "M000002");%>
 	
 	<div class="py-5 text-light opaque-overlay section-fade-in-out"
-		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpeg&quot;);">
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpg&quot;);">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-6 mx-auto">
@@ -105,7 +105,7 @@
 						
 
 						<div class="form-group">
-							<h3>Plan Name:</h3>
+							<h3>Plan Name</h3>
 							<input type="text" name="plan_name"
 								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
 								class="form-control"/>
@@ -113,13 +113,13 @@
 						<br>
 
 				 		<div class="form-group">
-							<label><h3>PlanStartDate:</h3></label> 
+							<label><h3>PlanStartDate</h3></label> 
 							<input type="text" name="plan_start_date" id="f_date1" class="date"/>
 						</div>
 
 
 					 	<div class="form-group">
-							<label><h3>Plan EndDate:</h3></label> 
+							<label><h3>Plan EndDate</h3></label> 
 							<input type="text" name="plan_end_date" id="f_date2" class="date"/>
 						</div>
 
@@ -127,8 +127,8 @@
 						
  						<jsp:useBean id="sptypeSvc"  scope="page" class="com.sptype.model.SptypeService"/>
 						
- 						<div class="form-group"> 
-							<label><h3>Sport Type:　　</h3></label> <select size="1"
+ 						<div class="form-group">  
+							<label><h3>Sport Type　</h3></label> <select size="1"
 								name="sptype_id" style="width: 150px; font-size: 18px;">
 								<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 									<option value="${sptypeVO.sptype_id}" ${(planVO.sptype_id==sptypeVO.sptype_id)? 'selected':''}>${sptypeVO.sport}
@@ -137,8 +137,8 @@
 						</div>
 
 
-						<div class="form-group">
-							<label><h3>Privacy Setting:</h3></label> <select size="1"
+						<div class="form-group">  
+							<label><h3>Privacy　　　</h3></label> <select size="1"
 								name="plan_privacy" style="width: 150px; font-size: 18px;">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
@@ -147,7 +147,7 @@
 						</div>
 
 						<div class="form-group">
-							<label><h3>Plan Cover:　</h3></label> 
+							<label><h3>Plan Cover　</h3></label> 
 							<label class="btn btn-info btn-lg"> 
 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" 
 									 onchange="openFile(event)" style="display: none;" 
@@ -162,25 +162,25 @@
 						</div>
 
 						<div class="form-group">
-							<label><h3>Plan Content:</h3></label><br>
+							<label><h3>Plan Content</h3></label><br>
 							<textarea name="plan_vo" rows="10" class="form-control" style="font-size: 22px"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
 	
 		
 						<div class="from-group">
-							<h5>
-    							瀏覽數：${planVO.plan_view} 
+<!-- 							<h5> -->
+<%--     							瀏覽數：${planVO.plan_view}  --%>
 							<input type="hidden" name="plan_view" value="50">
-							</h5>
+<!-- 							</h5> -->
 						</div>
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-primary">Add</button>
-						 	<button type="submit" class="btn btn-primary"
-						 		formaction="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Reset</button>
-							<button type="submit" class="btn btn-primary" 
-								formaction="<%= request.getContextPath()%>/front_end/plan/HomePage.jsp">cancel</button>
+							<button type="submit" class="btn btn-primary">Create</button>
+<!-- 							<button type="submit" class="btn btn-primary" -->
+<%-- 								formaction="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Reset</button> --%>
+<!-- 							<button type="submit" class="btn btn-primary"  -->
+<%-- 								formaction="<%= request.getContextPath()%>/front_end/plan/HomePage.jsp">cancel</button> --%>
 						</div>
 					</form>
 				</div>

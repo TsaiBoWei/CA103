@@ -14,13 +14,14 @@ public class Plan_CompositeQuery {
 
 		String aCondition = null;
 
-		if (("plan"+"_name").equals(columnName+"_name")) { // 用於varchar
+		if (("plan_name").equals(columnName)) { // 用於varchar
 			aCondition = columnName + " like'%" + value+"%'";
-		}else if (("plan"+"_vo").equals(columnName+"_vo"))
-			aCondition = columnName + " like'%" + value+"%'";
+		}
+//		else if (("plan"+"_vo").equals(columnName+"_vo"))
+//			aCondition = columnName + " like'%" + value+"%'";
 		else if ("sptype_id".equals(columnName) || "plan_privacy".equals(columnName)
 				|| "plan_status".equals(columnName)) // 用於其他
-			aCondition = columnName + " like '%" + value + "%'";
+			aCondition = columnName + " like '" + value + "'";
 		else if ("plan_start_date".equals(columnName) || "paln_end_date".equals(columnName))// 用於Oracle的date
 			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd hh:mi:ss')='" + value + "'";
 		else if ("paln_create_time".equals(columnName))
