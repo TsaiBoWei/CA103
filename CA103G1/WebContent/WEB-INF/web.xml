@@ -39,6 +39,8 @@
 
 	<filter-mapping>
 		<filter-name>Filter1</filter-name>
+		<url-pattern>/front_end/course/purchcour/page/purchcourform.jsp</url-pattern>
+		<url-pattern>/front_end/event/eve/addEve.jsp</url-pattern>
 		<url-pattern>/front_end/mem/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

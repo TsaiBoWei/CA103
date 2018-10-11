@@ -71,11 +71,8 @@
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-1">
-			<h1 class="text-left text-primary">Jennifer Lawrence</h1>
-			<p class="text-left">Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.</p>
+			<h1 class="text-left text-primary">${memVO.mem_name}</h1>
+			<p class="text-left">${memVO.mem_intro}</p>
 		</div>
 		<!-- Personal Pic -->
 	
