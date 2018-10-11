@@ -90,10 +90,10 @@ h5, label {
 
 </head>
 <body>
-	<% session.setAttribute("mem_id" , "M000002"); %>
 	<!-- =========================================以下為原personlhead.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlhead.jsp" />
 	<!-- =========================================以上為原personlhead.jsp的內容========================================== -->
+	<% session.setAttribute("mem_id" , "M000002"); %>
 
 	<div class="container" >
 		<div class="row">
@@ -113,18 +113,21 @@ h5, label {
 						<td>計畫編號<font color=red><b>*</b></font></td>
 						<td><%=planVO.getPlan_id()%></td>
 					</tr>
-<%-- 					<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/> --%>
+					<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/>
 					<tr>
 						<td>計畫創建人</td>
 						<td>
-							<c:if test="${planVO.mem_id == memVO.mem_id}"/>
-							<%= memVO.getMem_name() %>
+							<%= planVO.getMem_id() %>
+<%-- 							<%= memVO.getMem_email() %> --%>
+							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/>
+							${name}
+<%-- 							<%= memVO.getMem_name() %> --%>
 						</td>
 					</tr>
 					<tr>
 						<td>計畫創建日</td>
 						<td>
-							<%=planVO.getPlan_create_time()%>
+							<%= planVO.getPlan_create_time()%>
 						</td>
 					</tr>
 					<tr>
@@ -172,26 +175,28 @@ h5, label {
 						<td>瀏覽數</td>
 						<td><%=planVO.getPlan_view()%></td>
 					</tr>
-					
-					
-					
-	<!-- 					<th>瀏覽數</th> -->
-	<!-- 					<th>創建時間</th> -->
-	<!-- 					<th>執行狀態</th> -->
-	<!-- 					<th>隱私權</th> -->
-	
-	<%-- 				<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" --%>
-	<%-- 					end="<%=pageIndex+rowsPerPage-1%>"> --%>
-	<!-- 					<tr> -->
-	<%-- 						<td>${planVO.plan_view}</td> --%>
-	<%-- 						<td>${planVO.plan_create_time}</td> --%>
-	<%-- 						<td><c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if> --%>
-	<%-- 							<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if></td> --%>
-	<%-- 						<td><c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if> --%>
-	<%-- 							<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> <c:if --%>
-	<%-- 								test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if></td> --%>
-	<!-- 					</tr> -->
-	<%-- 				</c:forEach> --%>
+					<tr>
+						<td>執行狀態</td>
+						<td>
+							<select size="1" name="plan_status">
+								<c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if>
+								<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>隱私權</td>
+						<td>
+							<select size="1" name="plan_status">
+								<option value="planVO.plan_privacy">公開
+								<option value="planVO.plan_privacy">不公開
+								<option value="planVO.plan_privacy">只對朋友公開
+<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if> --%>
+<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> --%>
+<%-- 								<c:if test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if> --%>
+							</select>
+						</td>
+					</tr>
 				</table>
 			</form>
 		</div>
