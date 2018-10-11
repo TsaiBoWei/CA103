@@ -305,7 +305,7 @@ a,.fontstyle  {
 </div>
   <script>
     window.onload=function(){
-    	location.hash="#eveloc";
+    	location.hash="#event";
     	console.log(location.href);
     };
            
