@@ -187,7 +187,7 @@ li span {
           <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
               <script>
              	 $(document).ready(function() {
-            	    var len = 50; // 超過50個字以"..."取代
+            	    var len = 100; // 超過50個字以"..."取代
             	    $(".coach_text_short").each(function(i){
             	        if($(this).text().length>len){
             	            $(this).attr("title",$(this).text());
