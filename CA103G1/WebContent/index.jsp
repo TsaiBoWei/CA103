@@ -36,11 +36,12 @@
   <!-- Script: Make my navbar transparent when the document is scrolled to top -->
   
   <!--self definine 若放在上方cover輪播格式會跑掉 -->
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
-
+ 
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
   <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
   <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+  
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/index_content.js"></script>
 
 
@@ -52,6 +53,14 @@
   overflow: hidden;
 }
 
+</style>
+
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
 </style>
 
 
@@ -90,19 +99,19 @@
 	              <i class="fa fa-caret-down dropbtn"></i>
 	            </a>
 	            <div class="dropdown-content" id="myDropdown">
-	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file">&nbsp&nbsp個人頁面</i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator">&nbsp&nbsp計畫</i></a>
-	              <a href="#"><i class="fa fa-users" aria-hidden="true">&nbsp&nbsp好友</i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true">&nbsp&nbsp課程</i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp&nbsp活動</i></a>
+	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp個人頁面</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp計畫</font></i></a>
+	              <a href="#"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp課程</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp活動</font></i></a>
 	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
-	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true">&nbsp&nbsp行事曆</i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp行事曆</font></i></a>
 	               
 	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
-	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note">&nbsp&nbsp教練管理</i></a>
+	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbsp教練管理</font></i></a>
 	               </c:if>
-	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true">&nbsp&nbsp會員資料</i></a>
-	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout">登出</a>
+	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp會員資料</font></i></a>
+	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout"><font class="fontstyle">登出</font></a>
 	            </div>
 	          </li>
           </c:if>
