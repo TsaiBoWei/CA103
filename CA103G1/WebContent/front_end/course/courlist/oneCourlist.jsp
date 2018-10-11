@@ -291,7 +291,7 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
           <!-- 第二個按鈕 -->
           <li class="nav-item">
             <a class="nav-link" href="" data-target="#tabtwo" data-toggle="tab">
-              <i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
+              <i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
           </li>
           <!-- 第三個按鈕 -->
           <li class="nav-item">
@@ -396,7 +396,7 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <h2 class="text-primary text-md-left"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; 課程公告 &nbsp;
+              <h2 class="text-primary text-md-left"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; 課程公告 &nbsp;
                 <br> </h2>
               <p class="text-md-left"><%=courlistVO.getCour_ann()%></p>
             </div>
