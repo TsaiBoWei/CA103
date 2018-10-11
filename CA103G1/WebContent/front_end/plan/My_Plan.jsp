@@ -11,7 +11,7 @@
 <jsp:useBean id="sptypeSvc" scope="page"
 	class="com.sptype.model.SptypeService" />
 
-
+<%-- All DB Data --%>
 <!DOCTYPE html>
 <html>
 <head>
