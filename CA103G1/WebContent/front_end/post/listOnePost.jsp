@@ -135,6 +135,7 @@
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
 	</div>
 	<!-- Personal Pic -->
+	<c:if test="${memVO!=null}">
 	<div class="row mb-5 personalarea" id="personalnav">
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
@@ -152,6 +153,7 @@
 		<!-- Personal Pic -->
 	
 	</div>
+	</c:if>
 	<!-- NavBar Personal focus §PÂ_¦¡-->
 	
 	<%
