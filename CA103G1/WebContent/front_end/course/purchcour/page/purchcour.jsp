@@ -67,9 +67,9 @@ h1 {
 	                                      <jsp:include page="personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
  <%
- 
- MemVO memVO1= new MemService().getOneMem("M000001");
- session.setAttribute("memVO", memVO1);
+ 	//首頁測試
+//  MemVO memVO1= new MemService().getOneMem("M000001");
+//  session.setAttribute("memVO", memVO1);
 	 request.setCharacterEncoding("utf-8");
 	 MemVO memVO=(MemVO)session.getAttribute("memVO");
 	 String men_id=memVO.getMem_id();

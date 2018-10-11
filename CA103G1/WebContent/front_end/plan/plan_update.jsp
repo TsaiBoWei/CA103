@@ -38,10 +38,10 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/PersonalPageBase.css">
 
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
-<script src="js/animate-in.js"></script>
+<<!-- navbar setting -->
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">

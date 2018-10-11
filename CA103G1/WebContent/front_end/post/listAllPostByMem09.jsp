@@ -9,13 +9,11 @@
 <%@ page import="com.mem.model.*"%>
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
-<!-- 首頁測試 -->
-<%
+
+<%	
+// 	 首頁測試
 	MemVO memVO=(MemVO)session.getAttribute("memVO");
 	String mem_id = memVO.getMem_id();
-
-%>
-<%
 	
 	PostService postSvc = new PostService();
 	List<PostVO> list = postSvc.getByMemIDToDisplay(mem_id);

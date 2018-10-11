@@ -1027,19 +1027,19 @@ body {
 					<div class="col-md-2 col-6"></div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_1.png">
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_1.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_4.png">
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_4.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_3.png">
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_3.png">
 					</div>
 					<div class="col-md-2 col-6">
 						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_2.png">
+							src="<%=request.getContextPath()%>/front_end/assets/conference/logo_2.png">
 					</div>
 				</div>
 			</div>
@@ -1047,17 +1047,15 @@ body {
 		
 	
 		<!-- Call to action -->
-		<div class="py-5 mt-3 section section-fade-in-out" id="register"
-			style="background-image: url('<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/cover_2.jpg');">
+		<div class="py-5 section mt-3 section-fade-in-out" id="register"
+			style="background-image: url('<%=request.getContextPath()%>/front_end/assets/conference/cover_2.jpg');">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-left">
-						<h1 class="mb-3">Something Here</h1>
+						<h1 class="mb-3">Set and Achieve Goals</h1>
 						<p>
-							Pre-register to get a priority access to the event. Fares will be
-							published later on.&nbsp; <br>Get the maximum from the
-							lectures together with the possibility of joining exclusive
-							side-events.
+							By discovering the power of goal setting by committing to reaching an exercise milestone and then working out just how you¡¦ll achieve it, you can enjoy the 
+							benefits of exercise and the confidence that comes along with it.
 						</p>
 					</div>
 				</div>

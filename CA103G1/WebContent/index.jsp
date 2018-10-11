@@ -39,9 +39,9 @@
  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
 
   <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-  <!-- Script: Animated entrance -->
   <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath()%>/js/index_content.js"></script>
 
 
 

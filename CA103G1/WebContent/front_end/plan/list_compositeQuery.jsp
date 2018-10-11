@@ -31,10 +31,10 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
+<!-- navbar setting -->
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
 
