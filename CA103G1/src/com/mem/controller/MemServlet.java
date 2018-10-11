@@ -115,6 +115,21 @@ public class MemServlet extends HttpServlet {
 			res.sendRedirect(url);
 			return;
 		}
+		
+		if("resend".equals(action)) {
+			String verifyCode = returnAuthCode();
+			String regaccount = req.getParameter("regAccount");
+			String regName = req.getParameter("regName");
+			MailService verifyEMail = new MailService();
+			verifyEMail.jedisVeriCode(regaccount, verifyCode);
+			System.out.println("Auth code is: " + verifyCode);
+			String subject = "[Work It Out] 會員認證信";
+			String messageText = "Hello! " + regName + " 請輸入此驗證碼:" + verifyCode + "\n";
+			verifyEMail.sendMail(regaccount, subject, messageText);
+			System.out.println("email has been sent");
+			RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/Verify.jsp");
+			failureView.forward(req, res);
+		}
 
 		if ("mem_signUp".equals(action)) {
 
@@ -176,21 +191,16 @@ public class MemServlet extends HttpServlet {
 				memVO.setMem_email(regaccount);
 				memVO.setMem_status("MS0");
 
-				MailService verifyEMail = new MailService();
-				Jedis jedis = new Jedis("localhost", 6379);
-				jedis.auth("123456");
-
+				//產生驗證碼並存入redis
 				String verifyCode = returnAuthCode();
-				jedis.set(regaccount, verifyCode);
-				jedis.expire(regaccount, 100);
-
+				MailService verifyEMail = new MailService();
+				verifyEMail.jedisVeriCode(regaccount, verifyCode);
 				System.out.println("Auth code is: " + verifyCode);
 				String subject = "[Work It Out] 會員認證信";
 				String messageText = "Hello! " + regName + " 請輸入此驗證碼:" + verifyCode + "\n";
 				verifyEMail.sendMail(regaccount, subject, messageText);
 				System.out.println("email has been sent");
 
-				jedis.close();
 
 				MemVO loggedMember = memSvc.loginMem(regaccount, regPsw);
 				HttpSession session = req.getSession();

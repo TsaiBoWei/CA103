@@ -112,9 +112,16 @@
         </div>
         <div class="col-md-4"></div>
       </div>
+            <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+			<a href="<%=request.getContextPath() %>/mem/mem.do?action=resend&regAccount=${memVO.mem_account }&regName=${memVO.mem_name }">­«±HÅçÃÒ½X</a>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
     </div>
   </div>
-</div>
+
 
   <!-- Sponsor logos -->
   <div class="py-5 section">
