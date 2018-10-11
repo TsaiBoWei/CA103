@@ -524,12 +524,19 @@
 
                              $('#summernote').summernote({
 
-                             	height: 400,         
-                             	 popover: {
-                             	   image: [],
-                             	   link: [],
-                             	   air: []
-                             	 }
+                             	height: 400, 
+                             	toolbar: [
+                             	    ["style", ["style"]],
+                             	    ["font", ["bold", "italic", "underline", "clear"]],
+                             	    ["fontsize", ["fontsize"]],
+                             	    ["para", ["ul", "ol", "paragraph"]],
+                             	    ["insert", ["link", "picture", "hr"]]
+                             	  ],
+//                              	 popover: {
+//                              	   image: [],
+//                              	   link: [],
+//                              	   air: []
+//                              	 }
                              	       });      
 
                              	  //summernote賦值(將文字顯示在summernote上)    
