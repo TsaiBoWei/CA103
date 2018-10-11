@@ -11,7 +11,7 @@
 
 <%	//取出會員的SESSION
 	MemVO memVO = (MemVO) session.getAttribute("memVO"); 
-
+	
 	List<EventSaveVO> list=	eventsaveSvc.getEventSavesByMem(memVO.getMem_id());
 	pageContext.setAttribute("list",list);
 %>
