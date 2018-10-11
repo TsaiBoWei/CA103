@@ -217,8 +217,8 @@ public class MemServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				String str = req.getParameter("verifyCode");
-				if (str == null || (str.trim()).length() == 0) {
+				String verifyCode = req.getParameter("verifyCode");
+				if (verifyCode == null || (verifyCode.trim()).length() == 0) {
 					errorMsgs.add("請輸入驗證碼");
 				}
 				// Send the use back to the form, if there were errors
@@ -232,26 +232,32 @@ public class MemServlet extends HttpServlet {
 				 * 2.與redis資料庫比對驗證碼是否正確
 				 *****************************************/
 
-				MemVO memVO = new MemVO();
-
-				String verifyCode = req.getParameter("verifyCode");
 
 				// 開啟redis取得驗證碼
 				Jedis jedis = new Jedis("localhost", 6379);
 				jedis.auth("123456");
 				HttpSession session = req.getSession();
+				MemVO memVO = new MemVO();
 				memVO = (MemVO) session.getAttribute("memVO");
 				String tempAuth = jedis.get(memVO.getMem_account());
 
 				if (tempAuth == null) {
-					System.out.println("連結信已逾時，請重新申請");
+					System.out.println("驗證碼已逾時，請重新申請");
+					errorMsgs.add("驗證碼已逾時，請重新申請");
 				} else if (verifyCode.equals(tempAuth)) {
 					memVO.setMem_status("MS1");
 					MemService memSev = new MemService();
 					memSev.updateStatus(memVO.getMem_account(), memVO.getMem_status());
 					System.out.println("驗證成功!");
 				} else {
-					System.out.println("驗證有誤，請重新申請");
+					System.out.println("驗證有誤，請確認驗證碼或重新申請");
+					errorMsgs.add("驗證有誤，請確認驗證碼或重新申請");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/Verify.jsp");
+					failureView.forward(req, res);
+					jedis.close();
+					return;// 程式中斷
 				}
 				jedis.close();
 

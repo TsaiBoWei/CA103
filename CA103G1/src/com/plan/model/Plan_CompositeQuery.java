@@ -23,7 +23,7 @@ public class Plan_CompositeQuery {
 				|| "plan_status".equals(columnName)) // 用於其他
 			aCondition = columnName + " like '" + value + "'";
 		else if ("plan_start_date".equals(columnName) || "paln_end_date".equals(columnName))// 用於Oracle的date
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd hh:mi:ss')='" + value + "'";
+			aCondition = "to_char(" + columnName + ",'%yyyy-mm-dd hh:mi:ss%')='" + value + "'";
 		else if ("paln_create_time".equals(columnName))
 			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
 
