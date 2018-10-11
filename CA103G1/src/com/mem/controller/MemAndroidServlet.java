@@ -1,8 +1,7 @@
 package com.mem.controller;
 
-import com.mem.model.MemDAO;
-import com.mem.model.MemJDBCDAO;
-import com.mem.model.MemVO;
+
+import com.mem.model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class MemAndroidServlet extends HttpServlet {
 			jsonIn.append(line);
 		
 		System.out.println("input:" + jsonIn);
-		MemJDBCDAO memDAO = new MemJDBCDAO();
+		MemDAO memDAO = new MemDAO();
 		// Gson object to json object
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		// 取得請求
@@ -54,6 +53,14 @@ public class MemAndroidServlet extends HttpServlet {
 			String password = jsonObject.get("password").getAsString();
 			MemVO memVO = memDAO.findByAccountAndPassword(account, password);
 			writeText(res, memDAO == null? "" : gson.toJson(memVO));
+		}
+		
+		if ( "signin".equals(action) ) {
+			String str_memVO = jsonObject.get("mem_vo").getAsString();
+			MemVO memVO = gson.fromJson(str_memVO, MemVO.class);
+			memDAO.insert(memVO);
+			MemVO result = memDAO.findByAccountAndPassword(memVO.getMem_account(), memVO.getMem_password());
+			writeText(res, result == null? "fail" : "success");
 		}
 	}
 	
