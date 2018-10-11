@@ -163,11 +163,11 @@
 
 
       <div id="eve_id" style="display:none"></div>
-      <div class="row m-1">
+      <div class="row">
         <div class="" >活動標題:</div>
         <div id="eve_title"></div>
       </div>
-      <div class="row m-1">
+      <div class="row">
         <div>活動內容:</div>
         <div id="eve_content"></div>
         
@@ -524,12 +524,19 @@
 
                              $('#summernote').summernote({
 
-                             	height: 400,         
-                             	 popover: {
-                             	   image: [],
-                             	   link: [],
-                             	   air: []
-                             	 }
+                             	height: 400, 
+                             	toolbar: [
+                             	    ["style", ["style"]],
+                             	    ["font", ["bold", "italic", "underline", "clear"]],
+                             	    ["fontsize", ["fontsize"]],
+                             	    ["para", ["ul", "ol", "paragraph"]],
+                             	    ["insert", ["link", "picture", "hr"]]
+                             	  ],
+//                              	 popover: {
+//                              	   image: [],
+//                              	   link: [],
+//                              	   air: []
+//                              	 }
                              	       });      
 
                              	  //summernote賦值(將文字顯示在summernote上)    

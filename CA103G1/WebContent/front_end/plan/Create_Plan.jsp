@@ -2,10 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.plan.model.*"%>
+<%@ page import="com.mem.model.*" %>
 
 <%
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
+
+	MemVO memVO = (MemVO) request.getAttribute("memVO");
+	session.setAttribute("memVO", memVO);
+	
 %>
 
 <%/*1.下拉式選單做<請選擇>選項，並作錯誤驗證及導向。 
@@ -86,7 +91,6 @@ a,.fontstyle  {
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
-	<% session.setAttribute("mem_id" , "M000002");%>
 	
 	<div class="py-5 text-light opaque-overlay section-fade-in-out"
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpg&quot;);">

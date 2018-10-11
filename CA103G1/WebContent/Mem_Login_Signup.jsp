@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Map" %>
 <!DOCTYPE html>
 <html>
 
@@ -171,7 +172,7 @@ a,.fontstyle  {
 							<div class="input-group-prepend">
 								<span class="input-group-text">«H½c*</span>
 							</div>
-							<input type="email" name="regEmail" class="form-control"
+							<input value="${param.regEmail }" type="email" name="regEmail" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
@@ -180,7 +181,7 @@ a,.fontstyle  {
 							<div class="input-group-prepend">
 								<span class="input-group-text">¼ÊºÙ </span>
 							</div>
-							<input type="text" name="regName" class="form-control"
+							<input value="${param.regName }" type="text" name="regName" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
