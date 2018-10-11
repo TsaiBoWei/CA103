@@ -78,7 +78,8 @@ public class MemServlet extends HttpServlet {
 					String location=(String)session.getAttribute("location");
 					
 					String url= req.getContextPath()+"/index.jsp";  //無來源網頁 重導至INDEX.Html
-					if(location!=null&&!location.equals(req.getContextPath()+"/front_end/mem/login/js/animate-in.js")) { 							//確認有無來源網頁 有則導向來源網頁
+					if(location!=null&&!location.equals(req.getContextPath()+"/front_end/mem/login/js/animate-in.js")&&
+							!location.equals(req.getContextPath()+"/js/navbar_ontop.js")) { 							//確認有無來源網頁 有則導向來源網頁
 						url=location;                        
 					}	
 					System.out.println(url);
@@ -231,9 +232,10 @@ public class MemServlet extends HttpServlet {
 				}
 				jedis.close();
 
-				String url = "/front_end/mem/login/TestView.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				String url = req.getContextPath()+"/index.jsp";
+				res.sendRedirect(url);
+				return;
+
 
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
@@ -321,9 +323,9 @@ public class MemServlet extends HttpServlet {
 				session.setAttribute("memSpLikeVOList",memSpLikeVOList);
 				session.setAttribute("memVO", updatedMem);
 //				memSvc.getMemberPhoto(updatedMem.getMem_id());
-				String url = "/front_end/mem/login/TestView.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 TestView.jsp
-				successView.forward(req, res);
+				String url= req.getContextPath()+"/index.jsp"; 
+				res.sendRedirect(url);
+				return;
 
 			} catch (NullPointerException npe) {
 				errorMsgs.add("錯誤訊息: " + npe.getMessage());

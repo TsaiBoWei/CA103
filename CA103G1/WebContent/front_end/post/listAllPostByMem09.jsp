@@ -6,17 +6,32 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.Post.model.*"%>
 <%@ page import="com.plan.model.*"%>
+<%@ page import="com.mem.model.*"%>
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
+<!-- ­º­¶´ú¸Õ -->
 <%
-	PostService postSvc = new PostService();
-	List<PostVO> list = postSvc.getByMemIDToDisplay("M000001");
-	pageContext.setAttribute("list",list);
+	MemVO memVO=(MemVO)session.getAttribute("memVO");
+	String mem_id = memVO.getMem_id();
+
 %>
 <%
+	
+	PostService postSvc = new PostService();
+	List<PostVO> list = postSvc.getByMemIDToDisplay(mem_id);
+	pageContext.setAttribute("list",list);
+
 	PlanService planSvc =new PlanService();
-	List<PlanVO> planlist = planSvc.getPlansByMem("M000001");
+	List<PlanVO> planlist = planSvc.getPlansByMem(mem_id);
 	pageContext.setAttribute("planlist",planlist);
+
+// 	PostService postSvc = new PostService();
+// 	List<PostVO> list = postSvc.getByMemIDToDisplay("M000001");
+// 	pageContext.setAttribute("list",list);
+
+// 	PlanService planSvc =new PlanService();
+// 	List<PlanVO> planlist = planSvc.getPlansByMem("M000001");
+// 	pageContext.setAttribute("planlist",planlist);
 %>
 <jsp:useBean id="now" class="java.util.Date" />
 

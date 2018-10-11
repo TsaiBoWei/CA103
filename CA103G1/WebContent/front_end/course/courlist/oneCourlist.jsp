@@ -187,7 +187,7 @@ li span {
           <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
               <script>
              	 $(document).ready(function() {
-            	    var len = 50; // 超過50個字以"..."取代
+            	    var len = 100; // 超過50個字以"..."取代
             	    $(".coach_text_short").each(function(i){
             	        if($(this).text().length>len){
             	            $(this).attr("title",$(this).text());
@@ -291,7 +291,7 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
           <!-- 第二個按鈕 -->
           <li class="nav-item">
             <a class="nav-link" href="" data-target="#tabtwo" data-toggle="tab">
-              <i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
+              <i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
           </li>
           <!-- 第三個按鈕 -->
           <li class="nav-item">
@@ -396,7 +396,7 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <h2 class="text-primary text-md-left"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; 課程公告 &nbsp;
+              <h2 class="text-primary text-md-left"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; 課程公告 &nbsp;
                 <br> </h2>
               <p class="text-md-left"><%=courlistVO.getCour_ann()%></p>
             </div>

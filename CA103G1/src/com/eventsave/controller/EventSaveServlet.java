@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.eve.model.EveService;
+import com.eve.model.EventVO;
 import com.eventsave.model.EventSaveService;
 import com.eventsave.model.EventSaveVO;
 import com.friendlist.model.FriendListService;
@@ -230,8 +232,10 @@ public class EventSaveServlet extends HttpServlet{
 				EventSaveService eventSaveSvc = new EventSaveService();
 				eventsaveVO = eventSaveSvc.addEventSave(mem_id, eve_id, es_status);			
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				
-				String url ="/front_end/event/eventsave/eveSave.jsp";
+				EveService eveSvc=new EveService();
+				EventVO eveVO=eveSvc.getOneEve(eve_id);
+				req.setAttribute("eveVO", eveVO);
+				String url ="/front_end/event/eve/listOneEvent.jsp";
 				System.out.println(url);
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				

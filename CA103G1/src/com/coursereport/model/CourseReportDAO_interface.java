@@ -7,7 +7,7 @@ public interface CourseReportDAO_interface {
 
 	public void updateCourrep_Status(String courrep_status, String courrepo_id);// 伯誼建議用courrepo_id篩選改status
 
-	public CourseReportVO findByPK(String ccourrepo_id);
+	public CourseReportVO findByPK(String courrepo_id);
 
 	public List<CourseReportVO> findByCourIdplusStatus(String cour_id, String courrep_status);
 
