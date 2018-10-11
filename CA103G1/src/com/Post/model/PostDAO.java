@@ -502,7 +502,7 @@ public class PostDAO implements PostDAO_interface{
 				}
 				
 				postVO.setPost_view(a);	
-				postVO.setPost_view(rs.getInt("POST_VIEW"));
+				
 				postVO.setSptype_id(rs.getString("SPTYPE_ID"));
 				postVO.setPost_status(rs.getString("POST_STATUS"));
 				postVO.setPost_title(rs.getString("POST_TITLE"));
