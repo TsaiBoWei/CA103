@@ -192,7 +192,7 @@ a,.fontstyle  {
 					<input type="hidden" name="action" value="mem_update">
 					<!-- 進入servlet -->
 					<button type="submit" class="btn btn-lg btn-primary" id="regSend">送出</button>
-					<a class="btn btn-lg btn-secondary" href="../login/TestView.jsp">取消</a>
+					<a class="btn btn-lg btn-secondary" href="<%=request.getContextPath() %>/index.jsp">取消</a>
 					<%
 					CoachService coachSvc1=new CoachService(); 
 					MemVO memVO=(MemVO)session.getAttribute("memVO");
