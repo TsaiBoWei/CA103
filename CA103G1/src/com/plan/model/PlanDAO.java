@@ -323,15 +323,18 @@ public class PlanDAO implements PlanDAO_interface {
 
 			while (rs.next()) {
 				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
 				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setMem_id(rs.getString("mem_id"));
 				planVO.setPlan_vo(rs.getString("plan_vo"));
 				planVO.setPlan_start_date(rs.getTimestamp("plan_start_date"));
 				planVO.setPlan_end_date(rs.getTimestamp("plan_end_date"));
 				planVO.setSptype_id(rs.getString("sptype_id"));
-//				planVO.setPlan_view(rs.getInt("plan_view"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
 				planVO.setPlan_privacy(rs.getString("plan_privacy"));
 				planVO.setPlan_create_time(rs.getDate("plan_create_time"));
 				planVO.setPlan_status(rs.getString("plan_status"));
+				list.add(planVO);
 			}
 
 		} catch (SQLException ce) {

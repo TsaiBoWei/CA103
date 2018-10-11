@@ -16,7 +16,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
-<title>coach</title>
+<title>Wort it Out</title>
 
 <!-- CSS dependencies -->
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -59,10 +59,6 @@
 body {
 	overflow-x: hidden;
 }
-
-h1 {
-      font-family: Montserrat, Arial, "·L³n¥¿¶ÂÅé", "Microsoft JhengHei" !important;
-    }
 
 
 /*   .form-group-100{ */
@@ -227,7 +223,7 @@ h1 {
     <div class="row align-items-start ">
       <!--courselist-->
 
-      <div class="col-12 col-sm-12 mt-4 " id="jys">
+      <div class="col-12 col-sm-12 mt-4 ">
         <div class="col-12 col-sm-10 offset-md-1 ">
           <div class="accordion" id="accordionExample">
           <%
@@ -252,7 +248,7 @@ h1 {
                     <div class="col-md-11 commentbottomline px-0">
                       <div class="replynametext text-left ">
                         <div class="col-md-12  mt-2">
-                          <p class="h5 text-primary courboartitleword"><%=owncourlistVO.getCname()%>&nbsp;<a href="<%=request.getContextPath()%>/courlist/courlist.do?action=getOne_For_Update&cour_id=<%=owncourlistVO.getCour_id()%>"><i class="fas fa-pencil-alt"></i></a>&nbsp;<span ><i class="fas fa-bullhorn" id="<%=broadcastbtn%>" data-toggle="modal" data-target="#broadcastform"></i></span></span></p>
+                          <p class="h5 text-primary courboartitleword"><%=owncourlistVO.getCname()%>&nbsp; <i class="fas fa-pencil-alt"></i>&nbsp;<span ><i class="fas fa-bullhorn" id="<%=broadcastbtn%>" data-toggle="modal" data-target="#broadcastform"></i></span></span></p>
                         </div>
                       <script type="text/javascript">
                       $("<%=broadcastbtnid%>").click(function () {
@@ -450,6 +446,7 @@ h1 {
 	var wholeworld;
 	var finaldiscount;
 	var expiredateval;
+	var expiredateval;
     
 
 	var webSocket;
@@ -486,10 +483,14 @@ h1 {
 	    expiredateval = expiredate.value;
 console.log(expiredateval);
 	    wholeworld= new Date(expiredateval).getTime()-new Date().getTime();
+	    expiryunitl=Math.floor(wholeworld/(1000*60*60*24));
 console.log(wholeworld);
 	        var jsonObj = {"finaldiscount" : finaldiscount,
 	        		"discountcour_id":discountcour_id,
-	        		"discountcname":discountcname}
+	        		"discountcname":discountcname,
+	        		"expiryunitl":expiryunitl
+	        		
+	        }
 	        webSocket.send(JSON.stringify(jsonObj));
 	        };
 // 	        webSocket.send(JSON.stringify(jsonObj));
@@ -552,28 +553,6 @@ $(document).ready(function(){
 
 
 </script>
-
-<c:if test="${localhref!=null}">
-			
-			<script>
-<%-- 	    		 location.href="<%=request.getContextPath()%>${localhref}#jys"; --%>
-           $(document).ready(function(){       
-           $('html,body').animate({scrollTop:$('#jys').offset().top}, 800); 
-           }); 
-           </script>
-	        </c:if>
-	  <c:if test="${param.localhref!=null}">
-			
-			<script>
-	<%-- 	    		 location.href="<%=request.getContextPath()%>${localhref}#jys"; --%>
-	           $(document).ready(function(){       
-	           $('html,body').animate({scrollTop:$('#jys').offset().top}, 800); 
-	           }); 
-	           </script>
-	        </c:if>
-
-
-
 
 
 

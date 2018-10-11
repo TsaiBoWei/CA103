@@ -38,6 +38,17 @@
 <p>This is the Home page for CA103G1 EventSave: Home</p>
 
 <h3>資料查詢:</h3>
+
+<ul>
+  <li>
+    <a href="<%=request.getContextPath() %>/front_end/event/eve/select_event_page.jsp">
+       回到select_event_page.jsp 
+    </a>
+  </li>
+</ul>
+
+
+
 	
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -50,7 +61,7 @@
 </c:if>
 
 <ul>
-  <li><a href="<%=request.getContextPath() %>/front_end/event/eventsave/listAllEventSave.jsp">List</a> all FriendList.  <br><br></li>
+  <li><a href="<%=request.getContextPath() %>/front_end/event/eventsave/listAllEventSave.jsp">List</a> all EventSave.  <br><br></li>
   
   
   <li>

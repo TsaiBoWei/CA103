@@ -387,9 +387,9 @@ CourlistService courlistSvc = new CourlistService();
 									</button>
 								</div>
 								<div class="modal-body text-center text-light ">
-									<p id="discounttext"></p>
+									<p class="mb-1" id="discounttext"></p>
 									<img id="discountimg" alt="" src="" style="width:300px;">
-									<p><a id="discounthref" href="">More Detials</a></p>
+									<p class="mt-1"><a id="discounthref" href="">More Detials</a></p>
 								</div>
 								<div class="modal-footer courboarmodal">
 
@@ -434,6 +434,9 @@ $(document).ready(function(){
 		var discounttext = document.getElementById("discounttext");
 		var discountimg = document.getElementById("discountimg");
 		var discounthref = document.getElementById("discounthref");
+		var exampleModalCenterTitle=document.getElementById("exampleModalCenterTitle");
+		
+		
 		webSocket.onmessage = function(event) {
 // 			var messagesArea = document.getElementById("messagesArea");
 // 	        var jsonObj = JSON.parse(event.data);
@@ -444,8 +447,11 @@ $(document).ready(function(){
             var message = jsonObj.discountcname+jsonObj.finaldiscount + "§é";
             alert(message);
             var courno=jsonObj.discountcour_id;
+            var expiryunitl=jsonObj.expiryunitl;
             discounttext.innerHTML=message;
+            discounthref.href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id="+courno+"&courpageloc=tabone";
             discountimg.src="<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id="+courno;
+            exampleModalCenterTitle.innerHTML="­­®É"+expiryunitl+"¤Ñ";
             $("#broadcastwindow").modal({show: true});
            
            

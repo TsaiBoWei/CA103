@@ -35,6 +35,8 @@
 	var statusOutput = document.getElementById("statusOutput");
 	var webSocket;
 	
+	var synth = window.speechSynthesis;
+	
 	function connect() {
 		// 建立 websocket 物件
 		webSocket = new WebSocket(endPointURL);
@@ -50,6 +52,12 @@
 			var messagesArea = document.getElementById("messagesArea");
 	        var jsonObj = JSON.parse(event.data);
 	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
+	        console.log(jsonObj.message);
+	        if ( jsonObj.message.includes('abc') ) {
+	        	jsonObj.message = jsonObj.message.replace( 'abc', '' );
+	        	console.log( jsonObj.message);
+	        	Speech(jsonObj.message);
+	        }
 	        messagesArea.value = messagesArea.value + message;
 	        messagesArea.scrollTop = messagesArea.scrollHeight;
 		};
@@ -96,6 +104,24 @@
 	
 	function updateStatus(newStatus) {
 		statusOutput.innerHTML = newStatus;
+	}
+	
+	function Speech( message ) {
+		 if ('speechSynthesis' in window) with(speechSynthesis) {
+				utterance = new SpeechSynthesisUtterance(message);
+				utterance.voice = getVoices()[19];
+				speak(utterance); 
+		 }
+		 
+		    else { /* speech synthesis not supported */
+		        msg = document.createElement('h5');
+		        msg.textContent = "Detected no support for Speech Synthesis";
+		        msg.style.textAlign = 'center';
+		        msg.style.backgroundColor = 'red';
+		        msg.style.color = 'white';
+		        msg.style.marginTop = msg.style.marginBottom = 0;
+		        document.body.insertBefore(msg, document.querySelector('div'));
+		    }
 	}
     
 </script>

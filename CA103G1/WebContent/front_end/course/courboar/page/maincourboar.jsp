@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,10 +31,16 @@
 CourlistVO courlistVO = (CourlistVO)session.getAttribute("brows_courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
 // session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的
 System.out.print("maincourbour"+courlistVO.getCour_id());
-MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
-CoachService coachSvc=new CoachService(); 
-CoachVO ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());//if coach
 
+CoachService coachSvc=new CoachService(); 
+CoachVO ifmemcoachVO=null;
+MemVO memVO=null;
+if((MemVO) session.getAttribute("memVO")!=null){
+	memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
+	if( coachSvc.getOneCoachByMemId(memVO.getMem_id())!=null){
+	ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());//if coach
+	};
+};
 request.setCharacterEncoding("utf-8");
 
 CourBoarService courboarSvc = new CourBoarService();
@@ -293,9 +300,14 @@ body {
 					data-toggle="modal" data-target="#courboarform" id="addcomment">Add Your Comment</button><!-- 										///	 -->
 			</div>
 			
-			<%PurchcourService purchcourSvc=new PurchcourService();
-			 String orderid=purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id()); 
-			  if(orderid==null){
+			<%
+			
+			  PurchcourService purchcourSvc=new PurchcourService();
+			  
+			  String orderid=null;
+// 			  String orderid=purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id()); 
+			  if(memVO==null||purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id())==null){
+				
 			%>
 			<script type="text/javascript">
 			$(document).ready(function() { 
@@ -313,8 +325,10 @@ body {
 			
 			
 			</script>
-			
-			<%} %>	  
+			<%}
+			%>	
+		
+			  
 			  
 
 			<!--searchbar-->
@@ -363,7 +377,9 @@ body {
 									<input type="hidden" name="action" value="insert"></input> 
 									<input
 										type="hidden" name="cour_id" value="" class="brows_cour_id"></input>
-								    <input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+								
+								    <input type="hidden" name="mem_id" id="" value="${memVO.mem_id}"></input>
+						
 									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<button type="submit" class="btn btn-primary confirmbtn">Save
 										Changes</button>
@@ -466,7 +482,7 @@ body {
 									<button type="button" class="btn btn-secondary cancel"
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="crpost_id" id="hiddencrpost_idreplyform" value=""></input> 
-									<input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+									<input type="hidden" name="mem_id" id="" value="${memVO.mem_id}"></input>
 									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<input type="hidden" name="action" value="insert"></input>
 									<button type="submit" class="btn btn-primary confirmbtn">Save
@@ -769,7 +785,7 @@ body {
 															BoardresService boardresSvc = new BoardresService();
 															Integer replyCount=boardresSvc.getReplyCount(courboarVO.getCrpost_id());
 									System.out.print(boardresSvc.getReplyCount(courboarVO.getCrpost_id()));
-									System.out.print("///////////////////////");
+
 // 														    pageContext.setAttribute("count",count);
 // 														    Integer replyCount=(Integer)pageContext.getAttribute("count");
 														    
@@ -792,7 +808,7 @@ body {
 						</div>
 						
 						
-						
+						<c:if test="${ memVO != null }">
 						  <c:if test="<%=memVO.getMem_id().equals(courboarVO.getMem_id())%>">
 						  <script>
 								$(document).ready(function() {
@@ -801,7 +817,7 @@ body {
 														   
 								});
 						  </script>
-						  
+						  </c:if>
 				          </c:if>	
 <%System.out.println("i="+i); %>
 <%System.out.println(datatarget); %>
@@ -815,7 +831,8 @@ body {
 									data-toggle="modal" data-target="#replyform">
 									Reply</button>
 							</div>
-							<%if(orderid!=null){%>	
+							
+							<%if(memVO!=null&&purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id())!=null){%>	
 							<script>
 						
 								$(document).ready(function() {
@@ -844,7 +861,7 @@ body {
 			                });
 							</script>
 						    <%}%>
-							
+						
 						    
 							
 
@@ -921,7 +938,7 @@ body {
 										        });
 										
 										</script>
-										
+										<c:if test="${memVO!=null}">
 										<c:if test="<%=memVO.getMem_id().equals(boardresVO.getMem_id())%>">
 										  <script>
 												$(document).ready(function() {
@@ -931,6 +948,7 @@ body {
 												});
 										  </script>
 										   
+								       </c:if>
 								       </c:if>
 
 
@@ -992,7 +1010,7 @@ body {
 				$(".whichPagepasser").val("<%=whichPage%>");
 													  
 				});
-			});
+		});
 	</script>
 	
 

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eventlist.model.EventListVO;
+
 public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -19,6 +21,8 @@ public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 	private static final String DELETE = "DELETE FROM EVENTSAVE WHERE MEM_ID = ? AND EVE_ID = ?";
 	private static final String GET_ONE_STMT = "SELECT MEM_ID, EVE_ID, ES_STATUS FROM EVENTSAVE WHERE MEM_ID = ? AND EVE_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM EVENTSAVE";
+	private static final String GET_MEM_EVENTSAVE_STMT = "SELECT * FROM EVENTSAVE WHERE MEM_ID = ? AND ES_STATUS = 'ESS1'";
+	
 	@Override
 	public void insert(EventSaveVO eventsaveVO) {
 		Connection con = null;
@@ -244,6 +248,66 @@ public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public List<EventSaveVO> findByMemId(String mem_id) {
+		List<EventSaveVO> list = new ArrayList<EventSaveVO>();
+		EventSaveVO eventsaveVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USERID, PASSWORD);
+			pstmt = con.prepareStatement(GET_MEM_EVENTSAVE_STMT);
+			pstmt.setString(1, mem_id);
+			
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				eventsaveVO = new EventSaveVO();
+				eventsaveVO.setMem_id(rs.getString("mem_id"));
+				eventsaveVO.setEve_id(rs.getString("eve_id"));
+				eventsaveVO.setEs_status(rs.getString("es_status"));
+				list.add(eventsaveVO);	
+			}
+			
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		EventSaveJDBCDAO dao = new EventSaveJDBCDAO();
 		
@@ -272,12 +336,20 @@ public class EventSaveJDBCDAO implements EventSaveDAO_interface{
 //		System.out.println("---------------------------------");
 		
 		//琩高场
-		List<EventSaveVO> list = dao.getAll();
-		for(EventSaveVO eventsaveVO4 : list) {
-			System.out.print(eventsaveVO4.getMem_id() + ",");
-			System.out.print(eventsaveVO4.getEve_id() + ",");
-			System.out.print(eventsaveVO4.getEs_status());
-			System.out.println();
+//		List<EventSaveVO> list = dao.getAll();
+//		for(EventSaveVO eventsaveVO4 : list) {
+//			System.out.print(eventsaveVO4.getMem_id() + ",");
+//			System.out.print(eventsaveVO4.getEve_id() + ",");
+//			System.out.print(eventsaveVO4.getEs_status());
+//			System.out.println();
+//		}
+		
+		//琩高琘穦场笆Μ旅 (ヘ玡Τ拜肈)
+		List<EventSaveVO> listMemId = dao.findByMemId("M000001");
+		for(EventSaveVO eventsaveVO5:listMemId) {
+			System.out.print(eventsaveVO5.getMem_id()+ ",");
+			System.out.print(eventsaveVO5.getEve_id()+ ",");
+			System.out.println(eventsaveVO5.getEs_status());
 		}
 	}
 }

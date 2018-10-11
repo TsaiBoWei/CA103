@@ -21,9 +21,16 @@
 ///取出值
 CourlistVO courlistVO = (CourlistVO)session.getAttribute("brows_courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
 // session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的
-MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
+
 CoachService coachSvc=new CoachService(); 
-CoachVO ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());
+CoachVO ifmemcoachVO=null;
+MemVO memVO=null;
+if((MemVO) session.getAttribute("memVO")!=null){
+	memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
+	if( coachSvc.getOneCoachByMemId(memVO.getMem_id())!=null){
+	ifmemcoachVO= coachSvc.getOneCoachByMemId(memVO.getMem_id());//if coach
+	};
+};
 System.out.print("courunit"+courlistVO.getCour_id());
 
 %>
@@ -156,7 +163,7 @@ System.out.print("courunit"+courlistVO.getCour_id());
           </div>
           <a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp" class="btn btn-lg btn-primary mx-1">Buy It</a>
         </div>
-        <div class="col-md-5  align-self-center" id="jys">
+        <div class="col-md-5  align-self-center" >
           <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
           src="<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>"></div>
       </div>
@@ -164,7 +171,7 @@ System.out.print("courunit"+courlistVO.getCour_id());
   </div>
     <!-- 分頁頁籤 -->
 
-  <div class="container containerHrT " >
+  <div class="container containerHrT " id="jys" >
     <hr> </div>
   <nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar">
     <div class="container">
@@ -304,7 +311,7 @@ System.out.print("courunit"+courlistVO.getCour_id());
                 <h3 class="text-primary"> 課程單元內容</h3>
                 
                 <p>Totoal Duration&nbsp;· &nbsp;<%=(totalCourLength==0.0)? "00:00:00" : totalhour%>  </p>
-                <c:if test="<%=courlistVO.getCoa_id().equals(ifmemcoachVO.getCoa_id())%>">
+                <c:if test="<%=(ifmemcoachVO!=null)&&( courlistVO.getCoa_id().equals(ifmemcoachVO.getCoa_id()))%>">
                 <span data-target="#unitaddampleModal" data-toggle="modal"  style="cursor:pointer; ">
                   <p class="h5 text-right hovereditunit" id="uploadalesson" > Add A Lesson
                     <i class="far fa-plus-square"></i>
@@ -709,71 +716,47 @@ System.out.print("courunit"+courlistVO.getCour_id());
       </div>
     </div>
   </div>
-   <!--courboar-->
-		<!-- Sponsor logos -->
-		<div class="py-5 mt-5 section" >
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h1 class="mb-4">Sponsors</h1>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 col-6"></div>
-					<div class="col-md-2 col-6">
-						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_1.png">
-					</div>
-					<div class="col-md-2 col-6">
-						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_4.png">
-					</div>
-					<div class="col-md-2 col-6">
-						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_3.png">
-					</div>
-					<div class="col-md-2 col-6">
-						<img class="center-block img-fluid d-block"
-							src="<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/logo_2.png">
-					</div>
-				</div>
-			</div>
+    <!-- Sponsors -->
+  <div class="py-5 section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-6"></div>
+        <div class="col-md-2 col-6"></div>
+        <div class="col-md-2 col-6"></div>
+        <div class="col-md-2 col-6"></div>
+        <div class="col-md-2 col-6"></div>
+      </div>
+    </div>
+  </div>
+    <!-- Call to action -->
+  <div class="py-5 section section-fade-in-out" id="register" style="background-image: url('assets/conference/gymback.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <h1 class="mb-3"></h1>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="text-md-left text-center p-4">
+    <div class="container">
+      <div class="row">
+		<div class="col-lg-12"></div>
+	  </div>
+	  <div class="row">
+		<div class="col-md-12">
+		  <p class="text-muted">
+		  <br> <br> <br>
+		  </p>
 		</div>
-		
-	
-		<!-- Call to action -->
-		<div class="py-5 mt-3 section section-fade-in-out" id="register"
-			style="background-image: url('<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/cover_2.jpg');">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-left">
-						<h1 class="mb-3">Something Here</h1>
-						<p>
-							Pre-register to get a priority access to the event. Fares will be
-							published later on.&nbsp; <br>Get the maximum from the
-							lectures together with the possibility of joining exclusive
-							side-events.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Footer -->
-		<footer class="text-md-left text-center p-4">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<p class="text-muted">
-							<br> <br> <br>
-						</p>
-					</div>
-				</div>
-			</div>
-		</footer>
+	  </div>
+	</div>
+  </footer>
 	<!-- JavaScript dependencies -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

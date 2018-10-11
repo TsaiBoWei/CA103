@@ -79,10 +79,20 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
         <div class="container">
           <div class="row">
-            <div class="mt-4 text-right col-12">
+            <div class="mt-4 text-right col-11">
               <h1 class="display-6 text-center">Welcome Manager!</h1>
               <p class="lead text-center"><%=mgrVO.getMgr_name()%></p>
             </div>
+            
+            <div class="col-1 col-md-1">
+              <div>
+<%--                <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;"> --%>
+				<a class="btn  btn-outline-primary logoutbtn m-3" href="<%=request.getContextPath() %>/back_end/mgrview.jsp">¦^­º­¶</a>              
+              </div>
+            </div>
+            
+            
+            
           </div>
         </div>
       </div>

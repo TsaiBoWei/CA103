@@ -34,30 +34,29 @@ public class MgrPhototest extends HttpServlet {
 				}
 				in.close();
 			} else {
-				// res.sendError(HttpServletResponse.SC_NOT_FOUND);
-//				InputStream in = getServletContext().getResourceAsStream("/NoData/no.png");
-//				byte[] b = new byte[in.available()];
-//				in.read(b);
-//				out.write(b);
-//				in.close();
+				InputStream in = getServletContext().getResourceAsStream("/img/index/user.png");
+				byte[]b=new byte[in.available()];
+				in.read(b);
+				out.write(b);
+				in.close();
 
 			}
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
 System.out.println(e);
-//			InputStream in = getServletContext().getResourceAsStream("/NoData/null.png");
-//			byte[] b = new byte[in.available()];
-//			in.read(b);
-//			out.write(b);
-//			in.close();
+			InputStream in = getServletContext().getResourceAsStream("/img/index/user.png");
+			byte[]b=new byte[in.available()];
+			in.read(b);
+			out.write(b);
+			in.close();
 		}
 	}
 
 	public void init() throws ServletException {
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
 			con = ds.getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();

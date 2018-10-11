@@ -11,7 +11,9 @@ public class CourdiscountDAO implements CourdiscountDAO_interface {
 		CourdiscountVO courdiscountVO=new CourdiscountVO();
 		courdiscountVO.setFinaldiscount(jedis.hget(discountkey, "finaldiscount"));
 		courdiscountVO.setDiscountcour_id(jedis.hget(discountkey, "discountcour_id"));
-		courdiscountVO.setDiscountcour_id(jedis.hget(discountkey, "expiredateval"));
+		courdiscountVO.setExpiredateval(jedis.hget(discountkey, "expiredateval"));
+System.out.println("radisDAO"+discountkey);
+System.out.println("radisDAOdiscountcour_id"+courdiscountVO.expiredateval);
 		jedis.close();
 		return courdiscountVO;
 		

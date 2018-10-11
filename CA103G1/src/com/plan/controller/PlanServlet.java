@@ -257,7 +257,7 @@ public class PlanServlet extends HttpServlet {
 				List<PlanVO> list = planSvc.getAll(map);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("listPlan_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				req.setAttribute("listPlans_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
 				successView.forward(req, res);
 				System.out.println("已成功轉交");

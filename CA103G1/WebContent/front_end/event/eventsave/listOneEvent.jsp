@@ -3,13 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.eve.model.*" %> 
+<%@ page import="com.eve.model.*" %>
+
 
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
 <!-- 20181009 建廷 -->
 <jsp:useBean id="eventsaveSvc" scope="page" class="com.eventsave.model.EventSaveService" />
-   
+
 <!DOCTYPE html>
 <html>
 
@@ -66,8 +67,6 @@ border:0px;
 text-align:center;
 }
 
-#map { height: 400px; }
-
 
 
   
@@ -95,7 +94,7 @@ text-align:center;
             <a class="nav-link" href="#schedule">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#schedule">Event</a>
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/course/purchcour/page/personltemplete.jsp ">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="#speakers">Course</a>
@@ -217,8 +216,7 @@ text-align:center;
 <!--           <a class="btn btn-lg btn-block btn-danger my-3 p-1" href="#">立即報名</a> -->
           <div class="d-flex align-self-center align-items-center justify-content-center">
           
-          <!-- 活動收藏的按鈕    20181009完成  建廷 -->
-          <c:if test="${memVO.mem_id!=eveVO.mem_id}">
+<!-- 活動收藏的按鈕    20181009完成  建廷 -->
 				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)==null}">
 			        <form method="post" action="<%=request.getContextPath()%>/eventsave/eventsave.do">
 					    <input type="submit" class="btn btn-sm m-1 btn-outline-success" value="收藏">
@@ -231,10 +229,8 @@ text-align:center;
 				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)!=null}">
 				        <input type="submit" class="btn-sm  btn-success" value="已收藏">
 				</c:if>
-		</c:if>			
-				
-				
-<!--             <a href="#" class="btn btn-sm m-1 btn-outline-success">收藏 </a> -->
+			
+<%--             <a href="<%=request.getContextPath()%>/eventsave/eventsave.do" class="btn btn-sm m-1 btn-outline-success">收藏 </a> --%>
             <a href="#" class="btn btn-outline-primary btn-sm m-1">分享 </a>
             <a href="#" class="btn btn-sm btn-outline-secondary m-1">檢舉 </a>
           </div>
@@ -388,11 +384,11 @@ text-align:center;
         </div>
         <h3 class="">活動地圖</h3>
         <div class="row">
-          <div class="col-md-10 offset-md-1" id="map"></div>
+          <div class="col-md-12">
+            <img class="d-block img-fluid img-thumbnail mx-auto" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDW8nO9JhT_pEjebobq9pgUF2cEp0EUb1I&amp;markers=%E4%B8%AD%E5%A4%AE%E5%A4%A7%E5%AD%B8&amp;center=%E4%B8%AD%E5%A4%AE%E5%A4%A7%E5%AD%B8&amp;zoom=16&amp;size=800x350&amp;sensor=false"> </div>
         </div>
       </div>
     </div>
-    
     <div class="tab-pane fade" id="tabfive" role="tabpanel">
       <div class="container px-5">
         <div class="row d-block text-left">
@@ -728,41 +724,10 @@ text-align:center;
 		  setTimeout("clock()",1000)
 		} 
 </script>
-
-<!-- Google Map -->
-<script type="text/javascript">
-			var map;
-			var position = {
-			  lat: ${eveVO.eve_lat},
-			  lng: ${eveVO.eve_long}
-			};
-			var contentString = '<h2 style="color:black!important;">${eveVO.eve_title}</h2>';
-			
-			function initMap() {
-			  map = new google.maps.Map(document.getElementById('map'), {
-			    zoom: 15,
-			    center: position
-			  });
-			  var marker = new google.maps.Marker({
-			    map: map,
-			    position: position
-			  });
-			  var infowindow = new google.maps.InfoWindow({
-			    content: contentString,
-			    position: position,
-			
-			  });
-			  infowindow.open(map,marker);
-			
-			}
-			
-  </script>    
   
   
-  <!-- Google Map -->
-  <script async defer
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASI3sgz6P-wisrPe6D4N59Ro0RrodnHJM&callback=initMap">
-  </script>
+  
+  
   
   <!-- JavaScript dependencies -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

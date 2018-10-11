@@ -4,11 +4,11 @@
 <%@ page import="com.plan.model.*"%>
 <%
 	PlanService planSvc = new PlanService();
-	List<PlanVO> list = planSvc.getAll();
+	List<PlanVO> list = (List<PlanVO>)(request.getAttribute("listPlans_ByCompositeQuery"));
 	pageContext.setAttribute("list", list);
 %>
 
-<jsp:useBean id="listPlan_ByCompositeQuery" scope="request" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
+<jsp:useBean id="listPlans_ByCompositeQuery" scope="request" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
 
 <jsp:useBean id="sptypeSvc" scope="page"
 	class="com.sptype.model.SptypeService" />
@@ -50,9 +50,9 @@ body {
 	overflow-x: hidden;
 }
 
-/*圖片專區*/
+
 table {
- 	width: 1800px; 
+ 	width: 1850px; 
 /* 	background-color: #E0FFFF; */
  	color: #FFFFFF; 
 	font-size: 18px;
@@ -74,6 +74,18 @@ th, td {
 	depth: 165px;
 	border-radius: 100%;
 }
+
+h5	{
+	 font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+	 font-size: 18px;
+	 color: #FFFF00;
+
+}
+
+b {
+	font-size: 16px;
+	color: white;
+}
 </style>
 
 
@@ -85,9 +97,6 @@ th, td {
 	<jsp:include page="/front_end/course/purchcour/page/personlhead.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
-	<div class="container containerHrB ">
-		<hr>
-	</div>
 	<div class="form-control" style="background-color: #1f1f1f">
 		<h5>我的計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
@@ -118,14 +127,15 @@ th, td {
 				<th>刪除</th>
 			</tr>
 			<%@ include file="file/page1_ByCompositeQuery.file" %>
-			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#CCCCFF':''}>
+			<c:forEach var="planVO" items="${listPlans_ByCompositeQuery}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#000000':''}>
 					<td>
 						<img class="plan_cover" 
 							 src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
 					</td>
 					<td>${planVO.plan_name}</td>
-					<td>${planVO.plan_id}</td>
+					<td>
+					${planVO.plan_id}</td>
 					<td>${planVO.mem_id}</td>
 					<td>${planVO.plan_vo}</td>
 					<td>${planVO.plan_start_date}</td>
@@ -159,9 +169,9 @@ th, td {
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/plan/plan.do"
 							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除"> 
+							<input type="hidden" name="plan_id" value="${planVO.plan_id}"> 
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>

@@ -37,12 +37,12 @@ System.out.print(keyWord);
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
-<title>Jennifer Lawernce</title>
+<title>maincourboar</title>
 
 <!-- PAGE settings -->
   
- 
-  <title>searchcourboar</title>
+  
+  <title>TRY</title>
   <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
   <!-- ASHLEY -->
@@ -278,9 +278,14 @@ body {
 					data-toggle="modal" data-target="#courboarform" id="addcomment">Add Your Comment</button><!-- 										///	 -->
 			</div>
 			
-			<%PurchcourService purchcourSvc=new PurchcourService();
-			 String orderid=purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id()); 
-			  if(orderid==null){
+			<%
+			
+			  PurchcourService purchcourSvc=new PurchcourService();
+			  
+			  String orderid=null;
+// 			  String orderid=purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id()); 
+			  if(memVO==null||purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id())==null){
+				
 			%>
 			<script type="text/javascript">
 			$(document).ready(function() { 
@@ -298,8 +303,10 @@ body {
 			
 			
 			</script>
-			
-			<%} %>	  
+			<%}
+			%>	
+		
+			  
 			  
 
 			<!--searchbar-->
@@ -348,7 +355,9 @@ body {
 									<input type="hidden" name="action" value="insert"></input> 
 									<input
 										type="hidden" name="cour_id" value="" class="brows_cour_id"></input>
-								    <input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+								
+								    <input type="hidden" name="mem_id" id="" value="${memVO.mem_id}"></input>
+						
 									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<button type="submit" class="btn btn-primary confirmbtn">Save
 										Changes</button>
@@ -451,7 +460,7 @@ body {
 									<button type="button" class="btn btn-secondary cancel"
 										data-dismiss="modal">Cancel</button>
 									<input type="hidden" name="crpost_id" id="hiddencrpost_idreplyform" value=""></input> 
-									<input type="hidden" name="mem_id" id="" value="<%=memVO.getMem_id() %>"></input>
+									<input type="hidden" name="mem_id" id="" value="${memVO.mem_id}"></input>
 									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input> 
 									<input type="hidden" name="action" value="insert"></input>
 									<button type="submit" class="btn btn-primary confirmbtn">Save
@@ -754,7 +763,7 @@ body {
 															BoardresService boardresSvc = new BoardresService();
 															Integer replyCount=boardresSvc.getReplyCount(courboarVO.getCrpost_id());
 									System.out.print(boardresSvc.getReplyCount(courboarVO.getCrpost_id()));
-									System.out.print("///////////////////////");
+
 // 														    pageContext.setAttribute("count",count);
 // 														    Integer replyCount=(Integer)pageContext.getAttribute("count");
 														    
@@ -777,7 +786,7 @@ body {
 						</div>
 						
 						
-						
+						<c:if test="${ memVO != null }">
 						  <c:if test="<%=memVO.getMem_id().equals(courboarVO.getMem_id())%>">
 						  <script>
 								$(document).ready(function() {
@@ -786,7 +795,7 @@ body {
 														   
 								});
 						  </script>
-						  
+						  </c:if>
 				          </c:if>	
 <%System.out.println("i="+i); %>
 <%System.out.println(datatarget); %>
@@ -800,7 +809,8 @@ body {
 									data-toggle="modal" data-target="#replyform">
 									Reply</button>
 							</div>
-							<%if(orderid!=null){%>	
+							
+							<%if(memVO!=null&&purchcourSvc.getCrorder_idByCrMemId(courlistVO.getCour_id(), memVO.getMem_id())!=null){%>	
 							<script>
 						
 								$(document).ready(function() {
@@ -829,7 +839,7 @@ body {
 			                });
 							</script>
 						    <%}%>
-							
+						
 						    
 							
 
@@ -906,7 +916,7 @@ body {
 										        });
 										
 										</script>
-										
+										<c:if test="${memVO!=null}">
 										<c:if test="<%=memVO.getMem_id().equals(boardresVO.getMem_id())%>">
 										  <script>
 												$(document).ready(function() {
@@ -917,13 +927,14 @@ body {
 										  </script>
 										   
 								       </c:if>
+								       </c:if>
 
 
 								       <c:if test="<%=showCrres_id!=null %>">
-<%System.out.println("I AM¡@IN!!!");%>
+
 
 								       <c:if test="<%=showCrres_id.equals(boardresVO.getCrres_id())%>">
-<%System.out.println("I AM¡@IN22222!!!");%>
+
 										  <script>
 												$(document).ready(function() {
 																	           
@@ -977,13 +988,13 @@ body {
 				$(".whichPagepasser").val("<%=whichPage%>");
 													  
 				});
-			});
+		});
 	</script>
 	
 
 	<!--courboar-->
 		<!-- Sponsor logos -->
-		<div class="py-5 section" >
+		<div class="py-5 mt-5 section" >
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
@@ -1014,7 +1025,7 @@ body {
 		
 	
 		<!-- Call to action -->
-		<div class="py-5 section section-fade-in-out" id="register"
+		<div class="py-5 mt-3 section section-fade-in-out" id="register"
 			style="background-image: url('<%=request.getContextPath()%>/front_end/course/courboar/assets/conference/cover_2.jpg');">
 			<div class="container">
 				<div class="row">
@@ -1065,7 +1076,6 @@ body {
 </body>
 
 </html>
-
 
 
 

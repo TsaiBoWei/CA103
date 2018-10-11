@@ -59,17 +59,20 @@ th, td {
 
 
 	<h4>此頁練習採用 EL 的寫法取值:</h4>
+	
 	<table id="table-1">
 		<tr>
 			<td>
 				<h3>所有員工資料 - listAllEventSave.jsp</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/front_end/event/eventsave/selec_eventsave_page.jsp">
+					<a href="<%=request.getContextPath()%>/front_end/event/eventsave/select_eventsave_page.jsp">
 					<img src="<%=request.getContextPath()%>/front_end/event/eventsave/images/back1.gif" width="100" height="32" border="0">回首頁</a>>
 				</h4>
 			</td>
 		</tr>
 	</table>
+	
+<!-- 	servlet 傳過來的驗證錯誤 紅色錯誤-->
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
@@ -78,6 +81,7 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
+
 
 	<table>
 		<tr>

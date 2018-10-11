@@ -554,7 +554,7 @@ public class EveServlet extends HttpServlet {
 		
 					
 		}
-		
+//活動審核修改狀態碼			
 		if ("review".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -578,7 +578,7 @@ public class EveServlet extends HttpServlet {
 				
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				String url = "/front_end/event/eve/ReviewEve.jsp";
+				String url = "/back_end/review/eveReview.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -586,7 +586,7 @@ public class EveServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front_end/event/eve/select_event_page.jsp");
+						.getRequestDispatcher("/back_end/review/eveReviewToincluded.jsp");
 				failureView.forward(req, res);
 			}
 		}
