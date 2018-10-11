@@ -8,8 +8,8 @@
 
 
 <%
-MemVO memVO1= new MemService().getOneMem("M000001");
-session.setAttribute("memVO", memVO1);
+// MemVO memVO1= new MemService().getOneMem("M000001");
+// session.setAttribute("memVO", memVO1);
 
 %>
 
@@ -257,7 +257,9 @@ CourlistService courlistSvc = new CourlistService();
       
 
     <!-- LIST -->
+    <div style="visibility:hidden;">
 	<%@ include file="page1.file" %> 
+	</div>
 <%-- 	<c:forEach var="courlistVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 
 	<!-- CARD -->	
