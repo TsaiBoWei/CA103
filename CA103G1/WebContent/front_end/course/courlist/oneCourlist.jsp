@@ -6,6 +6,7 @@
 <%@ page import="com.coach.model.*"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.courunit.model.*"%>
+<%@ page import="com.courdiscount.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -26,6 +27,7 @@ CourlistService courlistSvc=new CourlistService();
 // CourlistVO courlistVO = (CourlistVO) request.getAttribute("courlistVO"); //CourlistServlet.java(Controller), 存入req的courlistVO物件
 CourlistVO courlistVO=courlistSvc.getOneCourlist(brows_courid);
 session.setAttribute("brows_courlistVO", courlistVO);//存在瀏覽頁面的, 之後改get parameter
+
 MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
 
 %>
@@ -37,6 +39,9 @@ MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
     
     MemService coamemSvc= new MemService();
     MemVO coamemVO= coamemSvc.getOneMem(coachVO.getMem_id());
+    CourdiscountService courdiscountSvc=new CourdiscountService();
+    CourdiscountVO courdiscountVO=courdiscountSvc.getOneCourdiscount("courdiscout:"+courlistVO.getCour_id());
+    
 %>
 
 <!DOCTYPE html>
@@ -74,7 +79,10 @@ MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
   <script src="<%=request.getContextPath() %>/front_end/course/courlist/js/jquery.events.touch.js"></script> 
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/course/courlist/css/buttonfix.css">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/course/courlist/css/editpostform.css">
-
+  <link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	crossorigin="anonymous">
   
   <style>  
     /*頁面設定*/
@@ -83,6 +91,41 @@ MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
       overflow-x: hidden;
     }
   </style>
+  <style type="text/css">
+/* * { */
+/*   box-sizing: border-box; */
+/*   margin: 0; */
+/*   padding: 0; */
+/* } */
+
+.countdowndiv{
+ 
+  
+}
+ p{
+      font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+    }
+
+
+
+.countdown {
+  display: inline-block;
+  font-size: 9px;
+  list-style-type: none;
+  padding: 0.7em; 
+  border:0.8px dotted rgba(249, 249, 249, 0.1);
+ 
+/*   text-transform: uppercase; */
+}
+
+li span {
+  display: block;
+/*   font-size: 4.5rem; */
+}
+
+</style>
+  
+  
 </head>
 
 
@@ -130,6 +173,7 @@ MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
     <div class="container">
       <div class="row">
         <div class="col-md-7 text-md-left text-center align-self-center my-5">
+        
           <h3><%=courlistVO.getCname()%>
             <br> </h3>
           <div class="text-md-right">
@@ -154,7 +198,77 @@ MemVO memVO = (MemVO) session.getAttribute("memVO"); //取出登入會員VO
             	});   
   			  </script>
           </div>
-          <a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
+         
+          <a class="btn btn-primary " href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
+      
+      
+      <!--  discount -->
+
+        <div class="mt-2 text-secondary" id="countdowntitle"><i class="fas fa-bullhorn"></i>&nbsp;限時<%=courdiscountVO.getFinaldiscount()%>折</div>
+         <div class="col-6 pl-2 mb-2 pt-1 countdowndiv ">
+         
+<%--          <c:if test="${not empty courdiscountSvc.getOneCourdiscount('courdiscout:'+brows_courlistVO.cour_id)}"> --%>
+          
+          <ul id="ulcountdown">
+           
+		    <li class="countdown"><span class="text-center" id="days"></span>Days</li>
+		    <li class="countdown"><span class="text-center" id="hours"></span>Hour</li>
+		    <li class="countdown"><span class="text-center" id="minutes"></span>Mins</li>
+		    <li class="countdown"><span class="text-center" id="seconds"></span>Secs</li>
+		  </ul>
+<%-- 		</c:if> --%>
+<!--   discount -->
+ 
+  </div>
+  <!--   discount -->
+
+<%if(courdiscountVO.getDiscountcour_id ()==null){ 
+System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDiscountcour_id());
+%>    <script type="text/javascript"> 
+        
+        $(document).ready(function(){
+        	$("#ulcountdown").hide();
+        	$("#countdowntitle").hide();
+        	
+        	});
+    
+</script>
+<%} %>
+<!--   discount -->
+ <script type="text/javascript">
+ $(document).ready(function(){ 
+		const second = 1000,
+		      minute = second * 60,
+		      hour = minute * 60,
+		      day = hour * 24;
+
+		let countDown = new Date('<%=courdiscountVO.getExpiredateval()%>').getTime(),
+		                                                             
+		    x = setInterval(function() {
+
+		      let now = new Date().getTime(),
+		          distance = countDown - now;
+
+		      	document.getElementById('days').innerText = Math.floor(distance / (day)),
+		        document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
+		        document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
+		        document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
+		      
+		      //do something later when date is reached
+		      //if (distance < 0) {
+// 		       clearInterval(x);
+		      //  'IT'S MY BIRTHDAY!;
+		      //}
+
+		    }, second)
+
+ });
+    </script>
+
+ <!--   discount -->   
+
+         
+        
         </div>
         <div class="col-md-5  align-self-center">
           <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
