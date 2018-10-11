@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.util.*, com.memsplike.model.MemSpLikeVO" %>
+<%@ page import="com.mem.model.*" %>
+<%@ page import="com.coach.model.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -191,7 +193,21 @@ a,.fontstyle  {
 					<!-- 進入servlet -->
 					<button type="submit" class="btn btn-lg btn-primary" id="regSend">送出</button>
 					<a class="btn btn-lg btn-secondary" href="../login/TestView.jsp">取消</a>
-					<a class="btn btn-lg btn-primary" href="../../course/coach/addCoachText.jsp">申請教練</a>
+					<%
+					CoachService coachSvc1=new CoachService(); 
+					MemVO memVO=(MemVO)session.getAttribute("memVO");
+					
+					if((coachSvc1.getOneCoachByMemId(memVO.getMem_id()))!=null){
+						if("CS01".equals(coachSvc1.getOneCoachByMemId(memVO.getMem_id()).getCoa_status())){ %>
+						<P>教練申請待認證</P>
+						<%}else if("CS02".equals(coachSvc1.getOneCoachByMemId(memVO.getMem_id()).getCoa_status())){ %>
+						<P>認證教練</P>
+						<%}else{ %>
+						<a class="btn btn-lg btn-primary" href="../../course/coach/addCoachText.jsp">申請教練</a>
+					 <%}%>
+					  <%}else{%>
+					  <a class="btn btn-lg btn-primary" href="../../course/coach/addCoachText.jsp">申請教練</a>
+					  <% }%>
 				</div>
 			</form>
 		</div>

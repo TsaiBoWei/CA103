@@ -117,7 +117,7 @@
           
 <!--           <p class="text-md-left">" * " 為必填項目</p> -->
           
-          <form METHOD="post" ACTION="<%=request.getContextPath()%>/courlist/courlist.do" name="form1" enctype="multipart/form-data">
+          <form METHOD="post" ACTION="<%=request.getContextPath()%>/coach/coach.do" name="form1" enctype="multipart/form-data">
             
             <div class="form-group">
 				<h4 class="text-md-left">教練資訊*</h4>
@@ -128,6 +128,7 @@
               				
 			<!-- 送出  -->
 			<input type="hidden" name="action" value="insert">
+			<input type="hidden" name="mem_id" value="${memVO.mem_id}">
 			<div class="text-md-right">
 				<button id="addBtnSubmit" type="submit" class="btn btn-outline-primary btn-sm m-1">Send</button>
 			</div>
