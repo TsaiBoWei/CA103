@@ -124,7 +124,7 @@ System.out.print("courunit"+courlistVO.getCour_id());
     </div>
   </nav>
   <!-- Cover -->
-  <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath() %>/front_end/course/courlist/assets/conference/024.jpg);">
+  <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>);">
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:13rem;"> </div>
