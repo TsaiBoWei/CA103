@@ -88,8 +88,8 @@
                
 <%--                 	<c:choose> --%>
 <%--                 		<c:when test="${today>=endday||today<=startday}"> --%>
-                <h6 class="text-muted  text-left">${planVO.plan_name }</h6>
-                <p class="text-left text-white plan_vo">${planVO.plan_vo}</p>
+                <h6 class="text-muted  text-left"></h6>
+                <p class="text-left text-white plan_vo">${planVO.plan_name }</p>
 <%--                 		</c:when> --%>
 <%--                 	<c:otherwise> --%>
 <!--                 		<h6 class="text-muted  text-left">Today has't plan.</h6> -->

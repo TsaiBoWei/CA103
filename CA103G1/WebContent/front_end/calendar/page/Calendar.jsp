@@ -425,9 +425,9 @@
                     eventLimit: true,
                     nextDayThreshold: "00:00:00",
                     header: {
-                        left: 'title',
-                        center: '',
-                        right: 'today prev,next'
+                    	 left: 'today prev,next',
+                         center: 'title',
+                         right: 'agendaDay,agendaWeek,month'
                     },
 
                     <!-- eventSources帶入活動和計畫到fullcalendar --> 
