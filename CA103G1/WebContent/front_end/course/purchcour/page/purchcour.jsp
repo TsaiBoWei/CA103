@@ -32,11 +32,6 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/purchcour.css">
 
-
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 <script src="<%=request.getContextPath()%>/front_end/course/purchcour/js/purchcour.js"></script>
 
 <link rel="stylesheet" type="text/css"
@@ -47,6 +42,11 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+<!-- navbar setting -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 <style>
  
 
@@ -58,6 +58,13 @@ body {
 h1 {
       font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
     }
+</style>
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
 </style>
 
 
@@ -149,7 +156,7 @@ h1 {
         <div class="col-md-6 text-left pl-4 pb-2 purchasbg ">
           <div class="mb-4 pb-1 pt-1 purchastitle">
             <span class="badge mb-1 badge-courpaycata"  style="background-color:<%=sportTypeColor.get(courlistVO.getSptype_id())%>;opacity:0.8;"><%=sptypeVO.getSport()%></span>
-            <h3 class="text-primary pt-1"><%=courlistVO.getCname()%></h3>
+            <h3 class="text-primary pt-1"><a href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?cour_id=<%=purchCourVO.getCour_id()%>&courpageloc=tabfour&localhref=localhref"><%=courlistVO.getCname()%></a></h3>
           </div>
           <div class="row mb-2 pl-1 ">
             <div class="col-3 col-md-1 courboarimg px-2 ">

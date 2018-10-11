@@ -176,7 +176,7 @@ public class PlanServlet extends HttpServlet {
 		}
 
 		if ("getOne_For_Update".equals(action)) { // 來自My_Plan.jsp的請求
-
+			System.out.println("有進來Servlet-getOne_For_Update");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -191,9 +191,9 @@ public class PlanServlet extends HttpServlet {
 				PlanVO planVO = planSvc.getOnePlan(plan_id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("planVO", planVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("planVO", planVO); // 資料庫取出的planVO物件,存入req
 				String url = "/front_end/plan/plan_update.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 plan_update.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
@@ -203,6 +203,143 @@ public class PlanServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("update".equals(action)) { // 來自plan_update.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】 或 【 /emp/listEmps_ByCompositeQuery.jsp】
+		
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String plan_id = new String(req.getParameter("plan_id").trim());
+				
+				// plan_cover
+				
+//				byte[] plan_cover = null;
+//				if(plan_cover==null) {
+//				}
+//				Part part = req.getPart("plan_cover");
+//				InputStream is = part.getInputStream();
+//				byte[] plan_cover = new byte[is.available()];
+//				is.read(plan_cover);
+//
+				Part part = req.getPart("plan_cover");
+				byte[] plan_cover = null;
+				if (part.getSubmittedFileName() != null && part.getContentType() != null) {
+					InputStream in = part.getInputStream();
+					plan_cover = new byte[in.available()];
+					in.read(plan_cover);
+					in.close();
+				}
+
+				//plan_name
+				String plan_name = req.getParameter("plan_name");
+				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
+				if (plan_name == null || plan_name.trim().length() == 0) {
+					errorMsgs.add("Plan Name Can't Be Blank");
+				} else if (!plan_name.trim().matches(plan_name_Reg)) {
+					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
+				}
+				
+				// plan_vo
+				String plan_vo = req.getParameter("plan_vo");
+				if (plan_vo == null || plan_vo.trim().length() == 0) {
+					errorMsgs.add("Plan Content Can't Be Blank");
+				}
+
+				// plan_start_date
+				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
+				java.util.Date du = null;
+				Timestamp plan_start_date = null;
+				try {
+					du = df.parse(req.getParameter("plan_start_date"));
+					plan_start_date = (new Timestamp(du.getTime()));
+				} catch (ParseException e) {
+					errorMsgs.add("Enter The Start Date");
+//					e.printStackTrace();
+				}
+
+				// plan_end_date
+				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
+				java.util.Date du2 = null;
+				Timestamp plan_end_date = null;
+				try {
+					du2 = df2.parse(req.getParameter("plan_end_date"));
+					plan_end_date = (new Timestamp(du2.getTime()));
+				} catch (ParseException e) {
+					errorMsgs.add("Enter The End Date");
+					e.printStackTrace();
+				}
+
+				// sptype_id
+				String sptype_id = req.getParameter("sptype_id");
+
+//				String sptype_id =null;
+//				if("請選擇"
+//						)
+//					req.getParameter("sptype_id");
+
+				// plan_privacy
+				String plan_privacy = req.getParameter("plan_privacy");
+				
+				//plan_status
+				String plan_status = req.getParameter("plan_status");
+				
+				PlanVO planVO = new PlanVO(); 
+				planVO.setPlan_cover(plan_cover);
+				planVO.setPlan_name(plan_name);
+				planVO.setPlan_vo(plan_vo);
+				planVO.setPlan_start_date(plan_start_date);
+				planVO.setPlan_end_date(plan_end_date);
+				planVO.setSptype_id(sptype_id);
+				planVO.setPlan_status(plan_status);
+				planVO.setPlan_privacy(plan_privacy);
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("planVO", planVO); // 含有輸入格式錯誤的planVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front_end/plan/plan_update.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+				 
+				/***************************2.開始修改資料*****************************************/
+				PlanService planSvc = new PlanService();
+				planVO = planSvc.updatePlan(plan_name, plan_vo, plan_cover, plan_start_date, plan_end_date,sptype_id, plan_privacy,plan_status);
+				
+				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
+//				DeptService deptSvc = new DeptService();
+//				if(requestURL.equals("/dept/listEmps_ByDeptno.jsp") || requestURL.equals("/dept/listAllDept.jsp"))
+//					req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(deptno)); // 資料庫取出的list物件,存入request
+				
+				if(requestURL.equals("/front_end/plan/list_compositeQuery.jsp")){
+					HttpSession session = req.getSession();
+					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+					List<PlanVO> list  = planSvc.getAll(map);
+					req.setAttribute("listPlans_ByCompositeQuery",list); //  複合查詢, 資料庫取出的list物件,存入request
+				}
+                
+				String url = requestURL;
+				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:"+e.getMessage()+"更新失敗");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
+		
 
 		if ("delete".equals(action)) { // 來自My_Plan.jsp
 
@@ -232,7 +369,7 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
-		if ("listPlans_ByCompositeQuery".equals(action)) { // 來自test.jsp的複合查詢請求
+		if ("listPlans_ByCompositeQuery".equals(action)) { // 來自compositeQuery.jsp的複合查詢請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.

@@ -9,7 +9,7 @@
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 	
-//	MemVO memVO = (MemVO) session.getAttribute("memVO");
+// 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	MemVO memVO = new MemVO();
 	memVO.setMem_id("M000002");
 	pageContext.setAttribute("memVO",memVO); 
@@ -19,6 +19,12 @@
 	pageContext.setAttribute("list", list);
 %>
 
+
+<%/*
+	1.更換圖片未做
+
+
+*/%>
 
 <!DOCTYPE html>
 <html>
@@ -86,7 +92,15 @@ h5, label {
 	depth: 165px;
 	border-radius: 100%;
 }
+
 </style>
+
+<script
+	src="<%=request.getContextPath()%>/front_end/plan/js/UploadPlan_Cover.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/plan/css/img.css">
+
+
 
 <!-- navbar setting -->
 <style type="text/css">
@@ -144,7 +158,13 @@ a,.fontstyle  {
 					<tr>
 						<td>計畫封面</td>
 						<td>
-							<img class="plan_cover" src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+							<img class="plan_cover" src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}"><br>
+<!-- 	 						<label class="btn btn-info btn-lg">  -->
+<!-- 								<input type="file" id="upload_img" name="plan_cover" accept="image/*" -->
+<!-- 									onchange="openFile(event)" style="display: none;"/> -->
+<!-- 								<i class="fa fa-photo">　Replace</i> -->
+<!-- 							</label> -->
+	 					
 	 					</td>
 	<!-- 					<td><input type="TEXT" name="ename" size="45" -->
 	<%-- 						value="<%=empVO.getEname()%>" /></td> --%>
@@ -183,12 +203,8 @@ a,.fontstyle  {
 						</select></td>
 					</tr>
 					<tr>
-						<td>瀏覽數</td>
-						<td><%=planVO.getPlan_view()%></td>
-					</tr>
-					<tr>
 						<td>執行狀態</td>
-						<td>
+						<td align="center">
 							<select size="1" name="plan_status">
 								<c:if test="${planVO.plan_status =='PLANST0'}"><option>進行中</option><option>已完成</option></c:if>
 								<c:if test="${planVO.plan_status =='PLANST1'}"><option>已完成</option></c:if>
@@ -197,7 +213,7 @@ a,.fontstyle  {
 					</tr>
 					<tr>
 						<td>隱私權</td>
-						<td>
+						<td align="center">
 							<select size="1" name="plan_status">
 							
 								<option value="planVO.plan_privacy">公開</option>
@@ -207,6 +223,18 @@ a,.fontstyle  {
 <%-- 								<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> --%>
 <%-- 								<c:if test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if> --%>
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>瀏覽數</td>
+						<td><%=planVO.getPlan_view()%></td>
+					</tr>
+					<tr>
+						<td colspan="2"  align="center">
+							<label class="btn btn-info btn-lg">
+								<i class="fa fa-upload">　Update</i>
+								<input type="hidden" name="action" value="update"/>
+							</label>
 						</td>
 					</tr>
 				</table>
@@ -233,10 +261,15 @@ a,.fontstyle  {
 	<!-- 						</td> -->
 
 
+<br><br><br>本網頁的路徑:<br><b>
+   <font color=white size=5px>request.getServletPath():→ <%=request.getServletPath()%></font><br>
+   <font color=white size=5px>request.getRequestURI():→  <%=request.getRequestURI()%></font> </b>
 	<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 	<!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
+
+
 
 </body>
 

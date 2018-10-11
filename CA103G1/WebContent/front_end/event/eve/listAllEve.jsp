@@ -38,9 +38,6 @@
 
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
    <script src="<%=request.getContextPath() %>/front_end/event/eve/js/listAllView.js"></script>
-   <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
-  <!-- Script: Animated entrance -->
-  <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   
   <!-- datetimepicker-->	
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -49,6 +46,12 @@
  
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/eve/css/listAllView.css">
+  
+  <!-- navbar setting -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
   
   
     
@@ -65,63 +68,70 @@
 	}
 	
   </style>  
+  
+  <!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
+</style>
     
 </head>
 
 <body class="text-center">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+   <!-- Navbar --> 
+ <nav   class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <span class="navbar-text"></span>
     <div class="container">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
-        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="#">WORK it OUT</a>
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#schedule">WorkOutPlan</a>
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="#speakers">Course</a>
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
           </li>
-          <li class="nav-item mx-2 btn-lg dropdown" id="navUserBtn">
-            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">User&nbsp;
-              <i class="fa fa-caret-down dropbtn"></i>
-            </a>
-            <div class="dropdown-content" id="myDropdown">
-              <a href="#">
-                <i class="fa fa-file">&nbsp;&nbsp;個人頁面</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-calculator">&nbsp;&nbsp;計畫</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-users" aria-hidden="true">&nbsp;&nbsp;好友</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-film" aria-hidden="true">&nbsp;&nbsp;課程</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-hand-spock-o" aria-hidden="true">&nbsp;&nbsp;活動</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;貼文</i>
-              </a>
-              <a href="#">
-                <i class="fa fa-sticky-note" aria-hidden="true">&nbsp;&nbsp;行事曆</i>
-              </a>
-              <a href="#">登出</a>
-            </div>
-          </li>
+         
+          <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >
+          <c:if test="${memVO!=null}">
+	          <li class="nav-item mx-2 btn-lg dropdown" >
+	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
+	              <i class="fa fa-caret-down dropbtn"></i>
+	            </a>
+	            <div class="dropdown-content" id="myDropdown">
+	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp個人頁面</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp計畫</font></i></a>
+	              <a href="#"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp課程</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp活動</font></i></a>
+	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
+	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp行事曆</font></i></a>
+	               
+	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
+	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbsp教練管理</font></i></a>
+	               </c:if>
+	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp會員資料</font></i></a>
+	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout"><font class="fontstyle">登出</font></a>
+	            </div>
+	          </li>
+          </c:if>
         </ul>
-        <a class="btn btn-lg btn-primary" href="#" id="registerBtn">Register now</a>
+        
+         <c:if test="${memVO==null}">
+        	<a class="btn btn-lg btn-primary" href="<%=request.getContextPath() %>/Mem_Login_Signup.jsp" id="registerBtn">Register now</a>
+		 </c:if>      	
       </div>
-    </div>
+    </div>	
   </nav>
+
   <!-- Cover -->
   <div class="align-items-center  section-fade-in-out " id="coverfirstImg" style="background: url(&quot;<%=request.getContextPath() %>/front_end/event/eve/assets/conference/cover_marathon.png&quot;);"> 
   </div>
@@ -695,6 +705,9 @@ $('#eve_enddate').datetimepicker({
   <button id="goTopBtn" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:80px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
   GoTop </button>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASI3sgz6P-wisrPe6D4N59Ro0RrodnHJM&callback=initMap" async defer></script>  
+  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 </body>
 
 </html>

@@ -154,7 +154,7 @@
 				<!-- Workoutplan-->
 					<li class="nav-item dropdown" ><a
 						class="nav-link dropdown-toggle personalnavlink" aria-expanded="false"
-						aria-haspopup="true" data-toggle="dropdown" rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=workoutplan#personalnav"
+						aria-haspopup="true" data-toggle="dropdown" rel="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp?perpageloc=workoutplan#personalnav"
 						id="workoutplan" style="cursor: pointer;"> <i class="fa fa-calculator"></i>
 							&nbsp; WorkOutPlan &nbsp;
 					</a>

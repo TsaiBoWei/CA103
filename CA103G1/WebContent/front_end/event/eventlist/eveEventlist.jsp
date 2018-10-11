@@ -35,11 +35,6 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-
 
 
 <link rel="stylesheet" type="text/css"
@@ -53,6 +48,12 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/event/eventlist/css/eveEventlist.css">	
 <link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/event/evechat/css/eveChat.css">
+
+<!-- navbar setting -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 	
 <style>
  
@@ -65,6 +66,14 @@ body {
 
 
 
+</style>
+
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
+}
 </style>
 
 

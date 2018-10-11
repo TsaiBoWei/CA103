@@ -91,10 +91,7 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/calendar/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/calendar/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/front_end/calendar/jquery-ui-1.12.1.custom/jquery-ui.structure.css">
-    <!-- Script: Make my navbar transparent when the document is scrolled to top -->
-    <script src="<%=request.getContextPath() %>/js/navbar-ontop.js"></script>
-    <!-- Script: Animated entrance -->
-    <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
+
     <!-- lightcase settings -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <!--  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
@@ -110,6 +107,12 @@
     <script src="<%=request.getContextPath() %>/front_end/calendar/js/fullcalendar.js">
     </script>
     <script src="<%=request.getContextPath() %>/front_end/calendar/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    
+    <!-- navbar setting -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+	<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+	<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
     <style>
         /*頁面設定*/
 
@@ -132,6 +135,14 @@
            height: 151px;   /* height:  151px; */
   }  
   </style>
+  
+  <!-- navbar setting -->
+<style type="text/css">
+
+	a,.fontstyle  {
+		font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	}
+</style>
 </head>
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
