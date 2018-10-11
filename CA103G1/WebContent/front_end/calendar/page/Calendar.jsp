@@ -22,10 +22,11 @@
 	MemVO memVO = (MemVO) session.getAttribute("memVO");  
  %>
 <% /*以會員id取出對應的evelist*/
-	List<EventListVO> list =evelistSvc.getEveListsByMem(memVO.getMem_id());
+ 	List<EventListVO> list =evelistSvc.getEveListsByMem(memVO.getMem_id()); 
 %>
+
 <%-- <% /*以會員id(先用假資料)取出對應的evelist*/ --%>
-<!-- // 	List<EventListVO> list =evelistSvc.getEveListsByMemToCal("M000001"); -->
+<!-- // 	List<EventListVO> list =evelistSvc.getEveListsByMemToCal("M000001");  -->
 	
 <%-- %> --%>
 
@@ -39,16 +40,16 @@
 %>
 
 
-<%-- <%-- <% /***假資料會員*****/ --%>
-<!-- // 	List<PlanVO> listPlan = planSvc.getPlansByMem("M000001"); -->
+<!--  /***假資料會員*****/ -->
+<%-- <%	List<PlanVO> listPlan = planSvc.getPlansByMem("M000001");  --%>
 
 <%-- %> --%>
 
 <%
-List<PlanVO> listPlan = planSvc.getPlansByMem(memVO.getMem_id());
+ List<PlanVO> listPlan = planSvc.getPlansByMem(memVO.getMem_id());
 
 %>
-
+//課程 暫不做
 <%-- <% --%>
 <!-- // 	List<PurchCourVO> listPurchCour = purSvc.findByMemToCal("M000001"); -->
 <!-- // 	System.out.println(listPurchCour); -->
