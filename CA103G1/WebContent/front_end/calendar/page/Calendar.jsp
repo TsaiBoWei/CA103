@@ -22,7 +22,7 @@
 	MemVO memVO = (MemVO) session.getAttribute("memVO");  
  %>
 <% /*以會員id取出對應的evelist*/
-  	List<EventListVO> list =evelistSvc.getEveListsByMem(memVO.getMem_id());
+  	List<EventListVO> list =evelistSvc.getEveListsByMemToCal(memVO.getMem_id());
  %> 
 
 <%-- <% /*以會員id(先用假資料)取出對應的evelist*/ --%>

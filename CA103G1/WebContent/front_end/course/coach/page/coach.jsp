@@ -248,7 +248,7 @@ body {
                     <div class="col-md-11 commentbottomline px-0">
                       <div class="replynametext text-left ">
                         <div class="col-md-12  mt-2">
-                          <p class="h5 text-primary courboartitleword"><%=owncourlistVO.getCname()%>&nbsp; <i class="fas fa-pencil-alt"></i>&nbsp;<span ><i class="fas fa-bullhorn" id="<%=broadcastbtn%>" data-toggle="modal" data-target="#broadcastform"></i></span></span></p>
+                          <p class="h5 text-primary courboartitleword"><%=owncourlistVO.getCname()%>&nbsp;<a href="<%=request.getContextPath()%>/courlist/courlist.do?action=getOne_For_Update&cour_id=<%=owncourlistVO.getCour_id()%>"> <i class="fas fa-pencil-alt"></i>&nbsp;</a><span ><i class="fas fa-bullhorn" id="<%=broadcastbtn%>" data-toggle="modal" data-target="#broadcastform"></i></span></span></p>
                         </div>
                       <script type="text/javascript">
                       $("<%=broadcastbtnid%>").click(function () {
