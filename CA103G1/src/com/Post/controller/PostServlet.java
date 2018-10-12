@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.Mgr.model.MgrVO;
 import com.Post.model.*;
 
 public class PostServlet extends HttpServlet {
@@ -207,10 +209,11 @@ public class PostServlet extends HttpServlet {
 			req.setAttribute("errorMsgs",errorMsgs);
 			try {
 				/***************************1.接收請求參數****************************************/
+//				
+				String mem_id = req.getParameter("mem_id");
 				
-//				String mem_id = req.getParameter("mem_id");
 				
-				String mem_id = "M000001";//先寫死
+//				String mem_id = "M000001";//先寫死
 				
 				String post_title =req.getParameter("post_title");
 				if(post_title == null||post_title.trim().length()==0) {					

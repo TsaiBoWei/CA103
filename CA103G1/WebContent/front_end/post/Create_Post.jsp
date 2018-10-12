@@ -129,7 +129,7 @@
             <div class="mt-4">
           	 
               <input type="hidden" name="action" value="insert">
-   			 	
+   			 	 <input type="hidden" name="mem_id" value="${memVO.mem_id }">
               <button id="sendPost" type="submit" class="btn btn-primary my-2">°e¥X</button>
                
             </div>
