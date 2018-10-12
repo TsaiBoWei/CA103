@@ -29,6 +29,11 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
+<!-- navbar setting -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
@@ -100,7 +105,7 @@ a,.fontstyle  {
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
 	<div class="form-control" style="background-color: #1f1f1f">
-		<h5>我的計畫清單，可供修改、刪除。</h5>
+		<h5>全部計畫清單，可供修改、刪除。</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>

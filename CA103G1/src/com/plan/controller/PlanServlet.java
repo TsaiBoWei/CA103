@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.mem.model.MemVO;
 import com.plan.model.PlanService;
 import com.plan.model.PlanVO;
 
@@ -55,12 +56,12 @@ public class PlanServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				// mem_id
-				HttpSession session = req.getSession();
-				String mem_id = (String) session.getAttribute("mem_id");
-				if (mem_id == null || mem_id.trim().length() == 0) {
+//				HttpSession session = req.getSession();
+				MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+				if (memVO.getMem_id() == null || memVO.getMem_id().trim().length() == 0) {
 					errorMsgs.add("未登入");
 				}
-
+				String mem_id = memVO.getMem_id();
 				// plan_name
 				String plan_name = req.getParameter("plan_name");
 				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
@@ -163,7 +164,7 @@ public class PlanServlet extends HttpServlet {
 						plan_privacy, plan_vo, plan_view);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/plan/plan_view.jsp";
+				String url = "/front_end/plan/My_Plan_myself.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

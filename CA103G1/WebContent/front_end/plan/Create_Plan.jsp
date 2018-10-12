@@ -8,8 +8,7 @@
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 
-	MemVO memVO = (MemVO) request.getAttribute("memVO");
-	session.setAttribute("memVO", memVO);
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	
 %>
 
