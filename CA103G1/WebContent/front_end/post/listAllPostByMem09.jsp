@@ -186,10 +186,10 @@
             <div class="col-6  align-self-end text-right">
               <ul class="list-inline postrectbar">
                 <li class="list-inline-item">
-                  <p class="h4">
-                  ${postVO.post_view} &nbsp;
-                    <i class="fa fa-eye"></i>
-                    
+                  <p class="h6">
+                   &nbsp;
+                    <i class="fa fa-eye" style="font-size:17px"> &nbsp;</i>
+                    ${postVO.post_view}
                    </p>
                 </li>
 <!--                 <li class="list-inline-item"> -->
@@ -201,8 +201,8 @@
                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/post/post.do" style="margin-bottom: 0px;">
 <!-- 			     <input type="submit" class="far fa-trash-alt" value=null> -->				 
 					<p class="h4">					
-					<button type="submit" class="btn  py-1 mb-2 mt-1">
-					<i class="far fa-trash-alt"></i>					
+					<button type="submit" class="btn  py-1 mb-2 mt-1" style="background:none;width:5px">
+					<i class="far fa-trash-alt text-light"></i>					
 					</button>
 					</p>								
 			     <input type="hidden" name="post_id"      value="${postVO.post_id}">			  
@@ -215,8 +215,8 @@
                 <li class="list-inline-item">
                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/post/post.do" style="margin-bottom: 0px;">
                   <p class="h4">              
-                  <button type="submit" class="btn  py-1 mb-2 mt-1">
-                    <i class="far fa-edit"></i>                  
+                  <button type="submit" class="btn  py-1 mb-2 mt-1" style="background:none;width:5px">
+                    <i class="far fa-edit text-light"></i>                  
                   </button>            
                   </p>
                   
