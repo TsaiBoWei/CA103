@@ -398,5 +398,19 @@ public class PlanServlet extends HttpServlet {
 			}
 
 		}
+	
+	
+		//會員未登入
+		
+		if("VisitorPage".equals(action)) {
+			System.out.println("我在這");
+			String url = "/Mem_Login_Signup.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
+	
+	
+	
 	}
 }

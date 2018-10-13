@@ -3,12 +3,18 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.plan.model.*"%>
 <%@ page import="com.mem.model.*" %>
+
 <%
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
+
 	PlanService planSvc = new PlanService();
 	List<PlanVO> list = planSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
 
+<c:if test="${memVO.mem_id ==null }" >
+ AAA
+</c:if>
 <jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/>
 
@@ -172,11 +178,13 @@ a,.fontstyle  {
 					<td>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/plan/plan.do" 
 							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> 
-							<input type="hidden" name="plan_id" value="${planVO.plan_id}">
-							<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
-							<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
-							<input type="hidden" name="action" value="getOne_For_Update">
+							<c:if test="${memVO.mem_id !=null }">
+								<input type="submit" value="修改"> 
+								<input type="hidden" name="plan_id" value="${planVO.plan_id}">
+								<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+								<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+								<input type="hidden" name="action" value="getOne_For_Update">
+							</c:if>
 						</FORM>
 					</td>
 					<td>
