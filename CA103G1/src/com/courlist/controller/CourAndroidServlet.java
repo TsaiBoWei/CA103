@@ -1,36 +1,73 @@
 package com.courlist.controller;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import javax.servlet.annotation.WebServlet;
 import com.courlist.*;
-import com.courunit.*;
+import com.courunit.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import com.purchcour.model.*;
+
+
 import com.courlist.model.*;
 
-@WebServlet("/CourAndroidServlet")
+@WebServlet(name="CourAndroidServlet",urlPatterns= {"/CourAndroidServlet"})
 public class CourAndroidServlet  extends HttpServlet  {
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CA103G1");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private String TAG = "CourAndroidServlet";
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
+		String id = req.getParameter("cour_unit_id");
+		System.out.println("id" + id);
+		InputStream is = findMp4ById(id);
+		int size = is.available();
+		System.out.println(size);
+		byte[] buffer = new byte[size];
+		is.read(buffer, 0, size);
+
+		res.setContentType("video/mp4");
+		res.setContentLength(buffer.length);
+		ServletOutputStream out = res.getOutputStream();
+		out.write(buffer);
+		out.close();
 	}
 
 	@Override
@@ -66,6 +103,13 @@ public class CourAndroidServlet  extends HttpServlet  {
 			writeText(res, courlists == null? "" : gson.toJson(courlists));
 		}
 		
+		CourunitService unitser = new CourunitService();
+		if ( "get_cour_units_by_cour_id".equals(action) ) {
+			String cour_id = jsonObject.get("cour_id").getAsString();
+			List<CourunitVO> courunitVOs = unitser.getCourUnit(cour_id);		
+			writeText(res, courunitVOs == null? "" : gson.toJson(courunitVOs));
+		}
+		
 		if ( "getImage".equals(action) ) {
 			OutputStream os = res.getOutputStream();
 			String cour_id = jsonObject.get("id").getAsString();
@@ -81,5 +125,41 @@ public class CourAndroidServlet  extends HttpServlet  {
 		out.print(outText);
 		out.close();
 		System.out.println("outText: " + outText);
+	}
+	
+	public InputStream findMp4ById(String id) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}		
+		String sql = "SELECT COUR_FILM_BLOB FROM COURUNIT WHERE COUR_UNIT_ID = ?";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = ds.getConnection();			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// video file
+				InputStream videoStream = rs.getBinaryStream(1);
+				return videoStream;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch ( Exception e ) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 }
