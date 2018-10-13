@@ -134,6 +134,27 @@
   .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
            height: 151px;   /* height:  151px; */
   }  
+  
+  #calendar1{
+  background-color: rgba(204, 204, 204,0.2);
+  }
+   .fc th, .fc td{ 
+   border:0.8px solid rgba(221, 221, 221,0.8); 
+  	
+   } 
+   .fc .fc-row .fc-content-skeleton table, .fc .fc-row .fc-content-skeleton td, .fc .fc-row .fc-helper-skeleton td {
+    background: none;
+    border-color: transparent;
+}
+  .fc-state-hover, .fc-state-down, .fc-state-active, .fc-state-disabled, .fc-state-default {
+    color: rgba(255,255,255,1);
+    background-color: rgba(68,68,68,0);
+    background-image: linear-gradient(to bottom, rgba(68, 68, 68, 0.8), rgba(68, 68, 68, 0.8));
+}
+/* background-image: linear-gradient(to bottom, rgba(31, 31, 31, 0.8), #e6e6e6); */
+fc-icon fc-icon-left-single-arrow{
+	color: rgba(0,0,0,1);
+}
   </style>
   
   <!-- navbar setting -->
@@ -163,7 +184,7 @@
         <div class="container">
             <div class="row">
                 <!--行事曆-->
-                <div class="col-md-12 cal1" id="calendar1"></div>
+                <div class="col-md-12 cal1 py-4 px-3" id="calendar1"></div>
                 <!-- 計畫列表-->
                   
               <div class="dialog_inpu" id="evedialog" title="My dialog" style="display:none">
@@ -433,6 +454,7 @@
                     editable: true,
                     height: 650,
                     width: 500,
+                    
                     eventLimit: true,
                     nextDayThreshold: "00:00:00",
                     header: {
@@ -445,14 +467,15 @@
                     eventSources: [
                     	{
                     		events: events,
-                    		 color: 'green',
+                    		 color: 'rgba(130, 179, 183,0.5)',
                     		 
                     		 editable: false
                     	},
                     	{
                     		
                     		events:plan,
-                    		 color: 'red',
+                    		 color: 'rgba(170, 183, 184,0.5)',
+                    		 
                     		 
                     	},
                     	
