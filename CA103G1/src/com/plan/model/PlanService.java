@@ -46,8 +46,6 @@ public class PlanService {
 		planVO.setPlan_status(plan_status);
 		planVO.setPlan_id(plan_id);
 		dao.update(planVO);
-		System.out.println(plan_vo);
-		System.out.println("testing2");
 		return planVO;
 	}
 

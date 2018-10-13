@@ -10,12 +10,12 @@
 	pageContext.setAttribute("list", list);
 	
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
-	pageContext.setAttribute("memVO",memVO);
+// 	pageContext.setAttribute("memVO",memVO);
 	
 %>
 
-<jsp:useBean id="sptypeSvc" scope="page"
-	class="com.sptype.model.SptypeService" />
+<jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
+<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/>
 
 <%-- All DB Data --%>
 <!DOCTYPE html>
@@ -50,14 +50,14 @@
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 
-<style>
+<style> 
 /*頁面設定*/
 body {
 	overflow-x: hidden;
 }
 
 table {
- 	width: 1800px; 
+ 	width: 1900px; 
 /* 	background-color: #E0FFFF; */
  	color: #FFFFFF; 
 	font-size: 18px;
@@ -68,9 +68,12 @@ table {
 table, th, td {
 	border: 1px solid #00FFFF;
 }
-
+ 
 th, td {
-	padding: 8px;
+	padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 0.5px;
+    padding-left: 0.5px;
 	text-align: center;
 }
 
@@ -106,7 +109,7 @@ a,.fontstyle  {
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
 	<div class="form-control" style="background-color: #1f1f1f">
-		<h5>我的計畫清單，可供修改、刪除。</h5>
+		<h5>我的計畫清單，可供修改、刪除。5</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -143,7 +146,14 @@ a,.fontstyle  {
 					</td>
 					<td>${planVO.plan_name}</td>
 					<td>${planVO.plan_id}</td>
-					<td>${planVO.mem_id}</td>
+					<td>
+						<c:forEach var="memVO" items="${memSvc.all}">
+							<c:if test="${planVO.mem_id == memVO.mem_id}">
+								${memVO.mem_name }
+							</c:if>
+						</c:forEach> 
+						
+					</td>
 					<td>${planVO.plan_vo}</td>
 					<td>${planVO.plan_start_date}</td>
 					<td>${planVO.plan_end_date}</td>
@@ -167,30 +177,35 @@ a,.fontstyle  {
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/plan/plan.do"
 							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="getOne_For_Update">
+							<input type="submit" value="修改"> 
+							<input type="hidden" name="plan_id" value="${planVO.plan_id}">
+							<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+							<input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
 					<td>
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/plan/plan.do"
 							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden"
-								name="plan_id" value="${planVO.plan_id}"> <input
-								type="hidden" name="action" value="delete">
+							<input type="submit" value="刪除"> 
+							<input type="hidden" name="plan_id" value="${planVO.plan_id}">
+							<input type="hidden" name="action" value="delete">
 						</FORM>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<%@ include file="file/page2.file"%>
+<font color=white size=5px>request.getServletPath():→ <%=request.getServletPath()%></font><br>
+<font color=white size=5px>request.getRequestURI():→  <%=request.getRequestURI()%></font> </b>
 	</div>
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 
+	
 </body>
 
 

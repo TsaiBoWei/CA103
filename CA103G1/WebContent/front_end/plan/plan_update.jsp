@@ -6,17 +6,13 @@
 <%@ page import="com.mem.model.*" %>
 
 <%
-	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
-	pageContext.setAttribute("planVO", planVO);
+	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	
-// 	MemVO memVO = (MemVO) session.getAttribute("memVO");
-	MemVO memVO = new MemVO();
-	memVO.setMem_id("M000002");
-	pageContext.setAttribute("memVO",memVO); 
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	
-	PlanService planSvc = new PlanService();
-	List<PlanVO> list = planSvc.getAll();
-	pageContext.setAttribute("list", list);
+// 	PlanService planSvc = new PlanService();
+// 	List<PlanVO> list = planSvc.getAll();
+// 	pageContext.setAttribute("list", list);
 %>
 
 
@@ -131,7 +127,7 @@ a,.fontstyle  {
 					</c:forEach>
 				</ul>
 			</c:if>
-			<form method="post" action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
+			<form method="post" action="<%=request.getContextPath()%>/plan/plan.do" name="form1"  enctype="multipart/form-data">
 				<table>
 	
 					<tr>
@@ -142,11 +138,11 @@ a,.fontstyle  {
 					<tr>
 						<td>計畫創建人</td>
 						<td>
-							<%= planVO.getMem_id() %>
+<%-- 							<%= memVO.getMem_id() %> --%>
 <%-- 							<%= memVO %> --%>
 <%-- 							${ memVO }... --%>
-<%-- 							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/> --%>
-<%-- 							${name} --%>
+							<c:if test="${planVO.mem_id == memVO.mem_id}" var="name"/>
+							${memVO.mem_name}
 <%-- 							<%= memVO.getMem_name() %> --%>
 						</td>
 					</tr>
@@ -224,7 +220,7 @@ a,.fontstyle  {
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr> 
 						<td>瀏覽數</td>
 						<td><%=planVO.getPlan_view()%></td>
 					</tr>

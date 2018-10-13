@@ -3,10 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.plan.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
 <%
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
+	
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
 
 <jsp:useBean id="sptypeSvc" scope="page"
@@ -22,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 <link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-<title>Jennifer Lawernce</title>
+<title>Work It Out</title>
 
 <!-- CSS dependencies -->
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

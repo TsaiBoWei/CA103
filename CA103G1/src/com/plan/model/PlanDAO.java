@@ -117,17 +117,6 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(7, planVO.getPlan_privacy());
 			pstmt.setString(8, planVO.getPlan_status());
 			pstmt.setString(9, planVO.getPlan_id());
-			System.out.println("包住");
-			System.out.println(planVO.getPlan_name());
-			System.out.println(planVO.getPlan_vo());
-			System.out.println(planVO.getPlan_cover());
-			System.out.println(planVO.getPlan_start_date());
-			System.out.println(planVO.getPlan_end_date());
-			System.out.println(planVO.getSptype_id());
-			System.out.println(planVO.getPlan_privacy());
-			System.out.println(planVO.getPlan_status());
-			System.out.println(planVO.getPlan_id());
-			System.out.println("包住2");
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
