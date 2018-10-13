@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.plan.model.*;
+import com.eventlist.model.*;
 
 @WebServlet("/PlanAndroidServlet")
 public class PlanAndroidServlet extends HttpServlet {
@@ -44,7 +45,6 @@ public class PlanAndroidServlet extends HttpServlet {
 			jsonIn.append(line);
 		
 		System.out.println("task" + TAG +"input: " + jsonIn);
-		System.out.println("input: " + jsonIn);
 						
 		List<PlanVO> planList = new ArrayList<PlanVO>();
 		List<EventVO> eventList = new ArrayList<EventVO>();
@@ -60,13 +60,33 @@ public class PlanAndroidServlet extends HttpServlet {
 		if ( "get_plan_by_mem_id".equals(action) ) {
 			PlanDAO plandao = new PlanDAO();
 			planList = plandao.getPlansByMem(mem_id);
+			for ( PlanVO vo : planList ) {
+				vo.setPlan_cover(null);
+			}
 			writeText(res, gson.toJson(planList));
 		}
 		
+		// 會員已加入的活動, 只需要取得其標題及日期即可
 		if ("get_eve_by_mem_id".equals(action)) {
-			EveService eveserv = new EveService();
-			eventList = eveserv.getEvesByMem(mem_id);
-			writeText(res, gson.toJson(eventList));
+			EventlistService evelistser = new EventlistService();
+			EveService eventService = new EveService();
+			
+			List<EventListVO> eventlistVOs = evelistser.getEveListsByMem(mem_id);
+			List<EventVO> eventVOs = new ArrayList<EventVO>();
+			
+			for ( EventListVO vo : eventlistVOs ) {
+				EventVO run = eventService.getOneEve(vo.getEve_id());
+				if ( run != null ) {
+					run.setEve_content("");
+					run.setEve_photo(null);
+					eventVOs.add(run);
+				}
+			}			
+			writeText(res, gson.toJson(eventVOs));
+		}
+		
+		if ("getImage".equals(action) ) {
+			
 		}
 	}
 		
