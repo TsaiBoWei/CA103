@@ -9,7 +9,7 @@
 <%@ page import="com.mem.model.*"%>
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
-
+ <jsp:useBean id="now" class="java.util.Date" />
 <%	
 // 	 ­º­¶´ú¸Õ
 	MemVO memVO=(MemVO)session.getAttribute("memVO");
@@ -31,7 +31,7 @@
 // 	List<PlanVO> planlist = planSvc.getPlansByMem("M000001");
 // 	pageContext.setAttribute("planlist",planlist);
 %>
-<jsp:useBean id="now" class="java.util.Date" />
+
 
 <!DOCTYPE html>
 <html>
@@ -108,20 +108,14 @@
               <div class="card-body card-body-custom">
                 <h4 class="text-primary text-left">Plan Today</h4>
                 <c:forEach var="planVO" items="${planlist}" >
-<%--                 	<c:set var="today" value="<%=new Date().getTime() %>"/> --%>
-<%--                 	<c:set var="startday" value="${planVO.plan_start_date}"/> --%>
-<%--                 	<c:set var="endday" value="${planVO.plan_end_date}"/> --%>
-               
-<%--                 	<c:choose> --%>
-<%--                 		<c:when test="${today>=endday||today<=startday}"> --%>
+
                 <h6 class="text-muted  text-left"></h6>
+               
+			<c:if test="${((now.time ge (planVO.plan_start_date).time)) && ((now.time le (planVO.plan_end_date).time)) }">			
                 <p class="text-left text-white plan_vo">${planVO.plan_name }</p>
-<%--                 		</c:when> --%>
-<%--                 	<c:otherwise> --%>
-<!--                 		<h6 class="text-muted  text-left">Today has't plan.</h6> -->
-<!--                 		<p class="text-left text-white plan_vo"></p> -->
-<%--                 	</c:otherwise> --%>
-<%--                 	</c:choose> --%>
+			</c:if>
+
+
                 </c:forEach>
               </div>
             </div>
