@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -69,10 +69,16 @@
       height: 200px;
       width: 270px
     }
+    input.btn{
     
-    
+    	z-index:2 !important    	
+    }
+     a.btn{
+    position:relative;
+    	z-index:2 !important    	
+    }
   </style>
-<title>Insert title here</title>
+
 </head>
 <body class="text-center">
 <div class="container">
@@ -83,6 +89,7 @@
         </ol>
       </nav>
     </div>
+    
       <div class="card bg-dark">
         <%-- --c:foreach var="coachVO" items="${coachSvc.all}"> </c:foreach> --%>
         <table class="table table-hover table-striped table-bordered" style="table-layout:fixed;word-wrap:break-word">
@@ -100,8 +107,8 @@
               <th style="width:15%">¼f®Öµ²ªG</th>
             </tr>
           </thead>
- 
-          <c:forEach var="eventVO" items="${list}" >
+ 	<%@ include file="page1.file" %> 
+          <c:forEach var="eventVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
           
      
           <tbody>
@@ -131,8 +138,11 @@
           </tbody>
           </c:forEach>
         </table>
+       
       </div>
+       <%@ include file="page2.file" %>
   </div>
+  
  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
