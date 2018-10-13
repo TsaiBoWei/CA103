@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
@@ -57,6 +57,14 @@
       height: 200px;
       width: 270px
     }
+      input.btn{
+    
+    	z-index:2 !important    	
+    }
+     a.btn{
+    position:relative;
+    	z-index:2 !important    	
+    }
   </style>
 
 <title>Insert title here</title>
@@ -80,21 +88,21 @@
           
             <tr>
               <th style="width:15%">教練編號</th>
-              <th style="width:15%%">教練姓名</th>
+              <th style="width:15%">教練姓名</th>
               <th style="width:50%">教練介紹</th>
               <th style="width:20%">審核結果</th>
             </tr>
           </thead>
-       
+       <%@ include file="page1.file" %> 
           <c:forEach var="coachVO" items="${list}" >
           
       
        
-          <tbody> 
-            <tr>
+          <tbody > 
+            <tr >
               <td>${coachVO.coa_id}</td>
               <td>${memSvc.getOneMem(coachVO.mem_id).mem_name}</td>
-              <td><div style="overflow: auto;width:100%; max-height:55px">${coachVO.coa_text}</div></td>
+              <td><div style="overflow: auto;width:100%; max-height:100px">${coachVO.coa_text}</div></td>
       		
               <td>
             	<c:choose>
@@ -113,7 +121,9 @@
            </c:forEach>
         </table>
       </div>
+      <%@ include file="page2.file" %>
   </div>
+  
  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

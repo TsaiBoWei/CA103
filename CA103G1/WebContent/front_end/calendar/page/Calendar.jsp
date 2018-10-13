@@ -152,9 +152,7 @@
     background-image: linear-gradient(to bottom, rgba(68, 68, 68, 0.8), rgba(68, 68, 68, 0.8));
 }
 /* background-image: linear-gradient(to bottom, rgba(31, 31, 31, 0.8), #e6e6e6); */
-fc-icon fc-icon-left-single-arrow{
-	color: rgba(0,0,0,1);
-}
+
   </style>
   
   <!-- navbar setting -->
@@ -268,6 +266,7 @@ fc-icon fc-icon-left-single-arrow{
             <input type="hidden" name="plan_vo" id="plan_vo">
 <!--           <textarea class="form-control" id="plan_vo" name="plan_vo" rows="5"></textarea> -->
         </div>
+        <div id="planurl"></div>
        
         <input type="submit" id="updatePlan" name="changePlan" value="修改計畫" class="m-1 btn btn-info">
         <input type="hidden" name="CalChangePlan" value="Cal_Change_Plan" >
@@ -341,7 +340,14 @@ fc-icon fc-icon-left-single-arrow{
 	
     <!-- JavaScript dependencies -->
     <script>
-    
+    $(document).ready(function() {
+        $(".cancel").click(function() {
+           
+             $(location).attr('href', 'https://fontawesome.com/icons/play-circle?style=regular');
+
+                
+                 });
+    });
     
     $.datetimepicker.setLocale('zh');
     
@@ -401,7 +407,8 @@ fc-icon fc-icon-left-single-arrow{
     	        %>
     	        description: '<%=dest%>',
     	        planidToDelete:'<%=planCal.getPlan_id()%>',
-    	      
+    	        planurl:'<a href="https:www.google.com">11</a>',
+    	      	url:'',
     	    	},
     	    	
     		
@@ -417,6 +424,7 @@ fc-icon fc-icon-left-single-arrow{
     		{id:'cour0001',
     		title:'測試',
     		start:'2018-10-07',
+    		
     		},
     			
     			
@@ -490,7 +498,7 @@ fc-icon fc-icon-left-single-arrow{
                     	
                     ],
                     eventClick: function(calEvent, jsEvent, view) { //計畫條點選事件，表示點擊計畫條之後要幹嘛
-                      
+                    	 
                     	var eventcheck = calEvent.id;
                     
                     if(eventcheck.indexOf('E00')>-1){
@@ -514,7 +522,7 @@ fc-icon fc-icon-left-single-arrow{
                         $("#eve_enddate").html(moment(calEvent.end).format("YYYY-MM-DD hh:mm A"));
                         $("#eve_chargeToback").val(calEvent.moneytobackend);
                         $("#eve_idTochange").val(calEvent.eveidtochange);
-                        
+                       
                         $('#evedialog').dialog('open');//對話框開啟
                         
                     }else if(eventcheck.indexOf('PLAN00')>-1){
@@ -532,6 +540,7 @@ fc-icon fc-icon-left-single-arrow{
                     	     $("#plan_end_date").val(moment(calEvent.end).format("YYYY-MM-DD hh:mm"));
                     	     $("#plan_vo").html(calEvent.description);
                     	     $("#plan_idToDelete").val(calEvent.planidToDelete);
+                    	     $("#planurl").html(calEvent.planurl);
                     	     $('#plan_end_date').datetimepicker({
                     	         theme: '',              //theme: 'dark',
                     	  	       timepicker:true,       //timepicker:true,
@@ -540,7 +549,7 @@ fc-icon fc-icon-left-single-arrow{
                     	  		  // value:   new Date(),
                     	         //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
                     	         //startDate:	            '2017/07/10',  // 起始日
-                    	         //minDate:               '-1970-01-01', // 去除今日(不含)之前
+                    	         minDate:               '-1970-01-01', // 去除今日(不含)之前
                     	         //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
                     	      });
                     	     $('#plan_start_date').datetimepicker({
@@ -551,7 +560,7 @@ fc-icon fc-icon-left-single-arrow{
                     	  		    // value:   new Date(),
                     	         //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
                     	         //startDate:	            '2017/07/10',  // 起始日
-                    	         //minDate:               '-1970-01-01', // 去除今日(不含)之前
+                    	         minDate:               '-1970-01-01', // 去除今日(不含)之前
                     	         //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
                     	      });
                     	     
@@ -595,11 +604,14 @@ fc-icon fc-icon-left-single-arrow{
                     		 
                     		 $('#courdialog').dialog('open');
                     		 
-                    	 }
+                    	 };
                     	 
-                    	 
+                    	 if (calEvent.url) {
+                             window.open(calEvent.url);
+                             return false;
+                         }
                     }
-
+                    
                    
                 });
 //             }());

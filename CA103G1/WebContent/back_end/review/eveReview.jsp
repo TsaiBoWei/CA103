@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -64,10 +64,15 @@
       width: 270px
     }
     
-    div>p{
+    div>p,li,span,td{
     color:#fff !important
     
     }
+    
+/*     .btn{ */
+/*     position: absolute */
+/*     	z-index:2 !important    	 */
+/*     } */
   </style>
 <title>¬¡°Ê¼f®Ö</title>
 </head>
@@ -104,7 +109,7 @@
   <!-- Personal Pic -->
   <!-- NavBar Personal-->
   <!-- Here you go -->
-  <div class="section-fade-in-out" id="mgrbackground">
+  <div class="section-fade-in-out" id="mgrbackground" style="z-index:1 !important">
     <div class="container">
       <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light m-2 w-100 bg-info" aria-label="breadcrumb">

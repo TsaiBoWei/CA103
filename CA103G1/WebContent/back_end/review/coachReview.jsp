@@ -59,6 +59,11 @@
       height: 200px;
       width: 270px
     }
+    
+    div>p,li,span{
+    color:#fff !important
+    
+    }
   </style>
 <title>±Ð½m¼f®Ö</title>
 </head>
