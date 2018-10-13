@@ -69,11 +69,74 @@ border:0px;
 text-align:center;
 }
 
-#map { height: 400px; }
+ 
+</style>
 
+<style type="text/css">
+    #map { height: 400px; }
 
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family:  "Montserrat","Arial","微軟正黑體","Microsoft JhengHei";
+        line-height: 30px;
+        padding-left: 10px;
+    }
 
-  
+    #floating-panel {
+        background: #fff;
+        padding: 5px;
+        font-family:  "Montserrat","Arial","微軟正黑體","Microsoft JhengHei";
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+    }
+
+     #right-panel {
+     	 font-size: 18px;
+        font-family:  "Montserrat","Arial","微軟正黑體","Microsoft JhengHei";
+        line-height: 30px;
+        margin-left: 0px;
+
+      }
+
+      #right-panel {
+        height: 400px;	
+        overflow-y: auto;
+      }
+      @media print {
+        #right-panel {        	 
+          float: none;
+          width: auto;
+        }
+      }
+
+      #mode,#start{
+      	height:36px;
+      	font-size: 20px;
+      	color:black;
+      	font-weight: bold;
+      }
+      strong,#routeBtn{
+      	color:black;
+      	font-size: 20px;
+      	font-weight: bold;
+      }
+
+      .rpanel_div{
+      	 padding-left: 0px;
+      }
+      
+      #mode{
+      	 font-family: 'FontAwesome', 'Second Font name';
+      }
+
 </style>
 
 <!-- navbar setting -->
@@ -398,8 +461,25 @@ a,.fontstyle  {
         </div>
         <h3 class="">活動地圖</h3>
         <div class="row">
-          <div class="col-md-10 offset-md-1" id="map"></div>
-        </div>
+			<div class="col-md-9">
+				<div id="floating-panel">
+				  <strong>路線查詢-</strong>
+				      <strong>從</strong>
+				      <input type="text"  size="8" value="目前位置" id="start">
+				      <select id="mode" >
+				      <option value="DRIVING">&#xf1b9</option>
+				      <option value="WALKING" style="font-size: 30px;">&#x1f6b6</option>
+				      <!-- <option value="BICYCLING">腳踏車</option> -->
+				      <option value="TRANSIT">&#xf238</option>
+				    </select>
+				    <button type="button" id="routeBtn">GO</button>
+				</div>				
+				<div id="map"></div>
+			</div>
+			<div class="col-md-3 rpanel_div">
+				<div id="right-panel"></div>
+			</div>
+		</div>
       </div>
     </div>
     
@@ -741,14 +821,19 @@ a,.fontstyle  {
 
 <!-- Google Map -->
 <script type="text/javascript">
-			var map;
-			var position = {
-			  lat: ${eveVO.eve_lat},
-			  lng: ${eveVO.eve_long}
-			};
+		   var map;
+		   var position = {
+							lat: ${eveVO.eve_lat},
+							lng: ${eveVO.eve_long}
+					      };
 			var contentString = '<h2 style="color:black!important;">${eveVO.eve_title}</h2>';
+			var start ;
+			
 			
 			function initMap() {
+			  var directionsDisplay = new google.maps.DirectionsRenderer;
+        	  var directionsService = new google.maps.DirectionsService;
+        	  
 			  map = new google.maps.Map(document.getElementById('map'), {
 			    zoom: 15,
 			    center: position
@@ -763,8 +848,62 @@ a,.fontstyle  {
 			
 			  });
 			  infowindow.open(map,marker);
+			  
+			  directionsDisplay.setMap(map);
+			  directionsDisplay.setPanel(document.getElementById('right-panel'));	
+
+
+			  var control = document.getElementById('floating-panel');
+     		  control.style.display = 'block';
+    		  map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+    		  var onClickHandler = function() {
+    		  start = document.getElementById('start').value;
+    		  		
+	      			if(start=='目前位置'){
+			        	if (navigator.geolocation) {
+					        navigator.geolocation.getCurrentPosition(function(position) {
+					            start = {
+					                lat: position.coords.latitude,
+					                lng: position.coords.longitude
+					            };
+					            console.log(start);
+					            marker.setMap(null);
+					            calculateAndDisplayRoute(directionsService, directionsDisplay,start);
 			
+					        });
+					    } else {
+					        // Browser doesn't support Geolocation
+					        alert("未允許或遭遇錯誤！");
+					        return;
+					    }
+
+			        }else{
+			        	calculateAndDisplayRoute(directionsService, directionsDisplay,start);
+
+			        }	
+	          		
+      		};
+     			 document.getElementById('routeBtn').addEventListener('click', onClickHandler);
+
 			}
+
+
+			function calculateAndDisplayRoute(directionsService, directionsDisplay,start) {
+				document.getElementById('right-panel').style.backgroundColor='white';
+				var selectedMode = document.getElementById('mode').value;	       
+		        directionsService.route({
+		          origin: start,
+		          destination: { lat: ${eveVO.eve_lat}, lng: ${eveVO.eve_long} },
+		          travelMode: selectedMode
+		        }, function(response, status) {
+		          if (status === 'OK') {
+		            directionsDisplay.setDirections(response);
+		          } else {
+		            window.alert('Directions request failed due to ' + status);
+		          }
+		        });
+		    }
 			
   </script>    
   
