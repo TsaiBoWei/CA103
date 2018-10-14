@@ -73,5 +73,19 @@ private MgrDAO_interface dao;
 	public MgrVO getMgrLostPS(String mgr_account,String mgr_mail) {
 		return dao.findByLostPS(mgr_account, mgr_mail);
 	}
+	
+public MgrVO updateMgrDate(String mgr_id,String mgr_name,String mgr_password,byte[] mgr_photo) {
+		
+		MgrVO mgrVO = new MgrVO();
+		
+		mgrVO.setMgr_id(mgr_id);
+		mgrVO.setMgr_name(mgr_name);
+		mgrVO.setMgr_password(mgr_password);
+		mgrVO.setMgr_photo(mgr_photo);
+		
+		dao.updateDate(mgrVO);
+		
+		return mgrVO;
+	}
 
 }

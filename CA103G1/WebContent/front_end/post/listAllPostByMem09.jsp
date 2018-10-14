@@ -126,7 +126,7 @@
                 <div class="card workoutnotecard">
                   <div class="card-body workoutnotecardbody ">
                     <div class="my-2 ">
-                      <h4 class="text-left">Hi,&nbsp;${memSvc.getOneMem("M000001").mem_name}</h4>
+                      <h4 class="text-left">Hi,&nbsp;${memSvc.getOneMem(memVO.mem_id).mem_name}</h4>
                       <h4> Do You <span class="txt-rotate" data-period="1800" data-rotate="[ &quot;Work Out Today ?&quot; ]"></span>
                       </h4>
                     </div>
