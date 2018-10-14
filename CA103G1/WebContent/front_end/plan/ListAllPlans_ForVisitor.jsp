@@ -28,30 +28,23 @@
 <!-- CSS dependencies -->
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<!-- navbar setting -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- fafaicon -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+	
 <!-- navbar setting -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">	
 
 <style> 
 /*頁面設定*/
@@ -102,7 +95,7 @@ a,.fontstyle  {
 
 
 </head>
-<body>
+
 <body>
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlhead.jsp" />
@@ -178,10 +171,6 @@ a,.fontstyle  {
 		<%@ include file="file/page2.file"%>
 		</FORM>
 	</div>
-	
-	<font color=white size=5px>request.getServletPath():→ <%=request.getServletPath()%></font><br>
-   <font color=white size=5px>request.getRequestURI():→  <%=request.getRequestURI()%></font> <br>
-	
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />

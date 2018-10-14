@@ -130,8 +130,6 @@ a, .fontstyle {
 				<th>刪除</th>
 			</tr>
 			<%@ include file="file/page1.file"%>
-<%-- 				<c:if test="${(memVO.mem_id != null)}"> --%>
-<%-- 					<c:if test="${((planVO.plan_privacy== 'PLANPR1')||(planVO.plan_privacy== 'PLANPR2')) }"> --%>
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr>
 					<td><img class="plan_cover"
@@ -180,16 +178,9 @@ a, .fontstyle {
 						</td>
 				</tr>
 			</c:forEach>
-<%-- 					</c:if> --%>
-<%-- 				</c:if> --%>
 		</table>
 		<%@ include file="file/page2.file"%>
 	</div>
-
-	<font color=white size=5px>request.getServletPath():→ <%=request.getServletPath()%></font>
-	<br>
-	<font color=white size=5px>request.getRequestURI():→ <%=request.getRequestURI()%></font>
-	<br>
 
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->

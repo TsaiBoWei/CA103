@@ -6,8 +6,8 @@
 
 <%
    
-//   MemVO memVO= new MemService().getOneMem("M000001");
-//   session.setAttribute("memVO", memVO);
+  MemVO memVO= (MemVO) session.getAttribute("memVO");
+  
   
   String perpageloc=request.getParameter("perpageloc");
 //  設在URL參數裡 ?perpageloc=course#personalnav
@@ -94,8 +94,13 @@
 	<div class="row mb-5 personalarea" id="personalnav">
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
+				<c:if test="${mem_id ==null}">
+					<img class="img-fluid rounded-circle" alt="Card image"  src="<%=request.getContextPath()%>/img/NoData/visitor2.jpg">
+				</c:if>
+				<c:if test="${mem_id !=null}">
 				<img class="img-fluid rounded-circle" alt="Card image"
 					src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${memVO.mem_id}">
+				</c:if>
 			</div>
 		</div>
 		<div class="col-md-4 align-self-end ml-1">

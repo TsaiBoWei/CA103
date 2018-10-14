@@ -3,6 +3,7 @@ package com.plan.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,10 @@ public class PlanDAO implements PlanDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO plan(plan_id,mem_id,plan_name,plan_vo,plan_cover,plan_start_date,plan_ens_date,sptype_id,plan_view,plan_privacy,plan_create_time,plan_status) VALUES (plan_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,sysdate,'PLANST0')";
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
-	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
+	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date,'yyyy-mm-dd hh24:mm:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mm:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
-	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
-	private static final String GET_ALL_FOR_VISITOR = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status  FROM plan  where plan_privacy = 'PLANPR0' order by plan_id";
+	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mm:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mm:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
+	private static final String GET_ALL_FOR_VISITOR = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mm:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mm:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status  FROM plan  where plan_privacy = 'PLANPR0' order by plan_id";
 	
 	/********************* 1010 ­º­¶¥Î *****************/
 	private static final String GET_NEW_PLAN="select * from" + 
@@ -317,7 +318,7 @@ public class PlanDAO implements PlanDAO_interface {
 				planVO.setSptype_id(rs.getString("sptype_id"));
 				planVO.setPlan_view(rs.getInt("plan_view"));
 				planVO.setPlan_privacy(rs.getString("plan_privacy"));
-				planVO.setPlan_create_time(rs.getDate("plan_creat_time"));
+				planVO.setPlan_create_time(rs.getDate("plan_create_time"));
 				planVO.setPlan_status(rs.getString("plan_status"));
 				list.add(planVO);
 			}

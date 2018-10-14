@@ -84,10 +84,7 @@ a,.fontstyle  {
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
           		<c:if test="${memVO.mem_id ==null }">
-          			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/plan/plan.do"  style="margin-bottom: 0px;">
-						<input type="hidden" name="action" value="VisitorPage">
-            			<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
-					</FORM>
+            		<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
 				</c:if>
 				<c:if test="${memVO.mem_id !=null }">
             		<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>

@@ -90,8 +90,13 @@ a,.fontstyle  {
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
         <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+         <li class="nav-item mx-2 btn-lg">
+          	<c:if test="${memVO.mem_id ==null }">
+            	<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
+			</c:if>
+			<c:if test="${memVO.mem_id !=null }">
+            	<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+			</c:if>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>

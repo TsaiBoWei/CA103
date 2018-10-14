@@ -23,10 +23,6 @@ import com.mem.model.MemVO;
 import com.plan.model.PlanService;
 import com.plan.model.PlanVO;
 
-import oracle.net.aso.e;
-
-//未完成:
-//新增 錯誤處理 圖片、
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class PlanServlet extends HttpServlet {
@@ -73,14 +69,6 @@ public class PlanServlet extends HttpServlet {
 				}
 
 				// plan_cover
-//				byte[] plan_cover = null;
-//				if(plan_cover==null) {
-//				}
-//				Part part = req.getPart("plan_cover");
-//				InputStream is = part.getInputStream();
-//				byte[] plan_cover = new byte[is.available()];
-//				is.read(plan_cover);
-
 				Part part = req.getPart("plan_cover");
 				byte[] plan_cover = null;
 				if (part.getSubmittedFileName() != null && part.getContentType() != null) {
@@ -117,10 +105,6 @@ public class PlanServlet extends HttpServlet {
 				// sptype_id
 				String sptype_id = req.getParameter("sptype_id");
 
-//				String sptype_id =null;
-//				if("請選擇"
-//						)
-//					req.getParameter("sptype_id");
 
 				// plan_privacy
 				String plan_privacy = req.getParameter("plan_privacy");
@@ -177,6 +161,7 @@ public class PlanServlet extends HttpServlet {
 			}
 		}
 
+		
 		if ("getOne_For_Update".equals(action)) { // 來自My_Plan_myself.jsp/My_Plan.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -263,6 +248,7 @@ public class PlanServlet extends HttpServlet {
 					errorMsgs.add("Enter The Start Date");
 //					e.printStackTrace();
 				}
+				
 				// plan_end_date
 				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du2 = null;
@@ -398,19 +384,6 @@ public class PlanServlet extends HttpServlet {
 			}
 
 		}
-	
-	
-		//會員未登入
-		
-		if("VisitorPage".equals(action)) {
-			System.out.println("我在這");
-			String url = "/Mem_Login_Signup.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-			
-		}
-	
-	
 	
 	}
 }
