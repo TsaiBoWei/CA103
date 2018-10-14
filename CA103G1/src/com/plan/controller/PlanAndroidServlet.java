@@ -56,6 +56,10 @@ public class PlanAndroidServlet extends HttpServlet {
 		String action = jsonObject.get("action").getAsString();
 		String mem_id = jsonObject.get("mem_id").getAsString();
 
+		PlanService planservice = new PlanService();
+		
+		EveService eveservice = new EveService();
+		EventlistService evelistservice = new EventlistService();
 		
 		if ( "get_plan_by_mem_id".equals(action) ) {
 			PlanDAO plandao = new PlanDAO();
