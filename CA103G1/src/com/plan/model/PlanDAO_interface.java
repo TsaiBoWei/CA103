@@ -15,6 +15,8 @@ public interface PlanDAO_interface {
 
 	public List<PlanVO> getAll();
 	
+	public List<PlanVO> getAllforVisitor();
+	
 	public List<PlanVO> getAll(Map<String, String[]> map);
 	
 	/******************1004增加計畫interface*************/

@@ -30,8 +30,8 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 	private static final String UPDATE = "UPDATE plan set plan_name=?, plan_vo=?, plan_cover=?,plan_start_date=? ,plan_end_date=? , sptype_id=?, plan_privacy=?, plan_status=? where plan_id = ? ";
 	private static final String GET_ONE_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan where plan_id = ?";
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
-
 	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
+	private static final String GET_ALL_FOR_VISITOR = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status  FROM plan  where plan_privacy = 'PLANPR0' order by plan_id";
 		
 	/********************* 1010 首頁用 *****************/
 	private static final String GET_NEW_PLAN="select * from" + 
@@ -302,7 +302,78 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 		}
 		return list;
 	}
+	
+	public List<PlanVO> getAllforVisitor(){
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, password);
+			pstmt = con.prepareStatement(GET_ALL_FOR_VISITOR);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setPlan_vo(rs.getString("plan_vo"));
+				planVO.setPlan_cover(rs.getBytes("plan_cover"));
+				planVO.setPlan_start_date(rs.getTimestamp("plan_start_date"));
+				planVO.setPlan_end_date(rs.getTimestamp("plan_end_date"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				planVO.setPlan_privacy(rs.getString("plan_privacy"));
+				planVO.setPlan_create_time(rs.getDate("plan_create_time"));
+				planVO.setPlan_status(rs.getString("plan_status"));
+				list.add(planVO);
+			}
+		} catch (ClassNotFoundException ce) {
+			ce.printStackTrace();
+		} catch (SQLException se) {
+			se.printStackTrace();
+//			throw new RuntimeException("A database error occurred. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+	}
+	
+
+	@Override
+	public List<PlanVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		PlanJDBCDAO dao = new PlanJDBCDAO();
 
@@ -410,11 +481,6 @@ public class PlanJDBCDAO implements PlanDAO_interface {
 
 	/******************************************************************/
 
-	@Override
-	public List<PlanVO> getAll(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 /********************* 1010 首頁用 *********************************/

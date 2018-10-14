@@ -60,6 +60,10 @@ public class PlanService {
 	public List<PlanVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<PlanVO> getAllforVisitor() {
+		return dao.getAllforVisitor();
+	}
 
 	public List<PlanVO> getAll(Map<String,String[]> map){
 		return dao.getAll(map);
