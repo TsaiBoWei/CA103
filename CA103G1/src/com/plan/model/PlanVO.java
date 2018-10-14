@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 
 public class PlanVO implements java.io.Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String plan_id;
 	private String mem_id;
 	private String plan_name;

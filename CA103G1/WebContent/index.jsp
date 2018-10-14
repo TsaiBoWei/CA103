@@ -83,7 +83,15 @@ a,.fontstyle  {
         <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+          		<c:if test="${memVO.mem_id ==null }">
+          			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/plan/plan.do"  style="margin-bottom: 0px;">
+						<input type="hidden" name="action" value="VisitorPage">
+            			<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
+					</FORM>
+				</c:if>
+				<c:if test="${memVO.mem_id !=null }">
+            		<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+				</c:if>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
@@ -127,7 +135,7 @@ a,.fontstyle  {
 
 
 
-  <!-- Cover -->
+  <!-- Cover --> 
   <div class="align-items-center py-5 cover section-fade-in-out" id="coverFirstImg" style="background: url(&quot;img/index/cover_run.jpg&quot;);background-size: cover;">
     <div class="container">
       <div class="row">
