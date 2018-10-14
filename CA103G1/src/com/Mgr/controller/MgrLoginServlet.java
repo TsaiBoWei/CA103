@@ -1,6 +1,7 @@
 package com.Mgr.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.Mgr.model.MgrService;
 import com.Mgr.model.MgrVO;
@@ -103,6 +105,99 @@ public class MgrLoginServlet extends HttpServlet {
 				
 			}
 		}
+		
+		
+		String action = req.getParameter("action");
+		try {
+		if("logout".equals(action)) {
+			HttpSession logoutsession = req.getSession();
+			logoutsession.getAttribute(actionMgrLogin);
+			logoutsession.invalidate();
+			
+			String url = "/back_end/mgr/mgrlogin.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);}
+		}catch(Exception ignore) {}
+			
+	//修改管理員資料	
+		
+		System.out.println("1");
+		
+				
+		
+		if ("Mgr_updateD".equals(action)) {
+			System.out.println("2");
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				System.out.println("3");	
+				HttpSession session = req.getSession();
+				MgrVO mgrLoggedVO = (MgrVO) session.getAttribute("islogin");
+				MgrService mgrSvc = new MgrService();
+				MgrVO mgrupdateVO = mgrSvc.getOneMgr(mgrLoggedVO.getMgr_id());
+				
+				System.out.println("4");
+				
+				Part part = req.getPart("mgr_photo");
+				byte[] mgr_photo=mgrLoggedVO.getMgr_photo();
+				
+				if(part.getSize() !=0) {
+					InputStream is = part.getInputStream();
+					mgr_photo = new byte[is.available()];
+					is.read(mgr_photo);
+					is.close();
+				}
+
+				System.out.println("4");		
+				String mgr_name = req.getParameter("mgr_name");
+						
+				String mgr_password = req.getParameter("new_password");			
+				String pschk = "^[(a-zA-Z0-9)]{2,10}$";
+					if (mgr_password == null || mgr_password.trim().length() == 0) {
+						errorMsgs.add("新密碼不得空白");
+					} else if(!mgr_password.trim().matches(pschk)) { 
+						errorMsgs.add("密碼格式錯誤，只能是英文字母或數字, 且長度必需在5到10之間");
+						System.out.println(mgr_password);
+					}
+			
+			mgrupdateVO = mgrSvc.updateMgrDate(mgrupdateVO.getMgr_id(),mgr_name,mgr_password,mgr_photo);
+			
+			System.out.println("5");
+			
+			if(!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+					.getRequestDispatcher("/back_end/mgrview.jsp");
+				failureView.forward(req, res);
+				return;//程式中斷
+			}
+			
+		
+			
+			
+			req.setAttribute("islogin", mgrupdateVO); // 資料庫update成功後,正確的的empVO物件,存入req
+//			String url = "/emp/listOneEmp.jsp";
+			String url = "/back_end/mgrview.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+			
+			
+			
+			}catch(Exception e) {
+				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back_end/mgrview.jsp");
+				failureView.forward(req, res);
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
 	
 	}
 }

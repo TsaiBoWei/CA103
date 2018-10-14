@@ -15,4 +15,6 @@ public interface MgrDAO_interface {
 	void addmgr(MgrVO mgrVO);
 	
 	MgrVO findByLostPS(String mgr_account,String mgr_mail);
+	
+	void updateDate(MgrVO mgrVO);
 }

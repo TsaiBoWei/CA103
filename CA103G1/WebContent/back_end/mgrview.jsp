@@ -48,7 +48,12 @@
             </div>
             <div class="col-1 col-md-1">
               <div>
-               <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;">
+<%--                <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;"> --%>
+				<a class="btn btn-info logoutbtn m-3" href="<%=request.getContextPath() %>/mgr/MgrLg.do?action=logout">Log Out</a>              
+              </div>
+              <div>
+<%--                <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;"> --%>
+				<a class="btn btn-info logoutbtn m-3" href="<%=request.getContextPath() %>/back_end/mgr/mgrDataChange.jsp">­×§ï¸ê®Æ</a>              
               </div>
             </div>
           </div>

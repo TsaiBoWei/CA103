@@ -43,10 +43,10 @@ public class PostDAO implements PostDAO_interface{
 	
 	/*********************  ­º­¶¥Î *****************/
 	private static final String GET_NEW_POST="select * from" + 
-			"(select post_id,mem_id,post_title,post_view,sptype_id,post_con from post where  POST_STATUS = 'POS0'  order  by post_id desc)" + 
+			"(select post_id,mem_id,post_title,post_view,sptype_id,post_con from post where  POST_STATUS = 'POS0' AND POST_PRIVACY='POSTPR1'  order  by post_id desc)" + 
 			"where rownum < 7";
 	private static final String GET_POPULAR_POST="select * from" + 
-			"(select post_id,mem_id,post_title,post_view,sptype_id,post_con from post  where  POST_STATUS = 'POS0'  order by post_view desc)" + 
+			"(select post_id,mem_id,post_title,post_view,sptype_id,post_con from post  where  POST_STATUS = 'POS0' AND POST_PRIVACY='POSTPR1' order by post_view desc)" + 
 			"where rownum < 7";
 	/*************************************************/
 	//update view
