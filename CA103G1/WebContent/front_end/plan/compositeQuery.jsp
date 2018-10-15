@@ -171,7 +171,7 @@ a,.fontstyle  {
 							<input type="submit" value="送出"> 
 							<input type="hidden" name="action" value="listPlans_ByCompositeQuery">
 						
-					<div class="form-row">
+<!-- 					<div class="form-row"> -->
 <!-- 							<div class="form-group col-md-4"> -->
 <!-- 								<label for="inputPassword4">計畫開始時間</label>  -->
 <!-- 								<input type="text" name="plan_start_date" id="f_date1" class="form-control" /><br> -->

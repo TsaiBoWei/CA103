@@ -289,8 +289,8 @@ a, .fontstyle {
 	</a>
 
 	<div class="form-control" style="background-color: #1f1f1f">
-		<h5>全部計畫清單，可供修改、刪除。10</h5>  
-		<%-- 錯誤表列 --%>
+		<h5>全部計畫清單，可供修改、刪除。14</h5>  
+		<%-- 錯誤表列 --%> 
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
 			<ul>
@@ -342,9 +342,8 @@ a, .fontstyle {
 							<td>${planVO.plan_create_time}</td>
 							<td><c:if test="${planVO.plan_status =='PLANST0'}">進行中</c:if>
 								<c:if test="${planVO.plan_status =='PLANST1'}">已完成</c:if></td>
-							<td><c:if test="${planVO.plan_privacy =='PLANPR0'}">公開</c:if>
-								<c:if test="${planVO.plan_privacy =='PLANPR1'}">不公開</c:if> <c:if
-									test="${planVO.plan_privacy =='PLANPR2'}"> 只對朋友公開</c:if></td>
+							<td><c:if test="${planVO.plan_privacy == 'PLANPR0'}">公開</c:if></td>
+							
 						</tr>
 					</c:if>
 				</c:forEach>
