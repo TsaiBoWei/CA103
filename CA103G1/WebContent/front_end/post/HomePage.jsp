@@ -37,9 +37,9 @@
 // 	pageContext.setAttribute("planlist",planlist);
 
 
-//  String perpageloc=request.getParameter("perpageloc");
-//  session.setAttribute("perpageloc", perpageloc);
-//  String sessionPerpageloc=(String)session.getAttribute("perpageloc");
+ String perpageloc=request.getParameter("perpageloc");
+ session.setAttribute("perpageloc", perpageloc);
+ String sessionPerpageloc=(String)session.getAttribute("perpageloc");
 
 %>
 
@@ -208,34 +208,34 @@
 <%-- 	</c:if> --%>
 	<!-- NavBar Personal focus §PÂ_¦¡-->
 	
-<%-- 	<% --%>
-<!-- // 	if(sessionPerpageloc!=null){ -->
-<!-- // 	String sessionPerpagelocClass="#"+sessionPerpageloc; -->
+	<%
+	if(sessionPerpageloc!=null){ 
+	String sessionPerpagelocClass="#"+sessionPerpageloc; 
 	
-<%-- 	%> --%>
+	%> 
 	 
-<!-- 	<script> -->
-<!-- // 	 $(document).ready(function() { -->
+	<script>
+ 	 $(document).ready(function() { 
       
-<%--         $("<%=sessionPerpagelocClass%>").css({"color": "#12bbad", "border-bottom": " 0.8px solid #12bbad"}); --%>
+        $("<%=sessionPerpagelocClass%>").css({"color": "#12bbad", "border-bottom": " 0.8px solid #12bbad"});
     
-<!-- // 	 }); -->
-<!--     </script> -->
-<%--     <% }%> --%>
+	 }); 
+     </script> 
+    <% }%>
     
-<!--     <script> -->
-<!-- //     $(document).ready(function() { -->
+    <script>
+    $(document).ready(function() { 
         
-<!-- //         $(".personalnavlink").click(function() { -->
-<!-- //         	var href= this.rel; -->
-<!-- //         	location.href= href; -->
-<!-- //         }); -->
+         $(".personalnavlink").click(function() { 
+         	var href= this.rel; 
+        	location.href= href; 
+         }); 
     
-<!-- // 	 }); -->
+	 }); 
     
     
     
-<!--     </script> -->
+   </script> 
 	
 	<!-- NavBar Personal focus §PÂ_¦¡-->
 
