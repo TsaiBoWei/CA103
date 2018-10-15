@@ -5,18 +5,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*"%>
 <%@ page import="com.Mgr.model.*"%>
-<%@ page import="com.eve.model.*"%>
+<%@ page import="com.coursereport.model.*"%>
 <%--  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");--%>
 
 <%
-	EveService eveSvc = new EveService();
-	List<EventVO> list = eveSvc.getReviewEves();
-		
-	pageContext.setAttribute("list",list);
+	CourseReportService courseReportSvc = new CourseReportService();
+	List<CourseReportVO> courseReport = courseReportSvc.getAllCourses();
+	pageContext.setAttribute("courseReport",courseReport);
 %>
-<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-
-
 
 <!DOCTYPE html>
 <html>
@@ -64,10 +60,15 @@
       width: 270px
     }
     
-    div>p{
+    div>p,li,span,td{
     color:#fff !important
     
     }
+    
+/*     .btn{ */
+/*     position: absolute */
+/*     	z-index:2 !important    	 */
+/*     } */
   </style>
 <title>活動審核</title>
 </head>
@@ -122,53 +123,59 @@
           </thead>
           
         
-          <c:forEach var="eventVO" items="${list}" >
+          <c:forEach var="courseReportVO" items="${courseReport}">
           
-       
           <tbody>
             <tr>
-              <td >${eventVO.eve_title}</td>
-              <td>${memSvc.getOneMem(eventVO.mem_id).mem_name}</td>
-              <td><div style="overflow: auto;width:100%; max-height:200px">${eventVO.eve_content}</div></td>
-      
+              <td>${courseReportVO.courrepo_id}</td>         	
+              <td>${courseReportVO.cour_id}</td>
+              <td>${courseReportVO.mem_id}</td>          
               <td>
-               <fmt:formatDate value="${eventVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>
-              									<br>~<br>		
-			   <fmt:formatDate value="${eventVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/>
+   				<c:choose>
+   					<c:when test="${courseReportVO.courrep_status==CRN1}">   					
+   						課程內容不當    					
+   					</c:when>
+   					<c:when test="${courseReportVO.courrep_status==CRN2}">   					
+   						課程收費不當    					
+   					</c:when>   				
+   					<c:otherwise>   					
+   						其他
+   					</c:otherwise>   			
+   				</c:choose>   				   		
               </td>
-              <td>${eventVO.eve_location}</td>
-              <td>${eventVO.estart_limit}~${eventVO.estart_max}人</td>
-              <td>${eventVO.eve_charge}元</td>
+              <td><div style="overflow: auto;width:100%; max-height:200px">${courseReportVO.courrep_text}</div></td>      
               <td>
-              <div class="row">
-              
-                <form method="post" action="<%=request.getContextPath() %>/eve/event.do" style="margin-bottom: 0px;">
-                    <input type="submit" value="通過" class="btn btn-outline-primary m-1" style="width:70px">
-                     <input type="hidden" name="result" value="review_pass">
-                    <input type="hidden" name="eve_id" value="${eventVO.eve_id}">
-                    <input type="hidden" name="action" value="review">
-               	</form>
-                <form method="post" action="" style="margin-bottom: 0px;">
-                    <input type="submit" class="btn btn-outline-primary m-1" value="不通過" style="width:70px">
-                      <input type="hidden" name="result" value="review_notpass">
-                    <input type="hidden" name="eve_id" value="${eventVO.eve_id}">
-                    <input type="hidden" name="action" value="review"> 
-                </form>
-                  
-              </div> 
-              </td>
-            </tr>
-           
+              	<fmt:formatDate value="${courseReportVO.courre_time}" pattern="yyyy/MM/dd HH:mm "/>
+			   </td>
+              <td><c:choose>
+   					<c:when test="${courseReportVO.courrep_status =='CR1'}">   					
+   						<a href="<%=request.getContextPath() %>/coursereport/coursereport.do?action=updateState">未處理</a>  					
+   					</c:when>
+   					<c:when test="${courseReportVO.courrep_status =='CR2'}">   					
+   						檢舉通過    					
+   					</c:when>   				
+   					<c:otherwise>   					
+   						檢舉未通過
+   					</c:otherwise>   			
+   				</c:choose></td>
+              <td><c:choose>
+   					<c:when test="${courseReportVO.reply_mgr_id==null}">   					
+   						尚無管理員處理   					
+   					</c:when> 				
+   					<c:otherwise>   					
+   						${courseReportVO.reply_mgr_id}
+   					</c:otherwise>   			
+   				</c:choose></td>
+         
+            </tr>           
           </tbody>
-           </c:forEach>
+          </c:forEach>
         </table>
         
       </div>
      
     </div>
-    
-    
-    <jsp:include page="courseReportToincluded.jsp" />
+     <jsp:include page="courseReportToincluded.jsp" /> 
     
     <!--include -->
     <!-- Here you go -->

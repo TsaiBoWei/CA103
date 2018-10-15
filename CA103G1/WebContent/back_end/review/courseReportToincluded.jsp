@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -7,16 +7,19 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.mem.model.*"%>
 <%--@ page import="com.Mgr.model.*"--%>
-<%@ page import="com.eve.model.*"%>
+<%@ page import="com.coursereport.model.*"%>
 <%--  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");--%>
 
 <%
-	EveService eveSvc = new EveService();
-	List<EventVO> list = eveSvc.getReviewEndEves();
-		
+	CourseReportService courseReportSvc = new CourseReportService();
+	List<CourseReportVO> list = courseReportSvc.getAllCourses();
+	
 	pageContext.setAttribute("list",list);
+	
+	
+	
 %>
-<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,10 +69,16 @@
       height: 200px;
       width: 270px
     }
+    input.btn{
     
-    
+    	z-index:2 !important    	
+    }
+     a.btn{
+    position:relative;
+    	z-index:2 !important    	
+    }
   </style>
-<title>Insert title here</title>
+
 </head>
 <body class="text-center">
 <div class="container">
@@ -80,6 +89,7 @@
         </ol>
       </nav>
     </div>
+    
       <div class="card bg-dark">
         <%-- --c:foreach var="coachVO" items="${coachSvc.all}"> </c:foreach> --%>
         <table class="table table-hover table-striped table-bordered" style="table-layout:fixed;word-wrap:break-word">
@@ -98,32 +108,53 @@
             </tr>
           </thead>
  		  <%@ include file="page1.file" %> 
-          <c:forEach var="eventVO" items="${list}" >
+          <c:forEach var="courseReportVO" items="${list }" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
           
-     
+          
           <tbody>
             <tr>
-              <td>${eventVO.eve_title}</td>         	
-              <td>${memSvc.getOneMem(eventVO.mem_id).mem_name}</td>          
-              <td><div style="overflow: auto;width:100%; max-height:200px">${eventVO.eve_content}</div></td>      
-              <td>
-              	<fmt:formatDate value="${eventVO.eve_startdate}" pattern="yyyy/MM/dd HH:mm "/>
-              									<br>~<br>		
-			   	<fmt:formatDate value="${eventVO.eve_enddate}" pattern="yyyy/MM/dd HH:mm"/>
-			   </td>
-              <td>${eventVO.eve_location}</td>
-              <td>${eventVO.estart_limit}~${eventVO.estart_max}人</td>
+              <td>${courseReportVO.courrepo_id}</td>         	
+              <td>${courseReportVO.cour_id}</td>
+              <td>${courseReportVO.mem_id}</td>          
               <td>
    				<c:choose>
-   					<c:when test="${eventVO.eve_charge==0}">   					
-   						免費    					
+   					<c:when test="${courseReportVO.courrep_status==CRN1}">   					
+   						課程內容不當    					
+   					</c:when>
+   					<c:when test="${courseReportVO.courrep_status==CRN2}">   					
+   						課程收費不當    					
    					</c:when>   				
    					<c:otherwise>   					
-   						${eventVO.eve_charge}元
+   						其他
    					</c:otherwise>   			
    				</c:choose>   				   		
               </td>
-              <td>${eveStatusMap.get(eventVO.eve_status)}</td>         
+              <td><div style="overflow: auto;width:100%; max-height:200px">${courseReportVO.courrep_text}</div></td>      
+              <td>
+              	<fmt:formatDate value="${courseReportVO.courre_time}" pattern="yyyy/MM/dd HH:mm "/>
+			   </td>
+              <td>
+              <c:choose>
+   					<c:when test="${courseReportVO.courrep_status =='CR1'}">   					
+   						未處理				
+   					</c:when>
+   					<c:when test="${courseReportVO.courrep_status =='CR2'}">   					
+   						檢舉通過    					
+   					</c:when>   				
+   					<c:otherwise>   					
+   						檢舉未通過
+   					</c:otherwise>   			
+   				</c:choose> 
+              </td>
+              <td><c:choose>
+   					<c:when test="${courseReportVO.reply_mgr_id==null}">   					
+   						尚無管理員處理   					
+   					</c:when> 				
+   					<c:otherwise>   					
+   						${courseReportVO.reply_mgr_id}
+   					</c:otherwise>   			
+   				</c:choose></td>
+         
             </tr>           
           </tbody>
           </c:forEach>

@@ -224,7 +224,7 @@ a,.fontstyle  {
 		$(function() {
 			var arr = [];
 			<% 	
-				List<MemSpLikeVO> memSpLikeVOList = (ArrayList<MemSpLikeVO>)session.getAttribute("memSpLikeVOList");
+				List<MemSpLikeVO> memSpLikeVOList = (ArrayList<MemSpLikeVO>) session.getAttribute("memSpLikeVOList");
 				ArrayList<String> sports = new ArrayList<String>();
 				if(memSpLikeVOList!=null){
 				for(MemSpLikeVO memSpLikeVO:memSpLikeVOList){
