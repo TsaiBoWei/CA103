@@ -173,7 +173,7 @@
 								href="<%=request.getContextPath()%>/front_end/plan/compositeQuery.jsp">Interesting Plan</a>
 						</div></li>
 					<!-- Friend-->
-                  <li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/friendlist/friendlistunconfirmed.jsp?perpageloc=friendlist#personalnav" id="friend"> <i
+                  <li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/friendlist/listfriendcomfirmed.jsp?perpageloc=friendlist#personalnav" id="friend"> <i
                          class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends &nbsp;&nbsp;
                   </a></li>
 					<li class="nav-item dropdown"><a
