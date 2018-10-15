@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.mem.model.*" %>    
+<%@ page import="com.mem.model.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +94,7 @@
           </div>
           <div class="inbox_chat">
 <!--           	直播連結要改動態寫法 -->
-            <iframe width="100%" height="100%" id="liveSrc" src="https://www.youtube.com/embed/SiT6y6zvC7A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" id="liveSrc" src="https://www.youtube.com/embed/<%=application.getAttribute("Stream_id") %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
           </div>
         </div>
@@ -142,8 +142,7 @@
 		};
 		
 		var history=true;
-		webSocket.onmessage = function(event) {
-			
+		webSocket.onmessage = function(event) {			
 			var messagesArea = document.getElementById("messagesArea");
 	        var jsonObj = JSON.parse(event.data);
 			
@@ -157,17 +156,14 @@
 	        	 
 	        //非歷史訊息 再判斷是由誰發送的訊息	 
 	        }else{
-	        	//若含有abc字元 語音發話
-	        	if ( jsonObj.message.includes('abc') ) {
+	        	//若含有@字元 語音發話
+	        	if ( jsonObj.message.includes('@') ) {
 	 	        	jsonObj.message = jsonObj.message.replace( 'abc', '' );
 	 	        	console.log( jsonObj.message);
 	 	        	Speech(jsonObj.message);
-	 	        }
-	        	
-	        	showmsg(jsonObj);
-        	
-	        }
-	        
+	 	        }	        	
+	        	showmsg(jsonObj);        	
+	        }	        
 	        
 			function showmsg(jsonObj){				
 				//系統發送的訊息
@@ -185,8 +181,7 @@
 					                 '<img style="width:100%;height:100%;" src="'+jsonObj.message+'" height="200">'+
 					                 '<span class="time_date"> 11:01 AM | June 9</span></div></div></div>';
 					//訊息是文字
-		        	}else{	  
-		        		
+		        	}else{	  		        		
 		        		 var message =  '<div class="incoming_msg">'+
 					                 '<div class="incoming_msg_img">'+
 					                 '<img  style="width:100%;height:100%;" src="<%=request.getContextPath() %>/DBChatPicReader?mem_id='+ jsonObj.userId +'"> </div>'+
@@ -194,8 +189,7 @@
 					                 '<div class="received_withd_msg">'+
 					                 '<p>'+jsonObj.message+'</p>'+
 					                 '<span class="time_date"> 11:01 AM | Yesterday</span></div></div></div>';		        		 
-		        	}
-	        		
+		        	}	        		
 	        	//	自己發送的訊息	        		
 	        	}else{
 	        		//訊息是圖片
@@ -221,7 +215,8 @@
 	        
 		};
 		
-
+		
+		
 		webSocket.onclose = function(event) {
 			updateStatus("WebSocket 已離線");
 		};
@@ -283,7 +278,25 @@
 		        document.body.insertBefore(msg, document.querySelector('div'));
 		    }
 	}
+	
+	function getStreamId(){
+		var url= "<%=request.getContextPath()%>/ListBroadcatsServlet";
+		console.log(url);
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function (){
+	    	if( xhr.status == 200){        
+	    		console.log(xhr.responseText);
+	    		}
+	    	else{
+	            alert( xhr.status );
+	          }//xhr.status == 200
+	    };//onload 
+	      
+	    xhr.open("Post",url,true);
+		xhr.send(null);	      
+	}
     
+	window.onload= getStreamId;
 </script>
  <!-- JavaScript dependencies -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
