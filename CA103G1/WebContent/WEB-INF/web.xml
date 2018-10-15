@@ -363,7 +363,6 @@
   <servlet-name>CalendarServlet</servlet-name>
   <url-pattern>/calendar/calendar.do</url-pattern>
   </servlet-mapping>
-<<<<<<< HEAD
 
  <servlet>
 	<servlet-name>CourseReportServlet</servlet-name>
@@ -373,7 +372,7 @@
 	<servlet-name>CourseReportServlet</servlet-name>
 	<url-pattern>/coursereport/coursereport.do</url-pattern>
  </servlet-mapping>
-=======
+
   
   <servlet>
   	<servlet-name>memHomepageServlet</servlet-name>
@@ -383,7 +382,7 @@
   <servlet-name>memHomepageServlet</servlet-name>
   <url-pattern>/post/Homepage.do</url-pattern>
   </servlet-mapping>
->>>>>>> 405a6b4ce1d4977418119c160892d158b9ea1836
+
 
   <servlet>
 	<servlet-name>ListBroadcasts</servlet-name>
