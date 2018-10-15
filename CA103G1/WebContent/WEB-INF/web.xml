@@ -373,4 +373,12 @@
   <url-pattern>/post/Homepage.do</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+	<servlet-name>ListBroadcasts</servlet-name>
+	<servlet-class>com.youtube.cmdline.ListBroadcastsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ListBroadcasts</servlet-name>
+	<url-pattern>/youtube/listStream.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -280,7 +280,7 @@
 	}
 	
 	function getStreamId(){
-		var url= "<%=request.getContextPath()%>/ListBroadcatsServlet";
+		var url= "<%=request.getContextPath()%>/youtube/listStream.do";
 		console.log(url);
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function (){

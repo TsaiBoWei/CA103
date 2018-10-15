@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ import com.google.api.services.youtube.model.LiveBroadcast;
 import com.google.api.services.youtube.model.LiveBroadcastListResponse;
 import com.google.common.collect.Lists;
 
-@WebServlet(name ="ListBroadcastsServlet", urlPatterns= {"/ListBroadcastsServlet"})
+
 public class ListBroadcastsServlet extends HttpServlet {
 	private static YouTube youtube;
 
