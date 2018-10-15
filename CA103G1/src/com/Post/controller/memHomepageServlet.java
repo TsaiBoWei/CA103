@@ -51,16 +51,20 @@ System.out.println(mem_id);
 				
 				
 				req.setAttribute("memVOtoHg", memVO);
+
 				req.setAttribute("postVOtoHg", postVO);
+	
 				String url ="/front_end/post/HomePage.jsp"; 
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交HomePage.jsp
+System.out.println("1.8");	
 				successView.forward(req, res);
 System.out.println("2");
 			}catch(Exception e) {
-				
+				e.printStackTrace();
 				errorMsgs.add(e.getMessage() + "無法進入該會員個人網頁貼文，可能該會員帳號已被註銷");
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
-				failureView.forward(req, res);								
+				failureView.forward(req, res);
+				System.out.println("3");	
 				
 			}
 			

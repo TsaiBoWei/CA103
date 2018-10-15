@@ -16,7 +16,7 @@
 
 
 	MemVO memVO=(MemVO)session.getAttribute("memVO");
-	String mem_id = memVO.getMem_id();
+// 	String mem_id = memVO.getMem_id();
 	
 // 	PostService postSvc = new PostService();
 // 	List<PostVO> list = postSvc.getByMemIDToDisplay(mem_id);
@@ -241,7 +241,7 @@
 
 
 	
-<c:if test="${memVO!=null}">
+<%-- <c:if test="${memVO!=null}"> --%>
 	<!-- NavBar Personal-->
 	<div class="container containerHrT " >
 		<hr>
@@ -310,7 +310,7 @@
 		<hr>
 	</div>
 	
-</c:if>
+<%-- </c:if> --%>
 	
 	
 	
