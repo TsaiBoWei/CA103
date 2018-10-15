@@ -47,4 +47,12 @@ public class FriendListService {
 	public List<FriendListVO> getAll(){
 		return dao.getAll();
 	}
+	
+	public List<FriendListVO> findFriendListByMem(String fl_memA_id)  {
+		return dao.findFriendListByMem(fl_memA_id);
+	}
+	
+	public List<FriendListVO> findFriendListUncomfirmedByMem(String fl_memA_id)  {
+		return dao.findFriendListUncomfirmedByMem(fl_memA_id);
+	}
 }
