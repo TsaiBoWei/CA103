@@ -53,11 +53,16 @@ public class EveAndroidServlet extends HttpServlet {
 			String eve_id = jsonObject.get("eve_id").getAsString();
 			EventVO evevo = evedao.findByPrimaryKey(eve_id);
 			evevo.setEve_photo(null);
+			evevo.setEve_logo(null);
 			writeText(res, evevo == null? "":gson.toJson(evevo));			
 		}
 		
 		if ( "get_all_eve".equals(action) ) {
 			List<EventVO> list = evedao.getAll();
+			for ( EventVO vo : list ) {
+				vo.setEve_photo(null);
+				vo.setEve_logo(null);
+			}
 			writeText(res, list == null? "":gson.toJson(list));			
 		}
 		

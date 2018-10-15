@@ -45,7 +45,7 @@ public class MgrJNDIDAO  implements MgrDAO_interface {
 	
 	private static final String FIND_BY_LOST_PASSWORD = 
 			"SELECT * FROM MGR WHERE MGR_ACCOUNT = ? AND MGR_MAIL = ?";
-	
+	private static final String UPDATE_MGR_DATA = "UPDATE MGR SET MGR_NAME = ?, MGR_PASSWORD = ?,mgr_photo = ? WHERE MGR_ID = ?";
 	
 	@Override
 	public void add(MgrVO mgrVO) {
@@ -529,4 +529,46 @@ public class MgrJNDIDAO  implements MgrDAO_interface {
 
 		return mgrVO;
 		}
+	
+	public void updateDate(MgrVO mgrVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_MGR_DATA);
+
+			
+			pstmt.setString(1,mgrVO.getMgr_name());
+			pstmt.setString(2,mgrVO.getMgr_password());
+			pstmt.setBytes(3,mgrVO.getMgr_photo());
+		
+			pstmt.setString(4,mgrVO.getMgr_id()); 
+			
+			pstmt.executeUpdate();
+		}
+		
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		
+	}finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+		
+	  }		
+	}
+				
 }

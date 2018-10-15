@@ -6,10 +6,11 @@
  <%@ page import="com.Post.model.*"%>
  <%@ page import="java.util.*"%>
   <%@ page import="java.text.*"%>
+   <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
  <%	//取出會員的SESSION
 	MemVO memVO = (MemVO) session.getAttribute("memVO");  
  %>
-   <%
+<%
    
 //   MemVO memVO= new MemService().getOneMem("M000001");
 //   session.setAttribute("memVO", memVO);
@@ -168,25 +169,34 @@
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
 	</div>
 	<!-- Personal Pic -->
-	<c:if test="${memVO!=null}">
+<%-- 	<c:if test="${memVO!=null}"> --%>
 	<div class="row mb-5 personalarea" id="personalnav">
 		<div class="col-md-3 offset-md-1">
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
-					src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${memVO.mem_id}">
+					src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${postVO.mem_id}">
 			</div>
 		</div>
+		
+		
+		
 		<div class="col-md-4 align-self-end ml-1">
-			<h1 class="text-left text-primary">Jennifer Lawrence</h1>
-			<p class="text-left">Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.Paragraph. Lorem ipsum dolor sit amet,
-				consectetur adipiscing elit.</p>
+		
+			<h1 class="text-left text-primary">${memSvc.getOneMem(postVO.mem_id).mem_name}</h1>
+			<p class="text-left">${memSvc.getOneMem(postVO.mem_id).mem_intro}</p>
+		</div>
+		
+		<div class="col-md-4">
+			<p class="h4">              
+               <button type="submit" class="btn  py-1 mb-2 mt-1" style="background-color:black;width:5px">
+                    <i class="fas fa-home text-light"></i>                  
+               </button>            
+            </p>
 		</div>
 		<!-- Personal Pic -->
 	
 	</div>
-	</c:if>
+<%-- 	</c:if> --%>
 	<!-- NavBar Personal focus 判斷式-->
 	
 	<%
@@ -313,18 +323,6 @@
 		<i class="fab fa-rocketchat"></i>
 	</a>
 	<!--fixbutton-->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
