@@ -5,6 +5,7 @@ import java.util.List;
 import com.Post.model.PostVO;
 import com.courlist.model.CourlistVO;
 import com.eve.model.EventVO;
+import com.plan.model.PlanVO;
 
 public class FriendListService {
 	
@@ -84,6 +85,10 @@ public class FriendListService {
 	}
 	public List<PostVO> getFriendPost(String fl_mema_id){
 		return dao1.getFriendPost(fl_mema_id);
+	}
+	public List<PlanVO> getFriendPlan(String fl_mema_id){
+		return dao1.getFriendPlan(fl_mema_id);
+		
 	}
 	
 }

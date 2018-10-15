@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import com.Post.model.PostVO;
 import com.courlist.model.CourlistVO;
 import com.eve.model.EventVO;
+import com.plan.model.PlanVO;
 
 public class FriendListDAO implements FriendListDAO_interface{
 
@@ -407,6 +408,12 @@ public class FriendListDAO implements FriendListDAO_interface{
 
 		@Override
 		public List<PostVO> getFriendPost(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<PlanVO> getFriendPlan(String fl_mema_id) {
 			// TODO Auto-generated method stub
 			return null;
 		}

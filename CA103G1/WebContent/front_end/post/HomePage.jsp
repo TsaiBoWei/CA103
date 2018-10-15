@@ -206,23 +206,24 @@
 	<!-- 	        對方未送出邀請 -->
 		        	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status!='FLS0'}">        
 		        		<input type="hidden" name="action" value="insert">        
-		        		<input type="submit" class="btn btn-success" value="送出好友邀請" id="addflBtn" onclick="addfriend()">
+		        		<input type="submit" class="btn btn-primary" value="加好友" id="addflBtn" onclick="addfriend()">
 		        	</c:if>
 		    	</c:if>
 		    	 
 	<!-- 	    	 對方有發送邀請 -->
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status=='FLS0'}">
-		        	<input type="submit" class="btn btn-success" value="好友確認" id="addflchBtn" onclick="addflcheck()">
+		        	<input type="submit" class="btn btn-primary" value="好友確認" id="addflchBtn" onclick="addflcheck()">
+		        	<input type="button" class="btn btn-primary ml-2" value="拒絕"  >
 		    	</c:if> 
 		    	
 	<!-- 	    	 發送邀請給對方 -->
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS0'}">
-		        	<input type="BUTTON" class="btn btn-success" value="已送出邀請" >
+		        	<input type="BUTTON" class="btn btn-primary" value="已送出好友邀請" >
 		    	</c:if> 
 		    	
 	<!-- 	    	 已成為好友 -->	    	
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS1'}">
-		        	<input type="BUTTON" class="btn btn-success" value="好友"  >
+		        	<input type="BUTTON" class="btn btn-primary" value="好友"  >
 		    	</c:if> 
 	    	</c:if>
 	    	
