@@ -151,6 +151,7 @@
     background-color: rgba(68,68,68,0);
     background-image: linear-gradient(to bottom, rgba(68, 68, 68, 0.8), rgba(68, 68, 68, 0.8));
 }
+ .note-editable { padding-top: 20px !important;}
 /* background-image: linear-gradient(to bottom, rgba(31, 31, 31, 0.8), #e6e6e6); */
 
   </style>
@@ -538,7 +539,7 @@
                     	     $("#plan_name").val(calEvent.title);
                     	     $("#plan_start_date").val(moment(calEvent.start).format("YYYY-MM-DD hh:mm"));
                     	     $("#plan_end_date").val(moment(calEvent.end).format("YYYY-MM-DD hh:mm"));
-                    	     $("#plan_vo").html(calEvent.description);
+//                     	     $("#plan_vo").html(calEvent.description);
                     	     $("#plan_idToDelete").val(calEvent.planidToDelete);
                     	     $("#planurl").html(calEvent.planurl);
                     	     $('#plan_end_date').datetimepicker({
@@ -586,6 +587,7 @@
                              	  $("#summernote").summernote("code", calEvent.description);
                              	  //summernote¨ú­È
                              	  $("#updatePlan").click(function(){
+                             		  
                              	        var markupStr = $('.note-editable').html();
                              	        $("#plan_vo").val(markupStr);
                              	      });    
@@ -637,6 +639,7 @@
       <!-- Script: Smooth scrolling between anchors in a same page -->
 
 	 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script> -->
+<script src="<%=request.getContextPath() %>/front_end/calendar/js/summernote.js"></script>
 </body>
 </html>
