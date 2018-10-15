@@ -197,7 +197,6 @@ public class FriendListServlet extends HttpServlet{
 		//第四步驟 新增(發出好友邀請)
         if ("insert".equals(action)) { // 來自addfriend1014.jsp的請求  
         	
-        	System.out.println("success");
 			PrintWriter out=res.getWriter();
 			
 			try {
@@ -266,7 +265,6 @@ public class FriendListServlet extends HttpServlet{
 		//第六步驟 新增(確認成為好友)
         if ("insert_friend".equals(action)) { // 來自addfriend1014.jsp的請求  
         	
-        	System.out.println("success2");
 			PrintWriter out=res.getWriter();
 			
 			try {

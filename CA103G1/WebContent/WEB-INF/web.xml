@@ -136,6 +136,18 @@
 		<url-pattern>/friendlist/friendlist.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
+	
+	<!--   FriendList_DBGifReader 20181015-->
+	  <servlet-name>FriendList_DBGifReader</servlet-name>
+	    <servlet-class>com.friendlist.controller.FriendList_DBGifReader</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>FriendList_DBGifReader</servlet-name>
+	    <url-pattern>/friendlist/FriendList_DBGifReader.do</url-pattern>
+	  </servlet-mapping> 
+	  
+	  
+	 <servlet>
 		<servlet-name>DBGifReader4</servlet-name>
 		<servlet-class>com.plan.model.DBGifReader4</servlet-class>
 	</servlet>
