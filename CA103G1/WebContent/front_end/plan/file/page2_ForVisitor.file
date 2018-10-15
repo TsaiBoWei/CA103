@@ -1,0 +1,17 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+  <font size="5">
+	  <%if (rowsPerPage<rowNumber) {%>
+	    <%if(pageIndex>=rowsPerPage){%>
+	        <A href="<%=request.getRequestURI()%>?whichPage=1"><font color="red">至第一頁</font></A>&nbsp;
+	        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>"><font color="red">上一頁</font> </A>&nbsp;
+	    <%}%>
+	  
+	    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+	        <A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>"><font color="red">下一頁 </font></A>&nbsp;
+	        <A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>"><font color="red">至最後一頁</font></A>&nbsp;
+	    <%}%>
+	  <%}%> 
+   </font> 
+
+<br><br>
+
