@@ -233,7 +233,83 @@ li span {
           </div>
          
           <a class="btn btn-sm btn-outline-primary" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
-          <a href="#" class="btn btn-sm btn-outline-secondary m-1">Report<br></a>
+          <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-outline-secondary m-1">Report<br></a>
+          
+          
+          <!-- Modal -->
+	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"
+		aria-labelledby="idModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="center modal-title" id="exampleModalLongTitle">會員註冊</h4>
+					<button type="button" class="close cancel" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="false">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="from-group mx-auto">
+							<c:if test="${not empty errorMsgs}">
+
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</div>
+					</div>
+					<form METHOD="post"
+						action="<%=request.getContextPath()%>/mem/mem.do">
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">信箱*</span>
+							</div>
+							<input value="${param.regEmail }" type="email" name="regEmail" class="form-control"
+								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<br>
+
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">暱稱 </span>
+							</div>
+							<input value="${param.regName }" type="text" name="regName" class="form-control"
+								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<br>
+
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">密碼*</span>
+							</div>
+							<input type="password" name="regPassword" class="form-control"
+								aria-label="Large" aria-describedby="inputGroup-sizing-sm ">
+						</div>
+						<br>
+
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">確認密碼*</span>
+							</div>
+							<input type="password" name="confirmedPsw" class="form-control"
+								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<br>
+						<div class="modal-footer">
+							<input type="hidden" name="action" value="mem_signUp">
+							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
+							<button type="button" class="btn btn-secondary cancel"
+								data-dismiss="modal">取消</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
       
       
       <!--  discount -->

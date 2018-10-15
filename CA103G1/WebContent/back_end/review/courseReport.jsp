@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -120,6 +120,7 @@
               <th style="width:15%">回覆管理員ID</th>
             </tr>
           </thead>
+          
         
           <c:forEach var="eventVO" items="${list}" >
           
@@ -167,7 +168,7 @@
     </div>
     
     
-    <jsp:include page="eveReviewToincluded.jsp" />
+    <jsp:include page="courseReportToincluded.jsp" />
     
     <!--include -->
     <!-- Here you go -->

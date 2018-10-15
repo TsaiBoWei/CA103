@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="BIG5"%>
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -15,9 +15,6 @@
 	List<EventVO> list = eveSvc.getReviewEndEves();
 		
 	pageContext.setAttribute("list",list);
-	
-	
-	
 %>
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <!DOCTYPE html>
@@ -89,18 +86,18 @@
         
           <thead class="thead-inverse">
           
-            <tr>
-              <th style="width:9.3%">活動標題</th>
-              <th style="width:6.4%">主辦人姓名</th>
-              <th style="width:29.8%">活動敘述</th>
-              <th style="width:12.2%">活動時間</th>
-              <th style="width:14.2%">活動地點</th>
-              <th style="width:7.3%">參加人數</th>
-              <th style="width:5.8%">報名費用</th>
-              <th style="width:15%">審核結果</th>
+ 			<tr>
+			  <th style="width:8.3%;">課程檢舉編號</th>
+              <th style="width:7.4%">課程編號</th>
+              <th style="width:10.8%">檢舉人之會員編號</th>
+              <th style="width:12.2%">檢舉項目</th>
+              <th style="width:14.2%">檢舉內容</th>
+              <th style="width:7.3%">檢舉時間</th>
+              <th style="width:8.8%">檢舉處理狀態</th>
+              <th style="width:15%">回覆管理員ID</th>
             </tr>
           </thead>
- 
+ 		  <%@ include file="page1.file" %> 
           <c:forEach var="eventVO" items="${list}" >
           
      
@@ -132,6 +129,7 @@
           </c:forEach>
         </table>
       </div>
+      <%@ include file="page2.file" %>
   </div>
  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

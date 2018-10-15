@@ -167,7 +167,7 @@ a,.fontstyle  {
 				</div>
 				<div class="form-group">
 					<label style="font-size: 150%">會員信箱 :</label> <input type="email" name="memEmail"
-						class="form-control">
+						class="form-control" value="${memVO.mem_email }">
 				</div>
 				<div class="form-group" style="padding-top: 10px;">
 					<fieldset >
@@ -185,7 +185,7 @@ a,.fontstyle  {
 				<div class="form-group">
 					<label style="font-size: 150%">個人簡介 :</label>
 					<textarea class="form-control" name="memIntro" placeholder=""
-						style="height: 300px"></textarea>
+						style="height: 300px">${memVO.mem_intro }</textarea>
 				</div>
 
 				<div class="form-group">
