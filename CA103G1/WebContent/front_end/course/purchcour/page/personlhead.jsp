@@ -173,10 +173,9 @@
 								href="<%=request.getContextPath()%>/front_end/plan/compositeQuery.jsp">Interesting Plan</a>
 						</div></li>
 					<!-- Friend-->
-					<li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/personltemplete.jsp?perpageloc=friend#personalnav" id="friend" style="cursor: pointer;"> <i
-							class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends
-							&nbsp;&nbsp;
-					</a></li>
+                  <li class="nav-item"><a class="nav-link personalnavlink"  rel="<%=request.getContextPath()%>/front_end/friendlist/friendlistunconfirmed.jsp?perpageloc=friendlist#personalnav" id="friend"> <i
+                         class="fa fa-users" aria-hidden="true"></i>&nbsp; &nbsp; Friends &nbsp;&nbsp;
+                  </a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle personalnavlink"  rel="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcour.jsp?perpageloc=course#personalnav" aria-expanded="false"
 						aria-haspopup="true" data-toggle="dropdown"
