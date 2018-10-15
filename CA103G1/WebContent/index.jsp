@@ -543,6 +543,9 @@ a,.fontstyle  {
     </div>  
   </div>
 
+<jsp:useBean id="flSvc" scope="page" class="com.friendlist.model.FriendListService" /><jsp >
+<!-- 判斷有好友才顯示 -->
+<c:if test="${flSvc.getFlByMem(memVO.mem_id,'FLS1').size()>0}">
   <div class="pt-5 " id="speakersFriend">
     <div class="container ">
       <div class="row ">
@@ -711,9 +714,11 @@ a,.fontstyle  {
         </div>
     </div>  
   </div>
+</c:if> 
   
-  <script>
-
+  
+ <script>
+  		
     var pnftab=document.getElementsByClassName("pnftab");
     for(var i=0;i<pnftab.length;i++){
        pnftab[i].onclick=getinfo;
@@ -721,17 +726,25 @@ a,.fontstyle  {
 
 	var time=0;
     function getinfo(e){
-    	
+    	var friend_course=document.getElementById("friend_course");
     	var targrtTab=e.target;
-    	   	
+    	
+    	if(time==2&&friend_course!=null){
+    		targrtTab=friend_course;
+   			time++;
+    	}
+    	
    		if(time==1){
    			targrtTab=document.getElementById("new_course");
    			time++;
-       		console.log(targrtTab);   			
+   			if(friend_course!=null){
+   				getinfo(e);
+   			}
+//        		console.log(targrtTab);   			
    		}
    		if(time==0){
    			targrtTab=document.getElementById("popular_course");
-       		console.log(targrtTab);   
+//        		console.log(targrtTab);   
        		time++;
        		getinfo(e);
    		}
@@ -805,9 +818,9 @@ a,.fontstyle  {
       var href4=imgrow2.children[0].children[1];
       var href5=imgrow2.children[1].children[0];
       var href6=imgrow2.children[2].children[0];
-      console.log(href4.href)
-      console.log(href5.href)
-      console.log(href6.href)
+//       console.log(href4.href)
+//       console.log(href5.href)
+//       console.log(href6.href)
       
       
       
@@ -829,7 +842,7 @@ a,.fontstyle  {
       xhr.onload = function (){
           if( xhr.status == 200){        
         	  
-        	  console.log(xhr.responseText);
+//         	  console.log(xhr.responseText);
          	 showresult(xhr.responseText);
  
           }else{
@@ -838,7 +851,7 @@ a,.fontstyle  {
       };//onload 
       
       //建立好Get連接
-      var url= "<%=request.getContextPath() %>/index?reqtype1="+type1+"&reqtype2="+reqtype2;
+      var url= "<%=request.getContextPath() %>/index?reqtype1="+type1+"&reqtype2="+reqtype2+"&mem_id=${memVO.mem_id}";
       
       xhr.open("Get",url,true); 
       //送出請求 
@@ -942,13 +955,11 @@ a,.fontstyle  {
     		  href6.href="<%=request.getContextPath()%>/post/post.do?action=find_by_post_id&post_id="+jArray[5].post_id;
     	  
     	  }
-    	  
- 	  
+    	  	  
     	  
       }
        
      
-
     }
   
 

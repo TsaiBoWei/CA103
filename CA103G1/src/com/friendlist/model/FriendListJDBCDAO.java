@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.Post.model.PostVO;
+import com.courlist.model.CourlistVO;
+import com.eve.model.EventVO;
  
 
 
@@ -456,5 +460,41 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 			System.out.print(friendlistVO7.getFl_status() + ",");
 			System.out.println(friendlistVO7.getFl_block() + ",");
 		}
+	}
+
+	@Override
+	public List<FriendListVO> getFlByMem(String fl_mema_id, String fl_status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getFriendEves(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getFriendEvelist(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CourlistVO> getFriendCour(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CourlistVO> getFriendPurCour(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PostVO> getFriendPost(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}		
 }

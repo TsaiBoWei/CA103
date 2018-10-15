@@ -13,6 +13,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.Post.model.PostVO;
+import com.courlist.model.CourlistVO;
+import com.eve.model.EventVO;
+
 public class FriendListDAO implements FriendListDAO_interface{
 
 	private static DataSource ds = null;
@@ -369,5 +373,41 @@ public class FriendListDAO implements FriendListDAO_interface{
 				}
 			}
 			return list;
+		}
+
+		@Override
+		public List<FriendListVO> getFlByMem(String fl_mema_id, String fl_status) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<EventVO> getFriendEves(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<EventVO> getFriendEvelist(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<CourlistVO> getFriendCour(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<CourlistVO> getFriendPurCour(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List<PostVO> getFriendPost(String fl_mema_id) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }
