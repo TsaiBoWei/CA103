@@ -937,6 +937,14 @@ a,.fontstyle  {
     		  image4.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[3].plan_id;
     		  image5.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[4].plan_id;
     		  image6.src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id="+jArray[5].plan_id;
+    		  
+    		  href1.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[0].plan_id;
+    		  href2.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[1].plan_id;
+    		  href3.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[2].plan_id;
+    		  href4.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[3].plan_id;
+    		  href5.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[4].plan_id;
+    		  href6.href="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id="+jArray[5].plan_id;
+    	
     		 
     	  
     	  }else if(reqtype2=='POST'){
