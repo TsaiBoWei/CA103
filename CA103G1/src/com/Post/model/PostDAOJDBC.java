@@ -481,6 +481,18 @@ public class PostDAOJDBC implements PostDAO_interface {
 		
 	}
 
+	@Override
+	public List<PostVO> getByMemIDToHomePage(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PostVO> getByMemIDToHomePageToFriend(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }
