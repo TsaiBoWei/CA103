@@ -464,6 +464,18 @@ public class PlanJNDIDAO implements PlanDAO_interface {
 		}
 		return list;
 		
+	}
+
+	@Override
+	public List<PlanVO> getPlanForVisitorByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PlanVO> getPlanForFriendByMem(String mem_id) {
+		// TODO Auto-generated method stub
+		return null;
 	};
 	
 	/******************************************************************/

@@ -136,6 +136,18 @@
 		<url-pattern>/friendlist/friendlist.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
+	
+	<!--   FriendList_DBGifReader 20181015-->
+	  <servlet-name>FriendList_DBGifReader</servlet-name>
+	    <servlet-class>com.friendlist.controller.FriendList_DBGifReader</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>FriendList_DBGifReader</servlet-name>
+	    <url-pattern>/friendlist/FriendList_DBGifReader.do</url-pattern>
+	  </servlet-mapping> 
+	  
+	  
+	 <servlet>
 		<servlet-name>DBGifReader4</servlet-name>
 		<servlet-class>com.plan.model.DBGifReader4</servlet-class>
 	</servlet>
@@ -351,6 +363,7 @@
   <servlet-name>CalendarServlet</servlet-name>
   <url-pattern>/calendar/calendar.do</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
 
  <servlet>
 	<servlet-name>CourseReportServlet</servlet-name>
@@ -360,5 +373,24 @@
 	<servlet-name>CourseReportServlet</servlet-name>
 	<url-pattern>/coursereport/coursereport.do</url-pattern>
  </servlet-mapping>
+=======
+  
+  <servlet>
+  	<servlet-name>memHomepageServlet</servlet-name>
+  	<servlet-class>com.Post.controller.memHomepageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>memHomepageServlet</servlet-name>
+  <url-pattern>/post/Homepage.do</url-pattern>
+  </servlet-mapping>
+>>>>>>> 405a6b4ce1d4977418119c160892d158b9ea1836
 
+  <servlet>
+	<servlet-name>ListBroadcasts</servlet-name>
+	<servlet-class>com.youtube.cmdline.ListBroadcastsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ListBroadcasts</servlet-name>
+	<url-pattern>/youtube/listStream.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -106,4 +106,12 @@ public class PostService {
 	
 	return postVO;
 	}
+   
+   public List<PostVO> getByMemIDToHomePage( String mem_id ) {
+		return dao.getByMemIDToHomePage(mem_id);
+ } 
+   
+   public List<PostVO> getByMemIDToHomePageToFriend( String mem_id ) {
+ 		return dao.getByMemIDToHomePageToFriend(mem_id);
+  } 
 }

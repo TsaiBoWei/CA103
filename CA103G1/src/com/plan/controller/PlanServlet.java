@@ -61,11 +61,11 @@ public class PlanServlet extends HttpServlet {
 				String mem_id = memVO.getMem_id();
 				// plan_name
 				String plan_name = req.getParameter("plan_name");
-				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_?)]{2,20}$";
+				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_?\\-)]{2,20}$";
 				if (plan_name == null || plan_name.trim().length() == 0) {
 					errorMsgs.add("Plan Name Can't Be Blank");
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
-					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
+					errorMsgs.add("Plan Name: 只能是中、英文字母、數字、?和_ , 且長度必需在2到20之間");
 				}
 
 				// plan_cover

@@ -24,4 +24,8 @@ public interface PostDAO_interface {
     
     //update view
     public void updateView(PostVO postVO);
+    
+    public List<PostVO> getByMemIDToHomePage(String mem_id);
+    
+    public List<PostVO> getByMemIDToHomePageToFriend(String mem_id);
 }

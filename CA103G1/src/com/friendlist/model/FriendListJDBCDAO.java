@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.Post.model.PostVO;
+import com.courlist.model.CourlistVO;
+import com.eve.model.EventVO;
  
 
 
@@ -22,6 +26,10 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 	private static final String DELETE = "DELETE FROM FRIENDLIST WHERE FL_MEMA_ID = ? AND FL_MEMB_ID = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMA_ID = ? AND FL_MEMB_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM FRIENDLIST";
+	//某個會員的好友清單
+	private static final String GET_MEM_FRIENDLIST_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMA_ID=? AND FL_STATUS='FLS1'";
+	//某個會員的待確認好友清單
+	private static final String GET_MEM_FRIENDLIST_UNCOMFIRMED_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMA_ID=? AND FL_STATUS='FLS0'";
 	
 	
 	@Override
@@ -271,6 +279,122 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 		return list;
 	}
 	
+	@Override
+	public List<FriendListVO> findFriendListByMem(String fl_memA_id) {
+		List<FriendListVO> list = new ArrayList<FriendListVO>();
+		FriendListVO friendlistVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USERID, PASSWORD);
+			pstmt = con.prepareStatement(GET_MEM_FRIENDLIST_STMT);
+			pstmt.setString(1, fl_memA_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				friendlistVO = new FriendListVO();
+				friendlistVO.setFl_memA_id(rs.getString("fl_memA_id"));
+				friendlistVO.setFl_memB_id(rs.getString("fl_memB_id"));
+				friendlistVO.setFl_friend_name(rs.getString("fl_friend_name"));
+				friendlistVO.setFl_status(rs.getString("fl_status"));
+				friendlistVO.setFl_friend_name("fl_block");
+				list.add(friendlistVO);	
+			}
+			
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<FriendListVO> findFriendListUncomfirmedByMem(String fl_memA_id) {
+		List<FriendListVO> list = new ArrayList<FriendListVO>();
+		FriendListVO friendlistVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USERID, PASSWORD);
+			pstmt = con.prepareStatement(GET_MEM_FRIENDLIST_UNCOMFIRMED_STMT);
+			pstmt.setString(1, fl_memA_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				friendlistVO = new FriendListVO();
+				friendlistVO.setFl_memA_id(rs.getString("fl_memA_id"));
+				friendlistVO.setFl_memB_id(rs.getString("fl_memB_id"));
+				friendlistVO.setFl_friend_name(rs.getString("fl_friend_name"));
+				friendlistVO.setFl_status(rs.getString("fl_status"));
+				friendlistVO.setFl_friend_name("fl_block");
+				list.add(friendlistVO);	
+			}
+			
+		}catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				}catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 
 	public static void main(String[] args) throws IOException{
 		
@@ -307,15 +431,70 @@ public class FriendListJDBCDAO implements FriendListDAO_interface {
 //		System.out.println("---------------------");
 			
 		// 查詢
-		List<FriendListVO> list = dao.getAll();
-		for (FriendListVO friendlistVO5 : list) {
-		System.out.print(friendlistVO5.getFl_memA_id() + ",");
-		System.out.print(friendlistVO5.getFl_memB_id() + ",");
-		System.out.print(friendlistVO5.getFl_friend_name() + ",");
-		System.out.print(friendlistVO5.getFl_status() + ",");
-		System.out.print(friendlistVO5.getFl_block() + ",");
-		System.out.println();}
+//		List<FriendListVO> list = dao.getAll();
+//		for (FriendListVO friendlistVO5 : list) {
+//			System.out.print(friendlistVO5.getFl_memA_id() + ",");
+//			System.out.print(friendlistVO5.getFl_memB_id() + ",");
+//			System.out.print(friendlistVO5.getFl_friend_name() + ",");
+//			System.out.print(friendlistVO5.getFl_status() + ",");
+//			System.out.print(friendlistVO5.getFl_block() + ",");
+//			System.out.println();
+//		}
 	
-
+		//查詢某會員的好友清單
+//		List<FriendListVO> list = dao.findFriendListByMem("M000001");
+//		for(FriendListVO friendlistVO7:list) {
+//			System.out.print(friendlistVO7.getFl_memA_id() + ",");
+//			System.out.print(friendlistVO7.getFl_memB_id() + ",");
+//			System.out.print(friendlistVO7.getFl_friend_name() + ",");
+//			System.out.print(friendlistVO7.getFl_status() + ",");
+//			System.out.println(friendlistVO7.getFl_block() + ",");
+//		}
+		
+		//查詢某會員的待確認好友清單
+		List<FriendListVO> list = dao.findFriendListUncomfirmedByMem("M000001");
+		for(FriendListVO friendlistVO7:list) {
+			System.out.print(friendlistVO7.getFl_memA_id() + ",");
+			System.out.print(friendlistVO7.getFl_memB_id() + ",");
+			System.out.print(friendlistVO7.getFl_friend_name() + ",");
+			System.out.print(friendlistVO7.getFl_status() + ",");
+			System.out.println(friendlistVO7.getFl_block() + ",");
 		}
+	}
+
+	@Override
+	public List<FriendListVO> getFlByMem(String fl_mema_id, String fl_status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getFriendEves(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> getFriendEvelist(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CourlistVO> getFriendCour(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CourlistVO> getFriendPurCour(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PostVO> getFriendPost(String fl_mema_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}		
 }

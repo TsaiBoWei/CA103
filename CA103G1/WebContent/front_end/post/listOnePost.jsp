@@ -185,13 +185,23 @@
 			<h1 class="text-left text-primary">${memSvc.getOneMem(postVO.mem_id).mem_name}</h1>
 			<p class="text-left">${memSvc.getOneMem(postVO.mem_id).mem_intro}</p>
 		</div>
-		
-		<div class="col-md-4">
-			<p class="h4">              
-               <button type="submit" class="btn  py-1 mb-2 mt-1" style="background-color:black;width:5px">
-                    <i class="fas fa-home text-light"></i>                  
-               </button>            
-            </p>
+		//toHome page
+		<div class="col-md-4"> 
+			 
+			 <form METHOD="post" ACTION="<%=request.getContextPath() %>/post/Homepage.do">
+			 <p class="h4"> 
+			 		<input type="hidden" name="action"     value="toHomePage">
+			 		<c:if test="${memVO!=null}">
+			 			<input type="hidden" name="visitor_mem_id"      value="${memVO.mem_id}"> 
+			 		</c:if>
+			 		<input type="hidden" name="mem_id"      value="${postVO.mem_id}"> 
+			 		<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">           
+               		<button type="submit" class="btn  py-1 mb-2 mt-1" style="background-color:black;width:5px">
+                    	<i class="fas fa-home text-light"></i>                  
+               		</button> 
+              </p>
+             </form>             
+           
 		</div>
 		<!-- Personal Pic -->
 	

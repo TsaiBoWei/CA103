@@ -15,13 +15,3 @@
 
 <br><br>
 
-  <%if (pageNumber>1) {%>
-    <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
-       <select size="1" name="whichPage" class="btn btn-info" style="font-size:18px">
-         <%for (int i=1; i<=pageNumber; i++){%>
-            <option value="<%=i%>">²Ä<%=i%>­¶
-         <%}%> 
-       </select>¡@
-       <input type="submit" value="½T©w"  class="btn btn-info btn-sm" style="font-size: 18px">  
-    </FORM>
-  <%}%>
