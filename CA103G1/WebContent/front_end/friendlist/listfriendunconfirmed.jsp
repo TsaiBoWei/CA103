@@ -12,8 +12,7 @@
 
 
 <%
-	//模擬會員
-	session.setAttribute("memVO", memSvc.getOneMem("M000001"));
+
 
 	//取出會員的SESSION
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
