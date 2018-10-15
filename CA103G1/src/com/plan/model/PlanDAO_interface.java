@@ -34,4 +34,11 @@ public interface PlanDAO_interface {
 	    public List<PlanVO> getPopularPlan();
 			
 	/*************************************************/	
+	    
+    /********************* 1015 給訪客和朋友的個人頁面用 *****************/
+    public List<PlanVO> getPlanForVisitorByMem(String mem_id);
+    
+    public List<PlanVO> getPlanForFriendByMem(String mem_id);
+    
+    /*************************************************/	
 }

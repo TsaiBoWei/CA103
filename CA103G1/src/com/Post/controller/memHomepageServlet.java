@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Post.model.PostService;
 import com.Post.model.PostVO;
+import com.friendlist.model.FriendListService;
+import com.friendlist.model.FriendListVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 
@@ -40,10 +42,33 @@ public class memHomepageServlet extends HttpServlet {
 			try {
 System.out.println("1");
 				String mem_id = req.getParameter("mem_id");
+				String visitor_mem_id = req.getParameter("visitor_mem_id");
 System.out.println(mem_id);
+System.out.println(visitor_mem_id);
+
+
+				FriendListService flSvc= new FriendListService();
+				FriendListVO flVO = new FriendListVO();
+				
+				flVO = flSvc.getOneFriendList(mem_id, visitor_mem_id);
+
 				PostService postSvc = new PostService();
-				List<PostVO> postVO = new ArrayList<PostVO>();				
-				postVO = postSvc.getByMemIDToHomePage(mem_id);
+				List<PostVO> postVO = new ArrayList<PostVO>();	
+				
+				
+				if(flVO != null&&flVO.getFl_status().equals("FLS1")) { //如果是朋友
+					
+					postVO=postSvc.getByMemIDToHomePageToFriend(mem_id);
+		System.out.println("yy");			
+					
+				}else {			//如果不是朋友
+					
+					postVO = postSvc.getByMemIDToHomePage(mem_id);
+		System.out.println("xx");			
+				}
+				
+							
+				
 				
 				MemVO memVO = new MemVO();
 				MemService memSvc = new MemService();

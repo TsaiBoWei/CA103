@@ -109,5 +109,17 @@ public class PlanService {
 		return dao.getPopularPlan();
 	}	
 	/************************************************************/
+	
+	
+	/********************* 1015 給訪客和朋友的個人頁面用 *****************/
+    public List<PlanVO> getPlanForVisitorByMem(String mem_id){
+    	return dao.getPlanForVisitorByMem(mem_id);
+    }
+    
+    public List<PlanVO> getPlanForFriendByMem(String mem_id){
+    	return dao.getPlanForFriendByMem(mem_id);	
+    }
+    
+    /*************************************************/	
 
 }
