@@ -290,6 +290,8 @@ a,.fontstyle  {
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="<%=request.getContextPath()%>/js/smooth-scroll.js"></script>
 
+<!-- µù¥U¥¢±Ñ,¥´¶}¿O½c -->
+
 	<c:if test="${openModal!=null}">
 		<script>
     		 $("#idModal").modal({show: true});
