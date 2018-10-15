@@ -383,7 +383,7 @@ a,.fontstyle  {
             });
       	
           //summernote賦值(將文字顯示在summernote上)     
-  		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)? "" : eveVO.getEve_content()%>');
+  		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)||eveVO.getEve_content()==null? "" : eveVO.getEve_content()%>');
   		
           //summernote取值
           $("#addBtnSubmit").click(function(){
