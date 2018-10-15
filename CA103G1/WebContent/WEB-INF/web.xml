@@ -352,5 +352,13 @@
   <url-pattern>/calendar/calendar.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>memHomepageServlet</servlet-name>
+  	<servlet-class>com.Post.controller.memHomepageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>memHomepageServlet</servlet-name>
+  <url-pattern>/post/Homepage.do</url-pattern>
+  </servlet-mapping>
 
 </web-app>
