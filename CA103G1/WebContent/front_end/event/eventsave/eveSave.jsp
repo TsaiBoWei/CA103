@@ -107,6 +107,12 @@ th, td {
 	width: 100%;
 	height: 180px;
 }
+
+.evetab{
+  font-size:15px;
+  font-weight:bold!important;
+}
+
 </style>
 
 
@@ -132,9 +138,9 @@ th, td {
 	<div class="container">
 		<div class="row">
 			<div class="list-group col-md-2">				
-				<a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action "> 參加的活動 </a>
-		        <a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action ">主辦的活動</a>
-		        <a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action active">活動收藏</a>					
+				<a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" class="evetab list-group-item list-group-item-action "> 參加的活動 </a>
+		        <a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav" class="evetab list-group-item list-group-item-action ">主辦的活動</a>
+		        <a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav" class="evetab list-group-item list-group-item-action active">活動收藏</a>					
 			</div>
 			
 			<div class="col-md-10">			

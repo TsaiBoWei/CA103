@@ -47,8 +47,9 @@
   .eveImg{
   width:100%;
   }
-   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span,#eve_contentDiv p,#eve_contentDiv div,#eve_contentDiv strong{
+   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span,#eve_contentDiv p,#eve_contentDiv div,#eve_contentDiv strong,#eve_contentDiv td{
   color:#efefef !important;
+  background-color:#1f1f1f!important;
   font-size:20px;
   }
   
@@ -239,7 +240,7 @@ a,.fontstyle  {
         <div class="col-md-10 pt-3 text-left pl-0">
           <h1 class=" text-left">
             <span>${eveVO.eve_title} &nbsp;
-              <button class="btn btn-sm  btn-outline-success">${sportTypeMap.get(eveVO.sptype_id)} </button>
+              <button class="btn btn-sm " style="background:${sportTypeColor.get(eveVO.sptype_id)};color:white; font-weight:bold;">${sportTypeMap.get(eveVO.sptype_id)} </button>
             </span>
           </h1>
           <div class="m-1   pb-2">
@@ -306,7 +307,7 @@ a,.fontstyle  {
           <c:if test="${memVO.mem_id!=eveVO.mem_id}">
 				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)==null}">
 			        <form method="post" action="<%=request.getContextPath()%>/eventsave/eventsave.do">
-					    <input type="submit" class="btn btn-sm m-1 btn-outline-success" value="收藏">
+					    <input type="submit" class="btn  m-1 btn-outline-success btn-lg" value="收藏">
 					    <input type="hidden" name="mem_id" value="${memVO.mem_id}">
 					    <input type="hidden" name="eve_id" value="${eveVO.eve_id}">
 						<input type="hidden" name="es_status" value="ESS1">
@@ -314,14 +315,13 @@ a,.fontstyle  {
 					</form>
 				</c:if>
 				<c:if test="${eventsaveSvc.getOneEventSave(memVO.mem_id,eveVO.eve_id)!=null}">
-				        <input type="submit" class="btn-sm  btn-success" value="已收藏">
+				        <input type="submit" class=" btn-success btn-lg"  value="已收藏">
 				</c:if>
 		</c:if>			
 				
 				
 <!--             <a href="#" class="btn btn-sm m-1 btn-outline-success">收藏 </a> -->
-            <a href="#" class="btn btn-outline-primary btn-sm m-1">分享 </a>
-            <a href="#" class="btn btn-sm btn-outline-secondary m-1">檢舉 </a>
+
           </div>
         </div>
       </div>
@@ -696,14 +696,20 @@ a,.fontstyle  {
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>信用卡卡號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text" class="payinput" ><div class="mt-2"> 月<input type="text"  class="payinput" size="1">年<input type="text"  class="payinput" size="1"> CVC<input type="text"  class="payinput" size="1" ></div></div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>持卡人姓名 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" value="${memVO.mem_name}"></div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款截止日 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_deadline}</div></div>
-				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>手機號碼 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" name="phone_number"></div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>手機號碼 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" id="phone"></div></div>
 
         	</div>
         	
 			<div class="modal-footer ">
-                <button type="button" class="btn btn-success" >
-                	<A href="<%=request.getContextPath() %>/eventlist/eventlist.do?action=pay_Update_Status&mem_id=${memVO.mem_id}&eve_id=${eveVO.eve_id}" class='text-dark'>確認付款</A>
-                </button>
+			    <form action="<%=request.getContextPath() %>/eventlist/eventlist.do?action=pay_Update_Status&mem_id=${memVO.mem_id}&eve_id=${eveVO.eve_id}">
+                 	<button type="submit" class="btn btn-success text-dark" id="paycheckBtn">
+						確認付款
+               		</button>
+               		<input type="hidden" name="phone_number" id="phone_number">
+               		<input type="hidden" name="action" value="pay_Update_Status">
+               		<input type="hidden" name="mem_id" value="${memVO.mem_id}">
+               		<input type="hidden" name="eve_id" value="${eveVO.eve_id}">
+                </form>
                 <button type="button" class="btn btn-success">
                 	<A href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp" class='text-dark'>稍後付款</A>
                 </button>
@@ -714,6 +720,13 @@ a,.fontstyle  {
 </div>
         <script>
     		 $("#elPayModal").modal({show: true});
+    		 $("#paycheckBtn").click(function(){
+    			 $("#phone_number").val($("#phone").val());
+    			 console.log($("#phone_number").val());
+    		 });
+    		 
+    		 
+    		 
         </script>
  </c:if>
   
@@ -763,7 +776,16 @@ a,.fontstyle  {
 						  document.getElementById("reshowElBtn").style.display="";	
 					  }else if(xhr.responseText=='organizer'){
 						  document.getElementById("reshowElBtn").style.display="";	
-						  document.getElementById("showElistCheck").innerHTML = "<p class='text-center'>請查看活動管理頁面</p>";
+						  
+						  var str=
+						 '<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" >'+
+		          			'<button type="ssubmit" class="btn">查看活動報名狀態</button>'+
+		          			'<input type="hidden" name="eve_id" value="${eveVO.eve_id}">'+
+		          			'<input type="hidden" name="action" value="getEvelists_By_EVE">'+
+		          	 	'</FORM>';
+		          	 	console.log(str);
+						 document.getElementById("showElistCheck").innerHTML =str; 
+
 					  }else{
 						  showEvelist(xhr.responseText);
 					  }
