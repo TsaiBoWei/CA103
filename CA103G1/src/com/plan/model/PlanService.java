@@ -33,7 +33,7 @@ public class PlanService {
 	}
 
 	public PlanVO updatePlan(String plan_name, String plan_vo, byte[] plan_cover, Timestamp plan_start_date,
-			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_status ,String plan_id) {
+			Timestamp plan_end_date, String sptype_id, String plan_privacy, String plan_status, String plan_id) {
 		PlanVO planVO = new PlanVO();
 
 		planVO.setPlan_name(plan_name);
@@ -60,20 +60,19 @@ public class PlanService {
 	public List<PlanVO> getAll() {
 		return dao.getAll();
 	}
-	
 
-	public List<PlanVO> getAll(Map<String,String[]> map){
+	public List<PlanVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
-	
+
 	public List<PlanVO> getAllforVisitor() {
 		return dao.getAllforVisitor();
 	}
-	
-	public List<PlanVO> getAllforVisitor(Map<String,String[]> map){
+
+	public List<PlanVO> getAllforVisitor(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
-	
+
 	/********************* 1004增加計畫service ***************/
 	// 以會員id查詢計畫
 	public List<PlanVO> getPlansByMem(String mem_id) {
@@ -102,29 +101,29 @@ public class PlanService {
 		dao.updatePlanStatusCal(plan_id, plan_status);
 		return dao.findByPrimaryKey(plan_id);
 	}
+
 	/************************************************************/
-	
-	
+
 	/********************* 1010 首頁用 ****************************/
 	public List<PlanVO> getNewPlan() {
 		return dao.getNewPlan();
 	}
-	
+
 	public List<PlanVO> getPopularPlan() {
 		return dao.getPopularPlan();
-	}	
+	}
+
 	/************************************************************/
-	
-	
+
 	/********************* 1015 給訪客和朋友的個人頁面用 *****************/
-    public List<PlanVO> getPlanForVisitorByMem(String mem_id){
-    	return dao.getPlanForVisitorByMem(mem_id);
-    }
-    
-    public List<PlanVO> getPlanForFriendByMem(String mem_id){
-    	return dao.getPlanForFriendByMem(mem_id);	
-    }
-    
-    /*************************************************/	
+	public List<PlanVO> getPlanForVisitorByMem(String mem_id) {
+		return dao.getPlanForVisitorByMem(mem_id);
+	}
+
+	public List<PlanVO> getPlanForFriendByMem(String mem_id) {
+		return dao.getPlanForFriendByMem(mem_id);
+	}
+
+	/*************************************************/
 
 }

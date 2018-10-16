@@ -199,7 +199,6 @@ public class PlanServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/emp/listAllEmp.jsp】 或  【/dept/listEmps_ByDeptno.jsp】 或 【 /dept/listAllDept.jsp】 或 【 /emp/listEmps_ByCompositeQuery.jsp】
 
 			try {
@@ -281,7 +280,7 @@ public class PlanServlet extends HttpServlet {
 				planVO.setSptype_id(sptype_id);
 				planVO.setPlan_status(plan_status);
 				planVO.setPlan_privacy(plan_privacy);
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("planVO", planVO); // 含有輸入格式錯誤的planVO物件,也存入req
@@ -294,7 +293,6 @@ public class PlanServlet extends HttpServlet {
 				/***************************2.開始修改資料*****************************************/
 				PlanService planSvc = new PlanService();
 				planVO = planSvc.updatePlan(plan_name, plan_vo, plan_cover, plan_start_date, plan_end_date,sptype_id, plan_privacy,plan_status ,plan_id);
-				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
 				if(requestURL.equals("/front_end/plan/list_compositeQuery.jsp")){
 //					HttpSession session = req.getSession();
@@ -304,6 +302,7 @@ public class PlanServlet extends HttpServlet {
 				}
 				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
+				System.out.println("line307 我在這裡");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
