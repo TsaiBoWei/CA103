@@ -111,14 +111,14 @@
           <thead class="thead-inverse">
           
             <tr>
-			  <th style="width:8.3%;">課程檢舉編號</th>
-              <th style="width:7.4%">課程編號</th>
+			  <th style="width:9.3%;">課程檢舉編號</th>
+              <th style="width:9.4%">課程編號</th>
               <th style="width:10.8%">檢舉人之會員編號</th>
               <th style="width:12.2%">檢舉項目</th>
               <th style="width:14.2%">檢舉內容</th>
               <th style="width:7.3%">檢舉時間</th>
               <th style="width:8.8%">檢舉處理狀態</th>
-              <th style="width:15%">回覆管理員ID</th>
+              <th style="width:10%">回覆管理員ID</th>
             </tr>
           </thead>
           

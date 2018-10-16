@@ -124,7 +124,7 @@
                 <h1 class="card-title text-dark d-flex justify-content-start m-0">課程檢舉</h1>
               </div>
               <div>
-                <a href="#" class="d-flex justify-content-start m-2 mgrwork">檢舉處裡</a>
+                <a href="<%=request.getContextPath() %>/back_end/review/courseReport.jsp" class="d-flex justify-content-start m-2 mgrwork">檢舉處理</a>
               </div>
             </div>
           </div>

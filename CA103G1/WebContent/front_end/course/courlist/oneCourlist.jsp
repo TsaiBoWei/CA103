@@ -266,7 +266,7 @@ li span {
 							<div class="input-group-prepend">
 								<span class="input-group-text">·|­û«H½c</span>
 							</div>
-							<input value="${param.regEmail }" type="email" name="Email" class="form-control"
+							<input value="${memVO.mem_email }" type="email" name="Email" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
