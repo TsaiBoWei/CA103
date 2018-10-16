@@ -495,7 +495,7 @@ a,.fontstyle  {
       </div>
     </div>
     
-    <div class="tab-pane fade" id="tabfive" role="tabpanel">
+    <div class="tab-pane fade " id="tabfive" role="tabpanel">
       <div class="container px-5">
         <div class="row d-block text-left">
           <div class="col-md-6 offset-md-3" >
@@ -506,107 +506,107 @@ a,.fontstyle  {
       </div>
     </div>
   </div>
-  <div class="py-5" id="speakers">
-    <div class="container ">
-      <div class="row ">
-        <div class="col-12 col-md-12">
-          <h2>專屬推薦活動</h2>
-          <div class="tab-content mt-2">
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              <p class="text-primary">Tab pane three. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="carousel slide" data-ride="carousel" id="bs4-multi-slide-carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row mr-4 ml-4">
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title1</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
+<!--   <div class="py-5" id="speakers"> -->
+<!--     <div class="container "> -->
+<!--       <div class="row "> -->
+<!--         <div class="col-12 col-md-12"> -->
+<!--           <h2>專屬推薦活動</h2> -->
+<!--           <div class="tab-content mt-2"> -->
+<!--             <div class="tab-pane fade" id="tabthree" role="tabpanel"> -->
+<!--               <p class="text-primary">Tab pane three. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     <div class="container"> -->
+<!--       <div class="carousel slide" data-ride="carousel" id="bs4-multi-slide-carousel"> -->
+<!--         <div class="carousel-inner"> -->
+<!--           <div class="carousel-item active"> -->
+<!--             <div class="row mr-4 ml-4"> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title1</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
 
-                <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title2</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title3</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
+<!--                 <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev"> -->
+<!--                   <span class="carousel-control-prev-icon"></span> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title2</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title3</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
           
-                <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row mr-4 ml-4">
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title4</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
+<!--                 <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next"> -->
+<!--                   <span class="carousel-control-next-icon"></span> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           <div class="carousel-item"> -->
+<!--             <div class="row mr-4 ml-4"> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/03.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title4</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
                
-                <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title5</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
-              </div>
-              <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  ">
-                <a href="#">
-                  <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300">
-                  <div class="carousel-caption img-tip">
-                    <h1>Event title6</h1>
-                    <h4>about the Event!</h4>
-                  </div>
-                </a>
+<!--                 <a class="carousel-control-prev multprev1" href="javascript:void(0)" data-slide="prev"> -->
+<!--                   <span class="carousel-control-prev-icon"></span> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/02.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title5</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--               <div class="col-lg-4 col-md-4 img-group pr-0 pl-0  "> -->
+<!--                 <a href="#"> -->
+<%--                   <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/conference/01.png" class="center-block img-fluid my-3 shadowed" width="300"> --%>
+<!--                   <div class="carousel-caption img-tip"> -->
+<!--                     <h1>Event title6</h1> -->
+<!--                     <h4>about the Event!</h4> -->
+<!--                   </div> -->
+<!--                 </a> -->
              
-                <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--                 <a class="carousel-control-next multnext1" href="javascript:void(0)" data-slide="next"> -->
+<!--                   <span class="carousel-control-next-icon"></span> -->
+<!--                 </a> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
   <!-- Schedule -->
   <!-- Sponsor logos -->
-  <div class="py-5 section sponsor-div">
+  <div class="py-5 section sponsor-div mt-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
