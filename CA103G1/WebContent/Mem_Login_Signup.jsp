@@ -35,6 +35,19 @@
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
+
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
+
+}
+input {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	color:rgba(0, 0, 0, 0.8)!important;
+	font-weight:bold!important;
+	font-size:150% !important;
+}
+
 </style>
  
 </head>
@@ -69,7 +82,15 @@ a,.fontstyle  {
 	            <div class="dropdown-content" id="myDropdown">
 	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp個人頁面</font></i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp計畫</font></i></a>
+
+
+	              <a href="#"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+
 	              <a href="<%=request.getContextPath() %>/front_end/friendlist/listfriendcomfirmed.jsp"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+
+
+	              <a href="<%=request.getContextPath() %>/front_end/friendlist/listfriendcomfirmed.jsp"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+
 	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp課程</font></i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp活動</font></i></a>
 	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
@@ -120,22 +141,23 @@ a,.fontstyle  {
 					<form method="post"
 						action="<%=request.getContextPath()%>/mem/mem.do">
 						<div class="form-group">
-							<label>電子郵件</label> <input type="email" name="email"
+							<input style="color:#ff0000" type="email" name="email"
 								class="form-control" placeholder="電子郵件">
-						</div>
+						</div><br>
 
 						<div class="form-group">
-							<label>密碼</label> <input type="password" name="password"
+							<input  type="password" name="password"
 								class="form-control" placeholder="密碼">
 						</div>
+						
 						<br> <input type="hidden" name="action" value="login">
-						<button type="submit"
-							class="btn btn-primary flex-row-reverse form-control"
-							id="btnLogIn">登入</button>
+						<button type="submit" style="font-size:150%"
+							class="btn btn-primary flex-row-reverse form-control fontstyle text-dark"
+							id="btnLogIn" >登&nbsp;入</button>
 					</form>
 				</div>
 				<div class="col-md-12" style="margin-bottom: 14px;">
-					<a href="#" data-toggle="modal" data-target="#idModal">快速註冊</a>
+					<a href="#" data-toggle="modal" data-target="#idModal" style="font-size:150%">快 速 註 冊</a>
 				</div>
 			</div>
 		</div>

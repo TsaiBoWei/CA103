@@ -90,6 +90,12 @@
       font-weight:bold;
     }
     
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+
+}
+    
     
 
   </style>
@@ -99,6 +105,11 @@
 
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
+
+.inputtext{
+color:black;
+font-weight:bold;
 }
 </style>
 
@@ -196,7 +207,7 @@ a,.fontstyle  {
                     </div>
                     <div class="form-group col-md-2">
                       <label for="sportType">類別</label>
-                      <select class="custom-select" id="sportType" size="1" name="sptype_id">
+                      <select class="custom-select inputtext" id="sportType" size="1" name="sptype_id">
                         <c:forEach var="sptype" items="${sportTypeMap}">
 							<option value="${sptype.key}" ${(sptype.key==eveVO.sptype_id)? 'selected':'' } >${sptype.value}
 						</c:forEach>
@@ -300,9 +311,9 @@ a,.fontstyle  {
                       
                       <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
                       <label for="city_id">活動地區</label>
-                      <select size="1" name="city_id" class="custom-select" id="city_id">
+                      <select size="1" name="city_id" class="custom-select inputtext" id="city_id">
 						  <c:forEach var="cityVO" items="${citySvc.all}">
-							<option value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
+							<option class="inputtext" value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
 						  </c:forEach>
 					  </select>
                       

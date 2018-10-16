@@ -12,8 +12,7 @@
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
 
-<jsp:useBean id="sptypeSvc" scope="page"
-	class="com.sptype.model.SptypeService" />
+<jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
 
 
 

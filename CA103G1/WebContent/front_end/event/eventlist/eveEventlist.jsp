@@ -63,7 +63,10 @@ body {
 	overflow-x: hidden;
 }
 
-
+.evetab{
+  font-size:15px;
+  font-weight:bold!important;
+}
 
 
 </style>
@@ -73,6 +76,17 @@ body {
 
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
+
+   .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;	
+}
+
+th,td{
+   font-weight:bold!important;
+   font-size:18px;
+
 }
 </style>
 
@@ -97,11 +111,11 @@ a,.fontstyle  {
 		<div class="row">
 			<div class="list-group col-md-2">				
 				<a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action "> 參加的活動 </a> 					
+					class="list-group-item list-group-item-action evetab"> 參加的活動 </a> 					
 				<a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action active">主辦的活動</a> 
+					class="list-group-item list-group-item-action active evetab">主辦的活動</a> 
 				<a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action ">活動收藏</a>	
+					class="list-group-item list-group-item-action evetab">活動收藏</a>	
 			</div>
 			<div class="col-md-9">	
 				<%-- 錯誤表列 --%>

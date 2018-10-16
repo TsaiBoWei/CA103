@@ -61,11 +61,16 @@ public class PlanService {
 		return dao.getAll();
 	}
 	
+
+	public List<PlanVO> getAll(Map<String,String[]> map){
+		return dao.getAll(map);
+	}
+	
 	public List<PlanVO> getAllforVisitor() {
 		return dao.getAllforVisitor();
 	}
-
-	public List<PlanVO> getAll(Map<String,String[]> map){
+	
+	public List<PlanVO> getAllforVisitor(Map<String,String[]> map){
 		return dao.getAll(map);
 	}
 	

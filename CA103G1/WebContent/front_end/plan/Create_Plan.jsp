@@ -8,7 +8,7 @@
 <%@ page import="com.watchedhr.model.*" %>
 
 <%
-	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
+	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
@@ -319,7 +319,7 @@ body{
 
 <body class="text-center">
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
-	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
+	 <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
 	
@@ -406,9 +406,11 @@ body{
 						</div>
 
 						<div class="form-group">
-							<label><h3>Plan Content</h3></label><br><span class="btn btn-info deletecbform px-1 mb-2 " data-toggle="modal" data-target="#courlistplan"> <i class="far fa-plus-square"></i>&nbsp;&nbsp;Add Course Into Plan
-																			</span>
-							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 22px" id="plan_votext"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
+							<label><h3>Plan Content</h3></label><br>
+							<span class="btn btn-info deletecbform px-1 mb-2 " data-toggle="modal" data-target="#courlistplan"> 
+								<i class="far fa-plus-square"></i>&nbsp;&nbsp;Add Course Into Plan
+							</span>
+							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 26px" id="plan_votext" >789</textarea>
 							<br>
 						</div>
 						<!-- 	ashley -->
@@ -542,6 +544,7 @@ body{
 						</div>
 					</div>
 				</div>
+				</div>
 <!--ashley -->
 
 
@@ -566,7 +569,9 @@ body{
 			});
 			var inputcourplan = $("#courseplan").html();
 			console.log(inputcourplan);
-			$("#plan_votext").val(inputcourplan);
+		
+			if (($("#courseplan").text())!=""){
+			$("#plan_votext").val(inputcourplan);}
 		});
 
 	});
@@ -584,7 +589,6 @@ body{
 
 	<!-- Script: Smooth scrolling between anchors in a same page -->
 	<script src="<%=request.getContextPath()%>/js/smooth-scroll.js"></script>
-	<h1>20181004-6</h1> 
 </body> 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->

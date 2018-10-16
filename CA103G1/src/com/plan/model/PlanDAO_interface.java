@@ -14,10 +14,12 @@ public interface PlanDAO_interface {
 	public PlanVO findByPrimaryKey(String plan_id);
 
 	public List<PlanVO> getAll();
+
+	public List<PlanVO> getAll(Map<String, String[]> map);
 	
 	public List<PlanVO> getAllforVisitor();
 	
-	public List<PlanVO> getAll(Map<String, String[]> map);
+	public List<PlanVO> getAllforVisitor(Map<String, String[]> map);
 	
 	/******************1004增加計畫interface*************/
 		//以會員id找到計畫

@@ -58,13 +58,14 @@
       width: 270px
     }
       input.btn{
-    
-    	z-index:2 !important    	
+    position:relative;
+    	z-index:4 !important    	
     }
      a.btn{
     position:relative;
     	z-index:2 !important    	
     }
+
   </style>
 
 <title>Insert title here</title>

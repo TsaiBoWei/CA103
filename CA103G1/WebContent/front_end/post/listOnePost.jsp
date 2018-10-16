@@ -93,6 +93,19 @@
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 	}
+	
+	#post_con{
+	font-size:1.2rem
+	}
+	div>span{
+	font-size:1.2rem!important
+	}
+	
+	.navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+
+	}
   </style>
 </head>
 
@@ -400,8 +413,8 @@
            
            
 <%--            %> --%>
-            <li class="list-inline-item px-2 border-right ">瀏覽數:&nbsp;&nbsp;${postVO.post_view}</li>
-            <li class="list-inline-item  px-2  "> 10k likes </li>
+            <li class="list-inline-item px-2 border-right ">瀏覽數:&nbsp;&nbsp;${postVO.post_view}&nbsp;&nbsp;</li>
+            <li class="list-inline-item  px-2  "> 作者:&nbsp;&nbsp;${memSvc.getOneMem(postVO.mem_id).mem_name} </li>
           </ul>
         </div>
         <!--bloglist-->

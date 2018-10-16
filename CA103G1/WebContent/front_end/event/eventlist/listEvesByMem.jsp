@@ -72,6 +72,25 @@ body {
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
+
+
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
+
+}
+
+.evetab{
+  font-size:15px;
+  font-weight:bold!important;
+}
+.quitBtn{
+	font-weight:bold!important;
+}
+.textSize{
+ font-size:14px;
+ font-weight:bold!important;
+}
 </style>
 
 
@@ -104,9 +123,9 @@ a,.fontstyle  {
     </div>
     <div class="row">
       <div class="list-group col-md-2">
-        <a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action active"> 參加的活動 </a>
-        <a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action ">主辦的活動</a>
-        <a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action ">活動收藏</a>
+        <a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action active evetab"> 參加的活動 </a>
+        <a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action evetab">主辦的活動</a>
+        <a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav" class="list-group-item list-group-item-action evetab">活動收藏</a>
       </div>
       
      
@@ -115,17 +134,17 @@ a,.fontstyle  {
       <div class="col-md-3">
         <div class="card" >         
           <div class="card-body">    
-          	<h5 class="card-title">${eveSvc.getOneEve(eventListVO.eve_id).eve_title}</h5>       
+          	<h5 class="card-title evetab">${eveSvc.getOneEve(eventListVO.eve_id).eve_title}</h5>       
             <A href="<%=request.getContextPath() %>/eve/event.do?eve_id=${eventListVO.eve_id}&action=getOne_For_Display&whichPage=<%=request.getParameter("whichPage")%>">               
                <img class="card-img-top"  src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eventListVO.eve_id}" alt="Card image cap">  
             </A>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item  " >
+            <li class="list-group-item  textSize" >
             	活動日期
             	<div><fmt:formatDate value="${eveSvc.getOneEve(eventListVO.eve_id).eve_startdate}" pattern="yyyy-MM-dd HH:mm "/>~</div>
 				<div><fmt:formatDate value="${eveSvc.getOneEve(eventListVO.eve_id).eve_enddate}" pattern="yyyy-MM-dd HH:mm "/> </div></li>
-            <li class="list-group-item " >
+            <li class="list-group-item  textSize" >
             	${eventListVO.evepay_amount==0?'免費':eventListVO.evepay_amount}
             	<c:if test="${eventListVO.evepay_amount!=0}">元</c:if>
             	<c:if test="${eventListVO.evelist_status=='EL1'}">
@@ -136,11 +155,11 @@ a,.fontstyle  {
             <div class='text-center '>
             	<FORM class="form-inline text-center justify-content-center" METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
             		
-            		<div class='px-2'>${eveListStatusMap.get(eventListVO.evelist_status)}</div>
+            		<div class='px-2 textSize'>${eveListStatusMap.get(eventListVO.evelist_status)}</div>
               
 				<c:if test="${eventListVO.evelist_status=='EL1'}">
 									
-				     <button type="submit" class="btn btn-sm btn-info">付款</button>
+				     <button type="submit" class="btn btn-sm btn-info ">付款</button>
 				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
 				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
 				     <input type="hidden" name="evelist_status"  value="${eventListVO.evelist_status}">
@@ -171,25 +190,12 @@ a,.fontstyle  {
 	          	</c:if>
 					${(eventListVO.eve_rating==0)?"":eventListVO.eve_rating}				
 			</c:if>	 
-			<c:if test="${eventListVO.eve_share=='ES0'}">
-					
-						<A class="btn btn-sm btn-warning mx-1" href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES1">
-						分享
-						</A>
-									
-			</c:if>
-			<c:if test="${eventListVO.eve_share=='ES1'}">
-					
-						<A class="btn btn-sm btn-warning mx-1" href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES0">
-						取消分享
-						</A>
-				
-			</c:if>
+		
 			
 			<c:if test="${eventListVO.evelist_status=='EL0'|| eventListVO.evelist_status=='EL1'|| eventListVO.evelist_status=='EL3'}">
 				
 				  <FORM METHOD="post" class="form-inline" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
-				     <button type="submit" class="btn btn-sm btn-warning mx-1">退出</button> 
+				     <button type="submit" class="btn quitBtn btn-warning mx-1">退出</button> 
 				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
 				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
 				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
@@ -212,26 +218,26 @@ a,.fontstyle  {
         <div class="col-md-3">
         <div class="card" >         
           <div class="card-body" ${(eventListVO.mem_id==param.mem_id && eventListVO.eve_id==param.eve_id) ? 'bgcolor=#CCCCFF':''}>
-            <h5 class="card-title">${eveSvc.getOneEve(eventListVO.eve_id).eve_title}</h5>
+            <h5 class="card-title evetab">${eveSvc.getOneEve(eventListVO.eve_id).eve_title}</h5>
               <img class="card-img-top"  src="<%=request.getContextPath() %>/eve/DBPicReader?eve_id=${eventListVO.eve_id}" alt="Card image cap">  
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item  " >
+            <li class="list-group-item  textSize" >
             	活動日期
             	<div><fmt:formatDate value="${eveSvc.getOneEve(eventListVO.eve_id).eve_startdate}" pattern="yyyy-MM-dd HH:mm "/>~</div>
 				<div><fmt:formatDate value="${eveSvc.getOneEve(eventListVO.eve_id).eve_enddate}" pattern="yyyy-MM-dd HH:mm "/> </div></li>
-            <li class="list-group-item " >
+            <li class="list-group-item textSize" >
             	${eventListVO.evepay_amount==0?'免費':eventListVO.evepay_amount}
             	<c:if test="${eventListVO.evepay_amount!=0}">元</c:if>
             	<c:if test="${eventListVO.evelist_status=='EL1'}">
             		(付款截止日${eventListVO.evepay_deadline})
             	</c:if>        	
             </li>
-            <li class="list-group-item  " >
+            <li class="list-group-item textSize " >
             <div class='text-center '>
             	<FORM class="form-inline text-center justify-content-center" METHOD="post" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
             		
-            		<div class='px-2'>${eveListStatusMap.get(eventListVO.evelist_status)}</div>
+            		<div class='px-2 textSize'>${eveListStatusMap.get(eventListVO.evelist_status)}</div>
               
 				<c:if test="${eventListVO.evelist_status=='EL1'}">
 									
@@ -266,25 +272,12 @@ a,.fontstyle  {
 	          	</c:if>
 					${(eventListVO.eve_rating==0)?"":eventListVO.eve_rating}				
 			</c:if>	 
-			<c:if test="${eventListVO.eve_share=='ES0'}">
-					
-						<A class="btn btn-sm btn-warning mx-1" href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES1">
-						分享
-						</A>
-									
-			</c:if>
-			<c:if test="${eventListVO.eve_share=='ES1'}">
-					
-						<A class="btn btn-sm btn-warning mx-1" href="<%=request.getContextPath() %>/eventlist/eventlist.do?mem_id=${eventListVO.mem_id}&eve_id=${eventListVO.eve_id}&action=update_ShareStatus&whichPage=<%=request.getParameter("whichPage")%>&sharestatus=ES0">
-						取消分享
-						</A>
-				
-			</c:if>
+		
 			
 			<c:if test="${eventListVO.evelist_status=='EL0'|| eventListVO.evelist_status=='EL1'|| eventListVO.evelist_status=='EL3'}">
 				
 				  <FORM METHOD="post" class="form-inline" ACTION="<%=request.getContextPath() %>/eventlist/eventlist.do" style="margin-bottom: 0px;">
-				     <button type="submit" class="btn btn-sm btn-warning mx-1">退出</button> 
+				     <button type="submit" class="btn quitBtn btn-warning mx-1">退出</button> 
 				     <input type="hidden" name="mem_id"  value="${eventListVO.mem_id}">
 				     <input type="hidden" name="eve_id"  value="${eventListVO.eve_id}">
 				     <input type="hidden" name="requestURL"	value="<%=request.getRequestURI()%>"><!--送出本網頁的路徑給Controller-->
