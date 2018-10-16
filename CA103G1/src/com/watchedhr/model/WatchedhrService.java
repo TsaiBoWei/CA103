@@ -32,4 +32,9 @@ public class WatchedhrService {
 	}
 	
 	
+	 public WatchedhrVO getFirstByCrorder_id(String crorder_id){
+		 return dao.getFirstByCrorder_id(crorder_id);
+	 } 
+	
+	
 }

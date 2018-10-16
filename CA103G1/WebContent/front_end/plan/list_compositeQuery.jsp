@@ -8,7 +8,7 @@
 	request.setAttribute("list", list);
 %>
 
-<jsp:useBean id="listPlans_ByCompositeQuery" scope="request" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
+<jsp:useBean id="listPlans_ByCompositeQuery" scope="session" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
 
 <jsp:useBean id="sptypeSvc" scope="page"
 	class="com.sptype.model.SptypeService" />
@@ -135,7 +135,7 @@ a,.fontstyle  {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="file/page1_ByCompositeQuery.file" %>
+			<%@ include file="file/page1_ByCompositeQuery.file" %>    
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#0066FF':''}>
 					<td>

@@ -90,6 +90,12 @@
       font-weight:bold;
     }
     
+    .navbar-dark .navbar-nav .nav-link{
+		color:rgba(255, 255, 255, 0.8)!important;
+		font-weight:bold!important;
+
+	}
+    
     
 
   </style>
@@ -383,7 +389,7 @@ a,.fontstyle  {
             });
       	
           //summernote賦值(將文字顯示在summernote上)     
-  		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)? "" : eveVO.getEve_content()%>');
+  		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)||eveVO.getEve_content()==null? "" : eveVO.getEve_content()%>');
   		
           //summernote取值
           $("#addBtnSubmit").click(function(){

@@ -356,6 +356,7 @@ public class index extends HttpServlet {
 		
 		if(type2.equals("PLAN")) {
 			List<PlanVO> list=new ArrayList<>();
+			List<PlanVO> list1=new ArrayList<>();
 			PlanService planSvc=new PlanService();
 			switch(type1) {
 			case "POPULAR":
@@ -364,31 +365,117 @@ public class index extends HttpServlet {
 			case "NEW":
 				list=planSvc.getNewPlan();
 				break;			
+			case "FRIEND":
+				list=flSvc.getFriendPlan(mema_id);
+				break;			
 			}
 			
 			JSONArray jarray=new JSONArray();
-	        for (int i = 0; i < list.size(); i++) {
-	        	PlanVO planVO=list.get(i);
-	 	        JSONObject jobj=new JSONObject();
-	 	        try {
-	 	        	
-	 	        	String mem_name=memSvc.getOneMem(planVO.getMem_id()).getMem_name();
-					String sptype_id=planVO.getSptype_id();
-	 	        	
-	 	        	jobj.put("plan_id", planVO.getPlan_id());
-					jobj.put("title", planVO.getPlan_name());				
-					jobj.put("mem_name", mem_name);
-					jobj.put("view", planVO.getPlan_view());
-					jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
-					jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
-					jarray.put(jobj);
+			
+			if("POPULAR".equals(type1)||"NEW".equals(type1)) {
+				for (int i = 0; i < list.size(); i++) {
+		        	PlanVO planVO=list.get(i);
+		 	        JSONObject jobj=new JSONObject();
+		 	        try {
+		 	        	
+		 	        	String mem_name=memSvc.getOneMem(planVO.getMem_id()).getMem_name();
+						String sptype_id=planVO.getSptype_id();
+		 	        	
+		 	        	jobj.put("plan_id", planVO.getPlan_id());
+						jobj.put("title", planVO.getPlan_name());				
+						jobj.put("mem_name", mem_name);
+						jobj.put("view", planVO.getPlan_view());
+						jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+						jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+						jarray.put(jobj);
+						
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+	   
+	            }
+				
+			//好友	
+			}else {
+				int listNum=0; 
+				if(list!=null) listNum=list.size();
 
+				if(listNum>=6) {
+					for (int i = 0; i < 6; i++) {
+			        	PlanVO planVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(planVO.getMem_id()).getMem_name();
+							String sptype_id=planVO.getSptype_id();
+			 	        	
+							jobj.put("plan_id", planVO.getPlan_id());
+							jobj.put("title", planVO.getPlan_name());				
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", planVO.getPlan_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
+
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+		   
+		            }
 					
-				} catch (JSONException e) {
-					e.printStackTrace();
+				}else if(listNum<6 && listNum>0) {
+					list1=planSvc.getPopularPlan();
+					list.addAll(list1);
+					for (int i = 0; i < 6; i++) {
+						PlanVO planVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(planVO.getMem_id()).getMem_name();
+							String sptype_id=planVO.getSptype_id();
+			 	        	
+							jobj.put("plan_id", planVO.getPlan_id());
+							jobj.put("title", planVO.getPlan_name());				
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", planVO.getPlan_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
+
+
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}		   
+		            }				
+					
+				
+				}else {
+					list=planSvc.getPopularPlan();
+					for (int i = 0; i < 6; i++) {
+						PlanVO planVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(planVO.getMem_id()).getMem_name();
+							String sptype_id=planVO.getSptype_id();
+			 	        	
+							jobj.put("plan_id", planVO.getPlan_id());
+							jobj.put("title", planVO.getPlan_name());				
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", planVO.getPlan_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
+
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}		   
+		            }							
+					
 				}
-   
-            }
+								
+			}	        
+	        
             out.print(jarray);
 						
 		}
@@ -436,88 +523,88 @@ public class index extends HttpServlet {
 	            }
 				
 				
-				//好友	
-				}else {
-					int listNum=0; 
-					if(list!=null) listNum=list.size();
+			//好友	
+			}else {
+				int listNum=0; 
+				if(list!=null) listNum=list.size();
 
-					if(listNum>=6) {
-						for (int i = 0; i < 6; i++) {
-				        	PostVO postVO=list.get(i);
-				 	        JSONObject jobj=new JSONObject();
-				 	        try {		 	        	
-				 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
-								String sptype_id=postVO.getSptype_id();
-				 	        	
-				 	        	jobj.put("post_id", postVO.getPost_id());
-				 	        	jobj.put("post_img",postVO.getPost_img());
-								jobj.put("title", postVO.getPost_title());	
-								jobj.put("mem_name", mem_name);
-								jobj.put("view", postVO.getPost_view());
-								jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
-								jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
-								jarray.put(jobj);
+				if(listNum>=6) {
+					for (int i = 0; i < 6; i++) {
+			        	PostVO postVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
+							String sptype_id=postVO.getSptype_id();
+			 	        	
+			 	        	jobj.put("post_id", postVO.getPost_id());
+			 	        	jobj.put("post_img",postVO.getPost_img());
+							jobj.put("title", postVO.getPost_title());	
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", postVO.getPost_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
 
-								
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-			   
-			            }
-						
-					}else if(listNum<6 && listNum>0) {
-						list1=postSvc.getPopularPost();
-						list.addAll(list1);
-						for (int i = 0; i < 6; i++) {
-							PostVO postVO=list.get(i);
-				 	        JSONObject jobj=new JSONObject();
-				 	        try {		 	        	
-				 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
-								String sptype_id=postVO.getSptype_id();
-				 	        	
-				 	        	jobj.put("post_id", postVO.getPost_id());
-				 	        	jobj.put("post_img",postVO.getPost_img());
-								jobj.put("title", postVO.getPost_title());	
-								jobj.put("mem_name", mem_name);
-								jobj.put("view", postVO.getPost_view());
-								jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
-								jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
-								jarray.put(jobj);
-
-								
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}		   
-			            }				
-						
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+		   
+		            }
 					
-					}else {
-						list=postSvc.getPopularPost();
-						for (int i = 0; i < 6; i++) {
-							PostVO postVO=list.get(i);
-				 	        JSONObject jobj=new JSONObject();
-				 	        try {		 	        	
-				 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
-								String sptype_id=postVO.getSptype_id();
-				 	        	
-				 	        	jobj.put("post_id", postVO.getPost_id());
-				 	        	jobj.put("post_img",postVO.getPost_img());
-								jobj.put("title", postVO.getPost_title());	
-								jobj.put("mem_name", mem_name);
-								jobj.put("view", postVO.getPost_view());
-								jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
-								jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
-								jarray.put(jobj);
+				}else if(listNum<6 && listNum>0) {
+					list1=postSvc.getPopularPost();
+					list.addAll(list1);
+					for (int i = 0; i < 6; i++) {
+						PostVO postVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
+							String sptype_id=postVO.getSptype_id();
+			 	        	
+			 	        	jobj.put("post_id", postVO.getPost_id());
+			 	        	jobj.put("post_img",postVO.getPost_img());
+							jobj.put("title", postVO.getPost_title());	
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", postVO.getPost_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
 
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}		   
+		            }				
+					
+				
+				}else {
+					list=postSvc.getPopularPost();
+					for (int i = 0; i < 6; i++) {
+						PostVO postVO=list.get(i);
+			 	        JSONObject jobj=new JSONObject();
+			 	        try {		 	        	
+			 	        	String mem_name=memSvc.getOneMem(postVO.getMem_id()).getMem_name();
+							String sptype_id=postVO.getSptype_id();
+			 	        	
+			 	        	jobj.put("post_id", postVO.getPost_id());
+			 	        	jobj.put("post_img",postVO.getPost_img());
+							jobj.put("title", postVO.getPost_title());	
+							jobj.put("mem_name", mem_name);
+							jobj.put("view", postVO.getPost_view());
+							jobj.put("sptype_color", sportTypeColor.get(sptype_id));				
+							jobj.put("sptype_name",sportTypeMap.get(sptype_id));				
+							jarray.put(jobj);
+
+							
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}		   
+		            }							
+					
+				}
 								
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}		   
-			            }							
-						
-					}
-									
-				}	        
+			}	        
 			
 	        
             out.print(jarray);

@@ -93,6 +93,19 @@
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 	}
+	
+	#post_con{
+	font-size:1.2rem
+	}
+	div>span{
+	font-size:1.2rem!important
+	}
+	
+	.navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+
+	}
   </style>
 </head>
 
@@ -176,33 +189,41 @@
 				<img class="img-fluid rounded-circle" alt="Card image"
 					src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${postVO.mem_id}">
 			</div>
+			
+			
+		
 		</div>
 		
 		
-		
-		<div class="col-md-4 align-self-end ml-1">
+		<div class="d-flex ">
+		<div class="col-md-9 align-self-end ml-1 d-flex flex-column">
 		
 			<h1 class="text-left text-primary">${memSvc.getOneMem(postVO.mem_id).mem_name}</h1>
 			<p class="text-left">${memSvc.getOneMem(postVO.mem_id).mem_intro}</p>
+			
+			
 		</div>
-		//toHome page
-		<div class="col-md-4"> 
+		
+			<div class="col align-self-end d-flex"> 
 			 
 			 <form METHOD="post" ACTION="<%=request.getContextPath() %>/post/Homepage.do">
-			 <p class="h4"> 
+			 <p class="h2"> 
 			 		<input type="hidden" name="action"     value="toHomePage">
 			 		<c:if test="${memVO!=null}">
 			 			<input type="hidden" name="visitor_mem_id"      value="${memVO.mem_id}"> 
 			 		</c:if>
 			 		<input type="hidden" name="mem_id"      value="${postVO.mem_id}"> 
 			 		<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">           
-               		<button type="submit" class="btn  py-1 mb-2 mt-1" style="background-color:black;width:5px">
-                    	<i class="fas fa-home text-light"></i>                  
+               		<button type="submit" class="btn  py-1 mb-2 mt-1" style="background:none;width:10px">
+                    	<i class="fas fa-home text-light" style="font-size:20px"></i>                  
                		</button> 
               </p>
              </form>             
            
 		</div>
+		</div>
+		//toHome page
+		
 		<!-- Personal Pic -->
 	
 	</div>

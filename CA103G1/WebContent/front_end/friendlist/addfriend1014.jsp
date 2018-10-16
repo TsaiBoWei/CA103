@@ -87,7 +87,8 @@
 	        		<input type="submit" value="送出邀請" id="addflBtn" onclick="addfriend()">
 	        	</c:if>
 	    	</c:if>
-	    	 
+<!-- 	    	 判斷目前A會員與B會員好友狀態 -->
+
 <!-- 	    	 對方有發送邀請 -->
 	    	<c:if test="${friendlistSvc.getOneFriendList(flmem_id,memVO.mem_id).fl_status=='FLS0'}">
 	        	<input type="submit" value="好友確認" id="addflchBtn" onclick="addflcheck()">

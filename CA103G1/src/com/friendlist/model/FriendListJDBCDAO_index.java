@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import com.Post.model.PostVO;
 import com.courlist.model.CourlistVO;
 import com.eve.model.EventVO;
+import com.plan.model.PlanVO;
 
 public class FriendListJDBCDAO_index {
 
@@ -33,6 +34,8 @@ public class FriendListJDBCDAO_index {
 			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' order by courlist.cour_id desc ";
 	private static final String GET_FRIEND_POST="select POST.post_id,POST.mem_id,POST.post_title,POST.post_view,POST.sptype_id,POST.post_con from friendlist JOIN post on(friendlist.fl_memb_id=post.mem_id) " + 
 			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' AND POST_PRIVACY='POSTPR1' and  POST_STATUS = 'POS0' order by post.post_id desc";
+	private static final String GET_FRIEND_PLAN="select plan_id,mem_id,plan_name,plan_view,sptype_id from friendlist JOIN PLAN on(friendlist.fl_memb_id=PLAN.mem_id) " + 
+			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' AND (plan_privacy = 'PLANPR0' OR plan_privacy = 'PLANPR2') order by PLAN.PLAN_ID desc";
 	
 	
 	
@@ -323,6 +326,54 @@ public class FriendListJDBCDAO_index {
 	 			return postList;
 	 			
 	 		};
+	 		
+	 		
+	 		
+ 		public List<PlanVO> getFriendPlan(String fl_mema_id){
+ 			List<PlanVO> list = new ArrayList<PlanVO>();
+ 			PlanVO planVO = null;
+
+ 			Connection con = null;
+ 			PreparedStatement pstmt = null;
+ 			ResultSet rs = null;
+
+ 			try {
+ 				Class.forName(DRIVER);
+ 				con = DriverManager.getConnection(URL, USERID, PASSWORD);
+ 				pstmt = con.prepareStatement(GET_FRIEND_PLAN);
+ 				pstmt.setString(1,fl_mema_id);
+ 				rs = pstmt.executeQuery();
+
+ 				while (rs.next()) {
+ 					planVO = new PlanVO();
+ 					planVO.setPlan_id(rs.getString("plan_id"));
+ 					planVO.setMem_id(rs.getString("mem_id"));
+ 					planVO.setPlan_name(rs.getString("plan_name"));
+ 					planVO.setSptype_id(rs.getString("sptype_id"));
+ 					planVO.setPlan_view(rs.getInt("plan_view"));
+ 					list.add(planVO);
+ 				}
+ 			
+ 			} catch (SQLException se) {
+ 				se.printStackTrace();
+//	 				throw new RuntimeException("A database error occurred. " + se.getMessage());
+ 			} catch (ClassNotFoundException e) {
+
+				e.printStackTrace();
+			} finally {
+ 				
+ 				if (con != null) {
+ 					try {
+ 						con.close();
+ 					} catch (SQLException se) {
+ 						se.printStackTrace();
+ 					}
+ 				}
+
+ 			}
+ 			return list;
+ 			
+ 		};
 	 	
 	
 	public static void main(String args[]) {
@@ -383,6 +434,16 @@ public class FriendListJDBCDAO_index {
 //			System.out.println(postVO.getPost_img());
 //			System.out.println(postVO.getPost_title());
 //			System.out.println(postVO.getSptype_id());
+//		}
+		
+//		List<PlanVO> list=dao.getFriendPlan("M000001");
+//		for(PlanVO planVO:list) {
+//			System.out.println(planVO.getPlan_id());
+//			System.out.println(planVO.getMem_id());
+//			System.out.println(planVO.getPlan_name());
+//			System.out.println(planVO.getSptype_id());
+//			System.out.println(planVO.getPlan_view());
+//		
 //		}
 		
 		

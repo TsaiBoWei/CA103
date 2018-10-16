@@ -7,6 +7,7 @@
 <%@ page import="com.Post.model.*"%>
 <%@ page import="com.plan.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.friendlist.model.*"%>
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
  <jsp:useBean id="now" class="java.util.Date" />
@@ -43,6 +44,9 @@
  String sessionPerpageloc=(String)session.getAttribute("perpageloc");
 
 %>
+
+
+
 
 
 <!DOCTYPE html>
@@ -97,6 +101,12 @@
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 	}
+	
+	.navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+
+}
   </style>
 </head>
 
@@ -187,7 +197,113 @@
 		
 			<h1 class="text-left text-primary">${memSvc.getOneMem(memVOtoHg.mem_id).mem_name}</h1>
 			<p class="text-left">${memSvc.getOneMem(memVOtoHg.mem_id).mem_intro}</p>
-		</div>
+		
+			<div class="text-left">
+			
+		 <jsp:useBean id="friendlistSvc" scope="page" class="com.friendlist.model.FriendListService" />
+	        <input type="hidden" name="fl_memA_id" value="${memVO.mem_id}" id="fl_memA_id">
+	        <input type="hidden" name="fl_memB_id" value="${memVOtoHg.mem_id}" id="fl_memB_id">
+        
+	<!--          不是自己的會員頁面 -->
+	
+	        <c:if test="${memVO.mem_id!=memVOtoHg.mem_id}">
+	<!--             是會員 且未加入好友 -->
+		        <c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id)==null&&memVO!=null}">
+	<!-- 	        對方未送出邀請 -->
+		        	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status!='FLS0'}">        
+		        		<input type="hidden" name="action" value="insert">        
+		        		<input type="submit" class="btn btn-primary" value="加好友" id="addflBtn" onclick="addfriend()">
+		        	</c:if>
+		    	</c:if>
+		    	 
+	<!-- 	    	 對方有發送邀請 -->
+		    	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status=='FLS0'}">
+		        	<input type="submit" class="btn btn-primary" value="好友確認" id="addflchBtn" onclick="addflcheck()">
+		        	<input type="button" class="btn btn-primary ml-2" value="拒絕"  >
+		    	</c:if> 
+		    	
+	<!-- 	    	 發送邀請給對方 -->
+		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS0'}">
+		        	<input type="BUTTON" class="btn btn-primary" value="已送出好友邀請" >
+		    	</c:if> 
+		    	
+	<!-- 	    	 已成為好友 -->	    	
+		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS1'}">
+		        	<input type="BUTTON" class="btn btn-primary" value="好友"  >
+		    	</c:if> 
+	    	</c:if>
+	    	
+    		</div>
+    	</div>
+    	
+    	
+    	<script type="text/javascript">
+	function addfriend(){
+		var fl_memA_id=document.getElementById("fl_memA_id").value;
+		var fl_memB_id=document.getElementById("fl_memB_id").value;
+		
+		var xhr = new XMLHttpRequest();
+	    //設定好回呼函數   
+	    xhr.onload = function (){
+	        if( xhr.status == 200){
+					console.log(xhr.responseText);
+				  if(xhr.responseText=='success'){
+					  document.getElementById("addflBtn").value = "已送出邀請";
+				  }else{
+					  alert(xhr.responseText);
+				  }
+	        	 
+	        }else{
+	          alert( xhr.status );
+	        }//xhr.status == 200
+	    };//onload 
+	    
+	    //建立好Get連接
+	    var url= "<%=request.getContextPath() %>/friendlist/friendlist.do?action=insert&fl_memA_id=" + fl_memA_id+
+	    		"&fl_memB_id="+fl_memB_id;
+	    xhr.open("Get",url,true); 
+	    //送出請求 
+	    xhr.send( null );    
+		
+		
+	}
+	
+	
+	function addflcheck(){
+		var fl_memA_id=document.getElementById("fl_memA_id").value;
+		var fl_memB_id=document.getElementById("fl_memB_id").value;
+		
+		var xhr = new XMLHttpRequest();
+	    //設定好回呼函數   
+	    xhr.onload = function (){
+	        if( xhr.status == 200){
+					console.log(xhr.responseText);
+				  if(xhr.responseText=='success'){
+					  document.getElementById("addflchBtn").value = "好友";
+				  }else{
+					  alert(xhr.responseText);
+				  }
+	        	 
+	        }else{
+	          alert( xhr.status );
+	        }//xhr.status == 200
+	    };//onload 
+	    
+	    //建立好Get連接
+	    var url= "<%=request.getContextPath() %>/friendlist/friendlist.do?action=insert_friend&fl_memA_id=" + fl_memA_id+
+	    		"&fl_memB_id="+fl_memB_id;
+	    xhr.open("Get",url,true); 
+	    //送出請求 
+	    xhr.send( null );    
+		
+		
+	}
+
+
+</script>
+    	
+		
+		
 <!-- 		//toHome page -->
 <!-- 		<div class="col-md-4">  -->
 			 

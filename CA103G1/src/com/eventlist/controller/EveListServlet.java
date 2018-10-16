@@ -116,8 +116,17 @@ public class EveListServlet extends HttpServlet {
 		if("openAddElModal".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			try{
-				
 				String eve_id = req.getParameter("eve_id");
+			
+				HttpSession session=req.getSession();
+				MemVO memVO=(MemVO)session.getAttribute("memVO");
+				if(memVO==null) {
+					session.setAttribute("location",req.getRequestURI()+"?action=openAddElModal&eve_id="+eve_id);
+					res.sendRedirect(req.getContextPath()+"/Mem_Login_Signup.jsp");
+					return;					
+				}
+				
+				
 				EveService eveSvc = new EveService();
 				EventVO eveVO = eveSvc.getOneEve(eve_id);
 				

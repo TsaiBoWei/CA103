@@ -52,6 +52,11 @@
   height:196px;
   overflow: hidden;
 }
+.btn-sm{
+  color:white!important;
+  font-weight:bold;
+}
+
 
 </style>
 
@@ -61,6 +66,27 @@
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 }
+</style>
+
+<style type="text/css">
+.pnftab{
+	font-weight:bold;
+	font-size:15px;
+	
+}
+
+
+
+#indexBtn{
+	font-weight:bold!important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
+
+}
+
 </style>
 
 
@@ -80,21 +106,21 @@ a,.fontstyle  {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
-        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
+        <a class=" btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" id="indexBtn" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
           		<c:if test="${memVO.mem_id ==null }">
-            		<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
+            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
 				</c:if>
 				<c:if test="${memVO.mem_id !=null }">
-            		<a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
 				</c:if>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
+            <a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
+            <a class="navtext nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
           </li>
          
           <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >

@@ -364,6 +364,7 @@
   <url-pattern>/calendar/calendar.do</url-pattern>
   </servlet-mapping>
 
+
  <servlet>
 	<servlet-name>CourseReportServlet</servlet-name>
 	<servlet-class>com.coursereport.controller.CourseReportServlet</servlet-class>
