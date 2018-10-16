@@ -236,13 +236,13 @@ li span {
           <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-outline-secondary m-1">Report<br></a>
           
           
-          <!-- Modal -->
+    <!-- 課程檢舉燈箱 -->
 	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"
 		aria-labelledby="idModal" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="center modal-title" id="exampleModalLongTitle">會員註冊</h4>
+					<h4 class="center modal-title" id="exampleModalLongTitle">課程檢舉</h4>
 					<button type="button" class="close cancel" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="false">&times;</span>
@@ -261,45 +261,36 @@ li span {
 							</c:if>
 						</div>
 					</div>
-					<form METHOD="post"
-						action="<%=request.getContextPath()%>/mem/mem.do">
+					<form METHOD="post" action="<%=request.getContextPath()%>/coursereport/coursereport.do">
 						<div class="input-group input-group-lg">
 							<div class="input-group-prepend">
-								<span class="input-group-text">信箱*</span>
+								<span class="input-group-text">會員信箱</span>
 							</div>
-							<input value="${param.regEmail }" type="email" name="regEmail" class="form-control"
+							<input value="${param.regEmail }" type="email" name="Email" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
 
-						<div class="input-group input-group-lg">
+						<div class="input-group-lg">
 							<div class="input-group-prepend">
-								<span class="input-group-text">暱稱 </span>
+							<span class="input-group-text">檢舉項目</span>
+							<select name= "reportItem">
+								<option value="CRN1">課程內容不當</option>
+								<option value="CRN2">課程收費不當</option>
+								<option value="CRN3">其它</option>
+							</select>
 							</div>
-							<input value="${param.regName }" type="text" name="regName" class="form-control"
-								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
 
-						<div class="input-group input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">密碼*</span>
-							</div>
-							<input type="password" name="regPassword" class="form-control"
-								aria-label="Large" aria-describedby="inputGroup-sizing-sm ">
-						</div>
-						<br>
-
-						<div class="input-group input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">確認密碼*</span>
-							</div>
-							<input type="password" name="confirmedPsw" class="form-control"
-								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+						<div class="input-group-lg">
+							<label style="font-size: 150%">狀況敘述 :</label>
+							<textarea class="form-control" name="courrepText"
+								style="height: 300px"></textarea>
 						</div>
 						<br>
 						<div class="modal-footer">
-							<input type="hidden" name="action" value="mem_signUp">
+							<input type="hidden" name="action" value="addReport">
 							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
 							<button type="button" class="btn btn-secondary cancel"
 								data-dismiss="modal">取消</button>
@@ -637,7 +628,26 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
-  
+  <!-- 註冊失敗,打開燈箱 -->
+  	<c:if test="${openModal!=null}">
+		<script>
+    		 $("#idModal").modal({show: true});
+        </script>
+	</c:if>
+
+	<script>
+   $(function() {
+       $(".cancel").click(function() {
+            $(location).attr('href', '<%= request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id=${brows_courlistVO.getCour_id()}&courpageloc=tabone');
+							});
+		});
+		var width = document.body.offsetWidth;
+		$(function() {
+			$(window).resize(function() {
+				$("#errorUL").css("padding-left", "2000 px")
+			})
+		});
+	</script>
 
 
 </body>

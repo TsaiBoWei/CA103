@@ -39,7 +39,7 @@ public class CourseReportDAO implements CourseReportDAO_interface{
 			"SELECT * FROM COURSEREPORT WHERE COURREPO_ID= ? ";
 	
 	private static final String GET_ALL = 
-			"SELECT * FROM COURSEREPORT ORDER BY COURREP_STATUS DESC ";
+			"SELECT * FROM COURSEREPORT";
 
 	@Override
 	public void add(CourseReportVO courseReportVO) {

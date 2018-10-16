@@ -69,6 +69,14 @@ border:0px;
 text-align:center;
 }
 
+.payinput{
+background-color:#e1e1e1;
+color:#10451b; 
+font-weight:bold;
+
+}
+
+
  
 </style>
 
@@ -665,7 +673,7 @@ a,.fontstyle  {
  </c:if>
  
  
- ${openPayModal!=null}
+
    <!-- The Modal -->
 <c:if test="${openPayModal!=null}">
 
@@ -681,8 +689,10 @@ a,.fontstyle  {
 			<div class="modal-body " >
 				 <div class="row"><div class="col-md-4  h4 text-success " style='font-weight:bold !important;'>活動名稱 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>  ${eveVO.eve_title}</div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'> 付款金額 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_amount}&nbsp元</div></div>
-				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款帳號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'></div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>信用卡卡號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text" class="payinput" ><div class="mt-2"> 月<input type="text"  class="payinput" size="1">年<input type="text"  class="payinput" size="1"> CVC<input type="text"  class="payinput" size="1" ></div></div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>持卡人姓名 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" value="${memVO.mem_name}"></div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款截止日 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_deadline}</div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>手機號碼 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" name="phone_number"></div></div>
 
         	</div>
         	

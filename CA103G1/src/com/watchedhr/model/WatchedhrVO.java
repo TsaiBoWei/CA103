@@ -1,11 +1,20 @@
 package com.watchedhr.model;
 
+import java.sql.Timestamp;
+
 public class WatchedhrVO {
 	
 	private String cour_unit_id;
 	private String crorder_id;
 	private Double watched_hr;
+	private Timestamp brows_time;
 	
+	public Timestamp getBrows_time() {
+		return brows_time;
+	}
+	public void setBrows_time(Timestamp brows_time) {
+		this.brows_time = brows_time;
+	}
 	public String getCour_unit_id() {
 		return cour_unit_id;
 	}

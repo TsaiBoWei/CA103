@@ -6,6 +6,10 @@
 <%@ page import="com.mem.model.*"%>
 
 <%
+
+	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
+	pageContext.setAttribute("planVO", planVO);
+
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 
 	String perpageloc = request.getParameter("perpageloc");
@@ -76,11 +80,11 @@ p {
 /* 	} */
 
 /*圖片專區*/
-.card-img-top {
-	width: 300px;
-	depth: 200px;
-	border-radius: 50px;
-}
+/* .card-img-top { */
+/* 	width: 300px; */
+/* 	depth: 200px; */
+/* 	border-radius: 50px; */
+/* } */
 </style>
 
 <!-- navbar setting -->
@@ -368,12 +372,12 @@ a, .fontstyle {
 						end="<%=pageIndex+rowsPerPage-1%>">
 						<div class="col-12 col-md-4">
 							<div class="card">
-								<img class="card-img-top"
+								<img class="card-img-top" style="height:250px; overflow:hidden;"
 									src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
 								<div class="card-body">
 									<h5 class="plan_name">${planVO.plan_name}</h5>
 									<p class="sptype_id">
-										7運動類型:
+										84運動類型:
 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
 										</c:forEach>

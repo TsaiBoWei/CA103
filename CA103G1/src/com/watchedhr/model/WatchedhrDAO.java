@@ -25,10 +25,11 @@ public class WatchedhrDAO implements WatchedhrDAO_interface {
 
 	private static final String INSERT_STMT = 
 			"INSERT INTO WATCHEDHR(COUR_UNIT_ID, CRORDER_ID, WATCHED_HR) VALUES(?, ?, ?)";
-	private static final String UPDATE_STMT = "UPDATE WATCHEDHR SET WATCHED_HR = ? WHERE COUR_UNIT_ID = ? AND CRORDER_ID = ?";
+	private static final String UPDATE_STMT = "UPDATE WATCHEDHR SET WATCHED_HR = ? WHERE COUR_UNIT_ID = ? AND CRORDER_ID = ?";//е╝зя
 	private static final String GET_WATCH_SUM_BY_CRORDER_ID = "SELECT SUM (WATCHED_HR) FROM WATCHEDHR WHERE CRORDER_ID=?" ;
 	private static final String GET_COUR_UNIT_BY_CRORDER_ID= "SELECT COUR_UNIT_ID FROM WATCHEDHR WHERE CRORDER_ID=?" ;
 	private static final String GET_WATCHEDHR= "SELECT WATCHED_HR FROM WATCHEDHR WHERE CRORDER_ID=? AND COUR_UNIT_ID=? " ;
+	private static final String GET_BROWS_TIME= "SELECT * FROM WATCHEDHR WHERE CRORDER_ID=? ORDER BY BROWS_TIME DESC" ;
 	
 	private static DataSource ds = null;
 	static {
@@ -249,6 +250,57 @@ public class WatchedhrDAO implements WatchedhrDAO_interface {
 		}
 
 		return watched_hr;
+
+	}
+
+	@Override
+	public WatchedhrVO getFirstByCrorder_id(String crorder_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		WatchedhrVO watchedhrVO=null;
+		
+		try {
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			pstmt = con.prepareStatement(GET_COUR_UNIT_BY_CRORDER_ID);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BROWS_TIME);
+			pstmt.setString(1, crorder_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				watchedhrVO= new WatchedhrVO();
+				watchedhrVO.setCrorder_id(rs.getString("CRORDER_ID"));
+				watchedhrVO.setBrows_time(rs.getTimestamp("BROWS_TIME"));
+				watchedhrVO.setWatched_hr(rs.getDouble("WATCHED_HR"));
+				watchedhrVO.setCour_unit_id(rs.getString("COUR_UNIT_ID"));
+				
+			}
+System.out.println("DAO"+watchedhrVO==null);
+
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return watchedhrVO;
 
 	}
 

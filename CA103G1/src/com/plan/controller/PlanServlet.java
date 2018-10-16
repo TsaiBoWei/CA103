@@ -350,7 +350,7 @@ public class PlanServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			System.out.println("line353");
 			try {
 
 				/*************************** 1.將輸入資料轉為Map **********************************/

@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.plan.model.*"%>
 <%@ page import="com.mem.model.*" %>
+<%@ page import="com.purchcour.model.*" %>
+<%@ page import="com.courlist.model.*" %>
+<%@ page import="com.watchedhr.model.*" %>
 
 <%
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
@@ -63,7 +66,16 @@
 		width: 170px;
 		height: 33px;
 		font-size: 18px;
+		background:none;
 	}
+	#courseplan{
+	
+	height: 60px;
+	border: 0.8px solid white;
+	}
+	
+	
+	
 	
 </style>
 
@@ -74,6 +86,226 @@ a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
 </style>
+<style type="text/css">
+
+.side-bar {
+  position: relative;
+  margin: 30px auto;
+/*   width: 400px; */
+  width: auto;
+  height: 350px;
+/*   background: #fff; */
+/*   padding: 30px; */ 
+  padding: 10px;
+/*   box-shadow: 0 32px 40px -20px rgba(0, 0, 0, .25); */ 
+  overflow: scroll;
+  transition: background 1s;
+}
+
+
+.side-bar.selected {
+  background: rgba(0, 0, 0, .05);
+}
+
+
+.side-bar.selected .prod-list {
+  transform: scale(0.85);
+}
+.side-bar .prod-list {
+  transition: 500ms;
+}
+.side-bar .prod-list li, .side-bar .sub-prod-list li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f6901e;
+  list-style: none;
+  padding: 5px 0; 
+
+  cursor: pointer;
+  border-bottom: 0.7px solid #12bbad;
+}
+.side-bar .popup-list {
+  background: #fff; 
+  padding: 30px; 
+  
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: cubic-bezier(0.7, 0, 0.2, 1) 0.5s;
+  overflow: scroll;
+  background: rgba(48, 48, 48, 1);
+}
+.side-bar .popup-list.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  box-shadow: 0 -32px 40px -20px rgba(0, 0, 0, .25);
+}
+/* #style-1::-webkit-scrollbar */
+/* { */
+/* 	width: 12px; */
+/* 	background-color: #F5F5F5; */
+/* } */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 12px;
+  
+}
+
+::-webkit-scrollbar-button {
+    
+    background-color:none;
+}
+/* ::-webkit-resizer{ */
+/*  -webkit-appearance: none; */
+/*  background-color:red; */
+/* } */
+
+::-webkit-scrollbar-corner {
+  background-color:none; 
+  -webkit-appearance: none;
+
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    border: 4px solid rgba(255,255,255,0);
+    background-clip: content-box;
+
+    background-color: rgba(160, 160, 160,0.8);
+}
+
+.side-bar .popup-list.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  box-shadow: 0 -32px 40px -20px rgba(0, 0, 0, .25);
+}
+
+
+</style>
+<style>
+
+.commentbottomline{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);
+}
+
+.postsubtitle .border-right {
+    border-right: 0.8px solid rgba(239, 239, 239,0.8)!important;
+}
+.courboarlistinnerline{
+  border-bottom: 0.8px solid rgba(239, 239, 239,0.4); 
+}
+
+.h5{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+
+p.h6{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+
+body{
+     font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
+}
+    
+.replyinreplynametext{
+  border-bottom: 0.5px solid rgba(239, 239, 239,0.4);  
+}
+
+
+   .commenttextarea {
+      height: 120px;
+    }
+
+    .courboarsearchbar {
+      background: none;
+      border: 0.7px solid #303030;
+    }
+
+    .courboarsearchbar:focus {
+      background: none;
+    }
+
+    .courboarformtitle {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarformtitle:focus {
+      background: none;
+    }
+
+    .courboarqform {
+      background: rgba(48, 48, 48, 0.9);
+      /*width: 700px;*/
+    }
+
+    .courboardqtext {
+      border-radius: 2px;
+      background: none;
+      border: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboardqtext:focus {
+      background: none;
+    }
+
+    .courboarmodalheader {
+      border-bottom: none;
+    }
+
+    .courboarmodal {
+      border-top: 0.5px solid rgba(204, 204, 204, 0.5);
+    }
+
+    .courboarlistinnerline {
+      border-bottom: 0.5px solid rgba(239, 239, 239, 0.4);
+    }
+    
+    .crposticon:hover{
+    
+    color:#009ac0;
+    }
+    
+  
+    /*20180915  courboarform  彈出表單修改尺寸*/
+
+    .form-group-100{
+        width:100%;
+    }
+
+    .modal-dialog.modal-dialog-700{
+        max-width: 400px;
+    }
+
+    .popModel-close-bt{
+        position: absolute;
+        right: 0;
+        height: 50px;
+        width: 50px;
+    }
+
+    /*//20180915  courboarform  彈出表單修改尺寸*/
+ #plan_votext{
+ background:none;
+ 
+ }
+ 
+ .myfirstday{
+ background:none;
+ 
+ }
+ 
+
+</style>
+
+
 
 <%--上傳圖片 --%>
 <script
@@ -120,19 +352,19 @@ a,.fontstyle  {
 							<h3>Plan Name</h3>
 							<input type="text" name="plan_name"
 								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
-								class="form-control"/>
+								class="form-control myfirstday text-light"/>
 						</div>
 						<br>
 
 				 		<div class="form-group">
 							<label><h3>PlanStartDate</h3></label> 
-							<input type="text" name="plan_start_date" id="f_date1" class="date"/>
+							<input type="text" name="plan_start_date" id="f_date1" class="date text-light"/>
 						</div>
 
 
 					 	<div class="form-group">
 							<label><h3>Plan EndDate</h3></label> 
-							<input type="text" name="plan_end_date" id="f_date2" class="date"/>
+							<input type="text" name="plan_end_date" id="f_date2" class="date text-light"/>
 						</div>
 
 						
@@ -141,7 +373,7 @@ a,.fontstyle  {
 						
  						<div class="form-group">  
 							<label><h3>Sport Type　</h3></label> <select size="1"
-								name="sptype_id" style="width: 150px; font-size: 18px;">
+								name="sptype_id" class="" style="width: 150px; font-size: 18px;">
 								<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 									<option value="${sptypeVO.sptype_id}" ${(planVO.sptype_id==sptypeVO.sptype_id)? 'selected':''}>${sptypeVO.sport}
 								</c:forEach>
@@ -150,11 +382,11 @@ a,.fontstyle  {
 
 
 						<div class="form-group">  
-							<label><h3>Privacy　　　</h3></label> <select size="1"
+							<label><h3>Privacy</h3></label> <select size="1"
 								name="plan_privacy" style="width: 150px; font-size: 18px;">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
-								<option value="PLANPR2">只對朋友公開</option>
+								<option  value="PLANPR2">只對朋友公開</option>
 							</select>
 						</div>
 
@@ -174,11 +406,16 @@ a,.fontstyle  {
 						</div>
 
 						<div class="form-group">
-							<label><h3>Plan Content</h3></label><br>
-							<textarea name="plan_vo" rows="10" class="form-control" style="font-size: 22px"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
+							<label><h3>Plan Content</h3></label><br><span class="btn btn-info deletecbform px-1 mb-2 " data-toggle="modal" data-target="#courlistplan"> <i class="far fa-plus-square"></i>&nbsp;&nbsp;Add Course Into Plan
+																			</span>
+							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 22px" id="plan_votext"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
 							<br>
 						</div>
-	
+						<!-- 	ashley -->
+						
+<!-- 						ashley -->
+						<div class="col-12 "id="courseplan" style="display:none;" ></div>
+	<!-- 						ashley -->
 		
 						<div class="from-group">
 <!-- 							<h5> -->
@@ -188,7 +425,7 @@ a,.fontstyle  {
 						</div>
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-primary">Create</button>
+							<button type="submit" class="btn btn-primary creatbtn">Create</button>
 <!-- 							<button type="submit" class="btn btn-primary" -->
 <%-- 								formaction="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Reset</button> --%>
 <!-- 							<button type="submit" class="btn btn-primary"  -->
@@ -203,7 +440,143 @@ a,.fontstyle  {
 	<div class="container containerHrB ">
 		<hr>
 	</div>
-	<!-- Here you go -->
+
+<!--ashley -->
+	<div class="col-md-12 text-center">
+					<div class="modal fade mx-auto" tabindex="-1" role="dialog"
+						aria-hidden="true" aria-labelledby="exampleModalLabel"
+						id="courlistplan" data-backdrop="static" data-keyboard="false"><!-- 										///	 -->
+						<div class="modal-dialog modal-dialog-700" role="document">
+							<div class="modal-content courboarqform">
+								<button type="button" class="close popModel-close-bt cancel"
+									data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true" class="text-light"><i
+										class="fas fa-times cancel"></i></span>
+								</button>
+								<div class="modal-header courboarmodalheader">
+									<div class="form-group text-left text-white form-group-100">
+										
+										
+									</div>
+								</div>
+								<div class="modal-body text-left">
+									<div class="form-group text-white">
+<!-- 										<label>Content</label> -->
+                                     <h3 class="text-primary">Choose A Lesson</h3>
+										<div class="side-bar text-light">
+										<ul class="prod-list">
+					<jsp:useBean id="purcourSvc" scope="page" class="com.purchcour.model.PurchcourService" />
+					<jsp:useBean id="courlistSvc" scope="page" class="com.courlist.model.CourlistService" />
+					<jsp:useBean id="watchedhrSvc" scope="page" class="com.watchedhr.model.WatchedhrService" />
+									<c:forEach var="purchcourVO" items="${purcourSvc.getMemPurchCour(memVO.mem_id)}">
+											<li class="pb-1" name="${purchcourVO.cour_id}" id="${purchcourVO.crorder_id}" ><i class="far fa-file-video"></i>&nbsp;${courlistSvc.getOneCourlist(purchcourVO.cour_id).cname}</li>
+									
+									<script>
+									$("#${purchcourVO.crorder_id}").click( function(){
+										
+										$("#plan_votext").hide();
+										$("#courseplan").show();
+										
+										$.ajax({
+									        url:'<%=request.getContextPath()%>/courunit/courunit.do',
+									        method:'POST',
+									       
+									        data:{
+									           action:"queryforcourlist",
+									           cour_id:$(this).attr("name"),
+									           crorder_id:$(this).attr("id"),
+								
+									        },
+									        success : function(result) {
+// 									            if (result.status === 'success'){
+									            	alert(result);
+									            $(".sub-prod-list").empty();
+									            $(".sub-prod-list").append(result);
+									            },
+									      
+									
+									});
+										
+									});
+									
+									
+									</script>
+									
+									
+									
+									</c:forEach>
+									
+										</ul>
+										<div class="popup-list" id="style-1">
+											<ul class="sub-prod-list">
+<!-- 											<li class="pb-1" data-dismiss="modal">Sub-option 1</li>				 -->
+										</ul>
+										</div>
+										
+									</div>
+								</div>
+								<div class="modal-footer courboarmodal">
+<!-- 									<button type="button" class="btn btn-secondary cancel" -->
+<!-- 										data-dismiss="modal">Cancel</button> -->
+<!-- 									<input type="hidden" name="action" value="insert"></input>  -->
+<!-- 									<input -->
+<!-- 										type="hidden" name="cour_id" value="" class="brows_cour_id"></input> -->
+								
+<%-- 								    <input type="hidden" name="mem_id" id="" value="${memVO.mem_id}"></input> --%>
+
+<%-- 								<c:if test="${watchedhrSvc.getFirstByCrorder_id(purchcourVO.crorder_id).cour_unit_id.equals(courunitlist.get(i).getCour_unit_id())}"> --%>
+<!-- 								<script type="text/javascript"> -->
+<!-- //  								$(document).ready(function() {   -->
+<!-- // 					            var strli=$("#").text()+"<i class='far fa-eye'></i>最後觀看至"; -->
+<!-- // 									$("#").text(strli);  -->
+<!-- // 							});  -->
+<!-- <!-- 								</script> --> 
+<%-- 								</c:if> --%>
+
+						
+<!-- 									<input class="whichPagepasser" type="hidden" name="whichPage" value=""></input>  -->
+<!-- 									<button type="submit" class="btn btn-primary confirmbtn">Save -->
+<!-- 										Changes</button> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<!--ashley -->
+
+
+<script type="text/javascript">
+	var courplantext="";
+	$('.side-bar').click( function(){
+	$(this).toggleClass('selected')
+	$('.popup-list').toggleClass('active')
+});
+
+
+    
+	
+	$(document).ready(function() {
+		$(".creatbtn").click(function(e) {
+// 			e.preventDefault();
+			$("#courseplan").find('.linkclose').each(function(index, item){
+				$(item).html('');
+			});
+			$("#courseplan").find('a').each(function(index, item){
+				$(item).removeClass();
+			});
+			var inputcourplan = $("#courseplan").html();
+			console.log(inputcourplan);
+			$("#plan_votext").val(inputcourplan);
+		});
+
+	});
+
+  
+
+
+</script>
+
+
 	
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	                                      <jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>
@@ -234,10 +607,10 @@ a,.fontstyle  {
 	}
 %>
 
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/front_end/plan/datetimepicker/jquery.datetimepicker.full.js"></script>
-
 
 
 <script>
@@ -266,5 +639,8 @@ $(function(){
 	});
 });
 </script>
+
+
+
 
 </html>

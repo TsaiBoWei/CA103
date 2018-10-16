@@ -279,8 +279,9 @@
 		    }
 	}
 	
+	var isStreaming = false;
 	function getStreamId(){
-		var url= "<%=request.getContextPath()%>/youtube/listStream.do";
+		var url= "<%=request.getContextPath()%>/youtube/listStream.do?action=?&coach_id=jspget&streamStatus=?";
 		console.log(url);
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function (){

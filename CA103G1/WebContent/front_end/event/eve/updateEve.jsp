@@ -314,6 +314,8 @@ a,.fontstyle  {
                       <label for="eve_loc">活動地點</label> <b class='errorMsg'> ${errorMsgs.eve_location}</b>
                       <input type="text" class="form-control" id="eve_loc" name="eve_location" 
                       	value="<%= (eveVO==null)? "" : eveVO.getEve_location()%>"> 
+                      <input type="hidden" name="eve_long"  id="eve_long" value="${eveVO.eve_long>0?eveVO.eve_long:''}">          
+ 					  <input type="hidden" name="eve_lat"  id="eve_lat" value="${eveVO.eve_long>0?eveVO.eve_lat:''}">            	
                     </div>	               
                   </div>
                   <div class="form-row">
@@ -528,6 +530,41 @@ a,.fontstyle  {
     </div>
   </div>
   
+  <script>
+      function initMap(){
+    	 
+    	  var eve_location= document.getElementById("eve_loc");
+          var addBtnSubmit=document.getElementById("addBtnSubmit");
+          var eve_long= document.getElementById("eve_long");
+		  var eve_lat= document.getElementById("eve_lat");
+		  console.log("11:"+eve_long.value);
+          eve_location.onchange= function(){ 
+        	  console.log(22);
+  		    var longitude;
+  		    var latitude;
+  		   
+  		    
+  		    var geocoder = new google.maps.Geocoder();
+  		
+  		    geocoder.geocode({
+  		      address: eve_location.value
+  		    }, function(results, status) {
+  		      if (status == google.maps.GeocoderStatus.OK) {
+  		         longitude=results[0].geometry.location.lng();
+  		         latitude=results[0].geometry.location.lat();
+  		         eve_long.value=longitude;
+  		         eve_lat.value=latitude;
+  		         console.log(eve_long.value);
+  		         console.log(eve_lat.value);
+  		      }
+  		    }); 		
+  		};
+          console.log(11);
+        
+      }
+    
+      </script>	 
+  
   
   <script>
 $(document).ready(function(){
@@ -573,7 +610,7 @@ $(document).ready(function(){
           });
     	
         //summernote賦值(將文字顯示在summernote上)     
-		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)? "" : eveVO.getEve_content()%>');
+		$("#econtent_summernote").summernote("code", '<%= (eveVO==null)||eveVO.getEve_content()==null? "" : eveVO.getEve_content()%>');
 		
         //summernote取值
         $("#addBtnSubmit").click(function(){
@@ -806,8 +843,14 @@ $(document).ready(function(){
                      return [true, ""];
              }});
         });
+
+        
         
        	
+</script>
+<!-- Google Map -->
+<script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASI3sgz6P-wisrPe6D4N59Ro0RrodnHJM&callback=initMap">
 </script>
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>

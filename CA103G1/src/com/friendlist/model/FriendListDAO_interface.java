@@ -5,6 +5,7 @@ import java.util.List;
 import com.Post.model.PostVO;
 import com.courlist.model.CourlistVO;
 import com.eve.model.EventVO;
+import com.plan.model.PlanVO;
 
 public interface FriendListDAO_interface {
 	void insert(FriendListVO friendlistVO);
@@ -23,4 +24,5 @@ public interface FriendListDAO_interface {
 	List<CourlistVO> getFriendCour(String fl_mema_id);
 	List<CourlistVO> getFriendPurCour(String fl_mema_id);
 	List<PostVO> getFriendPost(String fl_mema_id);
+	List<PlanVO> getFriendPlan(String fl_mema_id);
 }

@@ -15,11 +15,11 @@ import javax.sql.DataSource;
 import com.watchedhr.model.WatchedhrService;
 
 public class GiveMeRecord extends HttpServlet {
-	private static final String UPDATE_STMT = "UPDATE WATCHEDHR SET WATCHED_HR = ? WHERE COUR_UNIT_ID = ? AND CRORDER_ID=?";
+	private static final String UPDATE_STMT = "UPDATE WATCHEDHR SET WATCHED_HR = ? , BROWS_TIME = ? WHERE COUR_UNIT_ID = ? AND CRORDER_ID=?";
 	private static final String GET_WATCH_TIME = "SELECT WATCHED_HR FROM WATCHEDHR WHERE COUR_UNIT_ID = ? AND CRORDER_ID=?";
 	private static final String GET_COUR_UNIT_BY_CRORDER_ID= "SELECT COUR_UNIT_ID FROM WATCHEDHR WHERE CRORDER_ID=?" ;
 	private static final String INSERT_STMT= 
-			"INSERT INTO WATCHEDHR(COUR_UNIT_ID, CRORDER_ID, WATCHED_HR) VALUES(?, ?, ?)";
+			"INSERT INTO WATCHEDHR(COUR_UNIT_ID, CRORDER_ID, WATCHED_HR,BROWS_TIME) VALUES(?, ?, ?, ?)";
 
 	private static DataSource ds = null;
 	static {
@@ -44,7 +44,7 @@ public class GiveMeRecord extends HttpServlet {
 		Double watched_hr = (Double.valueOf(req.getParameter("maxcurrentTime")));
         String cour_unit_id=req.getParameter("cour_unit_id");
         String crorder_id=req.getParameter("crorder_id");
-        
+        Timestamp brows_time = new Timestamp(System.currentTimeMillis());
 
        
 System.out.println("maxTime" + watched_hr);
@@ -87,8 +87,9 @@ System.out.println("oriWatchTime" +oriWatchTime);
 	                if (oriWatchTime < watched_hr) {
 	            		pstmt1 = con.prepareStatement(UPDATE_STMT);
 						pstmt1.setDouble(1, watched_hr);
-						pstmt1.setString(2, cour_unit_id);
-						pstmt1.setString(3, crorder_id);
+						pstmt1.setTimestamp(2, brows_time);
+						pstmt1.setString(3, cour_unit_id);
+						pstmt1.setString(4, crorder_id);
 						pstmt1.executeUpdate();
 System.out.println("update");   
 	                }
@@ -98,6 +99,7 @@ System.out.println("update");
 					pstmt1.setString(1, cour_unit_id);
 					pstmt1.setString(2, crorder_id);
 					pstmt1.setDouble(3, watched_hr);
+					pstmt1.setTimestamp(4, brows_time);
 	    			pstmt1.executeUpdate();
 System.out.println("INSERT");            	
             }

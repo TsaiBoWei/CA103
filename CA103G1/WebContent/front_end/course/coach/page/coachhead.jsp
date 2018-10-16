@@ -83,6 +83,7 @@
 			<div class="colProfile">
 				<img class="img-fluid rounded-circle" alt="Card image"
 					src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${memVO.mem_id}">
+					<span class="coachlive" style="cursor: pointer;"><p class="h6 mt-3"><i class="fab fa-youtube"></i>&nbsp;&nbsp;<font class="livestreamsta">START&nbsp;A&nbsp;LIVESTREAM&nbsp;</font></p></span>
 			</div>
 		</div>
   <!--coach profile -->
@@ -100,6 +101,38 @@
 		
 	
 	</div>
+	<script>
+	$(document).ready(function() {
+		$(".coachlive").click(function(){
+			getStreamId();
+		$(".livestreamsta").text("LiveStreaming...")	
+		setTimeout('Redirect()', 10000);
+			});
+	});
+	
+	function Redirect(){
+        window.location = "<%=request.getContextPath()%>/front_end/stream/streamChat.jsp?";   //要跳轉的頁面
+	}
+	
+	function getStreamId(){
+		var url= "<%=request.getContextPath()%>/youtube/listStream.do?mem_id=${memVO.mem_id}";
+		console.log(url);
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function (){
+	    	if( xhr.status == 200){        
+	    		console.log(xhr.responseText);
+	    		}
+	    	else{
+	            alert( xhr.status );
+	          }//xhr.status == 200
+	    };//onload 
+	      
+	    xhr.open("Post",url,true);
+		xhr.send(null);	      
+	}
+	
+	</script>
+	
 	<!-- NavBar Personal focus 判斷式-->
 	
 <%-- 	<% --%>

@@ -84,6 +84,15 @@ body {
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 	}
+	.coachrow{
+	width:760.19px;
+	
+	}
+	
+	.coachlive:hover{
+	color:#009ac0;
+	
+	}
   </style>
 
 </head>
@@ -249,7 +258,7 @@ body {
             <div class="card">
               <div class="card-header " id="headingOne" >
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="<%=datatarget%>" aria-expanded="true" aria-controls="collapsev">
-                  <div class="row align-items-start px-1">
+                  <div class="row align-items-start px-1 coachrow">
                     <div class="col-3 col-md-1 courboarimg px-1 ">
                     <div class="">
                       <img class="img-fluid rounded rounded-courseimage" alt="Card image" src="<%=request.getContextPath()%>/front_end/course/purchcour/assets/conference/coursean.jpg"></div> </div>
