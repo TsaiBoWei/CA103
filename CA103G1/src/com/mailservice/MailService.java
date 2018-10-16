@@ -44,7 +44,7 @@ public class MailService {
 			   //設定信中的主旨  
 			   message.setSubject(subject);
 			   //設定信中的內容 
-			   message.setText(messageText);
+			   message.setContent(messageText, "text/html; charset=UTF-8");
 
 			   Transport.send(message);
 			   System.out.println("傳送成功!");

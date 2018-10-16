@@ -65,6 +65,14 @@ h1 {
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 }
+
+
+ /*  ¤jnav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
 </style>
 
 
@@ -173,7 +181,7 @@ a,.fontstyle  {
               <i class="far fa-check-circle"></i>&nbsp;Available </font>
              <%}else{%> 
              
-             <font class="text-secondary" style="opacity: 0.8;">
+             <font class="text-secondary font-weight-bold" style="opacity: 0.9;">
               <i class="fas fa-hand-holding-usd"></i>&nbsp;Refund is being processed</font>
              <%}%> 
           </p>
