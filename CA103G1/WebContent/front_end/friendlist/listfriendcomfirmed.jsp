@@ -35,10 +35,6 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<!-- Script: Make my navbar transparent when the document is scrolled to top -->
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<!-- Script: Animated entrance -->
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
@@ -48,6 +44,13 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+	
+<!--self definine 若放在上方cover輪播格式會跑掉 -->
+ 
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+  <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+  <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
 <style>
 
 /*頁面設定*/
@@ -107,6 +110,20 @@ th, td {
 }
 
 </style>
+
+
+<!-- navbar setting -->
+<style type="text/css">
+
+a,.fontstyle  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
+
+}
+</style>
 </head>
 
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
@@ -137,7 +154,7 @@ th, td {
 						<li class="nav-item"><a class="nav-link  text-white active"><h4>我的好友清單</h4></a>
 						</li>
 						<li class="nav-item"><a class="nav-link text-white disabled"
-							href="<%=request.getContextPath()%>/front_end/friendlist/listfriendunconfirmed.jsp"><h4>待確認</h4></a></li>
+							href="<%=request.getContextPath()%>/front_end/friendlist/listfriendunconfirmed.jsp?perpageloc=friendlist#personalnav"><h4>待確認</h4></a></li>
 					</ul>
 
 					<form class="form-inline my-2 my-lg-0">
@@ -156,7 +173,9 @@ th, td {
 				<c:forEach var="friendlistVO" items="${list}">
 					<div class="col-12 col-md-4">
 						<div class="card" style=" padding:20px;margin: 20px;">
-							<img id="dylan_memPhoto" src="<%=request.getContextPath()%>/friendlist/FriendList_DBGifReader.do?mem_id=${friendlistVO.fl_memB_id}">
+							<A href="<%=request.getContextPath() %>/post/Homepage.do?action=toHomePage&mem_id=${friendlistVO.fl_memB_id}&visitor_mem_id=${memVO.mem_id}&perpageloc=mypage#personalnav">
+								<img id="dylan_memPhoto" src="<%=request.getContextPath()%>/friendlist/FriendList_DBGifReader.do?mem_id=${friendlistVO.fl_memB_id}">
+							</A>
 							<div class="card-body">
 								<h3 id=dylan_fl_name align="center" style="display: inline;">
 									${memSvc.getOneMem(friendlistVO.fl_memB_id).mem_name}
