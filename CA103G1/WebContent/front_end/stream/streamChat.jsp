@@ -105,8 +105,8 @@
             <div class="input_msg_write">
               <input id="message" type="text" class="write_msg" placeholder="Type a message" autofocus onkeydown="if (event.keyCode == 13) sendMessage();"/>
 <!--           會員的id跟姓名 -->
-              <input id="userName" type="hidden" value="${memVO.mem_name}"/>
-     		  <input id="userId" type="hidden" value="${memVO.mem_id}"/>
+              <input id="userName" type="hidden" value="${memVO.mem_name==null?'訪客':memVO.mem_name}"/>
+     		  <input id="userId" type="hidden" value="${memVO.mem_id?'M999999':memVO.mem_id}"/>
               <button class="msg_send_btn pb-1 px-auto" type="button" id="sendMessage" onclick="sendMessage();"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             </div>
           </div>
@@ -297,7 +297,7 @@
 		xhr.send(null);	      
 	}
     
-	window.onload= getStreamId;
+// 	window.onload= getStreamId;
 </script>
  <!-- JavaScript dependencies -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

@@ -47,7 +47,7 @@
   .eveImg{
   width:100%;
   }
-   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span{
+   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span,#eve_contentDiv p,#eve_contentDiv div,#eve_contentDiv strong{
   color:#efefef !important;
   font-size:20px;
   }
@@ -76,7 +76,11 @@ font-weight:bold;
 
 }
 
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
 
+}
  
 </style>
 

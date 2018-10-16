@@ -81,6 +81,11 @@
     
     }
     
+    .navbar-dark .navbar-nav .nav-link{
+		color:rgba(255, 255, 255, 0.8)!important;
+		font-weight:bold!important;	
+	}
+	    
     
 
   </style>

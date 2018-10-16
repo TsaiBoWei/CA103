@@ -48,6 +48,14 @@ li.dropdown {
 
 
 
+
+.navtext {
+	font-weight:bold;
+	color:white!important;
+}
+
+
+
 /*cover*/
 /*cover輪播設定*/
 .cover_bgimg {
@@ -120,6 +128,9 @@ li.dropdown {
 
 
 /*popular new friend 點擊換分頁設定*/
+.pnftab{
+	font-weight:bold;
+}
 .slidePic{
      position:relative;
 }
@@ -144,6 +155,15 @@ li.dropdown {
 
 .btn2Pop, .btn2New,.btn2Friend{
     right:-2%; 
+}
+
+.pnftab{
+	font-weight:bold;
+}
+
+.navtext {
+	font-weight:bold;
+	color:white!important;
 }
 
 

@@ -8,7 +8,7 @@
 <%	
 	List<EventVO> list =(List<EventVO>)session.getAttribute("listEves_ByCompositeQuery");
 	Map sportTypeMap =(Map)application.getAttribute("sportTypeMap");
-	EveService eveSvc = new EveService();
+	EveService eveSvc = new EveService();	
 	
 	if(list==null){		
 		list = eveSvc.getEvesInViewPage();		
@@ -67,6 +67,12 @@
 	   font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei" !important;
 	}
 	
+	.navbar-dark .navbar-nav .nav-link{
+		color:rgba(255, 255, 255, 0.8)!important;
+		font-weight:bold!important;
+	
+	}
+	
   </style>  
   
   <!-- navbar setting -->
@@ -75,6 +81,21 @@
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
+
+.inputtext{
+color:black;
+font-weight:bold;
+}
+
+.fontBold{
+font-weight:bold;
+}
+
+.cityBtn{
+color:white;
+font-weight:bold;
+}
+
 </style>
     
 </head>
@@ -153,46 +174,46 @@ a,.fontstyle  {
 
 
   <div class="container-fluid  pb-2 row   m-3">
-    <div class="col-md-8 offset-md-2 bg-info  pt-3">
+    <div class="col-md-10  bg-info  pt-3">
       <form  METHOD="post" class="form-inline eveComQuery" ACTION="<%=request.getContextPath()%>/eve/event.do" name="form1">
           <div class="col-md-3 mb-3 d-flex">
             <label for="keyword" class="orderBy ">關鍵字&nbsp</label>
-            <input type="text" class="form-control" name="keyword"  style="width: 60%;" id="keyword" >
+            <input type="text" class="form-control inputtext" name="keyword"  style="width: 60%;" id="keyword" >
           </div>
           <div class="col-md-6 mb-3  d-flex">
-            <label for="eve_startdate " class="orderBy ">活動時間&nbsp</label>
-            <input type="text" name="eve_startdate" class="form-control" id="eve_startdate"  >
-             <input type="text" name="eve_enddate" class="form-control" id="eve_enddate" >
+            <label for="eve_startdate " class="orderBy">活動時間&nbsp</label>
+            <input type="text" name="eve_startdate" class="form-control inputtext" id="eve_startdate"  size="13">
+             <input type="text" name="eve_enddate" class="form-control inputtext" id="eve_enddate"  size="13">
           </div>
           <div class="col-md-3 mb-3  d-flex">
             <label for="validationDefaultUsername" class="orderBy">金額&nbsp</label>
             <div class="input-group">
-              <select size="1" name="eve_charge"  class="custom-select" style="width: 20%;" >
-                <option value="">不限
-                <option value="0">免費        
-                <option value="300">300元以下
-                <option value="500">300元~500元
-                <option value="1000">500元~1000元
-                <option value="1001">1000元以上
+              <select size="1" name="eve_charge"  class="custom-select inputtext" style="width: 20%;" >
+                <option value="" class="inputtext">不限
+                <option value="0" class="inputtext">免費        
+                <option value="300" class="inputtext">300元以下
+                <option value="500" class="inputtext">300元~500元
+                <option value="1000" class="inputtext">500元~1000元
+                <option value="1001" class="inputtext">1000元以上
               </select>
             </div>
           </div>
              
           <div class="col-md-3 mb-2  d-flex">
-            <label for="validationDefault03" class="orderBy ">活動地區&nbsp</label>
-              <select size="1" name="city_id" class="custom-select" name="city_id" style="width: 50%;">
-                  <option value="">全台灣
+            <label for="validationDefault03" class="orderBy">活動地區&nbsp</label>
+              <select size="1" name="city_id" class="custom-select inputtext" name="city_id" style="width: 50%;">
+                  <option value="" class="inputtext">全台灣
                  <c:forEach var="cityVO" items="${citySvc.all}" > 
-                  <option value="${cityVO.city_id}">${cityVO.city_name}
+                  <option value="${cityVO.city_id}" class="inputtext">${cityVO.city_name}
                  </c:forEach>   
                </select>
           </div>
           <div class="col-md-2   mb-2  d-flex">
-            <label for="validationDefault04" class="orderBy " >類別&nbsp</label>
-            <select size="1" name="sptype_id" class="custom-select" style="width: 60%;">
-               <option value="">不限
+            <label for="validationDefault04" class="orderBy " >類別</label>
+            <select size="1" name="sptype_id" class="custom-select inputtext" style="width: 65%;">
+               <option value="" class="inputtext">不限
               <c:forEach var="sptype" items="${sportTypeMap}" > 
-               <option value="${sptype.key}">${sptype.value}
+               <option value="${sptype.key}" class="inputtext">${sptype.value}
               </c:forEach>   
             </select>
           </div>
@@ -231,13 +252,13 @@ a,.fontstyle  {
 	<div class='container' >
 		<div class="row">
 			<div class='col-md-8'>
-				<p class=' text-left searchCondition'>查詢條件-
+				<p class=' text-left searchCondition fontBold'>查詢條件-
 					${eveQuery.keyword} ${eveQuery.eve_startdate} ${eveQuery.eve_enddate} ${eveQuery.eve_charge}
 					${eveQuery.city_id} ${eveQuery.sptype_id} ${eveQuery.orderBy}
 				</p>
 			</div>
 			<div class='col-md-4'>
-				<p class='h4 text-right searchCondition' >資料筆數&nbsp<%=list.size() %></p>
+				<p class='h4 text-right searchCondition fontBold' >資料筆數&nbsp<%=list.size() %></p>
 			</div>	
 		</div>
 	</div>
@@ -272,8 +293,8 @@ a,.fontstyle  {
 						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
 					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
 					<div class='text-right px-2 h5'>						
-						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
-						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<button class="btn btn-sm " style="background:${sportTypeColor.get(eveVO.sptype_id)};color:white; font-weight:bold;">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success cityBtn">${citySvc.getCityName(eveVO.city_id)} </button>
 						<i class="fa fa-eye"></i>${eveVO.eve_view}
 					</div>
 							
@@ -306,8 +327,8 @@ a,.fontstyle  {
 						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
 					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
 					<div class='text-right px-2 h5'>						
-						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
-						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<button class="btn btn-sm" style="background:${sportTypeColor.get(eveVO.sptype_id)};color:white; font-weight:bold;">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success cityBtn">${citySvc.getCityName(eveVO.city_id)} </button>
 						<i class="fa fa-eye"></i>${eveVO.eve_view}
 					</div>		
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
@@ -335,8 +356,8 @@ a,.fontstyle  {
 						<fmt:formatDate value="${eveVO.ereg_enddate}" pattern="yyyy-M-d"/></h4>
 					<h4 class="eveCardText px-2">收費金額 : ${eveVO.eve_charge}</h4>
 					<div class='text-right px-2 h5'>						
-						<button class="btn btn-sm  btn-info">${sportTypeMap.get(eveVO.sptype_id)} </button>
-						<button class="btn btn-sm  btn-success">${citySvc.getCityName(eveVO.city_id)} </button>
+						<button class="btn btn-sm" style="background:${sportTypeColor.get(eveVO.sptype_id)};color:white; font-weight:bold;">${sportTypeMap.get(eveVO.sptype_id)} </button>
+						<button class="btn btn-sm  btn-success cityBtn">${citySvc.getCityName(eveVO.city_id)} </button>
 						<i class="fa fa-eye"></i>${eveVO.eve_view}
 					</div>							
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" >
