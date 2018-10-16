@@ -189,7 +189,8 @@ font-weight:bold;
           <div class="col-md-10 offset-md-1">
             <div class="card text-white p-5 bg-info">
               <div>
-                <h1 class="mb-4 bg-info text-center text-white">建立新活動</h1>
+                <h1 class="mb-4 bg-info text-center text-white">建立新活動 <button  id="lbtn" type="button" class="btn m-3 btn-sm " ></button></h1>
+                 
               </div>
               <div class="card-body bg-info">
               
@@ -338,13 +339,31 @@ font-weight:bold;
                   	<input type="hidden" name="mem_id" value="${memVO.mem_id}">
 					<input type="hidden" name="action" value="insert">
                     <button id="addBtnSubmit" type="submit" class="btn m-3 btn-lg btn-block btn-warning" id="addEveBtn">送出</button>
+                  
                   </div>
+                 
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+<!--        小按鈕 -->
+      <script>
+      	$("#lbtn").click(function(){
+      		$("#eve_title").val("111");
+      		$("#econtact_info").val("0911-222333");
+      		$("#ereg_startdate").val("2018-10-17");
+      		$("#ereg_enddate").val("2018-10-31");
+      		$("#eve_startdate").val("2018-11-01 08:00");
+      		$("#eve_enddate").val("2018-11-03 10:00");
+      		$("#eve_loc").val("台東太麻里");	
+      		$("#econtent_summernote").summernote("code",'3535588863725359');
+      	});
+      
+      
+      </script>
       
       
       <script>
