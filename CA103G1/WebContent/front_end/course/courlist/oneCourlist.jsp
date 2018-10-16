@@ -138,6 +138,23 @@ li span {
 	opacity:0.9;
 }
 
+/* buybtn */
+ .buyit{
+  background-color:rgba(18, 187, 173,0.4);
+}
+
+/* reportbtn */
+
+.reportbtn{
+   background-color:rgba(247, 6, 85,0.4);
+}
+ /*  大nav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
+
 </style>
   
   
@@ -232,76 +249,11 @@ li span {
   			  </script>
           </div>
          
-          <a class="btn btn-sm btn-outline-primary" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
-          <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-outline-secondary m-1">Report<br></a>
+          <a class="btn btn-sm btn-primary buyit" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
+          <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-secondary m-1 reportbtn">Report<br></a>
           
           
-    <!-- 課程檢舉燈箱 -->
-	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"
-		aria-labelledby="idModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="center modal-title" id="exampleModalLongTitle">課程檢舉</h4>
-					<button type="button" class="close cancel" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="false">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="from-group mx-auto">
-							<c:if test="${not empty errorMsgs}">
-
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-						</div>
-					</div>
-					<form METHOD="post" action="<%=request.getContextPath()%>/coursereport/coursereport.do">
-						<div class="input-group input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">會員信箱</span>
-							</div>
-							<input value="${param.regEmail }" type="email" name="Email" class="form-control"
-								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-						</div>
-						<br>
-
-						<div class="input-group-lg">
-							<div class="input-group-prepend">
-							<span class="input-group-text">檢舉項目</span>
-							<select name= "reportItem">
-								<option value="CRN1">課程內容不當</option>
-								<option value="CRN2">課程收費不當</option>
-								<option value="CRN3">其它</option>
-							</select>
-							</div>
-						</div>
-						<br>
-
-						<div class="input-group-lg">
-							<label style="font-size: 150%">狀況敘述 :</label>
-							<textarea class="form-control" name="courrepText"
-								style="height: 300px"></textarea>
-						</div>
-						<br>
-						<div class="modal-footer">
-							<input type="hidden" name="action" value="addReport">
-							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
-							<button type="button" class="btn btn-secondary cancel"
-								data-dismiss="modal">取消</button>
-
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-      
+    
       
       <!--  discount -->
 
@@ -386,28 +338,28 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
       <div class="collapse navbar-collapse text-right justify-content-center marignBun" id="navbar3SupportedContent">
         <!-- 第一個按鈕 -->
         <ul class="nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="" data-target="#tabone" data-toggle="tab">
+          <li class="nav-item cournav">
+            <a class="nav-link cournav" href="" data-target="#tabone" data-toggle="tab">
               <i class="fa fa-user"></i> &nbsp; Coach &nbsp;</a>
           </li>
           <!-- 第二個按鈕 -->
-          <li class="nav-item">
-            <a class="nav-link" href="" data-target="#tabtwo" data-toggle="tab">
+          <li class="nav-item cournav">
+            <a class="nav-link cournav" href="" data-target="#tabtwo" data-toggle="tab">
               <i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
           </li>
           <!-- 第三個按鈕 -->
-          <li class="nav-item">
-            <a class="nav-link" href="" data-target="#tabthree" data-toggle="tab">
+          <li class="nav-item cournav">
+            <a class="nav-link cournav" href="" data-target="#tabthree" data-toggle="tab">
               <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; Information&nbsp;</a>
           </li>
          <!-- 第四個按鈕 -->
-          <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?courpageloc=tabfour&localhref=localhref" >
+          <li class="nav-item cournav">
+            <a class="nav-link cournav" href="<%=request.getContextPath()%>/front_end/course/courlist/courunit.jsp?courpageloc=tabfour&localhref=localhref" >
               <i class="fa fa-film" aria-hidden="true"></i>&nbsp; Course Unit &nbsp; </a>
           </li>
           <!-- 第五個按鈕 -->
-          <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp?courpageloc=tabfive&localhref=localhref" >
+          <li class="nav-item cournav">
+            <a class="nav-link cournav" href="<%=request.getContextPath()%>/front_end/course/courboar/page/maincourboar.jsp?courpageloc=tabfive&localhref=localhref" >
               <i class="fa fa-comments" aria-hidden="true"></i> &nbsp; Forum &nbsp; </a>
           </li>
           <!-- 第六個按鈕 -->
@@ -648,6 +600,73 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
 			})
 		});
 	</script>
+	
+	<!-- 課程檢舉燈箱 -->
+	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"
+		aria-labelledby="idModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="center modal-title" id="exampleModalLongTitle">課程檢舉</h4>
+					<button type="button" class="close cancel" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="false">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="from-group mx-auto">
+							<c:if test="${not empty errorMsgs}">
+
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</div>
+					</div>
+					<form METHOD="post" action="<%=request.getContextPath()%>/coursereport/coursereport.do">
+						<div class="input-group input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">會員信箱</span>
+							</div>
+							<input value="${param.regEmail }" type="email" name="Email" class="form-control"
+								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+						</div>
+						<br>
+
+						<div class="input-group-lg">
+							<div class="input-group-prepend">
+							<span class="input-group-text">檢舉項目</span>
+							<select name= "reportItem">
+								<option value="CRN1">課程內容不當</option>
+								<option value="CRN2">課程收費不當</option>
+								<option value="CRN3">其它</option>
+							</select>
+							</div>
+						</div>
+						<br>
+
+						<div class="input-group-lg">
+							<label style="font-size: 150%">狀況敘述 :</label>
+							<textarea class="form-control" name="courrepText"
+								style="height: 300px"></textarea>
+						</div>
+						<br>
+						<div class="modal-footer">
+							<input type="hidden" name="action" value="addReport">
+							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
+							<button type="button" class="btn btn-secondary cancel"
+								data-dismiss="modal">取消</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+      
 
 
 </body>
