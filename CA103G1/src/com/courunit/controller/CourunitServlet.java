@@ -164,7 +164,7 @@ System.out.println(cour_film_blob.length);
 									int sec = Integer.valueOf((secs).intValue());
 								str.append("<script>\r\n" + 
 //										" 								$(document).ready(function() {  \r\n" + 
-										"					            alert(\"OKOK\"); var strli=$(\"#"+courunitlist.get(i).getCour_unit_id()+"\").text()+\"Latest\";\r\n" + 
+										"					            var strli=$(\"#"+courunitlist.get(i).getCour_unit_id()+"\").text()+\"**最後觀看\";\r\n" + 
 										"									$(\"#"+courunitlist.get(i).getCour_unit_id()+"\").text(strli); \r\n" + 
 //										"							}); \r\n" + 
 										"								</script>");
@@ -175,8 +175,8 @@ System.out.println(cour_film_blob.length);
 								str.append("<script>" + 
 								          " $(function() {\r\n" + 
 								          "  $(\"#"+courunitlist.get(i).getCour_unit_id()+"\").click( function(){\r\n" + 
-								          "   alert($(this).text());\r\n" + 
-								          "    var courplantext=\"<a class='linkclass btn btn-outline-primary btn-sm' id='linkclass"+(courunitlist.get(i).getCour_unit_id()+i)+"' href='"+req.getContextPath()+"/front_end/course/courlist/courunit.jsp?cour_id="+courunitlist.get(i).getCour_id()+"&courpageloc=tabfour'>"+courunitlist.get(i).getCu_name()+"<font class='linkclose' id='linkclose"+(courunitlist.get(i).getCour_unit_id()+i)+"'>X</font></a>\";\r\n" + 
+								          "   alert('"+courunitlist.get(i).getCu_name()+"單元已選取');\r\n" + 
+								          "    var courplantext=\"<a class='linkclass btn btn-outline-primary font-weight-bold' id='linkclass"+(courunitlist.get(i).getCour_unit_id()+i)+"' href='"+req.getContextPath()+"/front_end/course/courlist/courunit.jsp?cour_id="+courunitlist.get(i).getCour_id()+"&courpageloc=tabfour'>"+courunitlist.get(i).getCu_name()+"<font class='linkclose' id='linkclose"+(courunitlist.get(i).getCour_unit_id()+i)+"'>&nbsp;X</font></a>\";\r\n" + 
 								          "    var courplantext2=\"<a class='linkclass' id='linkclass"+(courunitlist.get(i).getCour_unit_id()+i)+"' href='"+req.getContextPath()+"/front_end/course/courlist/courunit.jsp?cour_id="+courunitlist.get(i).getCour_id()+"&courpageloc=tabfour'>"+courunitlist.get(i).getCu_name()+"<font class='linkclose' id='linkclose"+(courunitlist.get(i).getCour_unit_id()+i)+"'></font></a>\";\r\n" + 
 								          "     $('#courseplan').append(courplantext);"+
 //								          "     inputcourplan+=courplantext2;\r\n" + 
