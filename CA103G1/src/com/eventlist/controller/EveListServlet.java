@@ -393,6 +393,8 @@ public class EveListServlet extends HttpServlet {
 				String mem_id = req.getParameter("mem_id");
 				String oriEvelist_Status = req.getParameter("evelist_status");
 				String requestURL=req.getParameter("requestURL");
+				String phone=req.getParameter("phone_number");
+				
 				
 				if("pay_Update_Status".equals(action)) {
 					oriEvelist_Status ="EL1";
@@ -421,12 +423,10 @@ public class EveListServlet extends HttpServlet {
 				EventlistService eveListSvc = new EventlistService();
 				EventListVO eventListVO= eveListSvc.changeEveListStatus(mem_id, eve_id, updateEvelist_Status);
 //				List<EventListVO> eveListsByEve=eveListSvc.getEveListsByEve(eve_id);
-				HttpSession session=req.getSession();
-				session.setAttribute("eve_id", eve_id);
-				res.sendRedirect(requestURL+"?whichPage="+whichPage+"&eve_id="+eve_id+"&mem_id="+mem_id);
 				
+		
 				//確認付款 發送簡訊
-				if(oriEvelist_Status.equals("EL2")) {
+				if(oriEvelist_Status.equals("EL1")) {
 					
 					MemService memSvc=new MemService();
 					String name=memSvc.getOneMem(mem_id).getMem_name();
@@ -435,13 +435,21 @@ public class EveListServlet extends HttpServlet {
 					String eve_title=eveVO.getEve_title();
 					Integer evepay_amount=eventListVO.getEvepay_amount();
 					Send payMsgSeend = new Send();
-				 	String[] tel ={"0975976761"};
+					
+					
+					String[] tel=new String[1];
+					tel[0]=phone;
+					
+
 				 	String message = name+" 您好! 已收到您參與"+eve_title+"的費用共"+evepay_amount+"元 !  感謝您的參與";
 				 	System.out.println(message);
-//				 	payMsgSeend.sendMessage(tel , message);
+				 	payMsgSeend.sendMessage(tel , message);
 				 	System.out.println("已發送簡訊!"); 
 					
-				}				
+				}		
+				HttpSession session=req.getSession();
+				session.setAttribute("eve_id", eve_id);
+				res.sendRedirect(requestURL+"?whichPage="+whichPage+"&eve_id="+eve_id+"&mem_id="+mem_id);
 				return;
 				
 				
@@ -473,10 +481,13 @@ public class EveListServlet extends HttpServlet {
 			session.setAttribute("memVO", memVO);
 			EventlistService evelistSvc =new EventlistService();
 			EventListVO evelistVO=evelistSvc.getOneEveList(memVO.getMem_id(), eve_id);
-			 if(evelistVO==null){
-				out.print("noneEvelist");				
-			}else if(evelistVO.getMem_id()==memVO.getMem_id()) {
+			EveService eveSvc=new EveService();
+			EventVO eveVO=eveSvc.getOneEve(eve_id);
+			
+			if(eveVO.getMem_id().equals(memVO.getMem_id())) {
 				out.print("organizer");
+			}else if(evelistVO==null){
+				out.print("noneEvelist");	
 				
 			}else {			
 				JSONObject evelist = new JSONObject();	
