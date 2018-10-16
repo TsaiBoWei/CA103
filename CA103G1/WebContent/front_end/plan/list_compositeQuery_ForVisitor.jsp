@@ -17,9 +17,12 @@
 	String sessionPerpageloc = (String) session.getAttribute("perpageloc");
 
 	PlanService planSvc = new PlanService();
-	List<PlanVO> list = planSvc.getAllforVisitor();
+	List<PlanVO> list = (List<PlanVO>)(session.getAttribute("listAllPlans_ForVisitor_ByCompositeQuery"));
 	pageContext.setAttribute("list", list);
 %>
+
+<jsp:useBean id="listAllPlans_ForVisitor_ByCompositeQuery" scope="session" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
+
 
 <jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
@@ -296,73 +299,9 @@
 		<i class="fab fa-rocketchat"></i>
 	</a>
 
-<!-- start -->
 
 	<div>
-		<div class="container">
-			<div class="row">
-				<div class="col-12  mx-auto">
-					<form method="post" class="select" 
-						action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
-						<br>
-
-						<div class="form-row">  
-							<div class="form-group col-md-2">
-								<select class="form-control bg-dark-posteditinput"  style="font-size: 18px"
-									id="inputPassword4" name="sptype_id">
-									<option>運動種類
-										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
-											<option value="${sptypeVO.sptype_id}">${sptypeVO.sport}
-										</c:forEach>
-								</select>
-							</div>
-
-							<div class="form-group col-md-2">
-								<select class="form-control" name="plan_privacy" id="inputPassword4" 
-									style="font-size: 18px">
-									<option >隱私權
-									<option value="PLANPR0">公開
-									<option value="PLANPR1">不公開
-									<option value="PLANPR2">只對朋友公開
-								</select>
-							</div>
-
-							<div class="form-group col-md-2">
-								<select class="form-control" name="plan_status" id="inputPassword4" 
-									style="font-size: 18px">
-									<option value="">執行狀態
-									<option value="PLANST0">進行中
-									<option value="PLANST1">已完成
-								</select>
-							</div>
-
-							<div class="form-group col-md-6 ">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"
-											style="background-color: #FFFFFF; color: #0621f1; font-size: 18px">Search</span>
-									</div>
-									
-									<input type="text" name="plan_name" id="" class="form-control" 
-										placeholder="Plan Name" style="font-size: 17px">
-									
-									<div class="input-group-append">
-										<button class="btn btn-info">
-											<i class="fa fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<br> 
-						<input type="hidden" name="action" value="listAllPlans_ForVisitor_ByCompositeQuery">
-					</form>
-				</div>
-			</div>
-		</div>
-<!-- end -->
-		<%@ include file="file/page1_ForVisitor.file"%>
-
+		<%@ include file="file/page1_ForVisitor_CompositeQuery.file"%>
 		<div class="py-5 text-light opaque-overlay section-fade-in-out"
 			style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpg&quot;);">
 			<div class="container">
@@ -370,15 +309,12 @@
 					<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<div class="col-12 col-md-4">
 							<div class="card">
-								<a href="<%=request.getContextPath()%>/index.jsp" >
-									<img class="card-img-top" style="height:250px; overflow:hidden;"
-										src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
-								</a>
-								
+								<img class="card-img-top" style="height:250px; overflow:hidden;"
+									src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
 								<div class="card-body">
 									<h5 class="plan_name">${planVO.plan_name}</h5>
 									
-									<p class="sptype_id">Sport Type: 
+									<p class="sptype_id">Sport Type: 　
 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
 										</c:forEach>
@@ -393,7 +329,7 @@
 										<fmt:formatDate value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
 									</p>
 									
-									<a href="<%=request.getContextPath()%>/index.jsp"
+									<a href="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp"
 										class="btn btn-info" style="font-size: 16px">Read More</a>
 								</div>
 							</div><br>
@@ -403,7 +339,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="file/page2_ForVisitor.file"%>
+	<%@ include file="file/page2_ForVisitor_CompositeQuery.file"%>
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->

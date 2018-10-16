@@ -14,6 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
+
 //DAO與JNDIDAO相同，只差在類別名稱不同。
 //plan_start_date  ,  plan_end_date  , plan_create_time  時間表示方法還未健全。
 //沒有刪除方法，使用計畫名稱關鍵字找到該計畫之方法尚未完成。
@@ -36,6 +38,7 @@ public class PlanDAO implements PlanDAO_interface {
 	private static final String DELETE = "DELETE FROM plan where plan_id=?";
 	private static final String GET_ALL_STMT = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status FROM plan order by plan_id ";
 	private static final String GET_ALL_FOR_VISITOR = "SELECT plan_id,mem_id,plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,plan_privacy,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status  FROM plan  where plan_privacy = 'PLANPR0' order by plan_id";
+	private static final String GET_ALL_FOR_VISITOR_ByCompositeQuery = "SELECT plan_name,plan_vo,plan_cover,to_char(plan_start_date ,'yyyy-mm-dd hh24:mi:ss')plan_start_date,to_char(plan_end_date,'yyyy-mm-dd hh24:mi:ss')plan_end_date,sptype_id,plan_view,to_char(plan_create_time,'yyyy-mm-dd')plan_create_time,plan_status  FROM plan  where plan_privacy = 'PLANPR0' order by plan_id";
 	
 	/********************* 1010 首頁用 *****************/
 	private static final String GET_NEW_PLAN="select * from" + 
@@ -510,8 +513,81 @@ public class PlanDAO implements PlanDAO_interface {
 
 	@Override
 	public List<PlanVO> getAll(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from plan "
+		          + Plan_CompositeQuery.get_WhereCondition(map)
+		          + "order by plan_id ";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setMem_id(rs.getString("mem_id"));
+				planVO.setPlan_id(rs.getString("plan_id"));
+				planVO.setPlan_vo(rs.getString("plan_vo"));
+				planVO.setPlan_cover(rs.getBytes("plan_cover"));
+				planVO.setPlan_start_date(rs.getTimestamp("plan_start_date"));
+				planVO.setPlan_end_date(rs.getTimestamp("plan_end_date"));
+				planVO.setPlan_privacy(rs.getString("plan_privacy"));
+				planVO.setPlan_create_time(rs.getDate("plan_create_time"));
+				planVO.setPlan_status(rs.getString("plan_status"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				list.add(planVO); // Store the row in the List
+				System.out.println("我是PlanDAO line 548");
+				System.out.println(rs.getString("plan_name"));
+				System.out.println(rs.getString("mem_id"));
+				System.out.println(rs.getString("plan_id"));
+				System.out.println(rs.getString("plan_vo"));
+				System.out.println(rs.getBytes("plan_cover"));
+				System.out.println(rs.getTimestamp("plan_start_date"));
+				System.out.println(rs.getTimestamp("plan_end_date"));
+				System.out.println(rs.getString("plan_privacy"));
+				System.out.println(rs.getDate("plan_create_time"));
+				System.out.println(rs.getString("plan_status"));
+				System.out.println(rs.getInt("plan_view"));
+				System.out.println(rs.getString("sptype_id"));
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 	/********************* 1010 首頁用 *********************************/
@@ -689,6 +765,81 @@ public class PlanDAO implements PlanDAO_interface {
 				}
 			}
 			
+		}
+		return list;
+	}
+
+	@Override
+	public List<PlanVO> getAllforVisitor(Map<String, String[]> map) {
+		List<PlanVO> list = new ArrayList<PlanVO>();
+		PlanVO planVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from plan "
+		          + Plan_CompositeQuery.get_WhereCondition(map)
+		          + "order by plan_id ";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				planVO = new PlanVO();
+				planVO.setPlan_name(rs.getString("plan_name"));
+				planVO.setPlan_vo(rs.getString("plan_vo"));
+				planVO.setPlan_cover(rs.getBytes("plan_cover"));
+				planVO.setPlan_start_date(rs.getTimestamp("plan_start_date"));
+				planVO.setPlan_end_date(rs.getTimestamp("plan_end_date"));
+				planVO.setPlan_status(rs.getString("plan_status"));
+				planVO.setPlan_view(rs.getInt("plan_view"));
+				planVO.setSptype_id(rs.getString("sptype_id"));
+				list.add(planVO); // Store the row in the List
+				System.out.println("我是PlanDAO line 548");
+				System.out.println(rs.getString("plan_name"));
+				System.out.println(rs.getString("mem_id"));
+				System.out.println(rs.getString("plan_id"));
+				System.out.println(rs.getString("plan_vo"));
+				System.out.println(rs.getBytes("plan_cover"));
+				System.out.println(rs.getTimestamp("plan_start_date"));
+				System.out.println(rs.getTimestamp("plan_end_date"));
+				System.out.println(rs.getString("plan_privacy"));
+				System.out.println(rs.getDate("plan_create_time"));
+				System.out.println(rs.getString("plan_status"));
+				System.out.println(rs.getInt("plan_view"));
+				System.out.println(rs.getString("sptype_id"));
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
 		return list;
 	}

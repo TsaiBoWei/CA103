@@ -2,16 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.plan.model.*"%>
+<%@ page import="com.mem.model.*"%>
+
 <%
+
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	
+
 	PlanService planSvc = new PlanService();
-	List<PlanVO> list = (List<PlanVO>)(request.getAttribute("listPlans_ByCompositeQuery"));
-	request.setAttribute("list", list);
+	List<PlanVO> list = (List<PlanVO>)(session.getAttribute("listPlans_ByCompositeQuery"));
+	pageContext.setAttribute("list", list);
 %>
 
 <jsp:useBean id="listPlans_ByCompositeQuery" scope="session" type="java.util.List<PlanVO>" /> <!-- 於EL此行可省略 -->
 
-<jsp:useBean id="sptypeSvc" scope="page"
-	class="com.sptype.model.SptypeService" />
+<jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
 
 
 <!DOCTYPE html>
@@ -107,7 +112,7 @@ a,.fontstyle  {
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
 	<div class="form-control" style="background-color: #1f1f1f">
-		<h5>我的計畫清單，可供修改、刪除。5</h5>
+		<h5>我的計畫清單，可供修改、刪除。7</h5>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -135,7 +140,7 @@ a,.fontstyle  {
 				<th>修改</th>
 				<th>刪除</th>
 			</tr>
-			<%@ include file="file/page1_ByCompositeQuery.file" %>    
+			<%@ include file="file/page1_ByCompositeQuery.file" %>     
 			<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 				<tr ${(planVO.plan_id==param.plan_id) ? 'bgcolor=#0066FF':''}>
 					<td>

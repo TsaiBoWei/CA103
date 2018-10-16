@@ -21,8 +21,7 @@
 	pageContext.setAttribute("list", list);
 %>
 
-<jsp:useBean id="sptypeSvc" scope="page"
-	class="com.sptype.model.SptypeService" />
+<jsp:useBean id="sptypeSvc" scope="page" class="com.sptype.model.SptypeService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <!DOCTYPE html>
@@ -30,73 +29,65 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 <!-- PAGE settings -->
-<link rel="icon"
-	href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
+<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
 <title>WORK it OUT</title>
 
 <!-- CSS dependencies -->
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
+<link rel="stylesheet" type="text/css" 
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- fafaicon -->
-<link rel="stylesheet" crossorigin="anonymous"
-	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+<link rel="stylesheet" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ">
 
 
 <!-- navbar setting -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/index.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/index.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
 
 <style>
-/*頁面設定*/
-body {
-	overflow-x: hidden;
-}
 
-h5 {
-	font-size: 23px;
-	color: #00FFFF;
-}
 
-p {
-	font-size: 18px;
-}
+	/*頁面設定*/
+	body {
+		overflow-x: hidden;
+	}
+	
+	h5 {
+		font-size: 23px;
+		color: #00FFFF;
+	}
+	
+	p {
+		font-size: 18px;
+	}
 
-/* 	.form-control { */
-/* 		background: none; */
-/* 		border: 0.7px solid #303030; */
-/* 	} */
-
-/*圖片專區*/
-/* .card-img-top { */
-/* 	width: 300px; */
-/* 	depth: 200px; */
-/* 	border-radius: 50px; */
-/* } */
+/* 
 </style>
 
 <!-- navbar setting -->
 
 <style type="text/css">
-a, .fontstyle {
-	font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
-}
+	a, .fontstyle {
+		font-family: Montserrat, Arial, "微軟正黑體", "Microsoft JhengHei" !important;
+	}
+	
+	.navbar-dark .navbar-nav .nav-link{
+		color:rgba(255, 255, 255, 0.8)!important;
+		font-weight:bold!important;
+	
+	}
+
 </style>
-
-
-
 
 </head>
 
@@ -107,69 +98,79 @@ a, .fontstyle {
 		<span class="navbar-text"></span>
 		<div class="container">
 			<button class="navbar-toggler navbar-toggler-right" type="button"
-				aria-expanded="false" data-toggle="collapse"
-				data-target="#navbar2SupportedContent"
-				aria-controls="navbar2SupportedContent"
-				aria-label="Toggle navigation">
+				aria-expanded="false" data-toggle="collapse" data-target="#navbar2SupportedContent"
+				aria-controls="navbar2SupportedContent" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse justify-content-center"
-				id="navbar2SupportedContent">
-				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
+			
+			<div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
+				<a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
 					href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mx-2 btn-lg"><c:if
-							test="${memVO.mem_id ==null }">
+					<li class="nav-item mx-2 btn-lg">
+						<c:if test="${memVO.mem_id ==null }">
 							<a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
-						</c:if> <c:if test="${memVO.mem_id !=null }">
-							<a class="nav-link"
-								href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
-						</c:if></li>
-
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp">Event</a>
+						</c:if> 
+						
+						<c:if test="${memVO.mem_id !=null }">
+							<a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+						</c:if>
+						
 					</li>
 
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
+					<li class="nav-item mx-2 btn-lg">
+						<a class="nav-link" 
+							href="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp">Event</a>
 					</li>
 
-					<jsp:useBean id="coachSvc" scope="page"
-						class="com.coach.model.CoachService" />
+					<li class="nav-item mx-2 btn-lg">
+						<a class="nav-link" 
+							href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
+					</li>
+
+					<jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" />
 					<c:if test="${memVO!=null}">
-						<li class="nav-item mx-2 btn-lg dropdown"><a
-							class="nav-link dropbtn" href="javascript:void(0)"
-							id="navUserName">${memVO.mem_name} <i
-								class="fa fa-caret-down dropbtn"></i>
-						</a>
+						<li class="nav-item mx-2 btn-lg dropdown">
+							<a class="nav-link dropbtn"  href="javascript:void(0)" 
+								id="navUserName">${memVO.mem_name} 
+								<i class="fa fa-caret-down dropbtn"></i>
+							</a>
+							
 							<div class="dropdown-content" id="myDropdown">
-								<a
-									href="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp">
-									<i class="fa fa-file "> <font class="fontstyle">&nbsp&nbsp個人頁面</font>
+							<a href="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp">
+								<i class="fa fa-file "> 
+									<font class="fontstyle">&nbsp&nbsp個人頁面</font>
 								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">
-									<i class="fa fa-calculator"> <font class="fontstyle">&nbsp&nbsp計畫</font>
+							</a> 
+							
+							<a href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">
+								<i class="fa fa-calculator"> 
+							 		<font class="fontstyle">&nbsp&nbsp計畫</font>
 								</i>
-								</a> <a href="#"> <i class="fa fa-users " aria-hidden="true">
-										<font class="fontstyle">&nbsp&nbsp好友</font>
+							</a> 
+							
+							<a href="#"> 
+								<i class="fa fa-users " aria-hidden="true">
+									<font class="fontstyle">&nbsp&nbsp好友</font>
 								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcour.jsp">
-									<i class="fa fa-film" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp課程</font>
+							</a> 
+							
+							<a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcour.jsp">
+								<i class="fa fa-film" aria-hidden="true"> 
+									<font class="fontstyle">&nbsp&nbsp課程</font>
 								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp">
-									<i class="fa fa-hand-spock-o" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp活動</font>
+							</a> 
+							
+							<a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp">
+								<i class="fa fa-hand-spock-o" aria-hidden="true"> 
+									<font class="fontstyle">&nbsp&nbsp活動</font>
 								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/calendar/page/Calendar.jsp">
-									<i class="fa fa-check" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp行事曆</font>
+							</a> 
+							
+							<a href="<%=request.getContextPath()%>/front_end/calendar/page/Calendar.jsp">
+								<i class="fa fa-check" aria-hidden="true"> 
+									<font class="fontstyle">&nbsp&nbsp行事曆</font>
 								</i>
 								</a>
 
@@ -309,11 +310,11 @@ a, .fontstyle {
 						action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
 						<br>
 
-						<div class="form-row">
+						<div class="form-row"> 
 							<div class="form-group col-md-2">
 								<select class="form-control bg-dark-posteditinput"
 									id="inputPassword4" name="sptype_id" style="font-size: 18px">
-									<option value="">運動種類
+									<option value="">1運動種類
 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 											<option value="${sptypeVO.sptype_id}">${sptypeVO.sport}
 										</c:forEach>
@@ -377,20 +378,25 @@ a, .fontstyle {
 								<div class="card-body">
 									<h5 class="plan_name">${planVO.plan_name}</h5>
 									<p class="sptype_id">
-										84運動類型:
+										Sport Type:　
 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
 										</c:forEach>
 
-									</p>
+									</p> 
 									<p class="plan_start_date">
-										計畫時間:
+										Start Time:　
 										<fmt:formatDate value="${planVO.plan_start_date}"
 											pattern="yyyy-MM-dd HH:mm " />
+<%-- 											~<br><fmt:formatDate value="${planVO.plan_end_date}" --%>
+<%-- 											pattern="yyyy-MM-dd HH:mm " /> --%>
+<%-- 											-<fmt:formatDate value="${planVO.plan_end_date}" --%>
+<%-- 											pattern="yyyy-MM-dd HH:mm " /> --%>
 									</p>
 									<p class="plan_end_date">
+										End Time:　
 										<fmt:formatDate value="${planVO.plan_end_date}"
-											pattern="yyyy-MM-dd HH:mm " />
+												pattern="yyyy-MM-dd HH:mm " />
 									</p>
 									<a
 										href="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp"

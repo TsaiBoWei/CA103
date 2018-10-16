@@ -350,7 +350,6 @@ public class PlanServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("line353");
 			try {
 
 				/*************************** 1.將輸入資料轉為Map **********************************/
@@ -368,10 +367,12 @@ public class PlanServlet extends HttpServlet {
 				/*************************** 2.開始複合查詢 ***************************************/
 				PlanService planSvc = new PlanService();
 				List<PlanVO> list = planSvc.getAll(map);
+				System.out.println("line371");
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("listPlans_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				req.getSession().setAttribute("listPlans_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				System.out.println("line376");
 				successView.forward(req, res);
 				System.out.println("已成功轉交");
 
@@ -383,6 +384,48 @@ public class PlanServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 
+		}
+		
+		
+		if ("listAllPlans_ForVisitor_ByCompositeQuery".equals(action)) { // 來自ListAllPlans_ForVisitor.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("line353");
+			try {
+				
+				/*************************** 1.將輸入資料轉為Map **********************************/
+				// 採用Map<String,String[]> getParameterMap()的方法
+				// 注意:an immutable java.util.Map
+				// Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
+				if (req.getParameter("whichPage") == null) {
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map", map1);
+					map = map1;
+				}
+				
+				/*************************** 2.開始複合查詢 ***************************************/
+				PlanService planSvc = new PlanService();
+				List<PlanVO> list = planSvc.getAllforVisitor(map);
+				System.out.println("line413");
+				
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.getSession().setAttribute("listAllPlans_ForVisitor_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery_ForVisitor.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+				System.out.println("已成功轉交");
+				
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				System.out.println("test20181007");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+			
 		}
 	
 	}
