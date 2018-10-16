@@ -86,6 +86,11 @@
 		font-weight:bold!important;	
 	}
 	    
+	.inputtext,input{
+	color:black!important;
+	font-weight:bold!important;
+	font-size:18px!important;
+	}    
     
 
   </style>
@@ -195,9 +200,9 @@ a,.fontstyle  {
                     </div>
                     <div class="form-group col-md-2">
                       <label for="sportType">類別</label>
-                      <select class="custom-select" id="sportType" size="1" name="sptype_id">
+                      <select class="custom-select inputtext" id="sportType" size="1" name="sptype_id">
                         <c:forEach var="sptype" items="${sportTypeMap}">
-							<option value="${sptype.key}" ${(sptype.key==eveVO.sptype_id)? 'selected':'' } >${sptype.value}
+							<option class="inputtext" value="${sptype.key}" ${(sptype.key==eveVO.sptype_id)? 'selected':'' } >${sptype.value}
 						</c:forEach>
                       </select>
                     </div>
@@ -308,9 +313,9 @@ a,.fontstyle  {
                       
                       <jsp:useBean id="citySvc" scope="page" class="com.city.model.CityService" />
                       <label for="city_id">活動地區</label>
-                      <select size="1" name="city_id" class="custom-select" id="city_id">
+                      <select size="1" name="city_id" class="custom-select inputtext" id="city_id">
 						  <c:forEach var="cityVO" items="${citySvc.all}">
-							<option value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
+							<option class="inputtext" value="${cityVO.city_id}" ${(cityVO.city_id==eveVO.city_id)? 'selected':'' } >${cityVO.city_name}
 						  </c:forEach>
 					  </select>
                       
@@ -328,7 +333,7 @@ a,.fontstyle  {
                       <label >活動敘述</label> <b class='errorMsg'> ${errorMsgs.eve_content}</b>
                     </div>
                     <div class="col-md-12 py-2">
-                      <textarea id="econtent_summernote" name="editordata"></textarea></textarea>
+                      <textarea id="econtent_summernote" name="editordata"></textarea>
                       <input type="hidden" name="eve_content"  id="eve_content">
                       
                     </div>

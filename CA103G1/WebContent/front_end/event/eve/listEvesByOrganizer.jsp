@@ -73,6 +73,10 @@ font-weight:bold!important;
 
 }
 
+.evetab{
+  font-size:15px;
+  font-weight:bold!important;
+}
  
  
 
@@ -107,11 +111,11 @@ a,.fontstyle  {
 		<div class="row">
 			<div class="list-group col-md-2">				
 				<a href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action "> 參加的活動 </a> 					
+					class="list-group-item list-group-item-action evetab"> 參加的活動 </a> 					
 				<a href="<%=request.getContextPath()%>/front_end/event/eve/listEvesByOrganizer.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action active">主辦的活動</a> 
+					class="list-group-item list-group-item-action active evetab">主辦的活動</a> 
 				<a href="<%=request.getContextPath()%>/front_end/event/eventsave/eveSave.jsp?perpageloc=event#personalnav"
-					class="list-group-item list-group-item-action ">活動收藏</a>	
+					class="list-group-item list-group-item-action evetab">活動收藏</a>	
 			</div>
 			<div class="col-md-9">	
 				<%-- 錯誤表列 --%>
@@ -157,7 +161,7 @@ a,.fontstyle  {
 			</td>										
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eventlist/eventlist.do" style="margin-bottom: 0px;">
-			     <input type="submit" class="btn btn-sm btn-danger " value="報名清單"> 
+			     <input type="submit" class="btn btn-sm btn-danger textSize" value="報名清單"> 
 			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
@@ -167,7 +171,7 @@ a,.fontstyle  {
 				
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
-			     <input type="submit" class="btn btn-sm btn-warning " value="修改資訊"> 
+			     <input type="submit" class="btn btn-sm btn-info textSize" value="修改資訊"> 
 			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
@@ -175,7 +179,7 @@ a,.fontstyle  {
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/eve/event.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="取消活動" class="btn btn-sm ml-1" >
+			     <input type="submit" value="取消活動 " class="btn btn-sm ml-1 textSize" >
 			     <input type="hidden" name="eve_id"      value="${eveVO.eve_id}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
