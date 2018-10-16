@@ -154,6 +154,12 @@
  .note-editable { padding-top: 50px !important;}
 /* background-image: linear-gradient(to bottom, rgba(31, 31, 31, 0.8), #e6e6e6); */
 .fc-event{font-size: .92em;}
+
+.navbar-dark .navbar-nav .nav-link{
+color:rgba(255, 255, 255, 0.8)!important;
+font-weight:bold!important;
+
+}
   </style>
   
   <!-- navbar setting -->
