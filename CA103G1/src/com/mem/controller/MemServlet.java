@@ -197,7 +197,8 @@ public class MemServlet extends HttpServlet {
 				verifyEMail.jedisVeriCode(regaccount, verifyCode);
 				System.out.println("Auth code is: " + verifyCode);
 				String subject = "[Work It Out] 會員認證信";
-				String messageText = "Hello! " + regName + " 請輸入此驗證碼:" + verifyCode + "\n";
+				String veriURL = "&quot;"+req.getRequestURL()+"?action=verifyCode&verifyCode="+verifyCode+"&quot;";
+				String messageText = "Hello! " + regName + "<a href="+veriURL+">請輸入此驗證碼:"+"</a>" + verifyCode + "\n";
 				verifyEMail.sendMail(regaccount, subject, messageText);
 				System.out.println("email has been sent");
 

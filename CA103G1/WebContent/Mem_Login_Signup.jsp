@@ -121,7 +121,7 @@ input {
 			<div class="row">
 				<div class="col-md-12">
 					<h1 class="display-1">
-						Log Into <br>Work It Out
+					<br>Work it Out
 					</h1>
 				</div>
 			</div>
