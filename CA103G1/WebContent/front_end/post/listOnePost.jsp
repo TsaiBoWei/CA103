@@ -93,6 +93,13 @@
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 	}
+	
+	#post_con{
+	font-size:1.2rem
+	}
+	div>span{
+	font-size:1.2rem!important
+	}
   </style>
 </head>
 

@@ -85,6 +85,13 @@
 	a,.fontstyle  {
 		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 	}
+	
+	i{
+		font-size:1.4rem;
+	}
+	.btnworkoutnote{
+	background-color:rgba(18, 187, 173,0.3)!important;
+	}	
   </style>
 </head>
 
@@ -122,7 +129,7 @@
           </div>
           <div class=" col-md-6 p-3">
             <div class="row justify-content-end">
-              <div class="col-sm-12 my-3">
+              <div class="col-sm-12">
                 <div class="card workoutnotecard">
                   <div class="card-body workoutnotecardbody ">
                     <div class="my-2 ">
@@ -180,9 +187,9 @@
             <div class="col-6  align-self-end text-right">
               <ul class="list-inline postrectbar">
                 <li class="list-inline-item">
-                  <p class="h6">
+                  <p class="h4" >
                    &nbsp;
-                    <i class="fa fa-eye" style="font-size:17px"> &nbsp;</i>
+                    <i class="fa fa-eye" style="font-size:1.4rem"> &nbsp;</i>
                     ${postVO.post_view}
                    </p>
                 </li>

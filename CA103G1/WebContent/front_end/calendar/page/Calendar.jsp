@@ -151,9 +151,9 @@
     background-color: rgba(68,68,68,0);
     background-image: linear-gradient(to bottom, rgba(68, 68, 68, 0.8), rgba(68, 68, 68, 0.8));
 }
- .note-editable { padding-top: 20px !important;}
+ .note-editable { padding-top: 50px !important;}
 /* background-image: linear-gradient(to bottom, rgba(31, 31, 31, 0.8), #e6e6e6); */
-
+.fc-event{font-size: .92em;}
   </style>
   
   <!-- navbar setting -->
@@ -267,7 +267,7 @@
             <input type="hidden" name="plan_vo" id="plan_vo">
 <!--           <textarea class="form-control" id="plan_vo" name="plan_vo" rows="5"></textarea> -->
         </div>
-        <div id="planurl"></div>
+        
        
         <input type="submit" id="updatePlan" name="changePlan" value="修改計畫" class="m-1 btn btn-info">
         <input type="hidden" name="CalChangePlan" value="Cal_Change_Plan" >
@@ -408,8 +408,8 @@
     	        %>
     	        description: '<%=dest%>',
     	        planidToDelete:'<%=planCal.getPlan_id()%>',
-    	        planurl:'<a href="https:www.google.com">11</a>',
-    	      	url:'',
+    	        
+    	      
     	    	},
     	    	
     		
@@ -422,11 +422,11 @@
     	<!-- 課程的值帶入 -->
     	var cour=[
     		
-    		{id:'cour0001',
-    		title:'測試',
-    		start:'2018-10-07',
+//     		{id:'cour0001',
+//     		title:'測試',
+//     		start:'2018-10-07',
     		
-    		},
+//     		},
     			
     			
 <%--     		<% --%>
@@ -483,7 +483,7 @@
                     	{
                     		
                     		events:plan,
-                    		 color: 'rgba(170, 183, 184,0.5)',
+                    		 color: 'rgba(200, 175, 217,0.5)',
                     		 
                     		 
                     	},
@@ -541,7 +541,7 @@
                     	     $("#plan_end_date").val(moment(calEvent.end).format("YYYY-MM-DD hh:mm"));
 //                     	     $("#plan_vo").html(calEvent.description);
                     	     $("#plan_idToDelete").val(calEvent.planidToDelete);
-                    	     $("#planurl").html(calEvent.planurl);
+                    	    
                     	     $('#plan_end_date').datetimepicker({
                     	         theme: '',              //theme: 'dark',
                     	  	       timepicker:true,       //timepicker:true,
@@ -608,10 +608,10 @@
                     		 
                     	 };
                     	 
-                    	 if (calEvent.url) {
-                             window.open(calEvent.url);
-                             return false;
-                         }
+//                     	 if (calEvent.url) {
+//                              window.open(calEvent.url);
+//                              return false;
+//                          }
                     }
                     
                    
