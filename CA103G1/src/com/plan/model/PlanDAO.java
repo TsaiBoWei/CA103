@@ -113,7 +113,8 @@ public class PlanDAO implements PlanDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-
+			
+			
 			pstmt.setString(1, planVO.getPlan_name());
 			pstmt.setString(2, planVO.getPlan_vo());
 			pstmt.setBytes(3, planVO.getPlan_cover());
@@ -122,7 +123,17 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(6, planVO.getSptype_id());
 			pstmt.setString(7, planVO.getPlan_privacy());
 			pstmt.setString(8, planVO.getPlan_status());
-
+			pstmt.setString(9, planVO.getPlan_id());
+			System.out.println("planDAO"+planVO.getPlan_name());
+			System.out.println("planDAO"+planVO.getPlan_vo());
+			System.out.println("planDAO"+planVO.getPlan_cover());
+			System.out.println("planDAO"+planVO.getPlan_start_date());
+			System.out.println("planDAO"+planVO.getPlan_end_date());
+			System.out.println("planDAO"+planVO.getSptype_id());
+			System.out.println("planDAO"+planVO.getPlan_privacy());
+			System.out.println("planDAO"+planVO.getPlan_status());
+			System.out.println("PlanDAO line 133 I am Here");
+			
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {

@@ -91,11 +91,11 @@
 <div class="container-fluid">
 
 	<!-- 確認連線 -->
-	<div class="container mt-5">
-		<h3 id="statusOutput" class="statusOutput">111</h3>
-		<input type="button" id="connect"     class="button" value="連線" onclick="connect();"/>
-		<input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/>
-	</div>
+<!-- 	<div class="container mt-5"> -->
+<!-- 		<h3 id="statusOutput" class="statusOutput"></h3> -->
+<!-- 		<input type="button" id="connect"     class="button" value="連線" onclick="connect();"/> -->
+<!-- 		<input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/> -->
+<!-- 	</div> -->
 	
 	<!--fixbutton-->
 	<a class="btn btn-lg btn-primary" id="bli_kontaktad_landing" onclick="showChatBox();"
@@ -135,6 +135,19 @@
           <div class="chat_ib">
             <h5 style="font-weight:900!important;">${eveSvc.getOneEve(evelsVO.eve_id).eve_title} </h5>
             <input type="hidden"  value='${evelsVO.eve_id}'>
+          
+          </div>
+        </div>
+					
+	</c:forEach>
+	
+	<c:forEach var="eveVO" items="${eveSvc.getEvesByMem(memVO.mem_id)}">	
+		
+		<div class="chat_people chat_list">
+          <div class="chat_img"> <img src="<%=request.getContextPath() %>/DBChatEveReader?eve_id=${eveVO.eve_id}"> </div>
+          <div class="chat_ib">
+            <h5 style="font-weight:900!important;">${eveVO.eve_title} </h5>
+            <input type="hidden"  value='${eveVO.eve_id}'>
           
           </div>
         </div>

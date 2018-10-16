@@ -38,7 +38,7 @@ public class FriendListDAO implements FriendListDAO_interface{
 	//某個會員的好友清單
 	private static final String GET_MEM_FRIENDLIST_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMA_ID=? AND FL_STATUS='FLS1'";
 	//某個會員的待確認好友清單
-	private static final String GET_MEM_FRIENDLIST_UNCOMFIRMED_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMA_ID=? AND FL_STATUS='FLS0'";
+	private static final String GET_MEM_FRIENDLIST_UNCOMFIRMED_STMT = "SELECT * FROM FRIENDLIST WHERE FL_MEMB_ID=? AND FL_STATUS='FLS0'";
 
 	
 	@Override

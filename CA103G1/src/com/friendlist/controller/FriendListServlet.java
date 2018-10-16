@@ -306,5 +306,59 @@ public class FriendListServlet extends HttpServlet{
 				out.print(e.getMessage());
 			}
         }
+        
+        if ("insert_to_friend".equals(action)) { // 來自listfriendunconfirmed.jsp的請求  
+        	System.out.println(111);
+        	List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+        	
+        	try {
+        		/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+        		
+        		String fl_memA_id = req.getParameter("fl_memA_id");
+        		String fl_memB_id = req.getParameter("fl_memB_id");
+        		String fl_status = "FLS1";				
+        		String fl_block = "FLB0";
+        		String fl_friend_name=null;
+        		
+        		FriendListVO firendlistVO = new FriendListVO();
+        		firendlistVO.setFl_memA_id(fl_memA_id);
+        		firendlistVO.setFl_memB_id(fl_memB_id);
+        		firendlistVO.setFl_friend_name(fl_friend_name);
+        		firendlistVO.setFl_status(fl_status);
+        		firendlistVO.setFl_block(fl_block);
+        		
+        		
+        		/***************************2.開始新增資料***************************************/
+        		FriendListService friendlistSvc = new FriendListService();
+        		if(friendlistSvc.getOneFriendList(fl_memA_id, fl_memB_id)==null) {
+        			friendlistSvc.addFriendList(fl_memA_id, fl_memB_id, fl_friend_name, fl_status, fl_block);
+        		}else {
+        			friendlistSvc.UpdateFriendList(fl_memA_id, fl_memB_id, fl_friend_name, fl_status, fl_block);
+        		}
+        		if(friendlistSvc.getOneFriendList(fl_memB_id,fl_memA_id)==null) {
+        			friendlistSvc.addFriendList( fl_memB_id,fl_memA_id, fl_friend_name, fl_status, fl_block);
+        		}else {
+        			friendlistSvc.UpdateFriendList(fl_memB_id,fl_memA_id, fl_friend_name, fl_status, fl_block);
+        		}
+        		
+        		
+        		/***************************3.新增完成,準備轉交(Send the Success view)***********/
+        		String url ="/front_end/friendlist/listfriendcomfirmed.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功後,轉交listfriendcomfirmed.jsp
+				successView.forward(req, res);
+        		
+        		
+        		/***************************其他可能的錯誤處理***********************************/
+        		
+        	} catch(Exception e){
+        		errorMsgs.add("新增資料失敗:"+ e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/friendlist/listAllFriendList.jsp");
+				failureView.forward(req, res);
+
+        		
+        	}
+        }
 	}
 }

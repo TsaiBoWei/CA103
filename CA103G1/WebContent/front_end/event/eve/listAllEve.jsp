@@ -135,7 +135,7 @@ font-weight:bold;
 	            <div class="dropdown-content" id="myDropdown">
 	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp個人頁面</font></i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp計畫</font></i></a>
-	              <a href="#"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+	              <a href="<%=request.getContextPath()%>/front_end/friendlist/listfriendcomfirmed.jsp?perpageloc=friendlist#personalnav"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp課程</font></i></a>
 	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp活動</font></i></a>
 	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
@@ -433,7 +433,7 @@ font-weight:bold;
         $(window).scroll(function(){
 //         	console.log($(window).scrollTop());
 //         	console.log($(document).height() - $(window).height() );
-            if($(window).scrollTop() > ( $(document).height() - $(window).height() - 50) && contentLoadTriggered == false)
+            if($(window).scrollTop() > ( $(document).height() - $(window).height() - 500) && contentLoadTriggered == false)
             {
             	console.log(index);
                 contentLoadTriggered = true;

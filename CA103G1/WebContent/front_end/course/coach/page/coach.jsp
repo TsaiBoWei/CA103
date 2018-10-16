@@ -93,6 +93,31 @@ body {
 	color:#009ac0;
 	
 	}
+	
+	@keyframes blink {
+	0% {opacity: 0}
+	49%{opacity: 0}
+	50% {opacity: 1}
+}
+
+    blink{animation: blink 0.9s infinite;}
+    
+    .refundsta{
+    
+    font-weight:600!important;
+    }
+    .refuncfm{
+    background-color:rgba(247, 6, 85,0.3);
+    }
+/*  大nav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
+    .courlisttile{
+    font-size:15px;
+    }
   </style>
 
 </head>
@@ -221,7 +246,7 @@ body {
         <div class="col-md-10 offset-md-1">
 		 <ul class="nav nav-tabs nav-tabs-courlist " >
 		            <li class="nav-item text-light" >
-		              <a href="#home" class="nav-link active nav-link-title " data-toggle="tab" aria-controls="home" aria-selected="true" id="home-tab" role="tab" data-target="white">Your Course List</a>
+		              <a href="#home" class="nav-link active nav-link-title text-light courlisttile" data-toggle="tab" aria-controls="home" aria-selected="true" id="home-tab" role="tab" data-target="white">Your Course List</a>
 		            </li>
 		            
 		          </ul>
@@ -278,7 +303,7 @@ body {
                         
                         <div class="row text-right justify-content-end pb-2 px-2">
                           <div class="col-md-2 text-left text-right text-light px-1 mr-1 ml-2 ">
-                            <div>&nbsp;Refund&nbsp;<span class="badge badge-secondary badge-pill mt-1 badge-pill-coachm"><%=refundcourcount %></span></div>
+                            <div >&nbsp;Refund&nbsp;<span class="badge badge-secondary badge-pill mt-1 badge-pill-coachm"><%=refundcourcount %></span></div>
                           </div>
                           <div class="col-md-2 text-left text-right text-light px-1 mr-1 ml-1">
                             <div>&nbsp;Purchase&nbsp;<span class="badge badge-info badge-pill mt-1 badge-pill-coachmi"><%=purchcourcount%></span></div>
@@ -327,10 +352,10 @@ body {
                          <FORM METHOD="POST" ACTION="<%=request.getContextPath()%>/coach/coach.do" name="checkform">
                          <input type="hidden" class="" name="action" value="refundconfirm"></input>
                          <input type="hidden" class="" id="" name="crorder_id" value="<%=purchCourVOstu.getCrorder_id()%>" ></input>
-                         <font class="text-secondary"><i class="fas fa-hand-holding-usd " ></i>Refund</font>
+                         <font class="text-secondary refundsta"><i class="fas fa-hand-holding-usd " ></i>Refund</font>
                          <br>
                          
-                          <button type="submit" class="btn btn-outline-secondary btn-sm py-1 mb-2 mt-1"> Confirm</button>
+                          <button type="submit" class="btn btn-outline-secondary btn-sm py-1 mb-2 mt-1 refuncfm text-secondary"> Confirm</button>
                           </FORM>
                        <%}else{%> 
 
@@ -479,7 +504,7 @@ body {
 		};
 
 		webSocket.onmessage = function(event) {
-            alert(event.data);
+            alert("特價宣傳成功");
 		};
 
 	}
