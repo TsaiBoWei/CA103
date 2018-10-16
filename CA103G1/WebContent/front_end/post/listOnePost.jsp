@@ -413,8 +413,8 @@
            
            
 <%--            %> --%>
-            <li class="list-inline-item px-2 border-right ">瀏覽數:&nbsp;&nbsp;${postVO.post_view}</li>
-            <li class="list-inline-item  px-2  "> 10k likes </li>
+            <li class="list-inline-item px-2 border-right ">瀏覽數:&nbsp;&nbsp;${postVO.post_view}&nbsp;&nbsp;</li>
+            <li class="list-inline-item  px-2  "> 作者:&nbsp;&nbsp;${memSvc.getOneMem(postVO.mem_id).mem_name} </li>
           </ul>
         </div>
         <!--bloglist-->
