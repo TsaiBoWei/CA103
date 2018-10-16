@@ -8,7 +8,7 @@
 <%@ page import="com.watchedhr.model.*" %>
 
 <%
-	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
+	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
@@ -319,7 +319,7 @@ body{
 
 <body class="text-center">
 <!-- =========================================以下為原personlhead.jsp的內容========================================== -->
-	                                      <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
+	 <jsp:include page="/front_end/course/purchcour/page/personlhead.jsp"/>
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 	
 	
@@ -408,7 +408,7 @@ body{
 						<div class="form-group">
 							<label><h3>Plan Content</h3></label><br><span class="btn btn-info deletecbform px-1 mb-2 " data-toggle="modal" data-target="#courlistplan"> <i class="far fa-plus-square"></i>&nbsp;&nbsp;Add Course Into Plan
 																			</span>
-							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 22px" id="plan_votext"><%=(planVO == null) ? "Enter Your Plan Content" : planVO.getPlan_vo()%></textarea>
+							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 22px" id="plan_votext" ></textarea>
 							<br>
 						</div>
 						<!-- 	ashley -->

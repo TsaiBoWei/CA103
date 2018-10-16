@@ -110,9 +110,10 @@ public class PlanServlet extends HttpServlet {
 				String plan_privacy = req.getParameter("plan_privacy");
 
 				// plan_vo
-				String plan_vo = req.getParameter("plan_vo");
+				String plan_vo = req.getParameter("plan_vo"); 
+				System.out.println("planServlet line114" + plan_vo);
 				if (plan_vo == null || plan_vo.trim().length() == 0) {
-					errorMsgs.add("Plan Content Can't Be Blank");
+					errorMsgs.add("Plan Content Can't Be Blank6666");
 				}
 
 				// plan_view

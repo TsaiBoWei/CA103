@@ -79,6 +79,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(7, planVO.getSptype_id());
 			pstmt.setInt(8, planVO.getPlan_view());
 			pstmt.setString(9, planVO.getPlan_privacy());
+			System.out.println("PlanDAO line82"+planVO.getPlan_vo());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
