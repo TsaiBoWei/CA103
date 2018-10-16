@@ -158,9 +158,6 @@ th, td {
 						<div class="card" style=" padding:20px;margin: 20px;">
 							<img id="dylan_memPhoto" src="<%=request.getContextPath()%>/friendlist/FriendList_DBGifReader.do?mem_id=${friendlistVO.fl_memB_id}">
 							<div class="card-body">
-								
-								<input type="image" src="<%=request.getContextPath()%>/front_end/friendlist/images/chat03.png" align="left">
-								
 								<h3 id=dylan_fl_name align="center" style="display: inline;">
 									${memSvc.getOneMem(friendlistVO.fl_memB_id).mem_name}
 								</h3>

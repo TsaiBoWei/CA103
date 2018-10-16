@@ -249,7 +249,7 @@ public class FriendListServlet extends HttpServlet{
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 
-				String url ="/front_end/friendlist/listAllFriendList.jsp";
+				String url ="/front_end/friendlist/listfriendcomfirmed.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
