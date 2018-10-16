@@ -615,7 +615,7 @@ font-weight:bold!important;
     <!-- 活動的值帶入 -->
     var events = [
     	<% 	
-    		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     	for(EventVO ii: listEve){
     		
     	%>
@@ -644,7 +644,7 @@ font-weight:bold!important;
     <!-- 計畫的值帶入 -->
     	var plan = [
     		<% 	
-    		SimpleDateFormat sdFormat1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    		SimpleDateFormat sdFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     	for(PlanVO planCal: listPlan){
     		
      		
@@ -779,8 +779,8 @@ font-weight:bold!important;
                         $("#eve_charge").html(calEvent.money);
                         $("#eve_location").html(calEvent.location);
                         
-                        $("#eve_startdate").html(moment(calEvent.start).format("YYYY-MM-DD hh:mm A"));
-                        $("#eve_enddate").html(moment(calEvent.end).format("YYYY-MM-DD hh:mm A"));
+                        $("#eve_startdate").html(moment(calEvent.start).format("YYYY-MM-DD hh:mm"));
+                        $("#eve_enddate").html(moment(calEvent.end).format("YYYY-MM-DD hh:mm"));
                         $("#eve_chargeToback").val(calEvent.moneytobackend);
                         $("#eve_idTochange").val(calEvent.eveidtochange);
                        
@@ -797,8 +797,8 @@ font-weight:bold!important;
                     	     
                     	     $("#plan_id").val(calEvent.id);
                     	     $("#plan_name").val(calEvent.title);
-                    	     $("#plan_start_date").val(moment(calEvent.start).format("YYYY-MM-DD hh:mm"));
-                    	     $("#plan_end_date").val(moment(calEvent.end).format("YYYY-MM-DD hh:mm"));
+                    	     $("#plan_start_date").val(moment(calEvent.start).format("YYYY-MM-DD HH:mm"));
+                    	     $("#plan_end_date").val(moment(calEvent.end).format("YYYY-MM-DD HH:mm"));
 //                     	     $("#plan_vo").html(calEvent.description);
                     	     $("#plan_idToDelete").val(calEvent.planidToDelete);
                     	    
@@ -806,7 +806,7 @@ font-weight:bold!important;
                     	         theme: '',              //theme: 'dark',
                     	  	       timepicker:true,       //timepicker:true,
                     	  	       step: 5,                //step: 60 (這是timepicker的預設間隔60分鐘)
-                    	  	       format:'Y-m-d H:i',         //format:'Y-m-d H:i:s',
+                    	  	       format:'Y-m-d H:i ',         //format:'Y-m-d H:i:s',
                     	  		  // value:   new Date(),
                     	         //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
                     	         //startDate:	            '2017/07/10',  // 起始日
@@ -817,7 +817,7 @@ font-weight:bold!important;
                     	         theme: '',              //theme: 'dark',
                     	  	       timepicker:true,       //timepicker:true,
                     	  	       step: 5,                //step: 60 (這是timepicker的預設間隔60分鐘)
-                    	  	       format:'Y-m-d H:i',         //format:'Y-m-d H:i:s',
+                    	  	       format:'Y-m-d H:i ',         //format:'Y-m-d H:i:s',
                     	  		    // value:   new Date(),
                     	         //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
                     	         //startDate:	            '2017/07/10',  // 起始日

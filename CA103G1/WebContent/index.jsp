@@ -162,9 +162,9 @@ font-weight:bold!important;
   <div class="align-items-center py-5 cover section-fade-in-out" id="coverFirstImg" style="background: url(&quot;img/index/cover_run.jpg&quot;);background-size: cover;">
     <div class="container">
       <div class="row">
-        <div class="mt-5 text-right col-12">
+        <div class="mt-5 text-right col-10">
           <h1 class="display-6 moveLetter1"style="padding-top: 350px;">WORK it OUT</h1>
-          <p class="lead moveLetter2"> TURN Your Goals INTO ACTION </p>
+          <p class="lead moveLetter2"> Turn Your Goals into Action  </p>
         </div>
       </div>
     </div>
@@ -174,13 +174,13 @@ font-weight:bold!important;
     <div id="cover_bg1" class="cover_bgimg row">
         <div class="mt-5 text-right col-10">
           <h1 class="display-6 pr-4"style="padding-top: 430px;"> WORK it OUT</h1>
-          <p class="lead pr-4">  TURN Your Goals INTO ACTION </p>
+          <p class="lead pr-4">  Turn Your Goals into Action </p>
         </div>
     </div>
     <div id="cover_bg2" class="cover_bgimg row " style="background-position:-30px">
         <div class="mt-5 text-right col-10">
           <h1 class="display-6 pr-4" style="padding-top: 430px;"> WORK it OUT</h1>
-          <p class="lead pr-4">  TURN Your Goals INTO ACTION </p>
+          <p class="lead pr-4">  Turn Your Goals into Action  </p>
         </div>
       
     </div>
@@ -188,7 +188,7 @@ font-weight:bold!important;
         <div class="mt-5 text-right col-10">
 
           <h1 class="display-6 pr-4" style="padding-top: 430px;">  WORK it OUT</h1>
-          <p class="lead pr-4">  TURN Your Goals INTO ACTION </p>
+          <p class="lead pr-4">  Turn Your Goals into Action  </p>
         </div>      
     </div>
   </div>

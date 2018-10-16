@@ -109,26 +109,6 @@ if((MemVO) session.getAttribute("memVO")!=null){
    a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
   }
-  
-  /* buybtn */
- .buyit{
-  background-color:rgba(18, 187, 173,0.4);
-}
-
-/* reportbtn */
-
-.reportbtn{
-   background-color:rgba(247, 6, 85,0.4);
-}
-  
-  /*  大nav bar */
-    .navbar-dark .navbar-nav .nav-link{
-	color:rgba(255, 255, 255, 0.7)!important;
-	font-weight:bold!important;
-	
-	} 
-  
-  
   </style>
 </head>
 
@@ -186,29 +166,33 @@ if((MemVO) session.getAttribute("memVO")!=null){
   </nav>
 
   <!-- Cover -->
-
   <div class="align-items-center d-flex section-fade-in-out" style="background-image: url(<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>);">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:20rem;"> </div>
+        <div class="col-md-12 text-md-left text-center align-self-center my-5" style="height:13rem;"> </div>
       </div>
     </div>
   </div>
-  
+ 
     <!-- 主頁圖(圖片) -->
-  <div class="pb-3 text-white">
+  <div class="py-5 text-white">
     <div class="container">
       <div class="row">
-        <div class="col-md-7 pr-5 text-md-left text-center align-self-center my-5">
-        
-          <h3><%=courlistVO.getCname()%><br> </h3>
-          <div class="text-md-right pr-2"><p><i class="fas fa-star"></i> &nbsp; 4.5</p></div>
+        <div class="col-md-7 text-md-left text-center align-self-center my-5">
+          <h3><%=courlistVO.getCname()%>
+            <br> </h3>
+          <div class="text-md-right">
+            <a href="#" class="btn btn-outline-primary btn-sm m-1">Share
+              <br> </a>
+            <a href="#" class="btn btn-sm btn-outline-secondary m-1">Report
+              <br> </a>
+          </div>
           <div>
 <%--           <p class="coach_text_short"><%=coachVO2.getCoa_text()%></p> --%>
           <p class="coach_text_short"><%=courlistVO.getCour_text()%></p>
               <script>
              	 $(document).ready(function() {
-            	    var len = 100; // 超過50個字以"..."取代
+            	    var len = 50; // 超過50個字以"..."取代
             	    $(".coach_text_short").each(function(i){
             	        if($(this).text().length>len){
             	            $(this).attr("title",$(this).text());
@@ -219,20 +203,14 @@ if((MemVO) session.getAttribute("memVO")!=null){
             	});   
   			  </script>
           </div>
-         
-          <a class="btn btn-sm btn-primary buyit" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
-          <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-secondary m-1 reportbtn">Report<br></a>
-          
-   
-        
+          <a href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp" class="btn btn-lg btn-primary mx-1">Buy It</a>
         </div>
-        <div class="col-md-5  align-self-center">
-          <img class="img-fluid d-block mx-auto align-baseline imgcourlist" style="border-radius:10px" alt="Card image"
+        <div class="col-md-5  align-self-center" >
+          <img class="img-fluid d-block mx-auto align-baseline" alt="Card image"
           src="<%=request.getContextPath()%>/courlist/Courlist_DBGifReader.do?cour_id=<%=courlistVO.getCour_id()%>"></div>
       </div>
     </div>
   </div>
-   <!-- Cover -->
     <!-- 分頁頁籤 -->
 
   <div class="container containerHrT " id="jys" >
@@ -249,7 +227,7 @@ if((MemVO) session.getAttribute("memVO")!=null){
           <!-- 第二個按鈕 -->
           <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?courpageloc=tabtwo&localhref=localhref">
-              <i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
+              <i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp; Announcement &nbsp;</a>
           </li>
           <!-- 第三個按鈕 -->
           <li class="nav-item">

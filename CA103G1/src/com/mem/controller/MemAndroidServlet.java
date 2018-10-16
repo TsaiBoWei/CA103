@@ -52,7 +52,8 @@ public class MemAndroidServlet extends HttpServlet {
 			String account= jsonObject.get("account").getAsString();
 			String password = jsonObject.get("password").getAsString();
 			MemVO memVO = memDAO.findByAccountAndPassword(account, password);
-			writeText(res, memDAO == null? "" : gson.toJson(memVO));
+			System.out.println(memVO.getMem_id());
+			writeText(res, memVO == null? "" : gson.toJson(memVO));
 		}
 		
 		if ( "signin".equals(action) ) {

@@ -161,6 +161,26 @@ CourlistService courlistSvc = new CourlistService();
    a,.fontstyle  {
 	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
   }
+  
+  
+  /*  ¤jnav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
+    .courlisttile{
+    font-size:15px;
+    }
+    
+    .imgcourhover{
+       -webkit-transition: transform 300ms;
+    }
+    
+    .imgcourhover:hover{
+     
+     transform: scale(1.07, 1.07)
+    }
   </style>
 
 
@@ -249,7 +269,7 @@ CourlistService courlistSvc = new CourlistService();
    <!--searchbar1-->
    <div class="mt-5" id="speakers">
     <div class="container">
-      <div class="row">
+      <div class="row px-1">
         <div class=" col-md-6 mb-0 pl-0 pr-5">
           <form>
             <div class="input-group">
@@ -266,15 +286,15 @@ CourlistService courlistSvc = new CourlistService();
           </form>
         </div>
         <!--Searchbar2-->
-        <div class=" col-12 col-md-2 mb-0 px-1">
+<!--         <div class=" col-12 col-md-2 mb-0 px-1"> -->
           <jsp:useBean id="coa_idSvc" scope="page" class="com.coach.model.CoachService" />
           <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-          <select name="coa_id" class="form-control bg-dark-posteditinput">
-			<c:forEach var="coachVO" items="${coa_idSvc.all}">
-				<option value="${coachVO.coa_id}" ${(courlistVO.coa_id==coachVO.coa_id)?'selected':'' } >${memSvc.getOneMem(coachVO.mem_id).mem_name}
-			</c:forEach>
-          </select>
-        </div>
+<!--           <select name="coa_id" class="form-control bg-dark-posteditinput"> -->
+<%-- 			<c:forEach var="coachVO" items="${coa_idSvc.all}"> --%>
+<%-- 				<option value="${coachVO.coa_id}" ${(courlistVO.coa_id==coachVO.coa_id)?'selected':'' } >${memSvc.getOneMem(coachVO.mem_id).mem_name} --%>
+<%-- 			</c:forEach> --%>
+<!--           </select> -->
+<!--         </div> -->
         <!--Searchbar3-->
         <div class=" col-12 col-md-2 mb-0 px-1">
           <jsp:useBean id="sportSvc" scope="page" class="com.sptype.model.SptypeService" />
@@ -305,9 +325,9 @@ CourlistService courlistSvc = new CourlistService();
     <div class="container "> 
       <div class="row mt-5">
       <c:forEach var="courlistVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-        <div class="col-lg-4 col-md-1 py-3">
+        <div class="col-lg-4 col-md-1 py-3 imgcourhover">
           <a href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id=${courlistVO.cour_id}&courpageloc=tabone"> </a>
-          <div class="card">
+          <div class="card ">
             <a href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id=${courlistVO.cour_id}&courpageloc=tabone">
              <div class="courboarimg">
            		 <img class="card-img-top imgcourlist" alt="Card image"
@@ -318,7 +338,7 @@ CourlistService courlistSvc = new CourlistService();
             <div class="card-body">
            
               <a href="<%=request.getContextPath()%>/front_end/course/courlist/oneCourlist.jsp?cour_id=${courlistVO.cour_id}&courpageloc=tabone">
-                <h5 class="card-title text-left"><span class="badge mb-1 badge-courpaycata" style="background-color:${sportTypeColor.get(courlistVO.sptype_id)};opacity:0.8;">${sportSvc.getOneSptype(courlistVO.sptype_id).sport}</span>&nbsp;&nbsp;&nbsp;</h5>
+                <h5 class="card-title text-left"><span class="badge mb-1 badge-courpaycata" style="background-color:${sportTypeColor.get(courlistVO.sptype_id)};opacity:0.9;">${sportSvc.getOneSptype(courlistVO.sptype_id).sport}</span>&nbsp;&nbsp;&nbsp;</h5>
                 <h4 class="">${courlistVO.cname} </h4>
                 <div class="row">
                   <div class="col-12 col-md-2  px-2 ">
@@ -485,7 +505,7 @@ $(document).ready(function(){
 // 	        messagesArea.scrollTop = messagesArea.scrollHeight;
             var jsonObj = JSON.parse(event.data);
             var message = jsonObj.discountcname+jsonObj.finaldiscount + "§é";
-            alert(message);
+//             alert(message);
             var courno=jsonObj.discountcour_id;
             var expiryunitl=jsonObj.expiryunitl;
             discounttext.innerHTML=message;

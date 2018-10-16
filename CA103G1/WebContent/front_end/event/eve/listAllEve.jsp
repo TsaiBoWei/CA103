@@ -433,7 +433,7 @@ font-weight:bold;
         $(window).scroll(function(){
 //         	console.log($(window).scrollTop());
 //         	console.log($(document).height() - $(window).height() );
-            if($(window).scrollTop() > ( $(document).height() - $(window).height() - 50) && contentLoadTriggered == false)
+            if($(window).scrollTop() > ( $(document).height() - $(window).height() - 500) && contentLoadTriggered == false)
             {
             	console.log(index);
                 contentLoadTriggered = true;

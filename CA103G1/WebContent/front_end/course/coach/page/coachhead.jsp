@@ -105,8 +105,10 @@
 	$(document).ready(function() {
 		$(".coachlive").click(function(){
 			getStreamId();
-		$(".livestreamsta").text("LiveStreaming...")	
-		setTimeout('Redirect()', 10000);
+		$(".livestreamsta").html("<blink class='text-primary'>&nbsp;PROCEEDING TO LIVESTREAM...</blink>")	
+		$(".fa-youtube").css("color","#12bbad");
+		setTimeout('Redirect()', 5000);
+		
 			});
 	});
 	

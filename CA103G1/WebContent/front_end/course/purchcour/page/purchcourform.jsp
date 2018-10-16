@@ -67,6 +67,13 @@ h1 {
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
 }
+
+ /*  ¤jnav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
 </style>
 
 
@@ -101,14 +108,15 @@ a,.fontstyle  {
       </div>
     </div>
   </div>
+  <jsp:useBean id="sportSvc" scope="page" class="com.sptype.model.SptypeService" />
   <div class="py5 ">
     <div class="container formpurchas formpurchas2 ">
       <div class="row no-gutters section-fade-in-out" style=" background-image: url('<%=request.getContextPath()%>/purchcour/CourPho_DBGifReader4.do?cour_id=<%=courlistVO.getCour_id()%>'); ">
         <div class="col-md-7 align-self-end text-left text-light purcourpic ">
           <div class=" pt-3 pb-4 align-self-end pl-4 paymentcour">
-            <span class="badge badge-secondary mb-2 badge-courpaycata">Others</span>
+            <span class="badge badge-secondary mb-2 badge-courpaycata" style="background-color:${sportTypeColor.get(courlistVO.sptype_id)};opacity:0.9;">${sportSvc.getOneSptype(courlistVO.sptype_id).sport}</span>
             <p class="h3 ">${courlistVO.cname}</p>
-            <p class="h5">$&nbsp;${courlistVO.cour_cost}</p>
+            <p class="h4 text-primary">$&nbsp;${courlistVO.cour_cost}</p>
           </div>
         </div>
         <!--left-->
@@ -150,7 +158,7 @@ a,.fontstyle  {
                 <i class="fas fa-user-circle text-light"></i>
               </span>
             </div>
-            <input type="text" name="cardholder" class="form-control text-info courpay " id="" aria-describedby="basic-addon3" placeholder="Peter God Wu"> </div>
+            <input type="text" name="cardholder" class="form-control text-primary font-weight-bold courpay " id="" aria-describedby="basic-addon3" placeholder="Peter God Wu"> </div>
           <!--credit card-->
           <!--credit card-->
           <label for="basic-url">Card Number</label>
@@ -160,14 +168,14 @@ a,.fontstyle  {
                 <i class="far fa-credit-card text-light"></i>
               </span>
             </div>
-            <input type="text" name="cardNumber" class="form-control courpay text-info" id="" aria-describedby="basic-addon3"> </div>
+            <input type="text" name="cardNumber" class="form-control courpay text-primary font-weight-bold" id="" aria-describedby="basic-addon3"> </div>
           <!--credit card-->
           <!--credit card-->
           <div class="row px-2 my-0 ">
             <div class="col-md-3 p-0">
               <div class="form-group my-3">
                 <label for="basic-url">Vaild Mon</label>
-                <input type="text" name="validmonth" class="form-control text-info courpay" aria-describedby="basic-addon3" id="" placeholder="08">
+                <input type="text" name="validmonth" class="form-control text-primary font-weight-bold courpay" aria-describedby="basic-addon3" id="" placeholder="08">
               </div>
             </div>
             <!--credit card-->
@@ -175,7 +183,7 @@ a,.fontstyle  {
             <div class="col-md-3 ml-2 px-0">
               <div class="form-group my-3">
                 <label for="basic-url">Year</label>
-                 <input type="text" name="validYear" class="form-control courpay text-info" aria-describedby="basic-addon3" id="" placeholder="22">
+                 <input type="text" name="validYear" class="form-control courpay text-primary font-weight-bold" aria-describedby="basic-addon3" id="" placeholder="22">
               </div>
             </div>
             <!--credit card-->
@@ -183,7 +191,7 @@ a,.fontstyle  {
             <div class="col-md-4 form-group my-3 ml-4 text-left text-white ">
               <label>CVC</label>
               <div class="">
-                <input type="password" name="cvc" class="form-control courpay text-info" aria-describedby="basic-addon3" id="" > </div>
+                <input type="password" name="cvc" class="form-control courpay text-primary font-weight-bold" aria-describedby="basic-addon3" id="" > </div>
             </div>
             <!--credit card-->
           </div>

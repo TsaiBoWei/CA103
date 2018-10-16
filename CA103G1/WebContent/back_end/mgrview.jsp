@@ -14,7 +14,8 @@
   <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"> -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/PersonalPageBase.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/back_end/css/mgr.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/back_end/css/mgrview.css">
@@ -46,14 +47,15 @@
                   
               </p>
             </div>
-            <div class="col-1 col-md-1">
-              <div>
+            <div class="col-1 col-md-1 d-flex">
+              <div class="m-1">
 <%--                <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;"> --%>
-				<a class="btn btn-info logoutbtn m-3" href="<%=request.getContextPath() %>/mgr/MgrLg.do?action=logout">Log Out</a>              
+				<a href="<%=request.getContextPath() %>/back_end/mgr/mgrDataChange.jsp"><i class="fas fa-user-circle fa-3x"></i></a>           
               </div>
-              <div>
+              <div class="m-1">
+              <a  href="<%=request.getContextPath() %>/mgr/MgrLg.do?action=logout"><i class="fas fa-sign-out-alt fa-3x"></i></a>
 <%--                <input type="button" class="btn btn-info logoutbtn m-3" value="log out" onclick="location.href=&quot;<%=request.getContextPath() %>/back_end/mgr/mgrlogin.jsp&quot;"> --%>
-				<a class="btn btn-info logoutbtn m-3" href="<%=request.getContextPath() %>/back_end/mgr/mgrDataChange.jsp">­×§ï¸ê®Æ</a>              
+				              
               </div>
             </div>
           </div>
