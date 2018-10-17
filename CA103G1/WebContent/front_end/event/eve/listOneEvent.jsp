@@ -686,14 +686,14 @@ a,.fontstyle  {
 		<div class="modal-content bg-dark">
 		
 			<div class="modal-header " >
-				<h3 class="modal-title text-success" id="myModalLabel" style='font-weight:bold !important;'>付款資訊</h3>
+				<h3 class="modal-title text-success" id="myModalLabel" style='font-weight:bold !important;'>付款資訊<button  id="lbtn" type="button" class="btn m-3 btn-sm " ></button></h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                
             </div>
 							
 			<div class="modal-body " >
 				 <div class="row"><div class="col-md-4  h4 text-success " style='font-weight:bold !important;'>活動名稱 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>  ${eveVO.eve_title}</div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'> 付款金額 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_amount}&nbsp元</div></div>
-				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>信用卡卡號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text" class="payinput" ><div class="mt-2"> 月<input type="text"  class="payinput" size="1">年<input type="text"  class="payinput" size="1"> CVC<input type="text"  class="payinput" size="1" ></div></div></div>
+				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>信用卡卡號 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text" class="payinput" id="credit_card"><div class="mt-2"> 月<input type="text" id="mon" class="payinput" size="1">年<input type="text" id="year" class="payinput" size="1"> CVC<input type="text"  class="payinput" id="cvc" size="1" ></div></div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>持卡人姓名 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" value="${memVO.mem_name}"></div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>付款截止日 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'>${eventListVO.evepay_deadline}</div></div>
 				 <div class="row"><div class="col-md-4 h4 text-success" style='font-weight:bold !important;'>手機號碼 </div><div class="col-md h4 text-success" style='font-weight:bold !important;'><input type="text"  class="payinput" id="phone"></div></div>
@@ -728,6 +728,19 @@ a,.fontstyle  {
     		 
     		 
         </script>
+        
+        <!--        小按鈕 -->
+      <script>
+      	$("#lbtn").click(function(){
+      		$("#credit_card").val("1234567890123456");
+      		$("#year").val("21");
+      		$("#mon").val("11");
+      		$("#cvc").val("123");
+      		$("#phone").val("0975976761");
+      	});
+      
+      
+      </script>
  </c:if>
   
   

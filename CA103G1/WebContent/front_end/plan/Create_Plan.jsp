@@ -70,8 +70,10 @@
 	}
 	#courseplan{
 	
-	height: 60px;
-	border: 0.8px solid white;
+	height: 100px;
+	border: 0.7px dotted rgba(239, 239, 239,0.8);
+	border-radius:5px;
+	
 	}
 	
 	
@@ -416,7 +418,7 @@ body{
 						<!-- 	ashley -->
 						
 <!-- 						ashley -->
-						<div class="col-12 "id="courseplan" style="display:none;" ></div>
+						<div class="col-12 p-2 my-2 "id="courseplan" style="display:none;" ></div>
 	<!-- 						ashley -->
 		
 						<div class="from-group">
@@ -491,7 +493,7 @@ body{
 									        },
 									        success : function(result) {
 // 									            if (result.status === 'success'){
-									            	alert(result);
+									         
 									            $(".sub-prod-list").empty();
 									            $(".sub-prod-list").append(result);
 									            },
