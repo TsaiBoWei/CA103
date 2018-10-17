@@ -122,7 +122,7 @@ a,.fontstyle  {
         <!--left-->
         <div class="col-md-5 text-left pl-4 pr-3 paymentcard formpurchas2">
           <div class="mt-2 pb-1 pt-3 mb-4  paymemttitleline ">
-            <h3 class="text-light-payment "> Account Details </h3>
+            <h3 class="text-light-payment " id="accountdetails"> Account Details </h3>
           </div>
            <!--- if erroMsg --->
            <div class="col-12 mt-1 ">&nbsp;
@@ -215,6 +215,18 @@ a,.fontstyle  {
     	console.log(location.href);
     };
            
+   </script>
+   
+   <script>
+   $(document).ready(function() {
+   $("#accountdetails").click(function() {
+	   $("input[name='cardholder']").val("Peter Wu");
+	   $("input[name='cardNumber']").val("1234567890123456");
+	   $("input[name='validmonth']").val("08");
+	   $("input[name='validYear']").val("22");
+	   $("input[name='cvc']").val("123");
+   });
+   });
    </script>
  
 

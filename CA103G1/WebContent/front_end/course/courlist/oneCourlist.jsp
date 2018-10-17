@@ -252,78 +252,7 @@ li span {
           <a class="btn btn-sm btn-primary buyit" href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcourform.jsp?localhref=localhref" class="btn btn-lg btn-primary mx-1">Buy It</a>
           <a href="#" data-toggle="modal" data-target="#idModal" class="btn btn-sm btn-secondary m-1 reportbtn">Report<br></a>
           
-          
-<<<<<<< HEAD
-    
-=======
-    <!-- 課程檢舉燈箱 -->
-	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"
-		aria-labelledby="idModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="center modal-title" id="exampleModalLongTitle">課程檢舉</h4>
-					<button type="button" class="close cancel" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="false">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="from-group mx-auto">
-							<c:if test="${not empty errorMsgs}">
-
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-						</div>
-					</div>
-					<form METHOD="post" action="<%=request.getContextPath()%>/coursereport/coursereport.do">
-						<div class="input-group input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">會員信箱</span>
-							</div>
-							<input value="${memVO.mem_email }" type="email" name="Email" class="form-control"
-								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-						</div>
-						<br>
-
-						<div class="input-group-lg">
-							<div class="input-group-prepend">
-							<span class="input-group-text">檢舉項目</span>
-							<select name= "reportItem">
-								<option value="CRN1">課程內容不當</option>
-								<option value="CRN2">課程收費不當</option>
-								<option value="CRN3">其它</option>
-							</select>
-							</div>
-						</div>
-						<br>
-
-						<div class="input-group-lg">
-							<label style="font-size: 150%">狀況敘述 :</label>
-							<textarea class="form-control" name="courrepText"
-								style="height: 300px"></textarea>
-						</div>
-						<br>
-						<div class="modal-footer">
-							<input type="hidden" name="action" value="addReport">
-							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
-							<button type="button" class="btn btn-secondary cancel"
-								data-dismiss="modal">取消</button>
-
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-      
->>>>>>> 1f8d9a29f02623ca551e31f99ebc9e430fe0d98a
-      
+       
       <!--  discount -->
 
         <div class="mt-2 text-secondary" id="countdowntitle"><i class="fas fa-bullhorn"></i>&nbsp;限時<%=courdiscountVO.getFinaldiscount()%>折</div>

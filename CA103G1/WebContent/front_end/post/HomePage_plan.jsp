@@ -96,6 +96,11 @@
     body {
       overflow-x: hidden; 
     }
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+	
+	}
     
     /*圖片專區*/
 	#plan_cover {
@@ -133,6 +138,7 @@
 
 
 <body class="text-center">
+<<<<<<< HEAD
  <!-- Navbar -->
 	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
 		<span class="navbar-text"></span>
@@ -228,6 +234,59 @@
 		</div>
 	</nav>
 
+=======
+  <!-- Navbar --> 
+ <nav   class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <span class="navbar-text"></span>
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
+        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
+          </li>
+          <li class="nav-item mx-2 btn-lg">
+            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
+          </li>
+         
+          <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >
+          <c:if test="${memVO!=null}">
+	          <li class="nav-item mx-2 btn-lg dropdown" >
+	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
+	              <i class="fa fa-caret-down dropbtn"></i>
+	            </a>
+	            <div class="dropdown-content" id="myDropdown">
+	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp個人頁面</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp計畫</font></i></a>
+	              <a href="<%=request.getContextPath()%>/front_end/friendlist/listfriendcomfirmed.jsp?perpageloc=friendlist#personalnav"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp好友</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp課程</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp活動</font></i></a>
+	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp貼文</i></a> -->
+	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp行事曆</font></i></a>
+	               
+	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
+	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbsp教練管理</font></i></a>
+	               </c:if>
+	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp會員資料</font></i></a>
+	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout"><font class="fontstyle">登出</font></a>
+	            </div>
+	          </li>
+          </c:if>
+        </ul>
+        
+         <c:if test="${memVO==null}">
+        	<a class="btn btn-lg btn-primary" href="<%=request.getContextPath() %>/Mem_Login_Signup.jsp" id="registerBtn">Register now</a>
+		 </c:if>      	
+      </div>
+    </div>	
+  </nav>
+>>>>>>> a63f09d304863c312b6c0bb779e3291750938a7e
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">

@@ -47,6 +47,13 @@
 <script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 <script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
+
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.5/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+
+
 <style>
  
 
@@ -65,6 +72,14 @@ h1 {
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
+
+
+ /*  大nav bar */
+    .navbar-dark .navbar-nav .nav-link{
+	color:rgba(255, 255, 255, 0.7)!important;
+	font-weight:bold!important;
+	
+	}
 </style>
 
 
@@ -173,7 +188,7 @@ a,.fontstyle  {
               <i class="far fa-check-circle"></i>&nbsp;Available </font>
              <%}else{%> 
              
-             <font class="text-secondary" style="opacity: 0.8;">
+             <font class="text-secondary font-weight-bold" style="opacity: 0.9;">
               <i class="fas fa-hand-holding-usd"></i>&nbsp;Refund is being processed</font>
              <%}%> 
           </p>
@@ -439,6 +454,21 @@ a,.fontstyle  {
     </div>
     </FORM>
     <!--refundform-->
+    
+     <c:if test="${param.successpayment!=null}">
+			<script>
+			
+				swal({
+					
+					  type: 'success',
+					  title: 'Your payment has been processed successfully.',
+					  showConfirmButton: false,
+					  timer: 2000,
+					})
+	    		 
+		
+	        </script>
+	        </c:if>
 
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	                                      <jsp:include page="personlfooter.jsp"/>
