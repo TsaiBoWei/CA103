@@ -226,7 +226,7 @@ public class PlanServlet extends HttpServlet {
 					is.read(plan_cover);
 					is.close();
 					System.out.println("success");
-				}
+				} 
 				
 				
 				// plan_vo

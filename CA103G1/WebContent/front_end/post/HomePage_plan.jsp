@@ -10,6 +10,9 @@
  <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
  <jsp:useBean id="now" class="java.util.Date" />
+ 
+ 
+<!--   line 258 先行註解 -->
 <%	
 	MemVO memVO=(MemVO)session.getAttribute("memVO");
 	String memidtoHg=request.getParameter("mem_id");
@@ -41,7 +44,7 @@
 		 list = planSvc.getPlanForVisitorByMem(memidtoHg);
 	}
 
-	System.out.println(list);
+// 	System.out.println(list);
 	pageContext.setAttribute("list", list);
 	
 	 String perpageloc=request.getParameter("perpageloc");
@@ -255,7 +258,7 @@
             <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
           </li>
          
-          <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >
+<%--           <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp > --%>
           <c:if test="${memVO!=null}">
 	          <li class="nav-item mx-2 btn-lg dropdown" >
 	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
@@ -560,7 +563,7 @@
 		</div>
 </div>
 		<!-- end -->
-<P>777777777777777777777777777777777777777777777777777777777777777777</P>
+<!-- <P>777777777777777777777777777777777777777777777777777777777777777777</P> -->
 		<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 		<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 		<!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
