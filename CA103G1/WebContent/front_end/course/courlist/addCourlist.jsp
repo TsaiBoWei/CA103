@@ -163,7 +163,7 @@
             
             <div class="form-group">
 				<h4 class="text-md-left">課程名稱*</h4>
-				<input type="TEXT" name="cname" size="45" class="form-control"
+				<input type="TEXT" name="cname" size="45" class="form-control" id="cname"
 				value="<%= (courlistVO==null)? "請輸入課程名稱" : courlistVO.getCname()%>" />
 			</div>
 			<br>
@@ -210,7 +210,7 @@
 						
 			<div class="form-group">
               <h4 class="text-md-left">課程介紹*</h4>
-				<div id="cour_text_summernote">課程介紹</div>
+				<textarea id="cour_text_summernote"></textarea>
 				<input type="hidden" name="cour_text"  id="cour_text">
 						
 				<script>
@@ -240,7 +240,7 @@
 			
 			<div class="form-group">
               <h4 class="text-md-left">課程費用*</h4>
-				<input type="TEXT" name="cour_cost" size="45" class="form-control"
+				<input type="text" name="cour_cost" id="cour_cost" size="45" class="form-control"
 				value="<%= (courlistVO==null)? "1000" : courlistVO.getCour_cost()%>" />
 			</div>
 			<br>
@@ -264,7 +264,7 @@
               <h4 class="text-md-left">課程公告</h4>
 <!-- 				<input type="TEXT" name="cour_ann" size="45" class="form-control" -->
 <%-- 				value="<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>" /></td> --%>
-				<textarea class="form-control text-light" name="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5">
+				<textarea class="form-control text-light" name="cour_ann" id="cour_ann" style="background-color:#1f1f1f; border-color:#505050;" rows="5">
 				<%= (courlistVO==null)? "請輸入課程公告" : courlistVO.getCour_ann()%>
 				</textarea>
 			</div>
@@ -275,6 +275,7 @@
 			<!-- 送出  -->
 			<input type="hidden" name="action" value="insert">
 			<div class="text-md-right">
+				<button id="magicBtn" type="button" class="btn btn-outline-primary btn-sm m-1">Magic</button>
 				<button id="addBtnSubmit" type="submit" class="btn btn-outline-primary btn-sm m-1">Send</button>
 			</div>
             
@@ -284,7 +285,15 @@
       </div>
     </div>
   </div>
-  
+
+  <script>
+	$("#magicBtn").click(function(){
+		$("#cname").val("誰說工程師不能當猛男？！");
+		$("#cour_text_summernote").summernote("code",'猛男教練David，在籃球領域上有深厚的經驗，並且持續提升台灣基層工程師的專業知識和技能，特辦「誰說工程師不能當猛男？！」特訓班。<br>由猛男教練David主講，搭配 TibaMe 引爆運動訓練教練團隊與選手示範，共同傳遞「Seafood的力量」給台灣工程師幼苗們。<br>課程內容包括撐不起來的伏地挺身、JAVA、Android以及幹話特訓。<br>......啊說好的籃球勒？！<br>');
+		$("#cour_cost").val("8787");
+		$("#cour_ann").val("請同學們牢記大衛seafood猛男秀開播時間，準時收看！！");
+	});  
+  </script>
 
 					
   
