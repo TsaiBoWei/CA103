@@ -141,12 +141,12 @@ input {
 					<form method="post"
 						action="<%=request.getContextPath()%>/mem/mem.do">
 						<div class="form-group">
-							<input style="color:#ff0000" type="email" name="email"
+							<input style="color:#ff0000" type="email" name="email" id="email"
 								class="form-control" placeholder="電子郵件">
 						</div><br>
 
 						<div class="form-group">
-							<input  type="password" name="password"
+							<input  type="password" name="password" id="psw"
 								class="form-control" placeholder="密碼">
 						</div>
 						
@@ -159,9 +159,28 @@ input {
 				<div class="col-md-12" style="margin-bottom: 14px;">
 					<a href="#" data-toggle="modal" data-target="#idModal" style="font-size:150%">快 速 註 冊</a>
 				</div>
+				<div class="col-md-12 pt-3" style="margin-bottom: 14px;">
+					<button type="button" id="david">小吳</button>
+					<button type="button" id="tsai">蔡脯</button>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	<script>
+	
+		$("#david").click(function(){
+      		$("#email").val("ca10303@gmail.com");
+      		$("#psw").val("123456");
+      	});
+		$("#tsai").click(function(){
+      		$("#email").val("chtseng89@gmail.com");
+      		$("#psw").val("123456");
+      	});
+      
+	
+	</script>
 
 	<!-- Modal -->
 	<div class="modal fade" id="idModal" tabindex="-1" role="dialog"

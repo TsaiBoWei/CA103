@@ -47,10 +47,10 @@
   .eveImg{
   width:100%;
   }
-   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span,#eve_contentDiv p,#eve_contentDiv div,#eve_contentDiv strong,#eve_contentDiv td{
+   #eve_contentDiv,#eve_contentDiv ul,#eve_contentDiv ul li,#eve_contentDiv li,#eve_contentDiv span, #eve_contentDiv span span,#eve_contentDiv p,#eve_contentDiv div,#eve_contentDiv div p,#eve_contentDiv strong,#eve_contentDiv td{
   color:#efefef !important;
   background-color:#1f1f1f!important;
-  font-size:20px;
+  font-size:20px!important;
   }
   
   #eve_locationP{
