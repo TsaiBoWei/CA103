@@ -204,7 +204,8 @@ public class PurchcourServlet extends HttpServlet {
 				CourlistService courlistSvc = new CourlistService();
 				CourlistVO courlistVO = courlistSvc.getOneCourlist(cour_id);
 
-				String url = "/front_end/course/purchcour/page/purchcour.jsp?perpageloc=course";
+//				String url = "/front_end/course/purchcour/page/purchcour.jsp?perpageloc=course";
+				String url = "/front_end/course/purchcour/page/purchcour.jsp?perpageloc=course&successpayment=successpayment";
 
 				String to = "chtseng89@gmail.com";
 

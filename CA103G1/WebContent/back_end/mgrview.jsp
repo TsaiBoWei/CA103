@@ -25,7 +25,7 @@
   <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   <!-- lightcase settings -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- 
+ <style type="text/css"></style>
 <title>管理員頁面</title>
 </head>
 <body class="text-center">
@@ -76,12 +76,13 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item active mgrlistbar" aria-current="page">教練審核</li>
             <li class="breadcrumb-item active mgrlistbar" aria-current="page">活動審核</li>
+            <li class="breadcrumb-item active mgrlistbar" aria-current="page">課程檢舉</li>
           </ol>
         </nav>
       </div>
       <div class="row">
-        <div class="col-3 h-25">
-          <div class="card bg-dark text-white h-24">
+        <div class="col h-25">
+          <div class="card bg-none text-white h-24" style="background-color:rgba(51, 51, 51, 0)">
             <img class="card-img  imglist" src="<%=request.getContextPath() %>/back_end/img/coachcheck_img.png">
             <div class="card-img-overlay">
               <div>
@@ -93,8 +94,8 @@
             </div>
           </div>
         </div>
-        <div class="col-3 h-25">
-          <div class="card bg-dark text-white h-24">
+        <div class="col h-25">
+          <div class="card bg-none text-white h-24" style="background-color:rgba(51, 51, 51, 0)">
             <img class="card-img  imglist" src="<%=request.getContextPath() %>/back_end/img/eventcheck_img.png">
             <div class="card-img-overlay">
               <div>
@@ -106,20 +107,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-success m-2 w-100" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active mgrlistbar" aria-current="page">課程檢舉</li>
-            <li class="breadcrumb-item active mgrlistbar" aria-current="page">貼文檢舉</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="row">
-        <div class="col-3 h-25">
-          <div class="card bg-dark text-white h-24">
+        
+         <div class="col h-25">
+          <div class="card bg-none text-white h-24" style="background-color:rgba(51, 51, 51, 0)">
             <img class="card-img  imglist" src="<%=request.getContextPath() %>/back_end/img/cour_report_img.png">
             <div class="card-img-overlay">
               <div>
@@ -131,21 +121,9 @@
             </div>
           </div>
         </div>
-        <div class="col-3 h-25">
-          <div class="card bg-dark text-white h-24">
-            <img class="card-img  imglist" src="<%=request.getContextPath() %>/back_end/img/post_report_img.png">
-            <div class="card-img-overlay">
-              <div>
-                <h1 class="card-title text-dark d-flex justify-content-start m-0">貼文檢舉</h1>
-              </div>
-              <div>
-                <a href="#" class="d-flex justify-content-start m-2 mgrwork">檢舉處理</a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+    
     <!-- Here you go -->
     <!-- Sponsor logos -->
     <!-- Call to action -->
