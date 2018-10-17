@@ -2,7 +2,6 @@ package com.plan.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.mem.model.MemService;
 import com.mem.model.MemVO;
 import com.plan.model.PlanService;
 import com.plan.model.PlanVO;
@@ -111,7 +111,6 @@ public class PlanServlet extends HttpServlet {
 
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo"); 
-				System.out.println("planServlet line114，印出plan_vo" + plan_vo);
 				if (plan_vo == null || plan_vo.trim().length() == 0) {
 					errorMsgs.add("Plan Content Can't Be Blank6666");
 				}
@@ -120,7 +119,6 @@ public class PlanServlet extends HttpServlet {
 				Integer plan_view = null;
 				try {
 					plan_view = Integer.parseInt(req.getParameter("plan_view"));
-					System.out.println(plan_view);
 				} catch (Exception s) {
 					errorMsgs.add("plan_view" + plan_view);
 				}
@@ -302,7 +300,6 @@ public class PlanServlet extends HttpServlet {
 				}
 				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
-				System.out.println("line307 我在這裡");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
@@ -367,19 +364,15 @@ public class PlanServlet extends HttpServlet {
 				/*************************** 2.開始複合查詢 ***************************************/
 				PlanService planSvc = new PlanService();
 				List<PlanVO> list = planSvc.getAll(map);
-				System.out.println("line371");
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.getSession().setAttribute("listPlans_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
-				System.out.println("line376");
 				successView.forward(req, res);
-				System.out.println("已成功轉交");
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				System.out.println("test20181007");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
@@ -392,7 +385,6 @@ public class PlanServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("line353");
 			try {
 				
 				/*************************** 1.將輸入資料轉為Map **********************************/
@@ -410,23 +402,62 @@ public class PlanServlet extends HttpServlet {
 				/*************************** 2.開始複合查詢 ***************************************/
 				PlanService planSvc = new PlanService();
 				List<PlanVO> list = planSvc.getAllforVisitor(map);
-				System.out.println("line413");
 				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.getSession().setAttribute("listAllPlans_ForVisitor_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("/front_end/plan/list_compositeQuery_ForVisitor.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
 				successView.forward(req, res);
-				System.out.println("已成功轉交");
 				
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				System.out.println("test20181007");
 				RequestDispatcher failureView = req.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
 				failureView.forward(req, res);
 			}
 			
 		}
+		
+		
+		if ("getOne_For_Display".equals(action)) { // 來自ListAllPlans_ForVisitor.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String plan_id = req.getParameter("plan_id");
+				/***************************2.開始查詢資料*****************************************/
+				PlanService planSvc = new PlanService();
+				PlanVO planVO = planSvc.getOnePlan(plan_id);
+				if (planVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front_end/plan/ListAllPlans_ForVisitor.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				 // 資料庫取出的empVO物件,存入req
+				req.getSession().setAttribute("planVO", planVO);
+				
+				String url = "/front_end/post/HomePage_plan.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交test3.jsp
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 	
 	}
 }

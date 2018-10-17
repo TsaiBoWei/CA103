@@ -560,7 +560,7 @@ body{
 	
 	$(document).ready(function() {
 		$(".creatbtn").click(function(e) {
-// 			e.preventDefault();
+			e.preventDefault();
 			$("#courseplan").find('.linkclose').each(function(index, item){
 				$(item).html('');
 			});
@@ -569,7 +569,7 @@ body{
 			});
 			var inputcourplan = $("#courseplan").html();
 			console.log(inputcourplan);
-		
+			console.log($("#courseplan").text());
 			if (($("#courseplan").text())!=""){
 			$("#plan_votext").val(inputcourplan);}
 		});
