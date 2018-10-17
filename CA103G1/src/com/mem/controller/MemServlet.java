@@ -124,7 +124,21 @@ public class MemServlet extends HttpServlet {
 			verifyEMail.jedisVeriCode(regaccount, verifyCode);
 			System.out.println("Auth code is: " + verifyCode);
 			String subject = "[Work It Out] 會員認證信";
-			String messageText = "Hello! " + regName + " 請輸入此驗證碼:" + verifyCode + "\n";
+			String veriURL = req.getRequestURL()+"?action=verifyCode&verifyCode="+verifyCode;
+			String veriAddr = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+ "/front_end/mem/login/Verify.jsp";
+			String messageText =
+					"<div style=\"font-size:20px\">*************************************************<br>"
+					+ "注意！本信件由系統發出，請勿回覆此信件 <br>"
+					+ "*************************************************<br></div>"
+					+ "<div style=\"font-size:20px\"><br>親愛的會員　您好： <br>恭喜您已成為 WORK it OUT 的會員，以下是您的基本資料，請依說明完成帳號認證，日後 WORK it OUT 才能為您服務。<br>"
+					+"<br>會員帳號："+regaccount+"&nbsp;<a href=\""+veriURL+"\">認證帳號</a>"
+					+"<br>會員名稱："+regName	+"<br><br>"+"※提醒您，您必須先完成帳號認證，才能登入WORK it OUT。<br>"
+					+"<br>"+"如果您無法點選以上連結，請直接複製以下網址貼到瀏覽器網址列：  <br>"
+					+veriURL
+					+"<br><br>或至<a href=\""+veriAddr+"\">驗證網頁</a>輸入以下驗證碼<br>"
+					+verifyCode
+					+"<br><br>如果此帳號非您所有，請直接刪除此信件。謝謝！"
+					+"</div>";
 			verifyEMail.sendMail(regaccount, subject, messageText);
 			System.out.println("email has been sent");
 			RequestDispatcher failureView = req.getRequestDispatcher("/front_end/mem/login/Verify.jsp");
@@ -198,7 +212,20 @@ public class MemServlet extends HttpServlet {
 				System.out.println("Auth code is: " + verifyCode);
 				String subject = "[Work It Out] 會員認證信";
 				String veriURL = req.getRequestURL()+"?action=verifyCode&verifyCode="+verifyCode;
-				String messageText = "Hello! " + regName + ", 請輸入此驗證碼:"+veriURL + "\n";
+				String veriAddr = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+ "/front_end/mem/login/Verify.jsp";
+				String messageText = 
+									"<div style=\"font-size:20px\">*************************************************<br>"
+									+ "注意！本信件由系統發出，請勿回覆此信件 <br>"
+									+ "*************************************************<br></div>"
+									+ "<div style=\"font-size:20px\"><br>親愛的會員　您好： <br>恭喜您已成為 WORK it OUT 的會員，以下是您的基本資料，請依說明完成帳號認證，日後 WORK it OUT 才能為您服務。<br>"
+									+"<br>會員帳號："+regaccount+"&nbsp;<a href=\""+veriURL+"\">認證帳號</a>"
+									+"<br>會員名稱："+regName	+"<br><br>"+"※提醒您，您必須先完成帳號認證，才能登入WORK it OUT。<br>"
+									+"<br>"+"如果您無法點選以上連結，請直接複製以下網址貼到瀏覽器網址列：  <br>"
+									+veriURL
+									+"<br><br>或至<a href=\""+veriAddr+"\">驗證網頁</a>輸入以下驗證碼<br>"
+									+verifyCode
+									+"<br><br>如果此帳號非您所有，請直接刪除此信件。謝謝！"
+									+"</div>";
 				verifyEMail.sendMail(regaccount, subject, messageText);
 				System.out.println("email has been sent");
 

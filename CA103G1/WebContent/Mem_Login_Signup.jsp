@@ -120,9 +120,9 @@ input {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="display-1">
-					<br>Work it Out
-					</h1>
+					<h6 class="display-1">
+					<br>WORK it OUT
+					</h6>
 				</div>
 			</div>
 			<div class="row">
@@ -201,7 +201,7 @@ input {
 
 						<div class="input-group input-group-lg">
 							<div class="input-group-prepend">
-								<span class="input-group-text">¼ÊºÙ </span>
+								<span class="input-group-text">¦WºÙ </span>
 							</div>
 							<input value="${param.regName }" type="text" name="regName" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
