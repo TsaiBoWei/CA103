@@ -25,8 +25,10 @@
   <!-- navbar setting -->
 <style type="text/css">
 
-a,.fontstyle  {
+a,.fontstyle{
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
 }
 
 .navbar-dark .navbar-nav .nav-link{
@@ -35,6 +37,12 @@ font-weight:bold!important;
 
 }
 
+input {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	color:rgba(0, 0, 0, 0.8)!important;
+	font-weight:bold!important;
+	font-size:150% !important;
+}
 </style>
 </head>
 
@@ -117,14 +125,14 @@ font-weight:bold!important;
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="">
-                    <label for="verifyCode">驗證碼</label>
+                    <label for="verifyCode" style="font-size: 23px; margin-bottom: -4px;">驗證碼</label>
                   </span>
                 </div>
                 <input name="verifyCode" id="verifyCode" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
               </div>
               <br>
               <input type="hidden" name="action" value="verifyCode">
-              <button type="submit" class="btn btn-primary mb-2">確定</button>
+              <button style="font-size:150%" type="submit" class="btn btn-primary mb-2">確  定</button>
             </div>
           </form>
         </div>
@@ -133,7 +141,7 @@ font-weight:bold!important;
             <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-			<a href="<%=request.getContextPath() %>/mem/mem.do?action=resend&regAccount=${memVO.mem_account }&regName=${memVO.mem_name }">重寄驗證碼</a>
+			<a style="font-size: 25px" class="fontstyle" href="<%=request.getContextPath() %>/mem/mem.do?action=resend&regAccount=${memVO.mem_account }&regName=${memVO.mem_name }"><font class="fontstyle">重 寄 驗 證 碼</font></a>
         </div>
         <div class="col-md-4"></div>
       </div>

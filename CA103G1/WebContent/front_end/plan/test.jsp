@@ -7,7 +7,7 @@
 
 <%
 
-	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
+	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	pageContext.setAttribute("planVO", planVO);
 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
@@ -71,6 +71,18 @@
 		font-size: 18px;
 	}
 
+
+	#img123{
+		
+		background-image: 150px;
+		
+	}
+	
+	.img-fluid{
+	
+		width: 450px;
+		border-radius: 100%;
+	}
 
 </style>
 
@@ -238,179 +250,42 @@
 </script>
 
 
-<!-- NavBar Personal-->
-	<div class="container containerHrT ">
-		<hr>
-	</div>
-	
-	<nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar">
-		<div class="container">
-			<div class="collapse navbar-collapse text-right justify-content-center marignBun"
-				id="navbar3SupportedContent">
-				<ul class="navbar-nav">
-
-					<!-- HomePage-->
-					<li class="nav-item">
-						<a class="nav-link personalnavlink" id="mypage" style="cursor: pointer;"
-							rel="<%=request.getContextPath()%>/index.jsp"> 
-							<i class="fa fa-file"></i>&nbsp;&nbsp; HomePage &nbsp; &nbsp;&nbsp;
-						</a>
-					</li>
-
-					<!-- Workoutplan-->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle personalnavlink"  style="cursor: pointer;"
-						aria-haspopup="true" id="workoutplan" aria-expanded="false" data-toggle="dropdown"		
-						rel="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">
-							<i class="fa fa-calculator"></i> &nbsp; WorkOutPlan &nbsp;
-						</a>
-					</li>
+ 	<P>3789</P>
 
 
-					<!--Course  -->
-					<li class="nav-item">
-						<a class="nav-link personalnavlink" id="course" style="cursor: pointer;"
-							rel="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp"> 
-							<i class="fa fa-film" aria-hidden="true"></i>&nbsp; &nbsp;Course&nbsp; &nbsp;
-						</a>
-					</li>
-				
-					<li class="nav-item dropdown">
-						<a class="nav-link personalnavlink" id="event" style="cursor: pointer;"
-							rel="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp"> 
-							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event&nbsp;&nbsp;
-						</a>
-					</li>
-					
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<div class="container containerHrB ">
-		<hr>
-	</div>
-
-	<a class="btn btn-lg btn-primary" href="#posteditlight" data-rel="lightcase:myCollection:slideshow" 
-		id="bli_kontaktad_landing">
-		<i class="fab fa-rocketchat"></i>
-	</a>
-
-<!-- start -->
-
-<!-- 	<div> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-12  mx-auto"> -->
-<!-- 					<form method="post" class="select"  -->
-<%-- 						action="<%=request.getContextPath()%>/plan/plan.do" name="form1"> --%>
-<!-- 						<br> -->
-
-<!-- 						<div class="form-row">   -->
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control bg-dark-posteditinput"  style="font-size: 18px" -->
-<!-- 									id="inputPassword4" name="sptype_id"> -->
-<!-- 									<option>運動種類 -->
-<%-- 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}"> --%>
-<%-- 											<option value="${sptypeVO.sptype_id}">${sptypeVO.sport} --%>
-<%-- 										</c:forEach> --%>
-<!-- 								</select> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control" name="plan_privacy" id="inputPassword4"  -->
-<!-- 									style="font-size: 18px"> -->
-<!-- 									<option>隱私權 -->
-<!-- 									<option value="PLANPR0">公開 -->
-<!-- 									<option value="PLANPR1">不公開 -->
-<!-- 									<option value="PLANPR2">只對朋友公開 -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control" name="plan_status" id="inputPassword4"  -->
-<!-- 									style="font-size: 18px"> -->
-<!-- 									<option>執行狀態 -->
-<!-- 									<option value="PLANST0">進行中 -->
-<!-- 									<option value="PLANST1">已完成 -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="form-group col-md-6 "> -->
-<!-- 								<div class="input-group"> -->
-<!-- 									<div class="input-group-prepend"> -->
-<!-- 										<span class="input-group-text" -->
-<!-- 											style="background-color: #FFFFFF; color: #0621f1; font-size: 18px">Search</span> -->
-<!-- 									</div> -->
-									
-<!-- 									<input type="text" name="plan_name" id="" class="form-control"  -->
-<!-- 										placeholder="Plan Name" style="font-size: 17px"> -->
-									
-<!-- 									<div class="input-group-append"> -->
-<!-- 										<button class="btn btn-info"> -->
-<!-- 											<i class="fa fa-search"></i> -->
-<!-- 										</button> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<br>  -->
-<!-- 						<input type="hidden" name="action" value="listAllPlans_ForVisitor_ByCompositeQuery"> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- end -->
-		<%@ include file="file/page1_ForVisitor.file"%>
-
-		<div class="py-5 text-light opaque-overlay section-fade-in-out"
-			style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpg&quot;);">
+<!-- 		<div class="py-5"> -->
+	<div class="py-5 text-light opaque-overlay section-fade-in-out" id="img123"
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/rsz_test2.jpg&quot;);">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
-									<a href="<%= request.getContextPath()%>/plan/plan.do?action=getOne_For_Display&plan_id=${planVO.plan_id}">	
-										<img class="card-img-top" style="height:250px; overflow:hidden;"
-											src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
-									</a>
-<!-- 									<input type="hidden" name="action" value="getOne_For_Display"> -->
-<%-- 									<input type="hidden" name="plan_id" value="${planVO.plan_id}"> --%>
-								</form> 
-								
-								<div class="card-body">
-									<h5 class="plan_name">${planVO.plan_name}</h5>
-									<p class="sptype_id">運動種類: 
-										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
-											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
-										</c:forEach>
+					<div class="p-0 col-lg-5 order-2 order-lg-1">
+						<img class="img-fluid d-block"
+							src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+					</div>
+					<div
+						class="d-flex flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
+						<a class="btn btn-outline-secondary mb-3"
+							href="https://tw.yahoo.com/">Read more</a> <a
+							class="btn btn-primary mb-3"
+							href="https://shopping.pchome.com.tw/">Main action</a> <a
+							class="btn btn-link" href="https://shopee.tw/">Link</a>
+						<p class="lead mb-0">
+							123456789來到減脂期的運動課表安排的時間啦，接下來我們就要來看一下中體脂的朋友，也就是體脂約在20%～30%的朋友如何安排運動課表。
+							我一直強調無氧運動跟鍛練肌肉的重要性，「為什麼無氧運動跟肌力訓練會那麼重要呢？」
+							簡單來說因為有氧運動對於增肌是沒什麼效果的，即使是有氧運動類別是世界級或專業級的選手，例如長跑，馬拉松，腳踏車等，也都不會只做長時間有氧的訓練，除了心肺跟肌耐力的訓練外，也會安排很多的肌力阻力以及爆發力的訓練以增進運動表現。
 
-									</p> 
-									
-									<p class="plan_start_date">運動開始:　
-										<fmt:formatDate value="${planVO.plan_start_date}" pattern="yyyy-MM-dd HH:mm " />
-									</p>
-									
-									<p class="plan_end_date">運動結束:　
-										<fmt:formatDate value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
-									</p>
-									<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
-										<button type='submit' class="btn btn-info" style="font-size: 16px">Read More</button>
-										<input type="hidden" name="action" value="getOne_For_Display">
-										<input type="hidden" name="plan_id" value="${planVO.plan_id }">
-										<input type="hidden" name="mem_id" value="${planVO.mem_id }">
-									</form>
-								</div>
-							</div><br>
-						</div>
-					</c:forEach>
-				</div><br>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<%@ include file="file/page2_ForVisitor.file"%>
-<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
+<!-- 	</div> -->
+
+
+
+
+
+	<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->
 

@@ -12,7 +12,7 @@
 
 <%
 	CourseReportService courseReportSvc = new CourseReportService();
-	List<CourseReportVO> list = courseReportSvc.getAllCourses();
+	List<CourseReportVO> list = courseReportSvc.getSolvedCours();
 	
 	pageContext.setAttribute("list",list);
 	
@@ -102,14 +102,14 @@
           <thead class="thead-inverse">
           
  			<tr>
-			  <th style="width:8.3%;">課程檢舉編號</th>
-              <th style="width:7.4%">課程編號</th>
+			  <th style="width:9.3%;">課程檢舉編號</th>
+              <th style="width:9.4%">課程編號</th>
               <th style="width:10.8%">檢舉人之會員編號</th>
               <th style="width:12.2%">檢舉項目</th>
               <th style="width:14.2%">檢舉內容</th>
               <th style="width:7.3%">檢舉時間</th>
               <th style="width:8.8%">檢舉處理狀態</th>
-              <th style="width:15%">回覆管理員ID</th>
+              <th style="width:10%">回覆管理員ID</th>
             </tr>
           </thead>
  		  <%@ include file="page1.file" %> 
@@ -123,10 +123,10 @@
               <td>${courseReportVO.mem_id}</td>          
               <td>
    				<c:choose>
-   					<c:when test="${courseReportVO.courrep_status==CRN1}">   					
+   					<c:when test="${courseReportVO.courrep_item=='CRN1'}">   					
    						課程內容不當    					
    					</c:when>
-   					<c:when test="${courseReportVO.courrep_status==CRN2}">   					
+   					<c:when test="${courseReportVO.courrep_item=='CRN2'}">   					
    						課程收費不當    					
    					</c:when>   				
    					<c:otherwise>   					
@@ -140,10 +140,10 @@
 			   </td>
               <td>
               <c:choose>
-   					<c:when test="${courseReportVO.courrep_status =='CR1'}">   					
+   					<c:when test="${courseReportVO.courrep_status == 'CR1'}">   					
    						未處理				
    					</c:when>
-   					<c:when test="${courseReportVO.courrep_status =='CR2'}">   					
+   					<c:when test="${courseReportVO.courrep_status == 'CR2'}">   					
    						檢舉通過    					
    					</c:when>   				
    					<c:otherwise>   					

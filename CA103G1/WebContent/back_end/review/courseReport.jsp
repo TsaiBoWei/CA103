@@ -10,7 +10,7 @@
 
 <%
 	CourseReportService courseReportSvc = new CourseReportService();
-	List<CourseReportVO> courseReport = courseReportSvc.getAllCourses();
+	List<CourseReportVO> courseReport = courseReportSvc.getByCourStatus("CR1");
 	pageContext.setAttribute("courseReport",courseReport);
 %>
 
@@ -132,10 +132,10 @@
               <td>${courseReportVO.mem_id}</td>          
               <td>
    				<c:choose>
-   					<c:when test="${courseReportVO.courrep_status==CRN1}">   					
+   					<c:when test="${courseReportVO.courrep_item=='CRN1'}">   					
    						課程內容不當    					
    					</c:when>
-   					<c:when test="${courseReportVO.courrep_status==CRN2}">   					
+   					<c:when test="${courseReportVO.courrep_item=='CRN2'}">   					
    						課程收費不當    					
    					</c:when>   				
    					<c:otherwise>   					

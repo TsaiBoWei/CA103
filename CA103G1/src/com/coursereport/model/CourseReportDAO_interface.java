@@ -12,5 +12,8 @@ public interface CourseReportDAO_interface {
 	public List<CourseReportVO> findByCourIdplusStatus(String cour_id, String courrep_status);
 
 	public List<CourseReportVO> getAll();
+	
+	public List<CourseReportVO> findByCourStatus(String courrep_status);
 
+	public List<CourseReportVO> findSolvedCours();
 }

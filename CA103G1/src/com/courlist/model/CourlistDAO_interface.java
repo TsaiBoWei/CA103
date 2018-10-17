@@ -16,4 +16,7 @@ public interface CourlistDAO_interface {
     public List<CourlistVO> getNewCour();
     //首頁用
     public List<CourlistVO> getPopularCour();
+    
+    //課程檢舉後下架
+    public void updateState(String cour_lau,String cour_id);
 }

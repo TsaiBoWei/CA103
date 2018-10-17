@@ -120,9 +120,9 @@ input {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="display-1">
-					<br>Work it Out
-					</h1>
+					<h6 class="display-1">
+					<br>WORK it OUT
+					</h6>
 				</div>
 			</div>
 			<div class="row">
@@ -207,7 +207,7 @@ input {
 							</c:if>
 						</div>
 					</div>
-					<form METHOD="post"
+					<form id="regForm" METHOD="post"
 						action="<%=request.getContextPath()%>/mem/mem.do">
 						<div class="input-group input-group-lg">
 							<div class="input-group-prepend">
@@ -220,7 +220,7 @@ input {
 
 						<div class="input-group input-group-lg">
 							<div class="input-group-prepend">
-								<span class="input-group-text">¼ÊºÙ </span>
+								<span class="input-group-text">¦WºÙ </span>
 							</div>
 							<input value="${param.regName }" type="text" name="regName" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
@@ -344,13 +344,19 @@ input {
        $(".cancel").click(function() {
             $(location).attr('href', '<%= request.getContextPath()%>/Mem_Login_Signup.jsp');
 							});
-		});
-		var width = document.body.offsetWidth;
-		$(function() {
-			$(window).resize(function() {
-				$("#errorUL").css("padding-left", "2000 px")
-			})
-		});
+	});
+   var width = document.body.offsetWidth;
+   $(function() {
+		$(window).resize(function() {
+			$("#errorUL").css("padding-left", "2000 px")
+				})
+	});
+   
+   $(function(){
+	   $("#regForm").submit(function(){
+		   $("#regSend").attr('disabled', true);
+	   });
+   });
 	</script>
 
 </body>

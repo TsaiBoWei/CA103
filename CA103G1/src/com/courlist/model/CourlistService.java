@@ -73,5 +73,10 @@ public class CourlistService {
 	public List<CourlistVO> getNewCour() {
 		return dao.getNewCour();
 	}
+	
+	//課程檢舉後下架
+	public void updateStates(String cour_lau,String cour_id) {
+		dao.updateState(cour_lau, cour_id);
+	}
 
 }

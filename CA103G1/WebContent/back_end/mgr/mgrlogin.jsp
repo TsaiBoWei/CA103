@@ -22,7 +22,11 @@
   <script src="<%=request.getContextPath() %>/js/animate-in.js"></script>
   <!-- lightcase settings -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <style type="text/css">
   
+  .form-control{font-size:1rem;font-weight:bold;}
+  
+  </style>
 <title>管理員登入</title>
 </head>
 <body class="text-center">
@@ -81,7 +85,7 @@
                              
              
               <div>
-                <a href="<%=request.getContextPath() %>/back_end/mgr/mgrLostPS.jsp">Lost your password?</a>
+                <a href="<%=request.getContextPath() %>/back_end/mgr/mgrLostPS.jsp" style="color:#ffc107">Lost your password?</a>
               </div>
             </div>
           </div>
