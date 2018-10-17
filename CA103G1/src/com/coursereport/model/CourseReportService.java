@@ -34,8 +34,16 @@ public class CourseReportService {
 		
 	}
 	
+	public List<CourseReportVO> getByCourStatus(String courrep_status){
+		return dao.findByCourStatus(courrep_status);
+	}
+	
 	public List<CourseReportVO> getAllCourses(){
 		return dao.getAll();
+	}
+	
+	public List<CourseReportVO> getSolvedCours(){
+		return dao.findSolvedCours();
 	}
 
 }

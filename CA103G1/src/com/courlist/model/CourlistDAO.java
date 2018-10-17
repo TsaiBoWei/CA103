@@ -49,6 +49,11 @@ public class CourlistDAO implements CourlistDAO_interface {
 	
 	//ashley
 	private static final String FIND_BY_COACH_ID = "SELECT * FROM COURLIST WHERE COA_ID=?";
+	
+	//課程檢舉後下架
+	private static final String UPDATE_STATE_STMT = 
+			 			  "UPDATE COUR_LAU = ? WHERE COUR_ID = ?";
+	
 
 	@Override
 	public void insert(CourlistVO courlistVO) {
@@ -518,7 +523,43 @@ public class CourlistDAO implements CourlistDAO_interface {
 				}
 				return list;
 		    	
-		    };
+		    }
+
+			@Override
+			public void updateState(String cour_lau, String cour_id) {
+				Connection con = null;
+				PreparedStatement pstmt = null;
+
+				try {
+
+					con = ds.getConnection();
+					pstmt = con.prepareStatement(UPDATE_STATE_STMT);
+					
+					pstmt.setString(1, cour_lau);
+					pstmt.setString(2, cour_id);
+					pstmt.executeUpdate();
+
+
+					// Handle any SQL errors
+				} catch (SQLException se) {
+					throw new RuntimeException("A database error occured. " + se.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+			}
 		
 	// Handle with byte array data
 //		public static void readPicture(byte[] bytes){

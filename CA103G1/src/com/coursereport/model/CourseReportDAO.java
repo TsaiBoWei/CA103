@@ -33,13 +33,21 @@ public class CourseReportDAO implements CourseReportDAO_interface{
 			"UPDATE COURSEREPORT SET COURREP_STATUS = ? WHERE COURREPO_ID= ?";
 	
 	private static final String GET_REPORT_BY_COURID_STATUS = 
-			"SELECT * FROM COURSEREPORT WHERE COUR_ID= ? AND COURREP_STATUS=? ORDER BY COURRE_TIME DESC";
+			"SELECT * FROM COURSEREPORT WHERE COUR_ID= ? AND COURREP_STATUS=? ORDER BY courrepo_id ASC";
 	
 	private static final String FIND_BY_PK = 
 			"SELECT * FROM COURSEREPORT WHERE COURREPO_ID= ? ";
 	
 	private static final String GET_ALL = 
 			"SELECT * FROM COURSEREPORT";
+	
+	private static final String GET_REPORT_BY_STATUS = 
+			"SELECT * FROM COURSEREPORT WHERE COURREP_STATUS=? ORDER BY courrepo_id ASC";
+	
+	private static final String GET_REPORT_BY_SOLVED_STATUS = 
+			"SELECT * FROM COURSEREPORT WHERE COURREP_STATUS='CR3' OR COURREP_STATUS='CR2' ORDER BY courrepo_id ASC";
+	
+	
 
 	@Override
 	public void add(CourseReportVO courseReportVO) {
@@ -138,6 +146,7 @@ public class CourseReportDAO implements CourseReportDAO_interface{
 				courseReportVO = new CourseReportVO();
 				courseReportVO.setCourrepo_id(courrepo_id);
 				courseReportVO.setCourre_time(rs.getTimestamp("COURRE_TIME"));
+				courseReportVO.setCourrep_item(rs.getString("COURREP_ITEM"));
 				courseReportVO.setCour_id(rs.getString("COUR_ID"));
 				courseReportVO.setMem_id(rs.getString("MEM_ID"));
 				courseReportVO.setCourrep_text(rs.getString("COURREP_TEXT"));
@@ -189,6 +198,7 @@ public class CourseReportDAO implements CourseReportDAO_interface{
 				courseReportVO = new CourseReportVO();
 				courseReportVO.setCourrepo_id(rs.getString("COURREPO_ID"));
 				courseReportVO.setCourre_time(rs.getTimestamp("COURRE_TIME"));
+				courseReportVO.setCourrep_item(rs.getString("COURREP_ITEM"));
 				courseReportVO.setCour_id(cour_id);
 				courseReportVO.setMem_id(rs.getString("MEM_ID"));
 				courseReportVO.setCourrep_text(rs.getString("COURREP_TEXT"));
@@ -238,6 +248,120 @@ public class CourseReportDAO implements CourseReportDAO_interface{
 				courseReportVO = new CourseReportVO();
 				courseReportVO.setCourrepo_id(rs.getString("COURREPO_ID"));
 				courseReportVO.setCourre_time(rs.getTimestamp("COURRE_TIME"));
+				courseReportVO.setCourrep_item(rs.getString("COURREP_ITEM"));
+				courseReportVO.setCour_id(rs.getString("COUR_ID"));
+				courseReportVO.setMem_id(rs.getString("MEM_ID"));
+				courseReportVO.setCourrep_text(rs.getString("COURREP_TEXT"));
+				courseReportVO.setCourrep_status(rs.getString("COURREP_STATUS"));
+				courseReportVO.setReply_mgr_id(rs.getString("REPLY_MGR_ID"));
+				courseReport_List.add(courseReportVO);
+
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+
+		} finally {
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		return courseReport_List;
+	}
+
+	@Override
+	public List<CourseReportVO> findByCourStatus(String courrep_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		CourseReportVO courseReportVO = null;
+		List<CourseReportVO> courseReport_List = new ArrayList<>();
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_REPORT_BY_STATUS);
+			pstmt.setString(1, courrep_status);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				courseReportVO = new CourseReportVO();
+				courseReportVO.setCourrepo_id(rs.getString("COURREPO_ID"));
+				courseReportVO.setCourre_time(rs.getTimestamp("COURRE_TIME"));
+				courseReportVO.setCourrep_item(rs.getString("COURREP_ITEM"));
+				courseReportVO.setCour_id(rs.getString("COUR_ID"));
+				courseReportVO.setMem_id(rs.getString("MEM_ID"));
+				courseReportVO.setCourrep_text(rs.getString("COURREP_TEXT"));
+				courseReportVO.setCourrep_status(courrep_status);
+				courseReportVO.setReply_mgr_id(rs.getString("REPLY_MGR_ID"));
+				courseReport_List.add(courseReportVO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return courseReport_List;
+
+	}
+
+	@Override
+	public List<CourseReportVO> findSolvedCours() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CourseReportVO courseReportVO = null;
+		List<CourseReportVO> courseReport_List = new ArrayList<>();
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_REPORT_BY_SOLVED_STATUS);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				courseReportVO = new CourseReportVO();
+				courseReportVO.setCourrepo_id(rs.getString("COURREPO_ID"));
+				courseReportVO.setCourre_time(rs.getTimestamp("COURRE_TIME"));
+				courseReportVO.setCourrep_item(rs.getString("COURREP_ITEM"));
 				courseReportVO.setCour_id(rs.getString("COUR_ID"));
 				courseReportVO.setMem_id(rs.getString("MEM_ID"));
 				courseReportVO.setCourrep_text(rs.getString("COURREP_TEXT"));
