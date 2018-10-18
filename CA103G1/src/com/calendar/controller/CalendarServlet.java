@@ -45,7 +45,7 @@ public class CalendarServlet extends HttpServlet{
 				String eve_id = req.getParameter("eve_idTochange"); //從行事曆接過來的eve_id
 				String eve_chargeStr = req.getParameter("eve_chargeToback"); //從行事曆接過來的eve_charge 用來分辨狀態，大於0就是EL3其他是EL0
 //				String mem_id = memVO.getMem_id();
-				String mem_id = "M000001"; //先用假資料
+				String mem_id = "M000003"; //先用假資料
 				String evelist_status=null;
 				
 				
