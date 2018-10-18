@@ -158,7 +158,7 @@
 	        }else{
 	        	//若含有@字元 語音發話
 	        	if ( jsonObj.message.includes('@') ) {
-	 	        	jsonObj.message = jsonObj.message.replace( 'abc', '' );
+	 	        	jsonObj.message = jsonObj.message.replace( '@', '' );
 	 	        	console.log( jsonObj.message);
 	 	        	Speech(jsonObj.message);
 	 	        }	        	
