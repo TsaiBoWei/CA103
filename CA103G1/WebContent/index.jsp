@@ -208,13 +208,13 @@ font-weight:bold!important;
    <!-- The slideshow -->
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="img/index/ad_marathon.png" class="slideimg">
+          <img src="img/index/ad_01.jpg" class="slideimg">
         </div>
         <div class="carousel-item">
-          <img src="img/index/ad_surf.png" class="slideimg">
+          <img src="img/index/ad_02.jpg" class="slideimg">
         </div>
         <div class="carousel-item">
-          <img src="img/index/ad_yoga_course.png" class="slideimg"> 
+          <img src="img/index/ad_03.jpg" class="slideimg"> 
         </div>
       </div>
   <!-- Left and right controls -->
