@@ -116,12 +116,12 @@ public class CourseReportServlet extends HttpServlet {
 				String courrepoID = req.getParameter("courrepoID");
 				String replyMgrID = req.getParameter("replyMgrID");
 				CourseReportService courseReportSvc = new CourseReportService();
-				
+				System.out.println(courrepStatus);
 				if("CR2".equals(courrepStatus)) {
-					System.out.println("update here");
 					courseReportSvc.updateCourseRepStatus(courrepStatus, courrepoID, replyMgrID);
 					CourlistService courlistService = new CourlistService();
 					courlistService.updateStates("CL01", courrepoID);
+					System.out.println("update here");
 				}else if("CR3".equals(courrepStatus)) {
 					courseReportSvc.updateCourseRepStatus(courrepStatus, courrepoID, replyMgrID);
 				}

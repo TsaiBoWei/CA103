@@ -291,6 +291,7 @@
 <script>
 $('#courseRepModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  
 	  var reportid = button.data('reportid') 
 	  var replymgrid = button.data('replymgrid') // Extract info from data-* attributes
 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -298,7 +299,7 @@ $('#courseRepModal').on('show.bs.modal', function (event) {
 	  var modal = $(this)
 	  modal.find('.modal-title').text('¿À¡|≥Ê∏π°@:°@' + reportid)
 	  modal.find('.modal-body input').val(replymgrid)
-	  $('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus=CR3&replyMgrID='+replymgrid);
+	  $('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus=CR2&replyMgrID='+replymgrid);
 	})
 	
 // 	$('#courseRepModal').on('show.bs.modal', function (event) {
