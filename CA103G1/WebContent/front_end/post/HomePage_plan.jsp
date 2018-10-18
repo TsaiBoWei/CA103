@@ -62,7 +62,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 	<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-	<title>666WORK it OUT</title>
+	<title>WORK it OUT</title>
 <!-- CSS dependencies -->
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
@@ -293,7 +293,6 @@
       </div>
     </div>	
   </nav>
->>>>>>> a63f09d304863c312b6c0bb779e3291750938a7e
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
@@ -523,8 +522,18 @@
 		href="#posteditlight" data-rel="lightcase:myCollection:slideshow">
 		<i class="fab fa-rocketchat"></i>
 	</a>
-
-
+	<div>
+<!-- 		<div class="container containerHrB  "> -->
+<!-- 			<hr> -->
+<!-- 		</div> -->
+		<p><font size="6" color="#00FFFF">The Plan</font> </p>
+		<div class="container containerHrB  ">
+			<hr>
+		</div>
+	</div>
+	<div>
+		<p><font size="7" color="white">${planVO.plan_name}</font> </p>
+	</div>
 		<!-- start -->
 		<div>
 			<div class="container">
