@@ -204,17 +204,9 @@
 	</div>
 </nav>
 <!-- Cover -->
-	 <!-- Cover -->
-  <div class="d-flex align-items-center cover section-fade-in-out" style="background-image: url(<%=request.getContextPath() %>/front_end/course/courlist/assets/conference/0N1A3599-EDIT-1.jpg);" draggable="true" >
-    <div class="container">
-      <div class="row">
-        <div class="mt-5 text-right col-12">
-          <h1 class="display-6">WorkOutPlan</h1>
-          <p class="lead"> TURN Your Goals INTO ACTION </p>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="d-flex align-items-center cover section-fade-in-out"
+		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
+	</div>
 
 <!-- NavBar Personal focus 判斷式-->
 
@@ -247,57 +239,57 @@
 
 
 <!-- NavBar Personal-->
-<!-- 	<div class="container containerHrT "> -->
-<!-- 		<hr> -->
-<!-- 	</div> -->
+	<div class="container containerHrT ">
+		<hr>
+	</div>
 	
-<!-- 	<nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar"> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="collapse navbar-collapse text-right justify-content-center marignBun" -->
-<!-- 				id="navbar3SupportedContent"> -->
-<!-- 				<ul class="navbar-nav"> -->
+	<nav class="navbar navbar-expand-md bg-dark-cutom navbar-dark p-0" id="profile-navbar">
+		<div class="container">
+			<div class="collapse navbar-collapse text-right justify-content-center marignBun"
+				id="navbar3SupportedContent">
+				<ul class="navbar-nav">
 
-<!-- 					HomePage -->
-<!-- 					<li class="nav-item"> -->
-<!-- 						<a class="nav-link personalnavlink" id="mypage" style="cursor: pointer;" -->
-<%-- 							rel="<%=request.getContextPath()%>/index.jsp">  --%>
-<!-- 							<i class="fa fa-file"></i>&nbsp;&nbsp; HomePage &nbsp; &nbsp;&nbsp; -->
-<!-- 						</a> -->
-<!-- 					</li> -->
+					<!-- HomePage-->
+					<li class="nav-item">
+						<a class="nav-link personalnavlink" id="mypage" style="cursor: pointer;"
+							rel="<%=request.getContextPath()%>/index.jsp"> 
+							<i class="fa fa-file"></i>&nbsp;&nbsp; HomePage &nbsp; &nbsp;&nbsp;
+						</a>
+					</li>
 
-<!-- 					Workoutplan -->
-<!-- 					<li class="nav-item dropdown"> -->
-<!-- 						<a class="nav-link dropdown-toggle personalnavlink"  style="cursor: pointer;" -->
-<!-- 						aria-haspopup="true" id="workoutplan" aria-expanded="false" data-toggle="dropdown"		 -->
-<%-- 						rel="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp"> --%>
-<!-- 							<i class="fa fa-calculator"></i> &nbsp; WorkOutPlan &nbsp; -->
-<!-- 						</a> -->
-<!-- 					</li> -->
+					<!-- Workoutplan-->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle personalnavlink"  style="cursor: pointer;"
+						aria-haspopup="true" id="workoutplan" aria-expanded="false" data-toggle="dropdown"		
+						rel="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">
+							<i class="fa fa-calculator"></i> &nbsp; WorkOutPlan &nbsp;
+						</a>
+					</li>
 
 
-<!-- 					Course  -->
-<!-- 					<li class="nav-item"> -->
-<!-- 						<a class="nav-link personalnavlink" id="course" style="cursor: pointer;" -->
-<%-- 							rel="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">  --%>
-<!-- 							<i class="fa fa-film" aria-hidden="true"></i>&nbsp; &nbsp;Course&nbsp; &nbsp; -->
-<!-- 						</a> -->
-<!-- 					</li> -->
+					<!--Course  -->
+					<li class="nav-item">
+						<a class="nav-link personalnavlink" id="course" style="cursor: pointer;"
+							rel="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp"> 
+							<i class="fa fa-film" aria-hidden="true"></i>&nbsp; &nbsp;Course&nbsp; &nbsp;
+						</a>
+					</li>
 				
-<!-- 					<li class="nav-item dropdown"> -->
-<!-- 						<a class="nav-link personalnavlink" id="event" style="cursor: pointer;" -->
-<%-- 							rel="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp">  --%>
-<!-- 							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event&nbsp;&nbsp; -->
-<!-- 						</a> -->
-<!-- 					</li> -->
+					<li class="nav-item dropdown">
+						<a class="nav-link personalnavlink" id="event" style="cursor: pointer;"
+							rel="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp"> 
+							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;Event&nbsp;&nbsp;
+						</a>
+					</li>
 					
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</nav> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-<!-- 	<div class="container containerHrB "> -->
-<!-- 		<hr> -->
-<!-- 	</div> -->
+	<div class="container containerHrB ">
+		<hr>
+	</div>
 
 	<a class="btn btn-lg btn-primary" href="#posteditlight" data-rel="lightcase:myCollection:slideshow" 
 		id="bli_kontaktad_landing">
