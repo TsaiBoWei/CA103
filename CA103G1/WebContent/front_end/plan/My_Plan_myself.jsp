@@ -33,7 +33,7 @@
 
 <!-- PAGE settings -->
 <link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-<title>7WORK it OUT</title>
+<title>WORK it OUT</title>
 
 <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
