@@ -215,7 +215,7 @@
           </div>
       	<div class="modal-footer">
       	<input type="hidden" name="action1" value="updateState">
-<!--         <button type="button" class="btn btn-primary"><a href="" id="submitBtn">送 出</a></button> -->
+        
         <button type="button" class="btn btn-primary"><a href="" id="submitBtn">送 出</a></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">取 消</button>
       	</div>
@@ -322,7 +322,6 @@ $('#courseRepModal').on('show.bs.modal', function (event) {
 		$('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus='+courrepStatus+'&replyMgrID='+replymgrid);
 		 console.log("302-state: "+courrepStatus)
 	})
-	
 	
 	
 	
