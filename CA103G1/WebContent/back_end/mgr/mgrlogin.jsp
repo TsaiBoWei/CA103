@@ -103,7 +103,7 @@
     <script type="text/javascript">
 	
 	$("#magicmgr").click(function(){
-  		$("#mgrac").val("dodoteacher");
+  		$("#mgrac").val("dodote");
   	});
 	
     
