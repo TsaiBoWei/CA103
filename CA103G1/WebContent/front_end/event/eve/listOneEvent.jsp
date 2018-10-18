@@ -280,7 +280,7 @@ a,.fontstyle  {
           </div>
           <div>
             <a href="">
-              <img src="<%=request.getContextPath() %>/front_end/event/eve/assets/styleguide/people_6.jpg" style="height:100%;">
+              <img src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=${eveVO.mem_id}" style="height:100%;">
               <h5 class="p-1 pt-2">${memSvc.getOneMem(eveVO.mem_id).mem_name}</h5>
             </a>
           </div>
