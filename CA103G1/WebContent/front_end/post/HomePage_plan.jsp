@@ -196,15 +196,11 @@
       </div>
     </div>	
   </nav>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> b8f3a8b49708d454dbcef77f66490b65deb5001f
-=======
->>>>>>> b8f3a8b49708d454dbcef77f66490b65deb5001f
+
+
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
