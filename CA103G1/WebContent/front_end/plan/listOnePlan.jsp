@@ -38,7 +38,7 @@
 <!-- PAGE settings -->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-<title>777WORK it OUT</title>
+<title>WORK it OUT</title>
 
 
 <!-- CSS dependencies -->
@@ -376,6 +376,18 @@ body {
 									value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
 							</font>
 						</p>
+						
+						<p>
+							<font size="5">
+							計畫狀態：
+								<c:if test="${planVO.plan_status=='PLANST0'}">進行中</c:if>
+								<c:if test="${planVO.plan_status=='PLANST1'}"><font size="5" color="red">已完成</font></c:if>
+							</font>
+							
+						
+						</p>
+						
+						
 						<p>
 						<FORM METHOD="post" class="together"
 								ACTION="<%=request.getContextPath()%>/plan/plan.do"
