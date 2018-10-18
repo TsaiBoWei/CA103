@@ -104,7 +104,7 @@ input {
   <!-- section -->
 
   <div class="py-5 section" >
-    <div class="container" style="padding-top: 240px;">
+    <div class="container" style="padding-top: 120px;">
 					<div class="row">
 						<div class="from-group mx-auto">
 							<c:if test="${not empty errorMsgs}">
@@ -117,6 +117,14 @@ input {
 							</c:if>
 						</div>
 					</div>
+					
+	  <div class="row">
+	  <div class="col-md-4"></div>
+	  <div class="col-md-4"><p class="text-left" style="color:rgba(255, 255, 255, 0.8);font-weight:bold;font-size: 23px ">親愛的會員 您好：<br>
+	  請至您所註冊的信箱帳號，收取會員認證信。</p></div>
+	  <div class="col-md-4"></div>
+	  </div>
+		<br>
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">

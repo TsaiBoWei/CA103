@@ -119,6 +119,12 @@
 			style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/plan/img/CreatPlan_picture.jpg&quot;);">
 			<div class="container">
 				<div class="row">
+		
+					<c:if test="${list.size()==0}">
+						<div class="col-12  h1 pb-5 mb-5">
+							<h1><a href="<%= request.getContextPath()%>/front_end/plan/Create_Plan.jsp">開始建立你的新計畫</a></h1>
+						</div>				
+					</c:if>
 					<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<div class="col-12 col-md-4">
 							<div class="card">
@@ -167,7 +173,6 @@
 		</div>
 	</div>
 	<%@ include file="file/page2_ForVisitor.file"%>
-	<p>55555555555555555</p>
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 <!-- =========================================以上為原personlhead.jsp的內容========================================== -->

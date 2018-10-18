@@ -627,9 +627,10 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
 					<form METHOD="post" action="<%=request.getContextPath()%>/coursereport/coursereport.do">
 						<div class="input-group input-group-lg">
 							<div class="input-group-prepend">
-								<span class="input-group-text">會員信箱</span>
+								<span class="input-group-text">會員帳號</span>
 							</div>
-							<input value="${param.regEmail }" type="email" name="Email" class="form-control"
+							<input style="color:rgba(0, 0, 0, 0.8)!important;font-weight:bold!important;" 
+							value="${memVO.mem_account }" type="email" name="Email" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
@@ -649,7 +650,7 @@ System.out.println("courdiscountVO.getDiscountcour_id()="+courdiscountVO.getDisc
 						<div class="input-group-lg">
 							<label style="font-size: 150%">狀況敘述 :</label>
 							<textarea class="form-control" name="courrepText"
-								style="height: 300px"></textarea>
+								style="height: 300px; color:rgba(0, 0, 0, 0.8)!important;font-weight:bold!important;"></textarea>
 						</div>
 						<br>
 						<div class="modal-footer">
