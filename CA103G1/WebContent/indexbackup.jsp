@@ -87,48 +87,6 @@ font-weight:bold!important;
 
 }
 
-
-
-/* livetreambtn */
-
-.circle {
-  position: relative;
-  width:50px;
-  height: 50px;
-}
-.circle svg {
-  fill: none;
-  stroke: #42a19a;
-  stroke-linecap: round;
-  stroke-width: 3;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  animation: stroke-draw 6s ease-out infinite alternate;
-}
-.circle img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-/*   width: 70px; */
-  border-radius: 50%;
-  width:30px;
-  height: 30px;
-}
-@keyframes stroke-draw {
-  from {
-    stroke: #186B65;
-    stroke-dasharray: 1;
-  }
-  to {
-    stroke: #42a19a;
-    transform: rotate(180deg);
-    stroke-dasharray: 8;
-  }
-}
-
-/* livetreambtn */
-
 </style>
 
 
@@ -149,22 +107,6 @@ font-weight:bold!important;
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
         <a class=" btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" id="indexBtn" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
-        
-        <!--           ASHLEY -->         
-           <c:if test="${Stream_id!=null }">
-			
-				 <div class="circle"><a href="<%=request.getContextPath()%>/front_end/stream/streamChat.jsp">
-				  <img src="<%=request.getContextPath()%>/courboar/Mem_DBGifReader4.do?mem_id=M000003" alt="" />
-				  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="enable-background:new -580 439 577.9 194;"
-				     xml:space="preserve">  
-				    <circle cx="50" cy="50" r="40" />
-				  </svg>
-				  </a>
-				</div>         
-			</c:if>
-         <!--           ASHLEY -->   
-        
-        
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
           		<c:if test="${memVO.mem_id ==null }">

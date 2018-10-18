@@ -246,9 +246,9 @@ input {
 						<br>
 						<div class="modal-footer">
 							<input type="hidden" name="action" value="mem_signUp">
-							<button type="submit" class="btn btn-primary" id="regSend">送出</button>
+							<button type="submit" class="btn btn-primary" id="regSend">送 出</button>
 							<button type="button" class="btn btn-secondary cancel"
-								data-dismiss="modal">取消</button>
+								data-dismiss="modal">取 消</button>
 
 						</div>
 					</form>

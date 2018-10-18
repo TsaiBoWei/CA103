@@ -19,7 +19,7 @@ public class CourseReportJDBCDAO implements CourseReportDAO_interface {
 	// SQL
 	private static final String INSERT_STMT = "INSERT INTO COURSEREPORT(COURREPO_ID,COURRE_TIME,COURREP_ITEM,COUR_ID,MEM_ID,COURREP_TEXT,COURREP_STATUS,REPLY_MGR_ID)"
 			+ "VALUES('CR'||LPAD(to_char(coursereport_seq.NEXTVAL), 6, '0'),?, ?, ?, ?, ?,'CR1',?)";
-	private static final String UPDATE_COURREP_STATUS_STMT = "UPDATE COURSEREPORT SET COURREP_STATUS = ? WHERE COURREPO_ID= ?";
+	private static final String UPDATE_COURREP_STATUS_STMT = "UPDATE COURSEREPORT SET COURREP_STATUS = ?, REPLY_MGR_ID = ? WHERE COURREPO_ID= ?";
 	private static final String GET_REPORT_BY_COURID_STATUS = "SELECT * FROM COURSEREPORT WHERE COUR_ID= ? AND COURREP_STATUS=? ORDER BY COURRE_TIME DESC";
 	private static final String FIND_BY_PK = "SELECT * FROM COURSEREPORT WHERE COURREPO_ID= ? ";
 	private static final String GET_ALL = "SELECT * FROM COURSEREPORT";
@@ -77,7 +77,7 @@ public class CourseReportJDBCDAO implements CourseReportDAO_interface {
 	}
 
 	@Override
-	public void updateCourrep_Status(String courrep_status, String courrepo_id) {
+	public void updateCourrep_Status(String courrep_status, String courrepo_id, String reply_mgr_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -89,7 +89,8 @@ public class CourseReportJDBCDAO implements CourseReportDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_COURREP_STATUS_STMT);
 
 			pstmt.setString(1, courrep_status);
-			pstmt.setString(2, courrepo_id);
+			pstmt.setString(2, reply_mgr_id);
+			pstmt.setString(3, courrepo_id);
 
 			pstmt.executeUpdate();
 
@@ -146,7 +147,6 @@ public class CourseReportJDBCDAO implements CourseReportDAO_interface {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
