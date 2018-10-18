@@ -6,9 +6,9 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.Mgr.model.*"%>
 <%@ page import="com.coursereport.model.*"%>
-<%--  MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");--%>
 
 <%
+ 	MgrVO mgrVO = (MgrVO) session.getAttribute("islogin");
 	CourseReportService courseReportSvc = new CourseReportService();
 	List<CourseReportVO> courseReport = courseReportSvc.getByCourStatus("CR1");
 	pageContext.setAttribute("courseReport",courseReport);
@@ -64,7 +64,12 @@
     color:#fff !important
     
     }
-    
+    input#recipient-name {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	color:rgba(0, 0, 0, 0.8)!important;
+	font-weight:bold!important;
+	font-size:150% !important;
+}
 /*     .btn{ */
 /*     position: absolute */
 /*     	z-index:2 !important    	 */
@@ -82,7 +87,7 @@
           <div class="row">
             <div class="mt-4 text-right col-12">
               <h1 class="display-6 text-center">Welcome Manager!</h1>
-              <p class="lead text-center">Login successed</p>
+              <p class="lead text-center"><%=mgrVO.getMgr_name()%></p>
             </div>
           </div>
         </div>
@@ -148,8 +153,9 @@
               	<fmt:formatDate value="${courseReportVO.courre_time}" pattern="yyyy/MM/dd HH:mm "/>
 			   </td>
               <td><c:choose>
-   					<c:when test="${courseReportVO.courrep_status =='CR1'}">   					
-   						<a href="<%=request.getContextPath() %>/coursereport/coursereport.do?action=updateState">未處理</a>  					
+   					<c:when test="${courseReportVO.courrep_status =='CR1'}">   	
+ 
+   						<a data-toggle="modal" data-target="#courseRepModal" data-reportid="${courseReportVO.courrepo_id }" data-replymgrid="<%=mgrVO.getMgr_id() %>" href="#">未處理</a> 				
    					</c:when>
    					<c:when test="${courseReportVO.courrep_status =='CR2'}">   					
    						檢舉通過    					
@@ -176,6 +182,82 @@
      
     </div>
      <jsp:include page="courseReportToincluded.jsp" /> 
+     
+     <!-- 點擊未處理的燈箱 -->
+     <div class="modal fade" id="courseRepModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="<%=request.getContextPath() %>/coursereport/coursereport.do">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" name="courrepoID" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="actionList" class="col-form-label">審核檢舉 : </label>
+            <select class="form-control" id="actionList" name="courrepStatus">
+            <option value="CR2">檢舉通過</option>
+            <option value="CR3">檢舉不通過</option>
+            </select>
+          </div>
+      	<div class="modal-footer">
+      	<input type="hidden" name="action1" value="updateState">
+        <button type="button" class="btn btn-primary"><a href="" id="submitBtn">送 出</a></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取 消</button>
+      	</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+     
+<!--      	點擊未處理的燈箱 -->
+<!-- 	<div class="modal fade" id="courseRepModal" tabindex="-1" role="dialog" -->
+<!-- 		aria-labelledby="idModal" aria-hidden="true"> -->
+<!-- 		<div class="modal-dialog modal-dialog-centered" role="document"> -->
+<!-- 			<div class="modal-content"> -->
+<!-- 				<div class="modal-header"> -->
+<!-- 					<h4 class="center modal-title" id="exampleModalLongTitle">會員註冊</h4> -->
+<!-- 					<button type="button" class="close cancel" data-dismiss="modal" -->
+<!-- 						aria-label="Close"> -->
+<!-- 						<span aria-hidden="false">&times;</span> -->
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body"> -->
+
+<!-- 						<div class="input-group input-group-lg"> -->
+<!-- 							<div class="input-group-prepend"> -->
+<!-- 								<a class="btn btn-primary mb-2"  -->
+<%-- 								href="<%=request.getContextPath() %>/coursereport/coursereport.do?action=updateState&courrepoID=${courseReportVO.courrepo_id}&courrepStatus=CR2&replyMgrID=${mgrVO.mgr_id}"> --%>
+<!-- 								檢舉通過</a> -->
+<!-- 							</div>						 -->
+<!-- 						</div> -->
+
+<!-- 						<div class="input-group input-group-lg"> -->
+<!-- 							<div class="input-group-prepend"> -->
+<!-- 								<a class="btn btn-primary mb-2"  -->
+<%-- 								href="<%=request.getContextPath() %>/coursereport/coursereport.do?action=updateState&courrepoID=<%=courrepoID %>&courrepStatus=CR3&replyMgrID=${mgrVO.mgr_id}"> --%>
+<!-- 								檢舉不通過</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+
+<!-- 						<br> -->
+<!-- 						<div class="modal-footer"> -->
+<!-- 							<button type="button" class="btn btn-secondary cancel" -->
+<!-- 								data-dismiss="modal">取消</button> -->
+
+<!-- 						</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+     
     
     <!--include -->
     <!-- Here you go -->
@@ -206,7 +288,26 @@
   <!-- Script: Smooth scrolling between anchors in a same page -->
   <script src="<%=request.getContextPath() %>/js/smooth-scroll.js"></script>
 
-
+<script>
+$('#courseRepModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var reportid = button.data('reportid') 
+	  var replymgrid = button.data('replymgrid') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('檢舉單號　:　' + reportid)
+	  modal.find('.modal-body input').val(replymgrid)
+	  $('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus=CR3&replyMgrID='+replymgrid);
+	})
+	
+// 	$('#courseRepModal').on('show.bs.modal', function (event) {
+// 	  var button = $(event.relatedTarget) // Button that triggered the modal
+// 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+// 	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+// 	  var modal = $(this)
+// 	})
+</script>
 
 
 </body>

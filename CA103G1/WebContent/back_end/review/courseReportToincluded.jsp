@@ -69,10 +69,7 @@
       height: 200px;
       width: 270px
     }
-    input.btn{
-    
-    	z-index:2 !important    	
-    }
+
      a.btn{
     position:relative;
     	z-index:2 !important    	

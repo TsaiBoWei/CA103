@@ -27,9 +27,9 @@ public class CourseReportService {
 		return courseReportVO;
 	}
 	
-	public CourseReportVO updateCourseRepStatus(String courrep_status, String courrepo_id) {
+	public CourseReportVO updateCourseRepStatus(String courrep_status, String courrepo_id,String reply_mgr_id) {
 		
-		dao.updateCourrep_Status(courrep_status, courrepo_id);
+		dao.updateCourrep_Status(courrep_status, courrepo_id,reply_mgr_id);
 		return dao.findByPK(courrepo_id);
 		
 	}
