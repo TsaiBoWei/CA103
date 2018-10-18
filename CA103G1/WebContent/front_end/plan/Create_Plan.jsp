@@ -424,7 +424,7 @@ body{
 						<div class="from-group">
 <!-- 							<h5> -->
 <%--     							瀏覽數：${planVO.plan_view}  --%>
-							<input type="hidden" name="plan_view" value="50">
+							<input type="hidden" name="plan_view" value="0">
 <!-- 							</h5> -->
 						</div>
 						<div class="form-group">
