@@ -52,8 +52,7 @@ public class CourlistDAO implements CourlistDAO_interface {
 	
 	//課程檢舉後下架
 	private static final String UPDATE_STATE_STMT = 
-			 			  "UPDATE COUR_LAU = ? WHERE COUR_ID = ?";
-	
+			 			  "UPDATE COURLIST SET COUR_LAU = ? WHERE COUR_ID = ?";
 
 	@Override
 	public void insert(CourlistVO courlistVO) {
