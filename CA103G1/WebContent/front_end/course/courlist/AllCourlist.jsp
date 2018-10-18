@@ -353,7 +353,7 @@ CourlistService courlistSvc = new CourlistService();
 <%--                   <%=coamemVO.getMem_name()%> --%>
                   </div>
                 </div>
-                <h4 class="card-text text-right courcost" >$ ${courlistVO.cour_cost}</h4>
+                <h4 class="card-text text-right courcost font-weight-bold" >$ ${courlistVO.cour_cost}</h4>
               </a>
             </div>
           </div>

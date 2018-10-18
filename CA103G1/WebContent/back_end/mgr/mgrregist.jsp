@@ -163,7 +163,7 @@
     <script type="text/javascript">
 	
 	$("#magicmgr").click(function(){
-  		$("#mgrRgac").val("dodoteacher");
+  		$("#mgrRgac").val("dodote");
   		$("#mgrRgps").val("³£³£");
   		$("#mgrRgEm").val("chtseng89@gmail.com");
   	});

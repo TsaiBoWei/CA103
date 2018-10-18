@@ -64,6 +64,13 @@
     color:#fff !important
     
     }
+    
+    a,.fontstyle{
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+	color:rgba(255, 255, 255, 0.8)!important;
+	font-weight:bold!important;
+}
+    
     input#recipient-name {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 	color:rgba(0, 0, 0, 0.8)!important;
@@ -291,7 +298,7 @@
 <script>
 $('#courseRepModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  
+	  var state = function(){ document.getelementbyid("actionList").value};
 	  var reportid = button.data('reportid') 
 	  var replymgrid = button.data('replymgrid') // Extract info from data-* attributes
 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
