@@ -45,5 +45,7 @@ public class CourseReportService {
 	public List<CourseReportVO> getSolvedCours(){
 		return dao.findSolvedCours();
 	}
+	
+
 
 }

@@ -213,7 +213,7 @@ input {
 							<div class="input-group-prepend">
 								<span class="input-group-text">«H½c*</span>
 							</div>
-							<input value="${param.regEmail }" type="email" name="regEmail" class="form-control"
+							<input value="${param.regEmail }" id="regEmail" type="email" name="regEmail" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
@@ -222,7 +222,7 @@ input {
 							<div class="input-group-prepend">
 								<span class="input-group-text">¦WºÙ </span>
 							</div>
-							<input value="${param.regName }" type="text" name="regName" class="form-control"
+							<input value="${param.regName }" type="text" id="regName" name="regName" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
 						<br>
@@ -231,7 +231,7 @@ input {
 							<div class="input-group-prepend">
 								<span class="input-group-text">±K½X*</span>
 							</div>
-							<input type="password" name="regPassword" class="form-control"
+							<input type="password" id="regPassword" name="regPassword" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm ">
 						</div>
 						<br>
@@ -240,9 +240,11 @@ input {
 							<div class="input-group-prepend">
 								<span class="input-group-text">½T»{±K½X*</span>
 							</div>
-							<input type="password" name="confirmedPsw" class="form-control"
+							<input type="password" id="confirmedPsw" name="confirmedPsw" class="form-control"
 								aria-label="Large" aria-describedby="inputGroup-sizing-sm">
 						</div>
+						
+						<button type="button" id="regtsai"></button>
 						<br>
 						<div class="modal-footer">
 							<input type="hidden" name="action" value="mem_signUp">
@@ -340,6 +342,14 @@ input {
 	</c:if>
 
 	<script>
+	
+	$("#regtsai").click(function(){
+  		$("#regEmail").val("chtseng89@gmail.com");
+  		$("#regName").val("½²²ã");
+  		$("#regPassword").val("123456");
+  		$("#confirmedPsw").val("123456");
+  	});
+	
    $(function() {
        $(".cancel").click(function() {
             $(location).attr('href', '<%= request.getContextPath()%>/Mem_Login_Signup.jsp');

@@ -118,10 +118,12 @@ public class CourseReportServlet extends HttpServlet {
 				CourseReportService courseReportSvc = new CourseReportService();
 				System.out.println(courrepStatus);
 				if("CR2".equals(courrepStatus)) {
-					courseReportSvc.updateCourseRepStatus(courrepStatus, courrepoID, replyMgrID);
+					CourseReportVO courseReportVO = courseReportSvc.updateCourseRepStatus(courrepStatus, courrepoID, replyMgrID);
+ 
 					CourlistService courlistService = new CourlistService();
-					courlistService.updateStates("CL01", courrepoID);
-					System.out.println("update here");
+
+					courlistService.updateStates("CL01", courseReportVO.getCour_id());
+					System.out.println(courrepoID);
 				}else if("CR3".equals(courrepStatus)) {
 					courseReportSvc.updateCourseRepStatus(courrepStatus, courrepoID, replyMgrID);
 				}
