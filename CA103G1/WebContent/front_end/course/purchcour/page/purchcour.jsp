@@ -463,7 +463,7 @@ a,.fontstyle  {
 					  type: 'success',
 					  title: 'Your payment has been processed successfully.',
 					  showConfirmButton: false,
-					  timer: 2000,
+					  timer: 5000,
 					})
 	    		 
 		
