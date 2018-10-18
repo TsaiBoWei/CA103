@@ -204,10 +204,11 @@ public class PlanServlet extends HttpServlet {
 				
 				HttpSession session = req.getSession();
 				PlanVO planVO = (PlanVO) session.getAttribute("planVO");
+//				System.out.println("planServlet line207 I am Here");
 				
 				//plan_id
 				String plan_id = new String(req.getParameter("plan_id").trim());
-				
+				System.out.println("planservlet line211 I am Here" + plan_id);
 				//plan_name
 				String plan_name = req.getParameter("plan_name");
 				String plan_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_?)]{2,20}$";
@@ -216,25 +217,26 @@ public class PlanServlet extends HttpServlet {
 				} else if (!plan_name.trim().matches(plan_name_Reg)) {
 					errorMsgs.add("Plan Name: 只能是中、英文字母、數字和_ , 且長度必需在2到20之間");
 				}
-				
+				System.out.println("line 220 I am Here"+plan_name);
 				//plan_cover
 				Part part = req.getPart("plan_cover");
 				byte[] plan_cover = planVO.getPlan_cover();
+				System.out.println(plan_cover);
 				if(part.getSize() !=0) {
 					InputStream is = part.getInputStream();
 					plan_cover = new byte[is.available()];
 					is.read(plan_cover);
 					is.close();
 					System.out.println("success");
-				}
-				
+				} 
+				System.out.println("line 231 I am Here");
 				
 				// plan_vo
 				String plan_vo = req.getParameter("plan_vo");
+				System.out.println("line 239 plan_vo"+plan_vo);
 				if (plan_vo == null || plan_vo.trim().length() == 0) {
 					errorMsgs.add("Plan Content Can't Be Blank");
 				}
-
 				// plan_start_date
 				java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du = null;
@@ -247,6 +249,7 @@ public class PlanServlet extends HttpServlet {
 //					e.printStackTrace();
 				}
 				
+				System.out.println("plan_start_date line 252"+plan_start_date);
 				// plan_end_date
 				java.text.DateFormat df2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
 				java.util.Date du2 = null;
@@ -278,7 +281,7 @@ public class PlanServlet extends HttpServlet {
 				planVO.setSptype_id(sptype_id);
 				planVO.setPlan_status(plan_status);
 				planVO.setPlan_privacy(plan_privacy);
-
+				System.out.println("planServlet line282 I am Here");
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("planVO", planVO); // 含有輸入格式錯誤的planVO物件,也存入req
@@ -291,8 +294,9 @@ public class PlanServlet extends HttpServlet {
 				/***************************2.開始修改資料*****************************************/
 				PlanService planSvc = new PlanService();
 				planVO = planSvc.updatePlan(plan_name, plan_vo, plan_cover, plan_start_date, plan_end_date,sptype_id, plan_privacy,plan_status ,plan_id);
+				System.out.println("planServlet line 297 I am Here");
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
-				if(requestURL.equals("/front_end/plan/list_compositeQuery.jsp")){
+				if(requestURL.equals("/front_end/plan/plan_update.jsp")){
 //					HttpSession session = req.getSession();
 					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
 					List<PlanVO> list  = planSvc.getAll(map);
@@ -330,7 +334,8 @@ public class PlanServlet extends HttpServlet {
 				planSvc.deletePlan(plan_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/front_end/plan/My_plan_blank.jsp";
+				String url = "/front_end/post/HomePage_plan.jsp";
+				System.out.println("planservlet line338 I am Here");
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
@@ -448,6 +453,47 @@ public class PlanServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交test3.jsp
 				successView.forward(req, res);
 
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		if ("getOne_For_Display1".equals(action)) { // 來自My_Plan_myself.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String plan_id = req.getParameter("plan_id");
+				/***************************2.開始查詢資料*****************************************/
+				PlanService planSvc = new PlanService();
+				PlanVO planVO = planSvc.getOnePlan(plan_id);
+				if (planVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front_end/plan/ListAllPlans_ForVisitor.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				// 資料庫取出的empVO物件,存入req
+				req.getSession().setAttribute("planVO", planVO);
+				
+				String url = "/front_end/plan/listOnePlan.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交test3.jsp
+				System.out.println("planServlet line489 I am here");
+				successView.forward(req, res);
+				
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());

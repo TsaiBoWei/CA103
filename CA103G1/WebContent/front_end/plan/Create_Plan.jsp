@@ -15,15 +15,8 @@
 	
 %>
 
-<%/*1.下拉式選單做<請選擇>選項，並作錯誤驗證及導向。 
-	2.計畫封面圖片沒上傳錯誤處理不做。
-	3.計畫內容拖拉圖片未做。
-	4.set/cancel 按鈕未做完全。
-	5.觀看次數
 
-*/%>
-
-
+<!-- line 563 註解 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,26 +28,31 @@
 <title>WORK it OUT</title>
 
 <!-- CSS dependencies -->
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/PersonalPage.css">
-<!-- navbar setting -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
-<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
-
-<link rel="stylesheet" type="text/css"
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/front_end/post/css/PersonalPage_list.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="<%=request.getContextPath() %>/front_end/post/js/jquery.events.touch.js"></script>
+	<script src="<%=request.getContextPath() %>/front_end/course/courboar/js/autotyping.js"></script>
+	<script src="<%=request.getContextPath() %>/front_end/post/js/truncateoverride.js"></script>
+	<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
 	
+
 <!-- fafaicon -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
 	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
 	crossorigin="anonymous">
+
+<!-- navbar setting -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+	<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+	<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+  
+
+
 
 <style>
 /*頁面設定*/
@@ -351,10 +349,10 @@ body{
 						
 
 						<div class="form-group">
-							<h3>Plan Name</h3>
-							<input type="text" name="plan_name"
+							<h3>Plan Name </h3>
+							<input type="text" name="plan_name" style="font-size: 18px"
 								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
-								class="form-control myfirstday text-light"/>
+								class="form-control myfirstday"/>
 						</div>
 						<br>
 
@@ -365,7 +363,7 @@ body{
 
 
 					 	<div class="form-group">
-							<label><h3>Plan EndDate</h3></label> 
+							<label><h3>Plan EndDate </h3></label>  
 							<input type="text" name="plan_end_date" id="f_date2" class="date text-light"/>
 						</div>
 
@@ -384,7 +382,7 @@ body{
 
 
 						<div class="form-group">  
-							<label><h3>Privacy</h3></label> <select size="1"
+							<label><h3>Privacy　　　</h3></label> <select size="1"
 								name="plan_privacy" style="width: 150px; font-size: 18px;">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
@@ -562,7 +560,7 @@ body{
 	
 	$(document).ready(function() {
 		$(".creatbtn").click(function(e) {
-			e.preventDefault();
+// 			e.preventDefault();
 			$("#courseplan").find('.linkclose').each(function(index, item){
 				$(item).html('');
 			});
@@ -586,7 +584,7 @@ body{
 
 	
 <!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
-	                                      <jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>
+	<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp"/>
 <!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
 
 	<!-- Script: Smooth scrolling between anchors in a same page -->

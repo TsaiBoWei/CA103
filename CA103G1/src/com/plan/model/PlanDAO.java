@@ -79,7 +79,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(7, planVO.getSptype_id());
 			pstmt.setInt(8, planVO.getPlan_view());
 			pstmt.setString(9, planVO.getPlan_privacy());
-			System.out.println("PlanDAO line82"+planVO.getPlan_vo());
+//			System.out.println("PlanDAO line82"+planVO.getPlan_vo());
 
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -124,15 +124,15 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt.setString(7, planVO.getPlan_privacy());
 			pstmt.setString(8, planVO.getPlan_status());
 			pstmt.setString(9, planVO.getPlan_id());
-			System.out.println("planDAO"+planVO.getPlan_name());
-			System.out.println("planDAO"+planVO.getPlan_vo());
-			System.out.println("planDAO"+planVO.getPlan_cover());
-			System.out.println("planDAO"+planVO.getPlan_start_date());
-			System.out.println("planDAO"+planVO.getPlan_end_date());
-			System.out.println("planDAO"+planVO.getSptype_id());
-			System.out.println("planDAO"+planVO.getPlan_privacy());
-			System.out.println("planDAO"+planVO.getPlan_status());
-			System.out.println("PlanDAO line 133 I am Here");
+//			System.out.println("planDAO"+planVO.getPlan_name());
+//			System.out.println("planDAO"+planVO.getPlan_vo());
+//			System.out.println("planDAO"+planVO.getPlan_cover());
+//			System.out.println("planDAO"+planVO.getPlan_start_date());
+//			System.out.println("planDAO"+planVO.getPlan_end_date());
+//			System.out.println("planDAO"+planVO.getSptype_id());
+//			System.out.println("planDAO"+planVO.getPlan_privacy());
+//			System.out.println("planDAO"+planVO.getPlan_status());
+//			System.out.println("PlanDAO line 133 I am Here");
 			
 			pstmt.executeUpdate();
 
@@ -169,6 +169,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, "plan_id");
+			System.out.println("planDAO plan_id line172"+plan_id);
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -539,7 +540,7 @@ public class PlanDAO implements PlanDAO_interface {
 		          + Plan_CompositeQuery.get_WhereCondition(map)
 		          + "order by plan_id ";
 			pstmt = con.prepareStatement(finalSQL);
-			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+//			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
 	
 			while (rs.next()) {
@@ -557,19 +558,19 @@ public class PlanDAO implements PlanDAO_interface {
 				planVO.setPlan_view(rs.getInt("plan_view"));
 				planVO.setSptype_id(rs.getString("sptype_id"));
 				list.add(planVO); // Store the row in the List
-				System.out.println("我是PlanDAO line 548");
-				System.out.println(rs.getString("plan_name"));
-				System.out.println(rs.getString("mem_id"));
-				System.out.println(rs.getString("plan_id"));
-				System.out.println(rs.getString("plan_vo"));
-				System.out.println(rs.getBytes("plan_cover"));
-				System.out.println(rs.getTimestamp("plan_start_date"));
-				System.out.println(rs.getTimestamp("plan_end_date"));
-				System.out.println(rs.getString("plan_privacy"));
-				System.out.println(rs.getDate("plan_create_time"));
-				System.out.println(rs.getString("plan_status"));
-				System.out.println(rs.getInt("plan_view"));
-				System.out.println(rs.getString("sptype_id"));
+//				System.out.println("我是PlanDAO line 548");
+//				System.out.println(rs.getString("plan_name"));
+//				System.out.println(rs.getString("mem_id"));
+//				System.out.println(rs.getString("plan_id"));
+//				System.out.println(rs.getString("plan_vo"));
+//				System.out.println(rs.getBytes("plan_cover"));
+//				System.out.println(rs.getTimestamp("plan_start_date"));
+//				System.out.println(rs.getTimestamp("plan_end_date"));
+//				System.out.println(rs.getString("plan_privacy"));
+//				System.out.println(rs.getDate("plan_create_time"));
+//				System.out.println(rs.getString("plan_status"));
+//				System.out.println(rs.getInt("plan_view"));
+//				System.out.println(rs.getString("sptype_id"));
 			}
 	
 			// Handle any SQL errors
@@ -811,19 +812,19 @@ public class PlanDAO implements PlanDAO_interface {
 				planVO.setPlan_view(rs.getInt("plan_view"));
 				planVO.setSptype_id(rs.getString("sptype_id"));
 				list.add(planVO); // Store the row in the List
-				System.out.println("我是PlanDAO line 548");
-				System.out.println(rs.getString("plan_name"));
-				System.out.println(rs.getString("mem_id"));
-				System.out.println(rs.getString("plan_id"));
-				System.out.println(rs.getString("plan_vo"));
-				System.out.println(rs.getBytes("plan_cover"));
-				System.out.println(rs.getTimestamp("plan_start_date"));
-				System.out.println(rs.getTimestamp("plan_end_date"));
-				System.out.println(rs.getString("plan_privacy"));
-				System.out.println(rs.getDate("plan_create_time"));
-				System.out.println(rs.getString("plan_status"));
-				System.out.println(rs.getInt("plan_view"));
-				System.out.println(rs.getString("sptype_id"));
+//				System.out.println("我是PlanDAO line 548");
+//				System.out.println(rs.getString("plan_name"));
+//				System.out.println(rs.getString("mem_id"));
+//				System.out.println(rs.getString("plan_id"));
+//				System.out.println(rs.getString("plan_vo"));
+//				System.out.println(rs.getBytes("plan_cover"));
+//				System.out.println(rs.getTimestamp("plan_start_date"));
+//				System.out.println(rs.getTimestamp("plan_end_date"));
+//				System.out.println(rs.getString("plan_privacy"));
+//				System.out.println(rs.getDate("plan_create_time"));
+//				System.out.println(rs.getString("plan_status"));
+//				System.out.println(rs.getInt("plan_view"));
+//				System.out.println(rs.getString("sptype_id"));
 			}
 	
 			// Handle any SQL errors

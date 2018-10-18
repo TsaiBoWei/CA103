@@ -678,7 +678,7 @@ function CenterControl(controlDiv, map) {
 	            };
 	            var marker = new google.maps.Marker({
 	                position: pos,
-	                icon:'assets/conference/logo_4.png',
+	                icon:'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
 	                map: map
 	            });
 	            map.setZoom(12);

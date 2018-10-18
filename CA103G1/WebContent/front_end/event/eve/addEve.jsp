@@ -352,14 +352,17 @@ font-weight:bold;
 <!--        小按鈕 -->
       <script>
       	$("#lbtn").click(function(){
-      		$("#eve_title").val("111");
+      		$("#eve_title").val("上山下海之花東鐵人三項");
       		$("#econtact_info").val("0911-222333");
       		$("#ereg_startdate").val("2018-10-17");
       		$("#ereg_enddate").val("2018-10-31");
-      		$("#eve_startdate").val("2018-11-01 08:00");
-      		$("#eve_enddate").val("2018-11-03 10:00");
-      		$("#eve_loc").val("台東太麻里");	
-      		$("#econtent_summernote").summernote("code",'3535588863725359');
+      		$("#eve_startdate").val("2018-11-08 08:00");
+      		$("#eve_enddate").val("2018-11-08 10:00");
+      		$("#eve_long").val("121.00446310000007");
+      		$("#eve_lat").val("22.6102278");
+      		$("#eve_loc").val("台東太麻里六十石山");	
+      		$("#econtent_summernote").summernote("code",'<div class="even_edit txt" style="margin: 0px; padding: 0px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; line-height: 1.6em; font-family: Verdana, &quot;Microsoft JhengHei&quot;, &quot;Apple LiGothic Medium&quot;, PMingLiU, sans-serif, serif; font-size: 16px; vertical-align: baseline; overflow: hidden; color: rgb(68, 68, 68);"><p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: 1.6em; font-family: Verdana, Arial, 微軟正黑體, &quot;Microsoft JhengHei&quot;, 微軟雅黑體, &quot;Microsoft YaHei&quot;; font-size: 1em; vertical-align: baseline; word-break: break-all; overflow-wrap: break-word; color: rgb(0, 0, 0);"><span style="font-size: 15px;">1.主旨：倡導工程師強健體魄概念，增進爆肝寫code之效率，加之推廣東部觀光風景及挑戰不可能的極限、毅力、耐力之鐵人三項。</span></p><p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: 1.6em; font-family: Verdana, Arial, 微軟正黑體, &quot;Microsoft JhengHei&quot;, 微軟雅黑體, &quot;Microsoft YaHei&quot;; font-size: 1em; vertical-align: baseline; word-break: break-all; overflow-wrap: break-word; color: rgb(0, 0, 0);"><br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;">2.活動路線： 台東太麻里--&gt;三仙台<br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;"><br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;">3.完成獎章：時間內完成並合格者，將由David贈送免費健身課程。<br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;"><br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;">5.活動沿途無交通管制及指引，參加人員需小心不要掉到山下。<br style="word-break: break-all; overflow-wrap: break-word; line-height: 1.6em;"><br style="word-break: break-all; overflow-wrap: break-word; font-size: 1em; line-height: 1.6em;">6.活動沿途無補給站，請帶足夠零錢或打給David。<br style="word-break: break-all; overflow-wrap: break-word; line-height: 1.6em;"><br style="word-break: break-all; overflow-wrap: break-word;line-height: 1.6em;">7.活動無協助回收，工程師們請自行回到終點或聯絡親友協助。<br style="word-break: break-all; overflow-wrap: break-word;  line-height: 1.6em;"><br style="word-break: break-all; overflow-wrap: break-word; line-height: 1.6em;">8.因劇烈天氣、道路中斷或發生不可抗拒之災害影響活動路線，主辦單位保留取消、延期及調整路線之權利，請密切注意相關異動訊息。</p></div>');
+    	
       	});
       
       

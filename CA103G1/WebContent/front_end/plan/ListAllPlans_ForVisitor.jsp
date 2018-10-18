@@ -298,68 +298,58 @@
 
 <!-- start -->
 
-<!-- 	<div> -->
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-12  mx-auto"> -->
-<!-- 					<form method="post" class="select"  -->
-<%-- 						action="<%=request.getContextPath()%>/plan/plan.do" name="form1"> --%>
-<!-- 						<br> -->
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class="col-12  mx-auto">
+					<form method="post" class="select" 
+						action="<%=request.getContextPath()%>/plan/plan.do" name="form1">
+						<br>
 
-<!-- 						<div class="form-row">   -->
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control bg-dark-posteditinput"  style="font-size: 18px" -->
-<!-- 									id="inputPassword4" name="sptype_id"> -->
-<!-- 									<option>運動種類 -->
-<%-- 										<c:forEach var="sptypeVO" items="${sptypeSvc.all}"> --%>
-<%-- 											<option value="${sptypeVO.sptype_id}">${sptypeVO.sport} --%>
-<%-- 										</c:forEach> --%>
-<!-- 								</select> -->
-<!-- 							</div> -->
+						<div class="form-row">  
+							<div class="form-group col-md-3">
+								<select class="form-control bg-dark-posteditinput"  style="font-size: 18px"
+									id="inputPassword4" name="sptype_id">
+									<option>運動種類
+										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+											<option value="${sptypeVO.sptype_id}">${sptypeVO.sport}
+										</c:forEach>
+								</select> 
+							</div>
 
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control" name="plan_privacy" id="inputPassword4"  -->
-<!-- 									style="font-size: 18px"> -->
-<!-- 									<option>隱私權 -->
-<!-- 									<option value="PLANPR0">公開 -->
-<!-- 									<option value="PLANPR1">不公開 -->
-<!-- 									<option value="PLANPR2">只對朋友公開 -->
-<!-- 								</select> -->
-<!-- 							</div> -->
+							<div class="form-group col-md-3">
+								<select class="form-control" name="plan_status" id="inputPassword4" 
+									style="font-size: 18px">
+									<option>執行狀態
+									<option value="PLANST0">進行中
+									<option value="PLANST1">已完成
+								</select>
+							</div>
 
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<select class="form-control" name="plan_status" id="inputPassword4"  -->
-<!-- 									style="font-size: 18px"> -->
-<!-- 									<option>執行狀態 -->
-<!-- 									<option value="PLANST0">進行中 -->
-<!-- 									<option value="PLANST1">已完成 -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-
-<!-- 							<div class="form-group col-md-6 "> -->
-<!-- 								<div class="input-group"> -->
-<!-- 									<div class="input-group-prepend"> -->
-<!-- 										<span class="input-group-text" -->
-<!-- 											style="background-color: #FFFFFF; color: #0621f1; font-size: 18px">Search</span> -->
-<!-- 									</div> -->
+							<div class="form-group col-md-6 ">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"
+											style="background-color: #FFFFFF; color: #0621f1; font-size: 18px">Search</span>
+									</div>
 									
-<!-- 									<input type="text" name="plan_name" id="" class="form-control"  -->
-<!-- 										placeholder="Plan Name" style="font-size: 17px"> -->
+									<input type="text" name="plan_name" id="" class="form-control" 
+										placeholder="Plan Name" style="font-size: 17px">
 									
-<!-- 									<div class="input-group-append"> -->
-<!-- 										<button class="btn btn-info"> -->
-<!-- 											<i class="fa fa-search"></i> -->
-<!-- 										</button> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<br>  -->
-<!-- 						<input type="hidden" name="action" value="listAllPlans_ForVisitor_ByCompositeQuery"> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+									<div class="input-group-append">
+										<button class="btn btn-info">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br> 
+						<input type="hidden" name="action" value="listAllPlans_ForVisitor_ByCompositeQuery">
+					</form>
+				</div>
+			</div>
+		</div>
 <!-- end -->
 		<%@ include file="file/page1_ForVisitor.file"%>
 
