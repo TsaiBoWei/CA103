@@ -167,12 +167,7 @@ font-weight:bold!important;
         
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-          		<c:if test="${memVO.mem_id ==null }">
-            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
-				</c:if>
-				<c:if test="${memVO.mem_id !=null }">
-            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp">WorkOutPlan</a>
-				</c:if>
+            <a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
