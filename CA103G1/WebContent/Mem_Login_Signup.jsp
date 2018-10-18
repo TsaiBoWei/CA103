@@ -171,7 +171,7 @@ input {
 	<script>
 	
 		$("#david").click(function(){
-      		$("#email").val("ca10303@gmail.com");
+      		$("#email").val("CA10303@gmail.com");
       		$("#psw").val("123456");
       	});
 		$("#tsai").click(function(){
