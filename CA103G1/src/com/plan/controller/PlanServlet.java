@@ -458,6 +458,47 @@ public class PlanServlet extends HttpServlet {
 		}
 		
 		
+		if ("getOne_For_Display1".equals(action)) { // 來自My_Plan_myself.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String plan_id = req.getParameter("plan_id");
+				/***************************2.開始查詢資料*****************************************/
+				PlanService planSvc = new PlanService();
+				PlanVO planVO = planSvc.getOnePlan(plan_id);
+				if (planVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front_end/plan/ListAllPlans_ForVisitor.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				// 資料庫取出的empVO物件,存入req
+				req.getSession().setAttribute("planVO", planVO);
+				
+				String url = "/front_end/plan/listOnePlan.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交test3.jsp
+				System.out.println("planServlet line489 I am here");
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front_end/plan/plan_wrong.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 	
 	}
 }

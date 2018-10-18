@@ -168,7 +168,7 @@
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%= request.getContextPath() %>/front_end/plan/Create_Plan.jsp">Create Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light dropdown-item-custom"
-								href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">My Plan</a> <a
+								href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">My Plan</a> <a
 								class="dropdown-item bg-dark bg-dark-dropmenuitem-cutom text-light"
 								href="<%=request.getContextPath()%>/front_end/plan/compositeQuery.jsp">Interesting Plan</a>
 						</div></li>

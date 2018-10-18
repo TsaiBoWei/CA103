@@ -62,7 +62,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 	<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-	<title>666WORK it OUT</title>
+	<title>WORK it OUT</title>
 <!-- CSS dependencies -->
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
@@ -85,13 +85,12 @@
 		integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
 		crossorigin="anonymous">
 
-<!-- navbar setting -->
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
-	<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
-	<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>
+
 	<link rel="stylesheet" type="text/css"
 		href="<%=request.getContextPath()%>/front_end/course/purchcour/css/buttonfix.css">
+	<!-- navbar setting -->
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css">
+	
 
   <style> 
   /*頁面設定*/
@@ -141,107 +140,6 @@
 
 
 <body class="text-center">
- <!-- Navbar -->
-	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-		<span class="navbar-text"></span>
-		<div class="container">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbar2SupportedContent"
-				aria-controls="navbar2SupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-center"
-				id="navbar2SupportedContent">
-				<a
-					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
-					href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mx-2 btn-lg">
-						<c:if test="${memVO.mem_id ==null }">
-							<a class="nav-link"
-								href="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
-						</c:if> 
-						
-						<c:if test="${memVO.mem_id !=null }">
-							<a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
-						</c:if>
-						
-					</li>
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp">Event</a>
-					</li>
-
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
-					</li>
-
-					<jsp:useBean id="coachSvc" scope="page"
-						class="com.coach.model.CoachService" />
-					<c:if test="${memVO!=null}">
-						<li class="nav-item mx-2 btn-lg dropdown"><a
-							class="nav-link dropbtn" href="javascript:void(0)"
-							id="navUserName">${memVO.mem_name} <i
-								class="fa fa-caret-down dropbtn"></i>
-						</a>
-							<div class="dropdown-content" id="myDropdown">
-								<a
-									href="<%=request.getContextPath()%>/front_end/post/listAllPostByMem09.jsp">
-									<i class="fa fa-file "> <font class="fontstyle">&nbsp&nbsp個人頁面</font>
-								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">
-									<i class="fa fa-calculator"> <font class="fontstyle">&nbsp&nbsp計畫</font>
-								</i>
-								</a> <a href="#"> <i class="fa fa-users " aria-hidden="true">
-										<font class="fontstyle">&nbsp&nbsp好友</font>
-								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/course/purchcour/page/purchcour.jsp">
-									<i class="fa fa-film" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp課程</font>
-								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/event/eventlist/listEvesByMem.jsp">
-									<i class="fa fa-hand-spock-o" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp活動</font>
-								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/front_end/calendar/page/Calendar.jsp">
-									<i class="fa fa-check" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp行事曆</font>
-								</i>
-								</a>
-
-								<c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
-									<a
-										href="<%=request.getContextPath()%>/front_end/course/coach/page/coach.jsp">
-										<i class="fa fa-sticky-note"> <font class="fontstyle">&nbsp&nbsp教練管理</font>
-									</i>
-									</a>
-								</c:if>
-
-								<a
-									href="<%=request.getContextPath()%>/front_end/mem/updateMember/updateMember.jsp">
-									<i class="fa fa-address-card" aria-hidden="true"> <font
-										class="fontstyle">&nbsp&nbsp會員資料</font>
-								</i>
-								</a> <a
-									href="<%=request.getContextPath()%>/mem/mem.do?action=loggedout">
-									<font class="fontstyle">登出</font>
-								</a>
-							</div></li>
-					</c:if>
-				</ul>
-				<c:if test="${memVO==null}">
-					<a class="btn btn-lg btn-primary"
-						href="<%=request.getContextPath()%>/Mem_Login_Signup.jsp"
-						id="registerBtn">Register now</a>
-				</c:if>
-			</div>
-		</div>
-	</nav>
-
   <!-- Navbar --> 
  <nav   class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <span class="navbar-text"></span>
@@ -250,19 +148,24 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbar2SupportedContent">
-        <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
+        <a class=" btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" id="indexBtn" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/index.jsp">WorkOutPlan</a>
+          		<c:if test="${memVO.mem_id ==null }">
+            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
+				</c:if>
+				<c:if test="${memVO.mem_id !=null }">
+            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+				</c:if>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
+            <a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
+            <a class="navtext nav-link" href="<%=request.getContextPath()%>/front_end/course/courlist/AllCourlist.jsp">Course</a>
           </li>
          
-<%--           <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp > --%>
+          <jsp:useBean id="coachSvc" scope="page" class="com.coach.model.CoachService" /><jsp >
           <c:if test="${memVO!=null}">
 	          <li class="nav-item mx-2 btn-lg dropdown" >
 	            <a class="nav-link dropbtn" href="javascript:void(0)" id="navUserName">${memVO.mem_name}
@@ -293,7 +196,12 @@
       </div>
     </div>	
   </nav>
->>>>>>> a63f09d304863c312b6c0bb779e3291750938a7e
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> b8f3a8b49708d454dbcef77f66490b65deb5001f
 	<!-- Cover -->
 	<div class="d-flex align-items-center cover section-fade-in-out"
 		style="background-image: url(&quot;<%=request.getContextPath()%>/front_end/assets/conference/jogback.jpg&quot;);">
@@ -523,54 +431,77 @@
 		href="#posteditlight" data-rel="lightcase:myCollection:slideshow">
 		<i class="fab fa-rocketchat"></i>
 	</a>
-
-
+	<div>
+<!-- 		<div class="container containerHrB  "> -->
+<!-- 			<hr> -->
+<!-- 		</div> -->
+		<p><font size="6" color="#00FFFF">The Plan</font> </p>
+		<div class="container containerHrB  ">
+			<hr>
+		</div>
+	</div>
+	<div>
+		<p><font size="7" color="white">${planVO.plan_name}</font> </p>
+	</div>
 		<!-- start -->
 		<div>
 			<div class="container">
+			
+			
 				<div class="row">
-					<div class="p-0 col-lg-5 order-2 order-lg-1">
-						<img class="img-fluid" id="plan_cover"
-							src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
-					</div>
+				<c:forEach var="planVO" items="${list}">
+				<div class="col-12 col-md-4">
+							<div class="card">
+								<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
+									<a href="<%= request.getContextPath()%>/plan/plan.do?action=getOne_For_Display&plan_id=${planVO.plan_id}">	
+										<img class="card-img-top" style="height:250px; overflow:hidden;"
+											src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+									</a>
+<!-- 									<input type="hidden" name="action" value="getOne_For_Display"> -->
+<%-- 									<input type="hidden" name="plan_id" value="${planVO.plan_id}"> --%>
+								</form> 
+								
+								<div class="card-body">
+									<h5 class="plan_name">${planVO.plan_name}</h5>
+									<p class="sptype_id">運動種類: 
+										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
+										</c:forEach>
 
-					<div
-						class="flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
-						<button class="btn btn-lg btn-info text-light">
-							<jsp:useBean id="sptypeSvc" scope="page"
-								class="com.sptype.model.SptypeService" />
-							<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
-								<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
-							</c:forEach>
-						</button>
-						<p>
-							<font size="5">計畫開始: <fmt:formatDate
-									value="${planVO.plan_start_date}" pattern="yyyy-MM-dd HH:mm " />
-							</font>
-						</p>
-
-						<p>
-							<font size="5">計畫結束: <fmt:formatDate
-									value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
-							</font>
-						</p>
-					</div>
-					<div
-						class="flex-column justify-content-center p-3 order-1 order-lg-2">
-						<br>
-						<p class="lead mb-0" style="color: white">
-							<font color="white">${planVO.plan_vo}</font>
-						</p>
-					</div>
+									</p> 
+									
+									<p class="plan_start_date">運動開始:　
+										<fmt:formatDate value="${planVO.plan_start_date}" pattern="yyyy-MM-dd HH:mm " />
+									</p>
+									
+									<p class="plan_end_date">運動結束:　
+										<fmt:formatDate value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
+									</p>
+									<form method="post"  action="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id=${planVO.plan_id }">
+										<button type='submit' class="btn btn-info" style="font-size: 16px">Read More</button>
+										<input type="hidden" name="action" value="getOne_For_Display">
+										<input type="hidden" name="plan_id" value="${planVO.plan_id }">
+										<input type="hidden" name="mem_id" value="${planVO.mem_id }">
+									</form>
+								</div>
+							</div><br>
+						</div>
+					</c:forEach>
 				</div>
+			
 			</div>
 		</div>
-</div>
+
 		<!-- end -->
 <!-- <P>777777777777777777777777777777777777777777777777777777777777777777</P> -->
 		<!-- =========================================以下為原personlfooter.jsp的內容========================================== -->
 		<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
 		<!-- =========================================以上為原personlfooter.jsp的內容========================================== -->
+	<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
+	<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	
+
+
 </body>
 </html>
  
