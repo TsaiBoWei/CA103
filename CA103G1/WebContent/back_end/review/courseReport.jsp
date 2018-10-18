@@ -203,7 +203,7 @@
       <div class="modal-body">
         <form method="post" action="<%=request.getContextPath() %>/coursereport/coursereport.do">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <label for="recipient-name" class="col-form-label">管理員編號:</label>
             <input type="text" class="form-control" name="courrepoID" id="recipient-name">
           </div>
           <div class="form-group">
@@ -215,6 +215,7 @@
           </div>
       	<div class="modal-footer">
       	<input type="hidden" name="action1" value="updateState">
+<!--         <button type="button" class="btn btn-primary"><a href="" id="submitBtn">送 出</a></button> -->
         <button type="button" class="btn btn-primary"><a href="" id="submitBtn">送 出</a></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">取 消</button>
       	</div>
@@ -298,7 +299,9 @@
 <script>
 $('#courseRepModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var state = function(){ document.getelementbyid("actionList").value};
+// 	  var state = function(){ document.getelementbyid("actionList").value};
+//	  var state = $('actionList').val();
+	 
 	  var reportid = button.data('reportid') 
 	  var replymgrid = button.data('replymgrid') // Extract info from data-* attributes
 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -308,6 +311,20 @@ $('#courseRepModal').on('show.bs.modal', function (event) {
 	  modal.find('.modal-body input').val(replymgrid)
 	  $('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus=CR2&replyMgrID='+replymgrid);
 	})
+	
+	
+	
+	$('#actionList').change(function(){	 
+		var button = $(event.relatedTarget)
+		var reportid = button.data('reportid') 
+		var replymgrid = button.data('replymgrid')
+		var courrepStatus = $(this).val()
+		$('#submitBtn').attr('href', '<%=request.getContextPath() %>/coursereport/coursereport.do?action1=updateState&courrepoID='+reportid+'&courrepStatus='+courrepStatus+'&replyMgrID='+replymgrid);
+		 console.log("302-state: "+courrepStatus)
+	})
+	
+	
+	
 	
 // 	$('#courseRepModal').on('show.bs.modal', function (event) {
 // 	  var button = $(event.relatedTarget) // Button that triggered the modal
