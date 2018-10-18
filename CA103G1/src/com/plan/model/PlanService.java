@@ -70,7 +70,7 @@ public class PlanService {
 	}
 
 	public List<PlanVO> getAllforVisitor(Map<String, String[]> map) {
-		return dao.getAll(map);
+		return dao.getAllforVisitor(map);
 	}
 
 	/********************* 1004增加計畫service ***************/

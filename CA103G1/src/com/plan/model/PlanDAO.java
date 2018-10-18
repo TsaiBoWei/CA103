@@ -169,6 +169,7 @@ public class PlanDAO implements PlanDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, "plan_id");
+			System.out.println("planDAO plan_id line172"+plan_id);
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());

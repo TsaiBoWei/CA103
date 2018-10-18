@@ -33,7 +33,7 @@
 
 <!-- PAGE settings -->
 <link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-<title>WORK it OUT</title>
+<title>777WORK it OUT</title>
 
 <!-- CSS dependencies -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/css/neon.css">
@@ -122,10 +122,18 @@
 					<c:forEach var="planVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<div class="col-12 col-md-4">
 							<div class="card">
-								<a href="<%=request.getContextPath()%>/front_end/plan/test.jsp" >
-									<img class="card-img-top" style="height:250px; overflow:hidden;"
-										src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
-								</a>
+								<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
+					<a href="<%= request.getContextPath()%>/plan/plan.do?action=getOne_For_Display1&plan_id=${planVO.plan_id}">	
+										<img class="card-img-top" style="height:250px; overflow:hidden;"
+											src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+									</a>
+								</form>
+							
+							
+<%-- 								<a href="<%=request.getContextPath()%>/front_end/plan/test.jsp" > --%>
+<!-- 									<img class="card-img-top" style="height:250px; overflow:hidden;" -->
+<%-- 										src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}"> --%>
+<!-- 								</a> -->
 								
 								<div class="card-body">
 									<h5 class="plan_name">${planVO.plan_name}</h5>
