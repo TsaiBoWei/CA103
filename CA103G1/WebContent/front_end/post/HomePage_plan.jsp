@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
@@ -12,7 +12,7 @@
  <jsp:useBean id="now" class="java.util.Date" />
  
  
-<!--   line 258 ¥ı¦æµù¸Ñ -->
+<!--   line 258 å…ˆè¡Œè¨»è§£ -->
 <%	
 	MemVO memVO=(MemVO)session.getAttribute("memVO");
 	String memidtoHg=request.getParameter("mem_id");
@@ -34,11 +34,11 @@
 		
 	}
 	
-	//¦pªG¬OªB¤Í
+	//å¦‚æœæ˜¯æœ‹å‹
 	if(flVO != null&&flVO.getFl_status().equals("FLS1")) { 
 		
 		 list =planSvc.getPlanForFriendByMem(memidtoHg);
-	//¦pªG¤£¬OªB¤Í	
+	//å¦‚æœä¸æ˜¯æœ‹å‹	
 	}else {			
 		
 		 list = planSvc.getPlanForVisitorByMem(memidtoHg);
@@ -58,7 +58,7 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 	<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
@@ -93,7 +93,7 @@
 	
 
   <style> 
-  /*­¶­±³]©w*/
+  /*é é¢è¨­å®š*/
 
     body {
       overflow-x: hidden; 
@@ -104,7 +104,7 @@
 	
 	}
     
-    /*¹Ï¤ù±M°Ï*/
+    /*åœ–ç‰‡å°ˆå€*/
 	#plan_cover {
 		width: 250px;
 		height: 250px;
@@ -117,7 +117,7 @@
   <style type="text/css">
 
 	a,.fontstyle  {
-		font-family: Montserrat,Arial,"·L³n¥¿¶ÂÅé","Microsoft JhengHei"!important;
+		font-family: Montserrat,Arial,"å¾®è»Ÿæ­£é»‘é«”","Microsoft JhengHei"!important;
 	}
   </style>
 </head>
@@ -126,7 +126,7 @@
 
 <style type="text/css">
 	a, .fontstyle {
-		font-family: Montserrat, Arial, "·L³n¥¿¶ÂÅé", "Microsoft JhengHei" !important;
+		font-family: Montserrat, Arial, "å¾®è»Ÿæ­£é»‘é«”", "Microsoft JhengHei" !important;
 	}
 	
 	.navbar-dark .navbar-nav .nav-link{
@@ -172,19 +172,19 @@
 	              <i class="fa fa-caret-down dropbtn"></i>
 	            </a>
 	            <div class="dropdown-content" id="myDropdown">
-	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbsp­Ó¤H­¶­±</font></i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbsp­pµe</font></i></a>
-	              <a href="<%=request.getContextPath()%>/front_end/friendlist/listfriendcomfirmed.jsp?perpageloc=friendlist#personalnav"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbsp¦n¤Í</font></i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp½Òµ{</font></i></a>
-	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp¬¡°Ê</font></i></a>
-	<!--               <a href=""><i class="fa fa-file">&nbsp&nbsp¶K¤å</i></a> -->
-	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp¦æ¨Æ¾ä</font></i></a>
+	               <a href="<%=request.getContextPath() %>/front_end/post/listAllPostByMem09.jsp"><i class="fa fa-file "><font class="fontstyle">&nbsp&nbspå€‹äººé é¢</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp"><i class="fa fa-calculator"><font class="fontstyle">&nbsp&nbspè¨ˆç•«</font></i></a>
+	              <a href="<%=request.getContextPath()%>/front_end/friendlist/listfriendcomfirmed.jsp?perpageloc=friendlist#personalnav"><i class="fa fa-users " aria-hidden="true"><font class="fontstyle">&nbsp&nbspå¥½å‹</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/course/purchcour/page/purchcour.jsp"><i class="fa fa-film" aria-hidden="true"><font class="fontstyle">&nbsp&nbspèª²ç¨‹</font></i></a>
+	              <a href="<%=request.getContextPath() %>/front_end/event/eventlist/listEvesByMem.jsp"> <i class="fa fa-hand-spock-o" aria-hidden="true"><font class="fontstyle">&nbsp&nbspæ´»å‹•</font></i></a>
+	<!--               <a href=""><i class="fa fa-file">&nbsp&nbspè²¼æ–‡</i></a> -->
+	              <a href="<%=request.getContextPath() %>/front_end/calendar/page/Calendar.jsp"><i class="fa fa-check" aria-hidden="true"><font class="fontstyle">&nbsp&nbspè¡Œäº‹æ›†</font></i></a>
 	               
 	               <c:if test="${coachSvc.getOneCoachByMemId(memVO.mem_id)!=null}">
-	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbsp±Ğ½mºŞ²z</font></i></a>
+	               	<a href="<%=request.getContextPath() %>/front_end/course/coach/page/coach.jsp"><i class="fa fa-sticky-note"><font class="fontstyle">&nbsp&nbspæ•™ç·´ç®¡ç†</font></i></a>
 	               </c:if>
-	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbsp·|­û¸ê®Æ</font></i></a>
-	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout"><font class="fontstyle">µn¥X</font></a>
+	              <a href="<%=request.getContextPath() %>/front_end/mem/updateMember/updateMember.jsp"><i class="fa fa-address-card" aria-hidden="true"><font class="fontstyle">&nbsp&nbspæœƒå“¡è³‡æ–™</font></i></a>
+	              <a href="<%=request.getContextPath() %>/mem/mem.do?action=loggedout"><font class="fontstyle">ç™»å‡º</font></a>
 	            </div>
 	          </li>
           </c:if>
@@ -229,32 +229,32 @@
 	        <input type="hidden" name="fl_memA_id" value="${memVO.mem_id}" id="fl_memA_id">
 	        <input type="hidden" name="fl_memB_id" value="${memVOtoHg.mem_id}" id="fl_memB_id">
         
-	<!--          ¤£¬O¦Û¤vªº·|­û­¶­± -->
+	<!--          ä¸æ˜¯è‡ªå·±çš„æœƒå“¡é é¢ -->
 	
 	        <c:if test="${memVO.mem_id!=memVOtoHg.mem_id}">
-	<!--             ¬O·|­û ¥B¥¼¥[¤J¦n¤Í -->
+	<!--             æ˜¯æœƒå“¡ ä¸”æœªåŠ å…¥å¥½å‹ -->
 		        <c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id)==null&&memVO!=null}">
-	<!-- 	        ¹ï¤è¥¼°e¥XÁÜ½Ğ -->
+	<!-- 	        å°æ–¹æœªé€å‡ºé‚€è«‹ -->
 		        	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status!='FLS0'}">        
 		        		<input type="hidden" name="action" value="insert">        
-		        		<input type="submit" class="btn btn-primary" value="¥[¦n¤Í" id="addflBtn" onclick="addfriend()">
+		        		<input type="submit" class="btn btn-primary" value="åŠ å¥½å‹" id="addflBtn" onclick="addfriend()">
 		        	</c:if>
 		    	</c:if>
 		    	 
-	<!-- 	    	 ¹ï¤è¦³µo°eÁÜ½Ğ -->
+	<!-- 	    	 å°æ–¹æœ‰ç™¼é€é‚€è«‹ -->
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVOtoHg.mem_id,memVO.mem_id).fl_status=='FLS0'}">
-		        	<input type="submit" class="btn btn-primary" value="¦n¤Í½T»{" id="addflchBtn" onclick="addflcheck()">
-		        	<input type="button" class="btn btn-primary ml-2" value="©Úµ´"  >
+		        	<input type="submit" class="btn btn-primary" value="å¥½å‹ç¢ºèª" id="addflchBtn" onclick="addflcheck()">
+		        	<input type="button" class="btn btn-primary ml-2" value="æ‹’çµ•"  >
 		    	</c:if> 
 		    	
-	<!-- 	    	 µo°eÁÜ½Ğµ¹¹ï¤è -->
+	<!-- 	    	 ç™¼é€é‚€è«‹çµ¦å°æ–¹ -->
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS0'}">
-		        	<input type="BUTTON" class="btn btn-primary" value="¤w°e¥X¦n¤ÍÁÜ½Ğ" >
+		        	<input type="BUTTON" class="btn btn-primary" value="å·²é€å‡ºå¥½å‹é‚€è«‹" >
 		    	</c:if> 
 		    	
-	<!-- 	    	 ¤w¦¨¬°¦n¤Í -->	    	
+	<!-- 	    	 å·²æˆç‚ºå¥½å‹ -->	    	
 		    	<c:if test="${friendlistSvc.getOneFriendList(memVO.mem_id,memVOtoHg.mem_id).fl_status=='FLS1'}">
-		        	<input type="BUTTON" class="btn btn-primary" value="¦n¤Í"  >
+		        	<input type="BUTTON" class="btn btn-primary" value="å¥½å‹"  >
 		    	</c:if> 
 	    	</c:if>
 	    	
@@ -268,12 +268,12 @@
 		var fl_memB_id=document.getElementById("fl_memB_id").value;
 		
 		var xhr = new XMLHttpRequest();
-	    //³]©w¦n¦^©I¨ç¼Æ   
+	    //è¨­å®šå¥½å›å‘¼å‡½æ•¸   
 	    xhr.onload = function (){
 	        if( xhr.status == 200){
 					console.log(xhr.responseText);
 				  if(xhr.responseText=='success'){
-					  document.getElementById("addflBtn").value = "¤w°e¥XÁÜ½Ğ";
+					  document.getElementById("addflBtn").value = "å·²é€å‡ºé‚€è«‹";
 				  }else{
 					  alert(xhr.responseText);
 				  }
@@ -283,11 +283,11 @@
 	        }//xhr.status == 200
 	    };//onload 
 	    
-	    //«Ø¥ß¦nGet³s±µ
+	    //å»ºç«‹å¥½Geté€£æ¥
 	    var url= "<%=request.getContextPath() %>/friendlist/friendlist.do?action=insert&fl_memA_id=" + fl_memA_id+
 	    		"&fl_memB_id="+fl_memB_id;
 	    xhr.open("Get",url,true); 
-	    //°e¥X½Ğ¨D 
+	    //é€å‡ºè«‹æ±‚ 
 	    xhr.send( null );    
 		
 		
@@ -299,12 +299,12 @@
 		var fl_memB_id=document.getElementById("fl_memB_id").value;
 		
 		var xhr = new XMLHttpRequest();
-	    //³]©w¦n¦^©I¨ç¼Æ   
+	    //è¨­å®šå¥½å›å‘¼å‡½æ•¸   
 	    xhr.onload = function (){
 	        if( xhr.status == 200){
 					console.log(xhr.responseText);
 				  if(xhr.responseText=='success'){
-					  document.getElementById("addflchBtn").value = "¦n¤Í";
+					  document.getElementById("addflchBtn").value = "å¥½å‹";
 				  }else{
 					  alert(xhr.responseText);
 				  }
@@ -314,11 +314,11 @@
 	        }//xhr.status == 200
 	    };//onload 
 	    
-	    //«Ø¥ß¦nGet³s±µ
+	    //å»ºç«‹å¥½Geté€£æ¥
 	    var url= "<%=request.getContextPath() %>/friendlist/friendlist.do?action=insert_friend&fl_memA_id=" + fl_memA_id+
 	    		"&fl_memB_id="+fl_memB_id;
 	    xhr.open("Get",url,true); 
-	    //°e¥X½Ğ¨D 
+	    //é€å‡ºè«‹æ±‚ 
 	    xhr.send( null );    
 		
 		
@@ -348,7 +348,7 @@
 	
 	</div>
 <%-- 	</c:if> --%>
-	<!-- NavBar Personal focus §PÂ_¦¡-->
+	<!-- NavBar Personal focus åˆ¤æ–·å¼-->
 	
 	<%
 	if(sessionPerpageloc!=null){ 
@@ -440,62 +440,116 @@
 		</div>
 	</div>
 	<div>
-		<p><font size="7" color="white">${planVO.plan_name}</font> </p>
+		<p><font size="7" color="white">555${planVO.plan_name}</font> </p>
 	</div>
 		<!-- start -->
 		<div>
 			<div class="container">
 			
 			
+				<div class="container">
 				<div class="row">
-				<c:forEach var="planVO" items="${list}">
-				<div class="col-12 col-md-4">
-							<div class="card">
-								<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
-									<a href="<%= request.getContextPath()%>/plan/plan.do?action=getOne_For_Display&plan_id=${planVO.plan_id}">	
+					<div class="p-0 col-lg-5 order-2 order-lg-1">
+					<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
+					<a href="<%= request.getContextPath()%>/plan/plan.do?action=getOne_For_Display1&plan_id=${planVO.plan_id}">	
 										<img class="card-img-top" style="height:250px; overflow:hidden;"
 											src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
 									</a>
 <!-- 									<input type="hidden" name="action" value="getOne_For_Display"> -->
 <%-- 									<input type="hidden" name="plan_id" value="${planVO.plan_id}"> --%>
-								</form> 
-								
-								<div class="card-body">
-									<h5 class="plan_name">${planVO.plan_name}</h5>
-									<p class="sptype_id">¹B°ÊºØÃş: 
-										<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
-											<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
-										</c:forEach>
+								</form>
+					
+					
+					
+<!-- 						<img class="img-fluid" id="plan_cover" -->
+<%-- 							src="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}"> --%>
+							
+					</div>
 
-									</p> 
+					<div
+						class="flex-column justify-content-center p-3 col-lg-7 order-1 order-lg-2">
+						<button class="btn btn-lg btn-info text-light">
+							<jsp:useBean id="sptypeSvc" scope="page"
+								class="com.sptype.model.SptypeService" />
+							<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
+								<c:if test="${planVO.sptype_id ==sptypeVO.sptype_id }">${sptypeVO.sport}</c:if>
+							</c:forEach>
+						</button>
+						<p>
+							<font size="5">è¨ˆç•«é–‹å§‹: <fmt:formatDate
+									value="${planVO.plan_start_date}" pattern="yyyy-MM-dd HH:mm " />
+							</font>
+						</p>
+
+						<p>
+							<font size="5">è¨ˆç•«çµæŸ: <fmt:formatDate
+									value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
+							</font>
+						</p>
+						
+						<p>
+							<font size="5">
+							è¨ˆç•«ç‹€æ…‹ï¼š
+								<c:if test="${planVO.plan_status=='PLANST0'}">é€²è¡Œä¸­</c:if>
+								<c:if test="${planVO.plan_status=='PLANST1'}"><font size="5" color="red">å·²å®Œæˆ</font></c:if>
+							</font>
+							
+						
+						</p>
+						
+						
+						<p>
+						<FORM METHOD="post" class="together"
+								ACTION="<%=request.getContextPath()%>/plan/plan.do"
+								style="margin-bottom: 0px;" enctype="multipart/form-data">
+									<input type="submit" class="btn btn-outline-primary mb-3" id="update"  value="update">
+									<input type="hidden" name="plan_id" value="${planVO.plan_id}">
+									<input type="hidden" name="plan_name" value="${planVO.plan_name }">
+									<input type="hidden" name="plan_cover" value="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+									<input type="hidden" name="plan_vo" value="${planVO.plan_vo }">
+									<input type="hidden" name="plan_start_date" value="${planVO.plan_start_date }">
+									<input type="hidden" name="plan_end_date" value="${planVO.plan_end_date }">
+									<input type="hidden" name="sptype_id" value="${planVO.sptype_id }">
+									<input type="hidden" name="plan_privacy" value="${planVO.plan_privacy }">
+									<input type="hidden" name="plan_status" value="${planVO.plan_status }">
+									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">   <!--é€å‡ºæœ¬ç¶²é çš„è·¯å¾‘çµ¦Controller-->
+									<input type="hidden" name="action" value="getOne_For_Update">
+							</FORM>
+<!-- 							<FORM METHOD="post" class="together" -->
+<%-- 								ACTION="<%=request.getContextPath()%>/plan/plan.do" --%>
+<!-- 								style="margin-bottom: 0px;" enctype="multipart/form-data"> -->
+<!-- 									<input type="submit" class="btn btn-outline-primary mb-3" id="delete" value="delete"> -->
+<%-- 									<input type="hidden" name="plan_id" value="${planVO.plan_id}"> --%>
+<%-- 									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">   <!--é€å‡ºæœ¬ç¶²é çš„è·¯å¾‘çµ¦Controller--> --%>
+<!-- 									<input type="hidden" name="action" value="delete"> -->
+<!-- 									<input type="hidden" name="action" value="delete"> -->
 									
-									<p class="plan_start_date">¹B°Ê¶}©l:¡@
-										<fmt:formatDate value="${planVO.plan_start_date}" pattern="yyyy-MM-dd HH:mm " />
-									</p>
-									
-									<p class="plan_end_date">¹B°Êµ²§ô:¡@
-										<fmt:formatDate value="${planVO.plan_end_date}" pattern="yyyy-MM-dd HH:mm " />
-									</p>
-									<form method="post"  action="<%=request.getContextPath()%>/front_end/plan/listOnePlan.jsp?plan_id=${planVO.plan_id }">
-										<button type='submit' class="btn btn-info" style="font-size: 16px">Read More</button>
-										<input type="hidden" name="action" value="getOne_For_Display">
-										<input type="hidden" name="plan_id" value="${planVO.plan_id }">
-										<input type="hidden" name="mem_id" value="${planVO.mem_id }">
-									</form>
-								</div>
-							</div><br>
-						</div>
-					</c:forEach>
+<!-- 							</FORM> -->
+						
+						
+						
+						</p>
+						
+					</div>
+					<div
+						class="flex-column justify-content-center p-3 order-1 order-lg-2">
+						<br>
+						<p class="lead mb-0" style="color: white">
+							<font color="white">${planVO.plan_vo}</font>
+						</p>
+					</div>
 				</div>
+			</div>
+		</div>
 			
 			</div>
 		</div>
 
 		<!-- end -->
 <!-- <P>777777777777777777777777777777777777777777777777777777777777777777</P> -->
-		<!-- =========================================¥H¤U¬°­ìpersonlfooter.jspªº¤º®e========================================== -->
+		<!-- =========================================ä»¥ä¸‹ç‚ºåŸpersonlfooter.jspçš„å…§å®¹========================================== -->
 		<jsp:include page="/front_end/course/purchcour/page/personlfooter.jsp" />
-		<!-- =========================================¥H¤W¬°­ìpersonlfooter.jspªº¤º®e========================================== -->
+		<!-- =========================================ä»¥ä¸Šç‚ºåŸpersonlfooter.jspçš„å…§å®¹========================================== -->
 	<script src="<%=request.getContextPath()%>/js/navbar-ontop.js"></script>
 	<script src="<%=request.getContextPath()%>/js/animate-in.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/index.js"></script>	

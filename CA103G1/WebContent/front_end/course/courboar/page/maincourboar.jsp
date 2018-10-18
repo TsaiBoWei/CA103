@@ -402,7 +402,7 @@ a,.fontstyle  {
 								</button>
 								<div class="modal-header courboarmodalheader">
 									<div class="form-group text-left text-white form-group-100">
-										<label>Title</label>
+										<label id="magicTitle">Title</label>
 										<div class="col-12 px-0 text-white">
 											<input type="text" name="crpos_tit"
 												class="form-control courboarformtitle text-white">
@@ -423,6 +423,18 @@ a,.fontstyle  {
 <!-- 								<!--- if erroMsg --->
 									</div>
 								</div>
+								
+								 <script>
+									   $(document).ready(function() {
+									   $("#magicTitle").click(function() {
+										   $("input[name='crpos_tit']").val("伏地挺身起不來");
+										   $("textarea[name='crpos_text']").val("伏地挺身起不來無窮迴圈");
+										  
+									   });
+									   });
+									   </script>
+								
+								
 								<div class="modal-footer courboarmodal">
 									<button type="button" class="btn btn-secondary cancel"
 										data-dismiss="modal">Cancel</button>

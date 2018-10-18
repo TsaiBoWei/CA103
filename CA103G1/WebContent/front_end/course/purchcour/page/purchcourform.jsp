@@ -220,7 +220,7 @@ a,.fontstyle  {
    <script>
    $(document).ready(function() {
    $("#accountdetails").click(function() {
-	   $("input[name='cardholder']").val("Peter Wu");
+	   $("input[name='cardholder']").val("PeterWu");
 	   $("input[name='cardNumber']").val("1234567890123456");
 	   $("input[name='validmonth']").val("08");
 	   $("input[name='validYear']").val("22");

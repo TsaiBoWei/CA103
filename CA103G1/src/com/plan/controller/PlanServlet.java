@@ -437,6 +437,7 @@ public class PlanServlet extends HttpServlet {
 				if (planVO == null) {
 					errorMsgs.add("查無資料");
 				}
+				System.out.println(planVO.getPlan_vo());
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
@@ -450,6 +451,7 @@ public class PlanServlet extends HttpServlet {
 				req.getSession().setAttribute("planVO", planVO);
 				
 				String url = "/front_end/post/HomePage_plan.jsp";
+				System.out.println("planservlet line453 I am Here");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交test3.jsp
 				successView.forward(req, res);
 
