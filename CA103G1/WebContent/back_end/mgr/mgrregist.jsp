@@ -66,6 +66,7 @@
     .logbt {
       width: 100px
     }
+    .form-control{font-size:1rem;font-weight:bold;}
   </style>
 <title>管理員註冊</title>
 </head>
@@ -116,15 +117,15 @@
                 <div class="form-group">
                 
                   <label>Account</label>
-                  <input type="text" name="mgr_account" class="form-control"> 
+                  <input type="text" name="mgr_account" class="form-control" id="mgrRgac"> 
                 </div>
                 <div class="form-group">
                   <label>姓名</label>
-                  <input type="text" name="mgr_name" class="form-control"> 
+                  <input type="text" name="mgr_name" class="form-control" id="mgrRgps"> 
                  </div>
                 <div class="form-group">
                   <label>E-mail</label>
-                  <input type="email" name="mgr_mail" class="form-control"> 
+                  <input type="email" name="mgr_mail" class="form-control" id="mgrRgEm"> 
                  </div>
                 <div class="form-group">
                   <label>大頭照</label>
@@ -146,6 +147,7 @@
                 </div>
               </div>
               </form>
+              <button id="magicmgr"></button>
             </div>
           </div>
         </div>
@@ -158,6 +160,17 @@
 
     
     <!-- JavaScript dependencies -->
+    <script type="text/javascript">
+	
+	$("#magicmgr").click(function(){
+  		$("#mgrRgac").val("dodoteacher");
+  		$("#mgrRgps").val("都都");
+  		$("#mgrRgEm").val("chtseng89@gmail.com");
+  	});
+	
+    
+    
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

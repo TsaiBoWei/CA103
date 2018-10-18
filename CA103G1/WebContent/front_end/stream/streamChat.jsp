@@ -94,7 +94,7 @@
           </div>
           <div class="inbox_chat">
 <!--           	直播連結要改動態寫法 -->
-            <iframe width="100%" height="100%" id="liveSrc" src="https://www.youtube.com/embed/<%=application.getAttribute("Stream_id") %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" id="liveSrc" src="https://www.youtube.com/embed/<%=application.getAttribute("Stream_id") == null ? "Leisszkil-c" : application.getAttribute("Stream_id") %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
           </div>
         </div>

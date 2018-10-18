@@ -284,10 +284,10 @@
 		webSocket = new WebSocket(endPointURL);
 		
 		webSocket.onopen = function(event) {
-			updateStatus("WebSocket 成功連線");
+// 			updateStatus("WebSocket 成功連線");
 			document.getElementById('sendMessage').disabled = false;
-			document.getElementById('connect').disabled = true;
-			document.getElementById('disconnect').disabled = false;
+// 			document.getElementById('connect').disabled = true;
+// 			document.getElementById('disconnect').disabled = false;
 			
 		};
 		var history=true;
@@ -417,7 +417,7 @@
 		};
 
 		webSocket.onclose = function(event) {
-			updateStatus("WebSocket 已離線");
+// 			updateStatus("WebSocket 已離線");
 		};
 	}
 	
@@ -485,8 +485,8 @@
 	function disconnect () {
 		webSocket.close();
 		document.getElementById('sendMessage').disabled = true;
-		document.getElementById('connect').disabled = false;
-		document.getElementById('disconnect').disabled = true;
+// 		document.getElementById('connect').disabled = false;
+// 		document.getElementById('disconnect').disabled = true;
 	}
 
 	

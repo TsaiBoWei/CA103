@@ -55,10 +55,9 @@ if((MemVO) session.getAttribute("memVO")!=null){
   
   <!-- PAGE settings -->
   
-  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
-  <title>TRY</title>
-  <meta name="description" content="Free Bootstrap 4 Pingendo Neon template for unique events.">
-  <meta name="keywords" content="Pingendo conference event neon free template bootstrap 4">
+  
+  <title>courseunit</title>
+  
   <!-- ASHLEY -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <!-- end ASHLEY -->

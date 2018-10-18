@@ -71,7 +71,7 @@
                 <div class="form-group">
              
                   <label>Account</label>
-                  <input type="text" name="mgr_account" class="form-control" placeholder="account"> </div>
+                  <input type="text" name="mgr_account" class="form-control" placeholder="account" id="mgrac"> </div>
                 <div class="form-group">
                   <label>Password</label>
                   <input type="password" name="mgr_password" class="form-control" placeholder="Password"> </div>
@@ -82,11 +82,12 @@
                   <!--button type="button" class="btn btn-info logbt m-3">Register</button-->
                  </div>
               </form>
-                             
+                         
              
               <div>
                 <a href="<%=request.getContextPath() %>/back_end/mgr/mgrLostPS.jsp" style="color:#ffc107">Lost your password?</a>
               </div>
+              <button id="magicmgr"></button>    
             </div>
           </div>
         </div>
@@ -99,6 +100,15 @@
   <!-- Footer -->
  
   <!-- JavaScript dependencies -->
+    <script type="text/javascript">
+	
+	$("#magicmgr").click(function(){
+  		$("#mgrac").val("dodoteacher");
+  	});
+	
+    
+    
+    </script>
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
