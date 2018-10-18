@@ -278,9 +278,9 @@ a, .fontstyle {
 	<%-- <c:if test="${memVO!=null}"> --%>
 
 	<!-- NavBar Personal-->
-	<div class="container containerHrT ">
-		<hr>
-	</div>
+<!-- 	<div class="container containerHrT "> -->
+<!-- 		<hr> -->
+<!-- 	</div> -->
   
 	<P align="center"><font size="6">The Plan</font></P>
 

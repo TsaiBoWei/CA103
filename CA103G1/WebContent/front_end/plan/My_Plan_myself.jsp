@@ -146,7 +146,7 @@
 									</p>
 									<form method="post"  action="<%= request.getContextPath()%>/plan/plan.do">
 										<button type='submit' class="btn btn-info" style="font-size: 16px">Read More</button>
-										<input type="hidden" name="action" value="getOne_For_Display">
+										<input type="hidden" name="action" value="getOne_For_Display1">
 										<input type="hidden" name="plan_id" value="${planVO.plan_id }">
 										<input type="hidden" name="mem_id" value="${planVO.mem_id }">
 									</form>
