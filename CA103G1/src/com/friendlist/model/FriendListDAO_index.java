@@ -40,7 +40,7 @@ public class FriendListDAO_index implements FriendListDAO_interface {
 	private static final String GET_FRIEND_PURCHCOUR="select courlist.cour_id,courlist.coa_id,courlist.cname,courlist.cour_view,courlist.sptype_id,purchcour.MEM_ID mem_id2 from purchcour JOIN friendlist on(friendlist.fl_memb_id=purchcour.mem_id) JOIN courlist on(courlist.cour_id=purchcour.cour_id) " + 
 			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' order by courlist.cour_id desc ";
 	private static final String GET_FRIEND_POST="select POST.post_id,POST.mem_id,POST.post_title,POST.post_view,POST.sptype_id,POST.post_con from friendlist JOIN post on(friendlist.fl_memb_id=post.mem_id) " + 
-			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' AND POST_PRIVACY='POSTPR1' and  POST_STATUS = 'POS0' order by post.post_id desc";
+			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' AND (POST_PRIVACY='POSTPR1' or POST_PRIVACY='POSTPR3') and  POST_STATUS = 'POS0'  order by post.post_id desc";
 	private static final String GET_FRIEND_PLAN="select plan_id,mem_id,plan_name,plan_view,sptype_id from friendlist JOIN PLAN on(friendlist.fl_memb_id=PLAN.mem_id) " + 
 			"where friendlist.fl_mema_id=?  and  friendlist.fl_status='FLS1' AND (plan_privacy = 'PLANPR0' OR plan_privacy = 'PLANPR2') order by PLAN.PLAN_ID desc";
 	
