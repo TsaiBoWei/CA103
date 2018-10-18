@@ -108,14 +108,14 @@
 					href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item mx-2 btn-lg">
-<%-- 						<c:if test="${memVO.mem_id ==null }"> --%>
+						<c:if test="${memVO.mem_id ==null }">
 							<a class="nav-link"
 								href="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
-<%-- 						</c:if>  --%>
+						</c:if> 
 						
-<%-- 						<c:if test="${memVO.mem_id !=null }"> --%>
-<%-- 							<a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">WorkOutPlan</a> --%>
-<%-- 						</c:if> --%>
+						<c:if test="${memVO.mem_id !=null }">
+							<a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan_myself.jsp">WorkOutPlan</a>
+						</c:if>
 						
 					</li>
 

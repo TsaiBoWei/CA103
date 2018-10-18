@@ -389,22 +389,24 @@ body {
 						
 						
 						<p>
-<!-- 						<FORM METHOD="post" class="together" -->
-<%-- 								ACTION="<%=request.getContextPath()%>/plan/plan.do" --%>
-<!-- 								style="margin-bottom: 0px;" enctype="multipart/form-data"> -->
-<!-- 									<input type="submit" class="btn btn-outline-primary mb-3" id="update"  value="update"> -->
-<%-- 									<input type="hidden" name="plan_id" value="${planVO.plan_id}"> --%>
-<%-- 									<input type="hidden" name="plan_name" value="${planVO.plan_name }"> --%>
-<%-- 									<input type="hidden" name="plan_cover" value="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}"> --%>
-<%-- 									<input type="hidden" name="plan_vo" value="${planVO.plan_vo }"> --%>
-<%-- 									<input type="hidden" name="plan_start_date" value="${planVO.plan_start_date }"> --%>
-<%-- 									<input type="hidden" name="plan_end_date" value="${planVO.plan_end_date }"> --%>
-<%-- 									<input type="hidden" name="sptype_id" value="${planVO.sptype_id }"> --%>
-<%-- 									<input type="hidden" name="plan_privacy" value="${planVO.plan_privacy }"> --%>
-<%-- 									<input type="hidden" name="plan_status" value="${planVO.plan_status }"> --%>
-<%-- 									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">   <!--送出本網頁的路徑給Controller--> --%>
-<!-- 									<input type="hidden" name="action" value="getOne_For_Update"> -->
-<!-- 							</FORM> -->
+<%-- 						<c:if test="${planVO.mem_id !=null }"> --%>
+						<FORM METHOD="post" class="together"
+								ACTION="<%=request.getContextPath()%>/plan/plan.do"
+								style="margin-bottom: 0px;" enctype="multipart/form-data">
+									<input type="submit" class="btn btn-outline-primary mb-3" id="update"  value="update">
+									<input type="hidden" name="plan_id" value="${planVO.plan_id}">
+									<input type="hidden" name="plan_name" value="${planVO.plan_name }">
+									<input type="hidden" name="plan_cover" value="<%=request.getContextPath() %>/plan/DBGifReader4?plan_id=${planVO.plan_id}">
+									<input type="hidden" name="plan_vo" value="${planVO.plan_vo }">
+									<input type="hidden" name="plan_start_date" value="${planVO.plan_start_date }">
+									<input type="hidden" name="plan_end_date" value="${planVO.plan_end_date }">
+									<input type="hidden" name="sptype_id" value="${planVO.sptype_id }">
+									<input type="hidden" name="plan_privacy" value="${planVO.plan_privacy }">
+									<input type="hidden" name="plan_status" value="${planVO.plan_status }">
+									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">   <!--送出本網頁的路徑給Controller-->
+									<input type="hidden" name="action" value="getOne_For_Update">
+							</FORM>
+<%-- 							</c:if> --%>
 <!-- 							<FORM METHOD="post" class="together" -->
 <%-- 								ACTION="<%=request.getContextPath()%>/plan/plan.do" --%>
 <!-- 								style="margin-bottom: 0px;" enctype="multipart/form-data"> -->
