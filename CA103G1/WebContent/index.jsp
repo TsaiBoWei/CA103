@@ -171,7 +171,7 @@ font-weight:bold!important;
             		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
 				</c:if>
 				<c:if test="${memVO.mem_id !=null }">
-            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+            		<a class="navtext nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan_myself.jsp">WorkOutPlan</a>
 				</c:if>
           </li>
           <li class="nav-item mx-2 btn-lg">

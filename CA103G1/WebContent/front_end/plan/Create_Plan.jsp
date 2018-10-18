@@ -85,6 +85,9 @@
 a,.fontstyle  {
 	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
 }
+div  {
+	font-family: Montserrat,Arial,"微軟正黑體","Microsoft JhengHei"!important;
+}
 </style>
 <style type="text/css">
 
@@ -297,10 +300,9 @@ body{
  
  }
  
- .myfirstday{
- background:none;
- 
- }
+	.myfirstday{ 
+		background:none; 
+  	} 
  
 
 </style>
@@ -332,8 +334,8 @@ body{
 						action="<%=request.getContextPath()%>/plan/plan.do"
 						enctype="multipart/form-data">
 
-						<div class="form-group text-primary" style="font-size: 24px">
-							Create A New Plan
+						<div class="form-group text-primary" style="font-size: 40px"> 
+							Create Your New Plan
 						</div>
 						<br>
 						
@@ -350,9 +352,9 @@ body{
 
 						<div class="form-group">
 							<h3>Plan Name </h3>
-							<input type="text" name="plan_name" style="font-size: 18px"
-								value="<%= (planVO==null) ? "MyFirstDay" : planVO.getPlan_name()%>"
-								class="form-control myfirstday"/>
+							<input type="text" name="plan_name" style="font-size: 20px ;color: white ;!important"
+								placeholder="MyFirstDay"
+								class="form-control myfirstday plan_name " id="plan_name1"/>
 						</div>
 						<br>
 
@@ -373,7 +375,7 @@ body{
 						
  						<div class="form-group">  
 							<label><h3>Sport Type　</h3></label> <select size="1"
-								name="sptype_id" class="" style="width: 150px; font-size: 18px;">
+								name="sptype_id" class="" style="width: 150px; font-size: 18px;" id="sport_type">
 								<c:forEach var="sptypeVO" items="${sptypeSvc.all}">
 									<option value="${sptypeVO.sptype_id}" ${(planVO.sptype_id==sptypeVO.sptype_id)? 'selected':''}>${sptypeVO.sport}
 								</c:forEach>
@@ -383,7 +385,7 @@ body{
 
 						<div class="form-group">  
 							<label><h3>Privacy　　　</h3></label> <select size="1"
-								name="plan_privacy" style="width: 150px; font-size: 18px;">
+								name="plan_privacy" style="width: 150px; font-size: 18px;" id="privicy">
 								<option value="PLANPR0">公開</option>
 								<option value="PLANPR1">不公開</option>
 								<option  value="PLANPR2">只對朋友公開</option>
@@ -410,7 +412,7 @@ body{
 							<span class="btn btn-info deletecbform px-1 mb-2 " data-toggle="modal" data-target="#courlistplan"> 
 								<i class="far fa-plus-square"></i>&nbsp;&nbsp;Add Course Into Plan
 							</span>
-							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 26px" id="plan_votext" >789</textarea>
+							<textarea name="plan_vo" rows="10" class="form-control text-light" style="font-size: 26px" id="plan_votext"  placeholder="Push-UP EveryDay" ></textarea>
 							<br>
 						</div>
 						<!-- 	ashley -->
@@ -427,7 +429,8 @@ body{
 						</div>
 						<div class="form-group">
 							<input type="hidden" name="action" value="insert">
-							<button type="submit" class="btn btn-primary creatbtn">Create</button>
+							<button type="submit" class="btn btn-info creatbtn"><font size="4">Create</font></button>
+							<button type="button" class="btn btn-info creatbtn" id="dataIn"><font size="4">Want To Be Click</font></button>
 <!-- 							<button type="submit" class="btn btn-primary" -->
 <%-- 								formaction="<%= request.getContextPath()%>/front_end/plan/Interesting_Plan.jsp">Reset</button> --%>
 <!-- 							<button type="submit" class="btn btn-primary"  -->
@@ -438,6 +441,15 @@ body{
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+
+// 	$("#dataIn").click(function(){
+// 		$("#plan_name1").val("testing");
+// // 		$("#psw").val("123456");
+// 	});
+
+
+</script> 
 	
 	<div class="container containerHrB ">
 		<hr>
@@ -580,6 +592,28 @@ body{
 
 
 </script>
+ 
+<script type="text/javascript">
+
+	$("#dataIn").click(function(){
+		$("#plan_name1").val("我要認真減脂增肌");
+		$("#f_date1").val("2018-10-19 11:00 ");
+		$("#f_date2").val("2018-10-26 11:00 ");
+// 		$("#plan_votext").text("2018-10-26 11:00 ");
+		$("#plan_votext").text("健身房上部大肌群訓練計畫菜單:<br>●全身大肌群訓練計畫<br>運動頻率：3次/每5天。運動時間：60分鐘（不包括暖身及伸展）。<br>運動內容：深蹲、伏地挺身、握推（8~12RM，組間休息2~3分鐘，每個動作4組）。
+
+					伸展（每個動作15~30秒，重複2~4組）
+
+
+					1.機器胸推。建議每組8~12下，2~4組，組間休息1分鐘。
+					2.機器夾胸。建議每組8~12下，2~4組，組間休息1分鐘。
+					3.寬握坐姿划船　建議每組8~12下，2~4組，組間休息1分鐘。");
+		
+	});
+
+
+</script>
+
 
 
 	
