@@ -62,7 +62,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PAGE settings -->
 	<link rel="icon" href="<%=request.getContextPath()%>/front_end/plan/img/PersonalPage_icon.png">
-	<title>WORK it OUT</title>
+	<title>666WORK it OUT</title>
 <!-- CSS dependencies -->
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/neon.css">
@@ -141,7 +141,6 @@
 
 
 <body class="text-center">
-<<<<<<< HEAD
  <!-- Navbar -->
 	<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
 		<span class="navbar-text"></span>
@@ -158,11 +157,17 @@
 					class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg"
 					href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
 				<ul class="navbar-nav ml-auto">
-
-					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
-						href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+					<li class="nav-item mx-2 btn-lg">
+						<c:if test="${memVO.mem_id ==null }">
+							<a class="nav-link"
+								href="<%=request.getContextPath()%>/front_end/plan/ListAllPlans_ForVisitor.jsp">WorkOutPlan</a>
+						</c:if> 
+						
+						<c:if test="${memVO.mem_id !=null }">
+							<a class="nav-link" href="<%=request.getContextPath()%>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+						</c:if>
+						
 					</li>
-
 					<li class="nav-item mx-2 btn-lg"><a class="nav-link"
 						href="<%=request.getContextPath()%>/front_end/event/eve/listAllEve.jsp">Event</a>
 					</li>
@@ -237,7 +242,6 @@
 		</div>
 	</nav>
 
-=======
   <!-- Navbar --> 
  <nav   class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <span class="navbar-text"></span>
@@ -249,7 +253,7 @@
         <a class="btn navbar-btn mx-2 justify-content-start btn-outline-primary btn-lg" href="<%=request.getContextPath()%>/index.jsp">WORK it OUT</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mx-2 btn-lg">
-            <a class="nav-link" href="<%=request.getContextPath() %>/front_end/plan/My_Plan.jsp">WorkOutPlan</a>
+            <a class="nav-link" href="<%=request.getContextPath() %>/index.jsp">WorkOutPlan</a>
           </li>
           <li class="nav-item mx-2 btn-lg">
             <a class="nav-link" href="<%=request.getContextPath() %>/front_end/event/eve/listAllEve.jsp">Event</a>
