@@ -484,6 +484,7 @@ font-weight:bold!important;
       </div>
       <form method="post" action="<%=request.getContextPath() %>/calendar/calendar.do">
         <div>
+          <input type="hidden" name="eve_mem_id" value="<%=memVO.getMem_id()%>">
           <input type="hidden" name="eve_idTochange" id="eve_idTochange">
           <input type="hidden" name="eve_chargeToback" id="eve_chargeToback">
           <input type="hidden" name="CaloutEvent" value="Cal_out_event" >
